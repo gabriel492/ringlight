@@ -184,10 +184,17 @@
             opacity: 1 !important;
         }
 
+        /* Estilos do Carrossel e Flip Card 3D */
         .carousel-container {
             overflow: hidden;
             width: 100%;
             position: relative;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .carousel-container:active {
+            cursor: grabbing;
         }
 
         .carousel-track {
@@ -200,9 +207,52 @@
         .carousel-card {
             width: 340px;
             flex-shrink: 0;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            transform-style: preserve-3d;
             perspective: 1000px;
+            background: transparent;
+            height: 390px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .carousel-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(226, 210, 195, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-front {
+            background-color: #faf7f4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-back {
+            background-color: #1e1410;
+            color: #f4ede6;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
         }
 
         #contact-modal {
@@ -253,6 +303,21 @@
                     Entre em Contato
                 </button>
             </div>
+
+            <!-- Botão Menu Hambúrguer (Mobile) -->
+            <button onclick="toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl glass-panel-brown flex items-center justify-center text-beige-100 text-lg transition-colors cursor-pointer z-50">
+                <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brown-900/95 backdrop-blur-xl border-b border-brown-800 py-6 px-6 shadow-2xl flex flex-col gap-4 transform -translate-y-full opacity-0 pointer-events-none transition-all duration-300 md:hidden">
+            <a href="#about" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Sobre</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Servi&ccedil;os</a>
+            <a href="#portfolio" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Portf&oacute;lio</a>
+            <button onclick="toggleMobileMenu(); openContactModal();" class="w-full mt-2 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-beige-300 to-beige-500 text-brown-950 shadow-md">
+                Entre em Contato
+            </button>
         </div>
     </header>
 
@@ -400,70 +465,146 @@
                 </div>
             </div>
 
-            <!-- Portfólio / Trabalhos Recentes em Carrossel Contínuo com Giro 3D -->
+            <!-- Portfólio / Carrossel Arrastável com Flip 3D (Moeda) -->
             <section id="portfolio" class="py-24 overflow-hidden relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
                     <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
                     <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
                         Trabalhos Recentes
                     </h2>
+                    <p class="text-xs text-brown-500 uppercase tracking-wider">Arraste para navegar • Clique no card para girar</p>
                 </div>
 
                 <div class="carousel-container py-6" id="portfolio-carousel">
                     <div class="carousel-track" id="carousel-track">
                         
                         <!-- Card 1 -->
-                        <div class="carousel-card rounded-2xl overflow-hidden border border-beige-200 shadow-md bg-beige-50">
-                            <div class="h-72 overflow-hidden relative">
-                                <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80" alt="Campanha Editorial" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-display font-bold text-lg text-brown-950">Campanha Editorial</h4>
-                                <p class="text-xs text-brown-600 mt-1">Fotografia &amp; Dire&ccedil;&atilde;o</p>
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80" alt="Campanha Editorial" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Campanha Editorial</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Fotografia &amp; Dire&ccedil;&atilde;o</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Campanha Editorial</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 2 -->
-                        <div class="carousel-card rounded-2xl overflow-hidden border border-beige-200 shadow-md bg-beige-50">
-                            <div class="h-72 overflow-hidden relative">
-                                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Filme Curto" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-display font-bold text-lg text-brown-950">Filme Curto</h4>
-                                <p class="text-xs text-brown-600 mt-1">Cinematografia</p>
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Filme Curto" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Filme Curto</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Cinematografia</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Filme Curto</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="carousel-card rounded-2xl overflow-hidden border border-beige-200 shadow-md bg-beige-50">
-                            <div class="h-72 overflow-hidden relative">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" alt="Moda & Retrato" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-display font-bold text-lg text-brown-950">Moda &amp; Retrato</h4>
-                                <p class="text-xs text-brown-600 mt-1">Produ&ccedil;&atilde;o Visual</p>
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Moda &amp; Retrato</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Produ&ccedil;&atilde;o Visual</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Moda &amp; Retrato</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="carousel-card rounded-2xl overflow-hidden border border-beige-200 shadow-md bg-beige-50">
-                            <div class="h-72 overflow-hidden relative">
-                                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-display font-bold text-lg text-brown-950">Comercial Global</h4>
-                                <p class="text-xs text-brown-600 mt-1">Dire&ccedil;&atilde;o de Arte</p>
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Comercial Global</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Dire&ccedil;&atilde;o de Arte</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Comercial Global</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 5 -->
-                        <div class="carousel-card rounded-2xl overflow-hidden border border-beige-200 shadow-md bg-beige-50">
-                            <div class="h-72 overflow-hidden relative">
-                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-display font-bold text-lg text-brown-950">Est&eacute;tica Minimalista</h4>
-                                <p class="text-xs text-brown-600 mt-1">Lookbook</p>
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Est&eacute;tica Minimalista</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Lookbook</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Est&eacute;tica Minimalista</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
@@ -574,6 +715,21 @@
             icon.classList.toggle('rotate-180');
         }
 
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            const isClosed = menu.classList.contains('-translate-y-full');
+            if (isClosed) {
+                menu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
         document.getElementById('contact-modal').addEventListener('click', (e) => {
             if (e.target.id === 'contact-modal') {
                 closeContactModal();
@@ -649,7 +805,6 @@
         const aboutBadge2 = document.getElementById('about-badge-2');
         const aboutTitle2 = document.getElementById('about-title-2');
 
-        // Preparar texto animado para "Produções Sob Medida"
         const servicesBadge = document.getElementById('services-badge');
         const servicesTitle = document.getElementById('services-title');
         const originalServicesTitleText = servicesTitle.innerText;
@@ -690,8 +845,6 @@
         window.addEventListener('scroll', () => {
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
-            
-            // Permitimos que o progress comece a computar um pouco antes/sobreposto ao final exato do herói
             targetProgress = Math.max(0, Math.min(1.05, -wrapperRect.top / wrapperHeight));
 
             const stackRect = servicesStackWrapper.getBoundingClientRect();
@@ -699,37 +852,79 @@
             targetStackProgress = Math.max(0, Math.min(1, -stackRect.top / stackHeight));
         }, { passive: true });
 
+        // CARROSSEL COM SUPORTE A DRAG/SWIPE E FLIP 3D
         const track = document.getElementById('carousel-track');
-        track.innerHTML += track.innerHTML;
+        track.innerHTML += track.innerHTML; // Duplica para efeito infinito contínuo
 
         let carouselPosition = 0;
-        const speed = 0.8;
-        let isPaused = false;
+        let autoSpeed = 0.8;
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let hasDragged = false;
 
         const carouselContainer = document.getElementById('portfolio-carousel');
-        carouselContainer.addEventListener('mouseenter', () => isPaused = true);
+
+        carouselContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            hasDragged = false;
+            startX = e.pageX;
+            scrollLeft = carouselPosition;
+        });
+
         carouselContainer.addEventListener('mouseleave', () => {
-            isPaused = false;
-            document.querySelectorAll('.carousel-card').forEach(card => {
-                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            });
+            isDown = false;
         });
 
-        document.querySelectorAll('.carousel-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -12;
-                const rotateY = ((x - centerX) / centerX) * 12;
-
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-            });
+        carouselContainer.addEventListener('mouseup', () => {
+            isDown = false;
         });
+
+        carouselContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            hasDragged = true;
+            const x = e.pageX;
+            const walk = (x - startX) * 1.8; // Velocidade do arraste
+            carouselPosition = scrollLeft - walk;
+            
+            const maxScroll = track.scrollWidth / 2;
+            if (carouselPosition >= maxScroll) carouselPosition = 0;
+            if (carouselPosition < 0) carouselPosition = maxScroll - 1;
+            
+            track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
+        });
+
+        // Touch para mobile
+        carouselContainer.addEventListener('touchstart', (e) => {
+            isDown = true;
+            hasDragged = false;
+            startX = e.touches[0].pageX;
+            scrollLeft = carouselPosition;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', () => {
+            isDown = false;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            hasDragged = true;
+            const x = e.touches[0].pageX;
+            const walk = (x - startX) * 1.8;
+            carouselPosition = scrollLeft - walk;
+
+            const maxScroll = track.scrollWidth / 2;
+            if (carouselPosition >= maxScroll) carouselPosition = 0;
+            if (carouselPosition < 0) carouselPosition = maxScroll - 1;
+
+            track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
+        }, { passive: true });
+
+        // Função de Flip 3D (Moeda) ao clicar no card (somente se não foi um arraste)
+        function flipCard(card) {
+            if (hasDragged) return;
+            card.classList.toggle('flipped');
+        }
 
         function animate() {
             currentProgress += (targetProgress - currentProgress) * 0.08;
@@ -822,7 +1017,7 @@
                 splitAboutSection1.style.pointerEvents = 'none';
             }
 
-            // SOBRE 2 (NOSSA FILOSOFIA) - AJUSTADO PARA PERMITIR SOBREPOSIÇÃO NO FINAL (ATÉ 1.02)
+            // SOBRE 2
             if (progress >= 0.52 && progress <= 1.02) {
                 splitAboutSection2.style.opacity = 1;
                 splitAboutSection2.style.pointerEvents = 'auto';
@@ -864,7 +1059,6 @@
                 splitAboutSection2.style.pointerEvents = 'none';
             }
 
-            // ANIMAÇÃO DE SUBIDA DO CARD 1 (Gatilho antecipado para iniciar junto ao final do Sobre 2)
             const stackProgress = currentStackProgress;
             
             const servicesTextProgress = Math.min(1, Math.max(0, stackProgress / 0.15));
@@ -878,7 +1072,6 @@
                 else span.classList.remove('revealed');
             });
 
-            // Card 1 inicia o movimento de subida de imediato com sobreposição
             if (stackProgress <= 0.0) {
                 card1.style.transform = `translate3d(0, 0px, 0) scale3d(1, 1, 1)`;
                 card1.style.zIndex = "30";
@@ -925,7 +1118,6 @@
                 card3.style.zIndex = "30";
             }
 
-            // ENTRADA DO PORTFÓLIO
             if (stackProgress <= 0.60) {
                 portfolioSection.style.transform = `translate3d(0, 100vh, 0)`;
             } else if (stackProgress > 0.60 && stackProgress <= 0.90) {
@@ -936,9 +1128,11 @@
                 portfolioSection.style.transform = `translate3d(0, 0vh, 0)`;
             }
 
-            if (!isPaused) {
-                carouselPosition += speed;
-                if (carouselPosition >= track.scrollWidth / 2) {
+            // Movimento automático contínuo do carrossel quando não estiver sendo arrastado
+            if (!isDown) {
+                carouselPosition += autoSpeed;
+                const maxScroll = track.scrollWidth / 2;
+                if (carouselPosition >= maxScroll) {
                     carouselPosition = 0;
                 }
                 track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
