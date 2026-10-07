@@ -171,7 +171,7 @@
             color: #ffffff !important;
         }
 
-        /* Estilos do Stack de Cards de Serviços */
+        /* Estilos da Pilha de Cards */
         .services-stack-wrapper {
             height: 350vh;
             position: relative;
@@ -190,9 +190,9 @@
 
         .stacked-card {
             will-change: transform;
-            transition: transform 0.1s linear;
-            transform-origin: center top;
-            opacity: 1 !important; /* Força 100% de opacidade sem esmaecimento */
+            transition: transform 0.05s linear;
+            transform-origin: center center;
+            opacity: 1 !important;
         }
     </style>
 </head>
@@ -201,7 +201,7 @@
     <!-- Cursor Interativo -->
     <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-beige-300/60 bg-beige-200/10 z-50 transform -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
 
-    <!-- Background Inicial em Slides -->
+    <!-- Background em Slides -->
     <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <div id="bg-slides-container" class="relative w-full h-full">
             <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
@@ -241,43 +241,32 @@
         </div>
     </header>
 
-    <!-- Conteúdo Principal -->
     <main class="relative z-10">
 
-        <!-- Área de Zoom LZ & Fundo Branco com Split do Sobre -->
+        <!-- Zoom Hero e Sobre -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
-                <!-- Monograma LZ e Frases do Hero -->
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
-                    
-                    <!-- Tag do Topo -->
                     <div id="hero-tag" class="hero-fade-element inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-brown text-beige-100 text-xs font-semibold tracking-widest uppercase shadow-lg">
                         <span class="w-2 h-2 rounded-full bg-beige-300 animate-ping"></span>
                         Cinematografia &amp; Dire&ccedil;&atilde;o de Imagem
                     </div>
 
-                    <!-- Monograma Central LZ -->
                     <div class="py-2 flex justify-center items-center">
                         <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black tracking-widest leading-none text-beige-pure select-none drop-shadow-2xl">
                             LZ
                         </h1>
                     </div>
 
-                    <!-- Frase de Baixo -->
                     <p id="hero-subtext" class="hero-fade-element text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
                         Est&uacute;dio audiovisual especializado em fotografia editorial e dire&ccedil;&atilde;o cinematogr&aacute;fica.
                     </p>
                 </div>
 
-                <!-- Seção Sobre o Estúdio Integrada -->
                 <div id="split-about-section" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden">
-                    
-                    <!-- Lado Esquerdo: Foto Dividida em Colunas -->
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container">
-                    </div>
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container"></div>
 
-                    <!-- Lado Direito: Conteúdo em Fundo Claro -->
                     <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white">
                         <div class="space-y-6 max-w-xl">
                             <span id="about-badge" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
@@ -301,71 +290,71 @@
         <!-- Demais Seções em Fundo Claro -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             
-            <!-- Seção Serviços: Cards Empilhados sem Opacidade no Scroll -->
+            <!-- Seção Serviços: Cards Empilhados Ajustados para Mobile -->
             <div id="services" class="services-stack-wrapper">
-                <div class="services-sticky-container px-6 lg:px-16">
+                <div class="services-sticky-container px-4 sm:px-6 lg:px-16">
                     
-                    <div class="text-center max-w-3xl mx-auto space-y-3 mb-8 md:mb-12">
+                    <div class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3 mb-6 md:mb-12">
                         <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Servi&ccedil;os Oferecidos</span>
-                        <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
+                        <h2 class="font-display text-2xl md:text-5xl font-bold tracking-wide text-brown-950">
                             Produ&ccedil;&otilde;es Sob Medida
                         </h2>
                     </div>
 
-                    <!-- Container da Pilha de Cards -->
-                    <div class="relative w-full max-w-2xl h-[380px] md:h-[420px] flex justify-center items-center">
+                    <!-- Container com altura ajustada para mobile -->
+                    <div class="relative w-full max-w-2xl h-[460px] md:h-[420px] flex justify-center items-center">
                         
-                        <!-- Card 1: Produção de Vídeo -->
-                        <div id="service-card-1" class="stacked-card absolute w-full bg-beige-50 p-8 md:p-12 rounded-3xl border border-beige-300/80 shadow-2xl flex flex-col justify-between h-full z-30">
+                        <!-- Card 1 -->
+                        <div id="service-card-1" class="stacked-card absolute w-full bg-beige-50 p-6 md:p-10 rounded-3xl border border-beige-300 shadow-2xl flex flex-col justify-between h-full z-30">
                             <div>
-                                <div class="w-14 h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-2xl mb-6 shadow-md">
+                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
                                     <i class="fa-solid fa-video"></i>
                                 </div>
-                                <span class="text-brown-500 font-display font-bold text-sm uppercase tracking-widest">01 / Produ&ccedil;&atilde;o</span>
-                                <h3 class="font-display font-extrabold text-3xl md:text-4xl text-brown-950 mt-2 mb-4">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
-                                <p class="text-brown-800 text-base md:text-lg leading-relaxed font-normal">
+                                <span class="text-brown-500 font-display font-bold text-xs md:text-sm uppercase tracking-widest">01 / Produ&ccedil;&atilde;o</span>
+                                <h3 class="font-display font-extrabold text-2xl md:text-4xl text-brown-950 mt-1 md:mt-2 mb-2 md:mb-4">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
+                                <p class="text-brown-800 text-sm md:text-lg leading-relaxed font-normal">
                                     Filmes publicit&aacute;rios, document&aacute;rios e conte&uacute;dos cinematogr&aacute;ficos desenvolvidos com narrativa envolvente, tratamento de cor avan&ccedil;ado e est&eacute;tica refinada.
                                 </p>
                             </div>
-                            <div class="flex justify-between items-center pt-6 border-t border-beige-200">
-                                <span class="text-xs font-bold text-brown-600 tracking-widest uppercase">Dire&ccedil;&atilde;o &amp; Edi&ccedil;&atilde;o</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700"></i>
+                            <div class="flex justify-between items-center pt-4 md:pt-6 border-t border-beige-200 mt-2">
+                                <span class="text-[10px] md:text-xs font-bold text-brown-600 tracking-widest uppercase">Dire&ccedil;&atilde;o &amp; Edi&ccedil;&atilde;o</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700 text-sm"></i>
                             </div>
                         </div>
 
-                        <!-- Card 2: Fotografia Editorial -->
-                        <div id="service-card-2" class="stacked-card absolute w-full bg-beige-100 p-8 md:p-12 rounded-3xl border border-beige-300/80 shadow-2xl flex flex-col justify-between h-full z-20">
+                        <!-- Card 2 -->
+                        <div id="service-card-2" class="stacked-card absolute w-full bg-beige-100 p-6 md:p-10 rounded-3xl border border-beige-300 shadow-2xl flex flex-col justify-between h-full z-20">
                             <div>
-                                <div class="w-14 h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-2xl mb-6 shadow-md">
+                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
                                     <i class="fa-solid fa-camera"></i>
                                 </div>
-                                <span class="text-brown-500 font-display font-bold text-sm uppercase tracking-widest">02 / Editorial</span>
-                                <h3 class="font-display font-extrabold text-3xl md:text-4xl text-brown-950 mt-2 mb-4">Fotografia Editorial</h3>
-                                <p class="text-brown-800 text-base md:text-lg leading-relaxed font-normal">
+                                <span class="text-brown-500 font-display font-bold text-xs md:text-sm uppercase tracking-widest">02 / Editorial</span>
+                                <h3 class="font-display font-extrabold text-2xl md:text-4xl text-brown-950 mt-1 md:mt-2 mb-2 md:mb-4">Fotografia Editorial</h3>
+                                <p class="text-brown-800 text-sm md:text-lg leading-relaxed font-normal">
                                     Ensaios conceituais e campanhas de moda com ilumina&ccedil;&atilde;o de est&uacute;dio de alta precis&atilde;o, enquadramentos autorais e acabamento fotogr&aacute;fico impec&aacute;vel.
                                 </p>
                             </div>
-                            <div class="flex justify-between items-center pt-6 border-t border-beige-200">
-                                <span class="text-xs font-bold text-brown-600 tracking-widest uppercase">Campanhas &amp; Lookbooks</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700"></i>
+                            <div class="flex justify-between items-center pt-4 md:pt-6 border-t border-beige-200 mt-2">
+                                <span class="text-[10px] md:text-xs font-bold text-brown-600 tracking-widest uppercase">Campanhas &amp; Lookbooks</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700 text-sm"></i>
                             </div>
                         </div>
 
-                        <!-- Card 3: Direção Criativa -->
-                        <div id="service-card-3" class="stacked-card absolute w-full bg-beige-200 p-8 md:p-12 rounded-3xl border border-beige-400/80 shadow-2xl flex flex-col justify-between h-full z-10">
+                        <!-- Card 3 -->
+                        <div id="service-card-3" class="stacked-card absolute w-full bg-beige-200 p-6 md:p-10 rounded-3xl border border-beige-400 shadow-2xl flex flex-col justify-between h-full z-10">
                             <div>
-                                <div class="w-14 h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-2xl mb-6 shadow-md">
+                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
                                     <i class="fa-solid fa-clapperboard"></i>
                                 </div>
-                                <span class="text-brown-700 font-display font-bold text-sm uppercase tracking-widest">03 / Conceito</span>
-                                <h3 class="font-display font-extrabold text-3xl md:text-4xl text-brown-950 mt-2 mb-4">Dire&ccedil;&atilde;o Criativa</h3>
-                                <p class="text-brown-900 text-base md:text-lg leading-relaxed font-normal">
+                                <span class="text-brown-700 font-display font-bold text-xs md:text-sm uppercase tracking-widest">03 / Conceito</span>
+                                <h3 class="font-display font-extrabold text-2xl md:text-4xl text-brown-950 mt-1 md:mt-2 mb-2 md:mb-4">Dire&ccedil;&atilde;o Criativa</h3>
+                                <p class="text-brown-900 text-sm md:text-lg leading-relaxed font-normal">
                                     Constru&ccedil;&atilde;o completa da identidade visual para marcas e projetos art&iacute;sticos, desde o moodboard e storyboard at&eacute; a supervis&atilde;o da entrega final.
                                 </p>
                             </div>
-                            <div class="flex justify-between items-center pt-6 border-t border-beige-300">
-                                <span class="text-xs font-bold text-brown-800 tracking-widest uppercase">Estrat&eacute;gia Visual</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-800"></i>
+                            <div class="flex justify-between items-center pt-4 md:pt-6 border-t border-beige-300 mt-2">
+                                <span class="text-[10px] md:text-xs font-bold text-brown-800 tracking-widest uppercase">Estrat&eacute;gia Visual</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-800 text-sm"></i>
                             </div>
                         </div>
 
@@ -374,7 +363,7 @@
                 </div>
             </div>
 
-            <!-- Seção Portfólio -->
+            <!-- Portfólio -->
             <section id="portfolio" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
                     <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
@@ -438,13 +427,11 @@
     </footer>
 
     <script>
-        // Cursor Personalizado
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
-        // Alternador de Fotos em Segundo Plano
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
         setInterval(() => {
@@ -453,7 +440,6 @@
             slides[currentSlide].classList.add('active');
         }, 5000);
 
-        // Montagem das Colunas da Foto Esquerda
         const columnsContainer = document.getElementById('columns-container');
         const numColumns = 5;
         const imageUrl = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop&q=80";
@@ -477,7 +463,6 @@
         }
         const columnElements = document.querySelectorAll('.reveal-column');
 
-        // Divisão do Texto em Spans
         const typewriterParagraph = document.getElementById('typewriter-text');
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = typewriterParagraph.innerHTML;
@@ -508,16 +493,13 @@
         const navLinkItems = document.querySelectorAll('.nav-link-item');
         const navCta = document.getElementById('nav-cta');
 
-        // Elementos dos Cards Empilhados
         const servicesStackWrapper = document.getElementById('services');
         const card1 = document.getElementById('service-card-1');
         const card2 = document.getElementById('service-card-2');
         const card3 = document.getElementById('service-card-3');
 
         window.addEventListener('scroll', () => {
-            // -------------------------------------------------------------
             // HERO & SOBRE
-            // -------------------------------------------------------------
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
             
@@ -586,7 +568,6 @@
 
             if (progress >= 0.40) {
                 const titleProgress = Math.min(1, Math.max(0, (progress - 0.40) / 0.15));
-                
                 aboutBadge.style.opacity = titleProgress;
                 aboutBadge.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
 
@@ -599,11 +580,9 @@
 
             if (progress >= 0.42) {
                 const columnProgress = Math.min(1, Math.max(0, (progress - 0.42) / 0.30));
-                
                 columnElements.forEach((col, index) => {
                     const colDelay = index * 0.12;
                     const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress - colDelay) / 0.52));
-                    
                     const translateY = 100 - (colIndividualProgress * 100);
                     col.style.transform = `translateY(${translateY}%)`;
                     col.style.opacity = colIndividualProgress;
@@ -624,36 +603,40 @@
                 });
             }
 
-            // -------------------------------------------------------------
-            // PILHA DE CARDS DE SERVIÇOS (Sem opacidade/transparência)
-            // -------------------------------------------------------------
+            // PILHA DE CARDS
             const stackRect = servicesStackWrapper.getBoundingClientRect();
             const stackHeight = servicesStackWrapper.offsetHeight - window.innerHeight;
             
             let stackProgress = -stackRect.top / stackHeight;
             stackProgress = Math.max(0, Math.min(1, stackProgress));
 
-            // Estágio 1: Card 1 sobe inteiro (0.0 até 0.45)
-            let card1Progress = Math.min(1, Math.max(0, stackProgress / 0.45));
-            const card1Y = -(card1Progress * 120); // Sobe até sair da tela
-            card1.style.transform = `translateY(${card1Y}vh) scale(1)`;
+            // FASE 1: Card 1 Sobe e Sai (0% a 40%)
+            let c1Progress = Math.min(1, Math.max(0, stackProgress / 0.40));
+            card1.style.transform = `translateY(${-c1Progress * 130}vh)`;
 
-            // Estágio 2: Card 2 passa de menor para o centro, e depois sobe (0.0 até 0.85)
-            let card2Promote = Math.min(1, Math.max(0, stackProgress / 0.35));
-            let card2Exit = Math.min(1, Math.max(0, (stackProgress - 0.45) / 0.40));
+            // FASE 2: Card 2 Sobe para o centro (0% a 40%) e depois Sai (40% a 80%)
+            let c2Promote = Math.min(1, Math.max(0, stackProgress / 0.40));
+            let c2Exit = Math.min(1, Math.max(0, (stackProgress - 0.40) / 0.40));
 
-            const card2Scale = 0.92 + (card2Promote * 0.08); // de 0.92 até 1.0
-            const card2InitialY = 24 - (card2Promote * 24); // de 24px até 0px
-            const card2ExitY = -(card2Exit * 120); // Sobe até sair da tela
+            const c2Scale = 0.93 + (c2Promote * 0.07);
+            const c2InitialY = 25 - (c2Promote * 25);
+            const c2ExitY = -(c2Exit * 130);
 
-            card2.style.transform = `translateY(${card2InitialY + card2ExitY}px) scale(${card2Scale})`;
+            card2.style.transform = `translateY(${c2InitialY + c2ExitY}vh) scale(${c2Scale})`;
 
-            // Estágio 3: Card 3 passa do fundo para o destaque principal (0.35 até 0.85)
-            let card3Promote = Math.min(1, Math.max(0, (stackProgress - 0.35) / 0.45));
-            const card3Scale = 0.85 + (card3Promote * 0.15); // de 0.85 até 1.0
-            const card3Y = 48 - (card3Promote * 48); // de 48px até 0px
+            // FASE 3: Card 3 Promove para o destaque principal (40% a 80%)
+            let c3Promote = Math.min(1, Math.max(0, (stackProgress - 0.40) / 0.40));
+            
+            const c3Scale = 0.86 + (c3Promote * 0.14);
+            const c3Y = 50 - (c3Promote * 50);
 
-            card3.style.transform = `translateY(${card3Y}px) scale(${card3Scale})`;
+            card3.style.transform = `translateY(${c3Y}px) scale(${c3Scale})`;
+            
+            if (stackProgress > 0.50) {
+                card3.style.zIndex = "40";
+            } else {
+                card3.style.zIndex = "10";
+            }
         });
     </script>
 </body>
