@@ -68,7 +68,6 @@
             border: 1px solid rgba(66, 47, 37, 0.2);
         }
 
-        /* Gradiente Bege de Alta Definição */
         .text-beige-pure {
             background: linear-gradient(135deg, #FAF7F4 0%, #E6D7CA 50%, #C2A895 100%);
             -webkit-background-clip: text;
@@ -124,6 +123,11 @@
             will-change: opacity;
         }
 
+        .hero-fade-element {
+            will-change: opacity, transform;
+            transition: opacity 0.1s linear, transform 0.1s linear;
+        }
+
         .reveal-column {
             height: 100%;
             transition: transform 0.1s linear, opacity 0.1s linear;
@@ -151,7 +155,6 @@
             color: #1e1410;
         }
 
-        /* Classes auxiliares para transição dos links do menu */
         .nav-link-item {
             transition: color 0.3s ease;
         }
@@ -166,6 +169,30 @@
         }
         .nav-link-light:hover {
             color: #ffffff !important;
+        }
+
+        /* Estilos do Stack de Cards de Serviços */
+        .services-stack-wrapper {
+            height: 350vh;
+            position: relative;
+        }
+
+        .services-sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .stacked-card {
+            will-change: transform;
+            transition: transform 0.1s linear;
+            transform-origin: center top;
+            opacity: 1 !important; /* Força 100% de opacidade sem esmaecimento */
         }
     </style>
 </head>
@@ -221,20 +248,24 @@
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
-                <!-- Monograma LZ -->
+                <!-- Monograma LZ e Frases do Hero -->
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
-                    <div id="hero-tag" class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-brown text-beige-100 text-xs font-semibold tracking-widest uppercase shadow-lg transition-opacity duration-300">
+                    
+                    <!-- Tag do Topo -->
+                    <div id="hero-tag" class="hero-fade-element inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-brown text-beige-100 text-xs font-semibold tracking-widest uppercase shadow-lg">
                         <span class="w-2 h-2 rounded-full bg-beige-300 animate-ping"></span>
                         Cinematografia &amp; Dire&ccedil;&atilde;o de Imagem
                     </div>
 
+                    <!-- Monograma Central LZ -->
                     <div class="py-2 flex justify-center items-center">
                         <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black tracking-widest leading-none text-beige-pure select-none drop-shadow-2xl">
                             LZ
                         </h1>
                     </div>
 
-                    <p id="hero-subtext" class="text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide transition-opacity duration-300">
+                    <!-- Frase de Baixo -->
+                    <p id="hero-subtext" class="hero-fade-element text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
                         Est&uacute;dio audiovisual especializado em fotografia editorial e dire&ccedil;&atilde;o cinematogr&aacute;fica.
                     </p>
                 </div>
@@ -244,7 +275,6 @@
                     
                     <!-- Lado Esquerdo: Foto Dividida em Colunas -->
                     <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container">
-                        <!-- Colunas inseridas via JS -->
                     </div>
 
                     <!-- Lado Direito: Conteúdo em Fundo Claro -->
@@ -268,37 +298,81 @@
             </div>
         </div>
 
-        <!-- Demais Seções -->
+        <!-- Demais Seções em Fundo Claro -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
-            <!-- Seção Serviços -->
-            <section id="services" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-                    <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Servi&ccedil;os Oferecidos</span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
-                        Produ&ccedil;&otilde;es Sob Medida
-                    </h2>
+            
+            <!-- Seção Serviços: Cards Empilhados sem Opacidade no Scroll -->
+            <div id="services" class="services-stack-wrapper">
+                <div class="services-sticky-container px-6 lg:px-16">
+                    
+                    <div class="text-center max-w-3xl mx-auto space-y-3 mb-8 md:mb-12">
+                        <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Servi&ccedil;os Oferecidos</span>
+                        <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
+                            Produ&ccedil;&otilde;es Sob Medida
+                        </h2>
+                    </div>
+
+                    <!-- Container da Pilha de Cards -->
+                    <div class="relative w-full max-w-2xl h-[380px] md:h-[420px] flex justify-center items-center">
+                        
+                        <!-- Card 1: Produção de Vídeo -->
+                        <div id="service-card-1" class="stacked-card absolute w-full bg-beige-50 p-8 md:p-12 rounded-3xl border border-beige-300/80 shadow-2xl flex flex-col justify-between h-full z-30">
+                            <div>
+                                <div class="w-14 h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-2xl mb-6 shadow-md">
+                                    <i class="fa-solid fa-video"></i>
+                                </div>
+                                <span class="text-brown-500 font-display font-bold text-sm uppercase tracking-widest">01 / Produ&ccedil;&atilde;o</span>
+                                <h3 class="font-display font-extrabold text-3xl md:text-4xl text-brown-950 mt-2 mb-4">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
+                                <p class="text-brown-800 text-base md:text-lg leading-relaxed font-normal">
+                                    Filmes publicit&aacute;rios, document&aacute;rios e conte&uacute;dos cinematogr&aacute;ficos desenvolvidos com narrativa envolvente, tratamento de cor avan&ccedil;ado e est&eacute;tica refinada.
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-center pt-6 border-t border-beige-200">
+                                <span class="text-xs font-bold text-brown-600 tracking-widest uppercase">Dire&ccedil;&atilde;o &amp; Edi&ccedil;&atilde;o</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Fotografia Editorial -->
+                        <div id="service-card-2" class="stacked-card absolute w-full bg-beige-100 p-8 md:p-12 rounded-3xl border border-beige-300/80 shadow-2xl flex flex-col justify-between h-full z-20">
+                            <div>
+                                <div class="w-14 h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-2xl mb-6 shadow-md">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
+                                <span class="text-brown-500 font-display font-bold text-sm uppercase tracking-widest">02 / Editorial</span>
+                                <h3 class="font-display font-extrabold text-3xl md:text-4xl text-brown-950 mt-2 mb-4">Fotografia Editorial</h3>
+                                <p class="text-brown-800 text-base md:text-lg leading-relaxed font-normal">
+                                    Ensaios conceituais e campanhas de moda com ilumina&ccedil;&atilde;o de est&uacute;dio de alta precis&atilde;o, enquadramentos autorais e acabamento fotogr&aacute;fico impec&aacute;vel.
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-center pt-6 border-t border-beige-200">
+                                <span class="text-xs font-bold text-brown-600 tracking-widest uppercase">Campanhas &amp; Lookbooks</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Direção Criativa -->
+                        <div id="service-card-3" class="stacked-card absolute w-full bg-beige-200 p-8 md:p-12 rounded-3xl border border-beige-400/80 shadow-2xl flex flex-col justify-between h-full z-10">
+                            <div>
+                                <div class="w-14 h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-2xl mb-6 shadow-md">
+                                    <i class="fa-solid fa-clapperboard"></i>
+                                </div>
+                                <span class="text-brown-700 font-display font-bold text-sm uppercase tracking-widest">03 / Conceito</span>
+                                <h3 class="font-display font-extrabold text-3xl md:text-4xl text-brown-950 mt-2 mb-4">Dire&ccedil;&atilde;o Criativa</h3>
+                                <p class="text-brown-900 text-base md:text-lg leading-relaxed font-normal">
+                                    Constru&ccedil;&atilde;o completa da identidade visual para marcas e projetos art&iacute;sticos, desde o moodboard e storyboard at&eacute; a supervis&atilde;o da entrega final.
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-center pt-6 border-t border-beige-300">
+                                <span class="text-xs font-bold text-brown-800 tracking-widest uppercase">Estrat&eacute;gia Visual</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-800"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-beige-50 p-8 rounded-3xl border border-beige-200 shadow-sm hover:shadow-xl transition-all">
-                        <i class="fa-solid fa-video text-3xl text-brown-700 mb-6"></i>
-                        <h3 class="font-display font-bold text-2xl text-brown-950 mb-3">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
-                        <p class="text-brown-700 text-sm leading-relaxed">Filmes publicit&aacute;rios e conte&uacute;dos cinematogr&aacute;ficos com est&eacute;tica refinada.</p>
-                    </div>
-
-                    <div class="bg-beige-50 p-8 rounded-3xl border border-beige-200 shadow-sm hover:shadow-xl transition-all">
-                        <i class="fa-solid fa-camera text-3xl text-brown-700 mb-6"></i>
-                        <h3 class="font-display font-bold text-2xl text-brown-950 mb-3">Fotografia Editorial</h3>
-                        <p class="text-brown-700 text-sm leading-relaxed">Ensaios e campanhas com ilumina&ccedil;&atilde;o de est&uacute;dio e enquadramentos autorais.</p>
-                    </div>
-
-                    <div class="bg-beige-50 p-8 rounded-3xl border border-beige-200 shadow-sm hover:shadow-xl transition-all">
-                        <i class="fa-solid fa-clapperboard text-3xl text-brown-700 mb-6"></i>
-                        <h3 class="font-display font-bold text-2xl text-brown-950 mb-3">Dire&ccedil;&atilde;o Criativa</h3>
-                        <p class="text-brown-700 text-sm leading-relaxed">Constru&ccedil;&atilde;o de narrativas e desenvolvimento de conceito visual para marcas.</p>
-                    </div>
-                </div>
-            </section>
+            </div>
 
             <!-- Seção Portfólio -->
             <section id="portfolio" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
@@ -420,11 +494,9 @@
             charSpans.push(span);
         });
 
-        // Elementos de Revelação do Título
         const aboutBadge = document.getElementById('about-badge');
         const aboutTitle = document.getElementById('about-title');
 
-        // Lógica Principal de Scroll
         const heroWrapper = document.getElementById('hero-wrapper');
         const lzLogo = document.getElementById('zoom-lz-logo');
         const heroTag = document.getElementById('hero-tag');
@@ -436,38 +508,40 @@
         const navLinkItems = document.querySelectorAll('.nav-link-item');
         const navCta = document.getElementById('nav-cta');
 
+        // Elementos dos Cards Empilhados
+        const servicesStackWrapper = document.getElementById('services');
+        const card1 = document.getElementById('service-card-1');
+        const card2 = document.getElementById('service-card-2');
+        const card3 = document.getElementById('service-card-3');
+
         window.addEventListener('scroll', () => {
+            // -------------------------------------------------------------
+            // HERO & SOBRE
+            // -------------------------------------------------------------
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
             
             let progress = -wrapperRect.top / wrapperHeight;
             progress = Math.max(0, Math.min(1, progress));
 
-            // 1. Transição Suave para Fundo Branco
             const whiteProgress = Math.min(1, progress / 0.35);
             whiteOverlay.style.opacity = whiteProgress;
 
-            // Transição de Cor do Menu para Marrom no Fundo Claro
             if (whiteProgress > 0.5) {
-                // Título LZ STUDIO
                 navTitle.classList.remove('text-beige-100');
                 navTitle.classList.add('text-brown-950');
 
-                // Container do Menu
                 navLinks.classList.remove('glass-panel-brown');
                 navLinks.classList.add('glass-panel-beige-light');
 
-                // Links do Menu trocam para Marrom
                 navLinkItems.forEach(item => {
                     item.classList.remove('nav-link-light');
                     item.classList.add('nav-link-dark');
                 });
 
-                // Botão de Contato
                 navCta.classList.remove('from-beige-300', 'to-beige-500', 'text-brown-950');
                 navCta.classList.add('bg-brown-950', 'text-beige-100');
             } else {
-                // Retorna ao estilo Escuro/Bege original
                 navTitle.classList.add('text-beige-100');
                 navTitle.classList.remove('text-brown-950');
 
@@ -483,16 +557,18 @@
                 navCta.classList.remove('bg-brown-950', 'text-beige-100');
             }
 
-            // 2. Crescimento Suave do Monograma LZ
             const scale = 1 + (progress * 12);
             lzLogo.style.transform = `scale(${scale})`;
 
-            // Esconde os textos iniciais
-            const fadeHero = Math.max(0, 1 - (progress * 3.5));
-            heroTag.style.opacity = fadeHero;
-            heroSubtext.style.opacity = fadeHero;
+            const fadeHero = Math.max(0, 1 - (progress * 4.0));
+            const translateYHero = -(progress * 40);
 
-            // 3. Oculta o Monograma LZ antes da seção Sobre
+            heroTag.style.opacity = fadeHero;
+            heroTag.style.transform = `translateY(${translateYHero}px)`;
+
+            heroSubtext.style.opacity = fadeHero;
+            heroSubtext.style.transform = `translateY(${translateYHero * 0.5}px)`;
+
             if (progress > 0.28) {
                 const logoFade = Math.max(0, 1 - ((progress - 0.28) / 0.12));
                 lzLogo.style.opacity = logoFade;
@@ -500,7 +576,6 @@
                 lzLogo.style.opacity = 1;
             }
 
-            // Ativa o container "Sobre o Estúdio"
             if (progress > 0.38) {
                 splitAboutSection.style.opacity = 1;
                 splitAboutSection.style.pointerEvents = 'auto';
@@ -509,7 +584,6 @@
                 splitAboutSection.style.pointerEvents = 'none';
             }
 
-            // 4. Revelação do Título
             if (progress >= 0.40) {
                 const titleProgress = Math.min(1, Math.max(0, (progress - 0.40) / 0.15));
                 
@@ -523,7 +597,6 @@
                 aboutTitle.style.opacity = 0;
             }
 
-            // 5. Efeito das Colunas da Foto
             if (progress >= 0.42) {
                 const columnProgress = Math.min(1, Math.max(0, (progress - 0.42) / 0.30));
                 
@@ -537,7 +610,6 @@
                 });
             }
 
-            // 6. Efeito das Letras Aparecendo
             if (progress >= 0.55) {
                 const textProgress = Math.min(1, Math.max(0, (progress - 0.55) / 0.40));
                 const totalChars = charSpans.length;
@@ -551,6 +623,37 @@
                     }
                 });
             }
+
+            // -------------------------------------------------------------
+            // PILHA DE CARDS DE SERVIÇOS (Sem opacidade/transparência)
+            // -------------------------------------------------------------
+            const stackRect = servicesStackWrapper.getBoundingClientRect();
+            const stackHeight = servicesStackWrapper.offsetHeight - window.innerHeight;
+            
+            let stackProgress = -stackRect.top / stackHeight;
+            stackProgress = Math.max(0, Math.min(1, stackProgress));
+
+            // Estágio 1: Card 1 sobe inteiro (0.0 até 0.45)
+            let card1Progress = Math.min(1, Math.max(0, stackProgress / 0.45));
+            const card1Y = -(card1Progress * 120); // Sobe até sair da tela
+            card1.style.transform = `translateY(${card1Y}vh) scale(1)`;
+
+            // Estágio 2: Card 2 passa de menor para o centro, e depois sobe (0.0 até 0.85)
+            let card2Promote = Math.min(1, Math.max(0, stackProgress / 0.35));
+            let card2Exit = Math.min(1, Math.max(0, (stackProgress - 0.45) / 0.40));
+
+            const card2Scale = 0.92 + (card2Promote * 0.08); // de 0.92 até 1.0
+            const card2InitialY = 24 - (card2Promote * 24); // de 24px até 0px
+            const card2ExitY = -(card2Exit * 120); // Sobe até sair da tela
+
+            card2.style.transform = `translateY(${card2InitialY + card2ExitY}px) scale(${card2Scale})`;
+
+            // Estágio 3: Card 3 passa do fundo para o destaque principal (0.35 até 0.85)
+            let card3Promote = Math.min(1, Math.max(0, (stackProgress - 0.35) / 0.45));
+            const card3Scale = 0.85 + (card3Promote * 0.15); // de 0.85 até 1.0
+            const card3Y = 48 - (card3Promote * 48); // de 48px até 0px
+
+            card3.style.transform = `translateY(${card3Y}px) scale(${card3Scale})`;
         });
     </script>
 </body>
