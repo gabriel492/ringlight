@@ -95,7 +95,7 @@
         }
 
         .zoom-hero-wrapper {
-            height: 400vh;
+            height: 600vh;
             position: relative;
         }
 
@@ -171,9 +171,8 @@
             color: #ffffff !important;
         }
 
-        /* Estilos da Pilha de Cards */
         .services-stack-wrapper {
-            height: 350vh;
+            height: 400vh;
             position: relative;
         }
 
@@ -189,7 +188,7 @@
         }
 
         .stacked-card {
-            will-change: transform;
+            will-change: transform, opacity;
             transition: transform 0.05s linear;
             transform-origin: center center;
             opacity: 1 !important;
@@ -243,10 +242,11 @@
 
     <main class="relative z-10">
 
-        <!-- Zoom Hero e Sobre -->
+        <!-- Zoom Hero e Seções Sobre 1 & 2 -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
+                <!-- Hero Content -->
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
                     <div id="hero-tag" class="hero-fade-element inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-brown text-beige-100 text-xs font-semibold tracking-widest uppercase shadow-lg">
                         <span class="w-2 h-2 rounded-full bg-beige-300 animate-ping"></span>
@@ -264,24 +264,46 @@
                     </p>
                 </div>
 
-                <div id="split-about-section" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden">
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container"></div>
+                <!-- PRIMEIRA SEÇÃO: Imagem na Esquerda, Texto na Direita -->
+                <div id="split-about-section" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden transition-opacity duration-300">
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container-1"></div>
 
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white">
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white" id="about-text-container-1">
                         <div class="space-y-6 max-w-xl">
-                            <span id="about-badge" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
+                            <span id="about-badge-1" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
                                 Sobre o Est&uacute;dio
                             </span>
                             
-                            <h2 id="about-title" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
+                            <h2 id="about-title-1" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
                                 Transformamos Narrativas em Arte Visual Memor&aacute;vel
                             </h2>
                             
-                            <p id="typewriter-text" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
+                            <p id="typewriter-text-1" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
                                 No est&uacute;dio LZ, cada frame &eacute; planejado com precis&atilde;o cir&uacute;rgica. Atuamos na interse&ccedil;&atilde;o exata entre a eleg&acirc;ncia da est&eacute;tica cl&aacute;ssica e a inova&ccedil;&atilde;o tecnol&oacute;gica da fotografia e cinematografia moderna.
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <!-- SEGUNDA SEÇÃO (ESPELHADA): Texto na Esquerda, Imagem na Direita -->
+                <div id="split-about-section-2" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden transition-opacity duration-300">
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white order-2 md:order-1">
+                        <div class="space-y-6 max-w-xl">
+                            <span id="about-badge-2" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
+                                Nossa Filosofia
+                            </span>
+                            
+                            <h2 id="about-title-2" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
+                                Est&eacute;tica Apurada &amp; Vis&atilde;o Singular
+                            </h2>
+                            
+                            <p id="typewriter-text-2" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
+                                Acreditamos que imagens aut&ecirc;nticas nascem da sensibilidade e da t&eacute;cnica em perfeita harmonia. Nossa busca cont&iacute;nua pelo extraordin&aacute;rio redefine padr&otilde;es visuais e gera conex&otilde;es profundas e duradouras.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex order-1 md:order-2" id="columns-container-2"></div>
                 </div>
 
             </div>
@@ -290,7 +312,7 @@
         <!-- Demais Seções em Fundo Claro -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             
-            <!-- Seção Serviços: Cards Empilhados Ajustados para Mobile -->
+            <!-- Seção Serviços: Cards Empilhados -->
             <div id="services" class="services-stack-wrapper">
                 <div class="services-sticky-container px-4 sm:px-6 lg:px-16">
                     
@@ -301,7 +323,7 @@
                         </h2>
                     </div>
 
-                    <!-- Container com altura ajustada para mobile -->
+                    <!-- Container da Pilha de Cards -->
                     <div class="relative w-full max-w-2xl h-[460px] md:h-[420px] flex justify-center items-center">
                         
                         <!-- Card 1 -->
@@ -440,54 +462,72 @@
             slides[currentSlide].classList.add('active');
         }, 5000);
 
-        const columnsContainer = document.getElementById('columns-container');
         const numColumns = 5;
-        const imageUrl = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop&q=80";
 
-        for (let i = 0; i < numColumns; i++) {
-            const col = document.createElement('div');
-            col.className = 'reveal-column flex-1 relative overflow-hidden h-full';
-            
-            const imgInner = document.createElement('div');
-            imgInner.style.position = 'absolute';
-            imgInner.style.top = '0';
-            imgInner.style.bottom = '0';
-            imgInner.style.width = `${numColumns * 100}%`;
-            imgInner.style.left = `-${i * 100}%`;
-            imgInner.style.backgroundImage = `url('${imageUrl}')`;
-            imgInner.style.backgroundSize = 'cover';
-            imgInner.style.backgroundPosition = 'center';
+        // Função utilitária para gerar colunas da imagem
+        function buildColumns(containerId, imageUrl) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < numColumns; i++) {
+                const col = document.createElement('div');
+                col.className = 'reveal-column flex-1 relative overflow-hidden h-full';
+                
+                const imgInner = document.createElement('div');
+                imgInner.style.position = 'absolute';
+                imgInner.style.top = '0';
+                imgInner.style.bottom = '0';
+                imgInner.style.width = `${numColumns * 100}%`;
+                imgInner.style.left = `-${i * 100}%`;
+                imgInner.style.backgroundImage = `url('${imageUrl}')`;
+                imgInner.style.backgroundSize = 'cover';
+                imgInner.style.backgroundPosition = 'center';
 
-            col.appendChild(imgInner);
-            columnsContainer.appendChild(col);
+                col.appendChild(imgInner);
+                container.appendChild(col);
+            }
+            return container.querySelectorAll('.reveal-column');
         }
-        const columnElements = document.querySelectorAll('.reveal-column');
 
-        const typewriterParagraph = document.getElementById('typewriter-text');
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = typewriterParagraph.innerHTML;
-        const decodedText = tempDiv.textContent || tempDiv.innerText;
-        
-        typewriterParagraph.innerHTML = '';
-        
-        const charSpans = [];
-        Array.from(decodedText).forEach(char => {
-            const span = document.createElement('span');
-            span.className = 'char-span';
-            span.textContent = char;
-            typewriterParagraph.appendChild(span);
-            charSpans.push(span);
-        });
+        // Função utilitária para preparar textos no estilo typewriter
+        function prepareTypewriterText(elementId) {
+            const paragraph = document.getElementById(elementId);
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = paragraph.innerHTML;
+            const decodedText = tempDiv.textContent || tempDiv.innerText;
+            paragraph.innerHTML = '';
+            
+            const charSpans = [];
+            Array.from(decodedText).forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char-span';
+                span.textContent = char;
+                paragraph.appendChild(span);
+                charSpans.push(span);
+            });
+            return charSpans;
+        }
 
-        const aboutBadge = document.getElementById('about-badge');
-        const aboutTitle = document.getElementById('about-title');
+        // Montagem Seção 1
+        const columns1 = buildColumns('columns-container-1', "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop&q=80");
+        const charSpans1 = prepareTypewriterText('typewriter-text-1');
+        const aboutTextContainer1 = document.getElementById('about-text-container-1');
+
+        // Montagem Seção 2 (Imagem 2)
+        const columns2 = buildColumns('columns-container-2', "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&auto=format&fit=crop&q=80");
+        const charSpans2 = prepareTypewriterText('typewriter-text-2');
+
+        const aboutBadge1 = document.getElementById('about-badge-1');
+        const aboutTitle1 = document.getElementById('about-title-1');
+        const aboutBadge2 = document.getElementById('about-badge-2');
+        const aboutTitle2 = document.getElementById('about-title-2');
 
         const heroWrapper = document.getElementById('hero-wrapper');
         const lzLogo = document.getElementById('zoom-lz-logo');
         const heroTag = document.getElementById('hero-tag');
         const heroSubtext = document.getElementById('hero-subtext');
         const whiteOverlay = document.getElementById('hero-white-overlay');
-        const splitAboutSection = document.getElementById('split-about-section');
+        const splitAboutSection1 = document.getElementById('split-about-section');
+        const splitAboutSection2 = document.getElementById('split-about-section-2');
+
         const navTitle = document.getElementById('nav-title');
         const navLinks = document.getElementById('nav-links');
         const navLinkItems = document.querySelectorAll('.nav-link-item');
@@ -499,14 +539,14 @@
         const card3 = document.getElementById('service-card-3');
 
         window.addEventListener('scroll', () => {
-            // HERO & SOBRE
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
             
             let progress = -wrapperRect.top / wrapperHeight;
             progress = Math.max(0, Math.min(1, progress));
 
-            const whiteProgress = Math.min(1, progress / 0.35);
+            // Fundo Branco do Hero
+            const whiteProgress = Math.min(1, progress / 0.20);
             whiteOverlay.style.opacity = whiteProgress;
 
             if (whiteProgress > 0.5) {
@@ -539,10 +579,11 @@
                 navCta.classList.remove('bg-brown-950', 'text-beige-100');
             }
 
-            const scale = 1 + (progress * 12);
+            // Animação de Zoom do Logo
+            const scale = 1 + (progress * 16);
             lzLogo.style.transform = `scale(${scale})`;
 
-            const fadeHero = Math.max(0, 1 - (progress * 4.0));
+            const fadeHero = Math.max(0, 1 - (progress * 6.0));
             const translateYHero = -(progress * 40);
 
             heroTag.style.opacity = fadeHero;
@@ -551,91 +592,166 @@
             heroSubtext.style.opacity = fadeHero;
             heroSubtext.style.transform = `translateY(${translateYHero * 0.5}px)`;
 
-            if (progress > 0.28) {
-                const logoFade = Math.max(0, 1 - ((progress - 0.28) / 0.12));
+            if (progress > 0.15) {
+                const logoFade = Math.max(0, 1 - ((progress - 0.15) / 0.08));
                 lzLogo.style.opacity = logoFade;
             } else {
                 lzLogo.style.opacity = 1;
             }
 
-            if (progress > 0.38) {
-                splitAboutSection.style.opacity = 1;
-                splitAboutSection.style.pointerEvents = 'auto';
-            } else {
-                splitAboutSection.style.opacity = 0;
-                splitAboutSection.style.pointerEvents = 'none';
-            }
+            // -------------------------------------------------------------
+            // ETAPA 1: PRIMEIRA SEÇÃO "SOBRE" (Progress 0.22 a 0.58)
+            // -------------------------------------------------------------
+            if (progress >= 0.22 && progress <= 0.58) {
+                splitAboutSection1.style.opacity = 1;
+                splitAboutSection1.style.pointerEvents = 'auto';
 
-            if (progress >= 0.40) {
-                const titleProgress = Math.min(1, Math.max(0, (progress - 0.40) / 0.15));
-                aboutBadge.style.opacity = titleProgress;
-                aboutBadge.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
+                // Títulos e Badge da Seção 1
+                const titleProgress = Math.min(1, Math.max(0, (progress - 0.22) / 0.08));
+                aboutBadge1.style.opacity = titleProgress;
+                aboutBadge1.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
 
-                aboutTitle.style.opacity = titleProgress;
-                aboutTitle.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
-            } else {
-                aboutBadge.style.opacity = 0;
-                aboutTitle.style.opacity = 0;
-            }
+                aboutTitle1.style.opacity = titleProgress;
+                aboutTitle1.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
 
-            if (progress >= 0.42) {
-                const columnProgress = Math.min(1, Math.max(0, (progress - 0.42) / 0.30));
-                columnElements.forEach((col, index) => {
-                    const colDelay = index * 0.12;
-                    const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress - colDelay) / 0.52));
-                    const translateY = 100 - (colIndividualProgress * 100);
-                    col.style.transform = `translateY(${translateY}%)`;
-                    col.style.opacity = colIndividualProgress;
-                });
-            }
+                // Colunas da Imagem 1 e Saída Sincronizada do Texto
+                if (progress <= 0.44) {
+                    // ENTRADA: sobem por colunas de 0.24 a 0.40
+                    const columnProgress = Math.min(1, Math.max(0, (progress - 0.24) / 0.12));
+                    columns1.forEach((col, index) => {
+                        const colDelay = index * 0.12;
+                        const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress - colDelay) / 0.52));
+                        const translateY = 100 - (colIndividualProgress * 100);
+                        col.style.transform = `translateY(${translateY}%)`;
+                        col.style.opacity = colIndividualProgress;
+                    });
 
-            if (progress >= 0.55) {
-                const textProgress = Math.min(1, Math.max(0, (progress - 0.55) / 0.40));
-                const totalChars = charSpans.length;
-                const charsToReveal = Math.floor(textProgress * totalChars);
+                    // Reset do Container de Texto durante a entrada
+                    aboutTextContainer1.style.opacity = 1;
+                    aboutTextContainer1.style.transform = 'translateY(0px)';
+                } else {
+                    // SAÍDA: imagem sobe em colunas E o bloco de texto sobe suavemente junto
+                    const exitProgress = Math.min(1, Math.max(0, (progress - 0.44) / 0.12));
+                    
+                    columns1.forEach((col, index) => {
+                        const colDelay = index * 0.12;
+                        const colIndividualExit = Math.min(1, Math.max(0, (exitProgress - colDelay) / 0.52));
+                        const translateY = -(colIndividualExit * 100);
+                        col.style.transform = `translateY(${translateY}%)`;
+                        col.style.opacity = 1 - colIndividualExit;
+                    });
 
-                charSpans.forEach((span, index) => {
-                    if (index <= charsToReveal) {
+                    // Animação de saída do texto sincronizada
+                    const textExitProgress = Math.min(1, Math.max(0, (progress - 0.44) / 0.12));
+                    aboutTextContainer1.style.opacity = 1 - textExitProgress;
+                    aboutTextContainer1.style.transform = `translateY(${-textExitProgress * 60}px)`;
+                }
+
+                // Texto Typewriter 1
+                const textProgress = Math.min(1, Math.max(0, (progress - 0.32) / 0.18));
+                const totalChars1 = charSpans1.length;
+                const charsToReveal1 = Math.floor(textProgress * totalChars1);
+
+                charSpans1.forEach((span, index) => {
+                    if (index <= charsToReveal1) {
                         span.classList.add('revealed');
                     } else {
                         span.classList.remove('revealed');
                     }
                 });
+            } else {
+                splitAboutSection1.style.opacity = 0;
+                splitAboutSection1.style.pointerEvents = 'none';
             }
 
-            // PILHA DE CARDS
+            // -------------------------------------------------------------
+            // ETAPA 2: SEGUNDA SEÇÃO "ESPELHADA" (Progress 0.50 a 1.0)
+            // -------------------------------------------------------------
+            if (progress > 0.50) {
+                splitAboutSection2.style.opacity = 1;
+                splitAboutSection2.style.pointerEvents = 'auto';
+
+                // Títulos e Badge
+                const titleProgress2 = Math.min(1, Math.max(0, (progress - 0.50) / 0.08));
+                aboutBadge2.style.opacity = titleProgress2;
+                aboutBadge2.style.transform = `translateY(${30 - (titleProgress2 * 30)}px)`;
+
+                aboutTitle2.style.opacity = titleProgress2;
+                aboutTitle2.style.transform = `translateY(${30 - (titleProgress2 * 30)}px)`;
+
+                // Colunas da Imagem 2 (Entrada suave por colunas do lado direito)
+                const columnProgress2 = Math.min(1, Math.max(0, (progress - 0.52) / 0.14));
+                columns2.forEach((col, index) => {
+                    const colDelay = index * 0.12;
+                    const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress2 - colDelay) / 0.52));
+                    const translateY = 100 - (colIndividualProgress * 100);
+                    col.style.transform = `translateY(${translateY}%)`;
+                    col.style.opacity = colIndividualProgress;
+                });
+
+                // Texto Typewriter 2
+                const textProgress2 = Math.min(1, Math.max(0, (progress - 0.62) / 0.22));
+                const totalChars2 = charSpans2.length;
+                const charsToReveal2 = Math.floor(textProgress2 * totalChars2);
+
+                charSpans2.forEach((span, index) => {
+                    if (index <= charsToReveal2) {
+                        span.classList.add('revealed');
+                    } else {
+                        span.classList.remove('revealed');
+                    }
+                });
+            } else {
+                splitAboutSection2.style.opacity = 0;
+                splitAboutSection2.style.pointerEvents = 'none';
+            }
+
+            // -------------------------------------------------------------
+            // LÓGICA DA PILHA DE CARDS
+            // -------------------------------------------------------------
             const stackRect = servicesStackWrapper.getBoundingClientRect();
             const stackHeight = servicesStackWrapper.offsetHeight - window.innerHeight;
             
             let stackProgress = -stackRect.top / stackHeight;
             stackProgress = Math.max(0, Math.min(1, stackProgress));
 
-            // FASE 1: Card 1 Sobe e Sai (0% a 40%)
-            let c1Progress = Math.min(1, Math.max(0, stackProgress / 0.40));
-            card1.style.transform = `translateY(${-c1Progress * 130}vh)`;
-
-            // FASE 2: Card 2 Sobe para o centro (0% a 40%) e depois Sai (40% a 80%)
-            let c2Promote = Math.min(1, Math.max(0, stackProgress / 0.40));
-            let c2Exit = Math.min(1, Math.max(0, (stackProgress - 0.40) / 0.40));
-
-            const c2Scale = 0.93 + (c2Promote * 0.07);
-            const c2InitialY = 25 - (c2Promote * 25);
-            const c2ExitY = -(c2Exit * 130);
-
-            card2.style.transform = `translateY(${c2InitialY + c2ExitY}vh) scale(${c2Scale})`;
-
-            // FASE 3: Card 3 Promove para o destaque principal (40% a 80%)
-            let c3Promote = Math.min(1, Math.max(0, (stackProgress - 0.40) / 0.40));
-            
-            const c3Scale = 0.86 + (c3Promote * 0.14);
-            const c3Y = 50 - (c3Promote * 50);
-
-            card3.style.transform = `translateY(${c3Y}px) scale(${c3Scale})`;
-            
-            if (stackProgress > 0.50) {
-                card3.style.zIndex = "40";
+            // FASE 1: CARD 1 (0% a 35%)
+            if (stackProgress <= 0.35) {
+                let p1 = stackProgress / 0.35;
+                card1.style.transform = `translateY(${-p1 * 120}vh)`;
             } else {
+                card1.style.transform = `translateY(-120vh)`;
+            }
+
+            // FASE 2: CARD 2 (0% a 70%)
+            if (stackProgress <= 0.35) {
+                let p2In = stackProgress / 0.35;
+                let scale2 = 0.93 + (p2In * 0.07);
+                let y2 = 30 - (p2In * 30);
+                card2.style.transform = `translateY(${y2}px) scale(${scale2})`;
+                card2.style.zIndex = "20";
+            } else if (stackProgress > 0.35 && stackProgress <= 0.70) {
+                let p2Out = (stackProgress - 0.35) / 0.35;
+                card2.style.transform = `translateY(${-p2Out * 120}vh) scale(1)`;
+                card2.style.zIndex = "30";
+            } else {
+                card2.style.transform = `translateY(-120vh) scale(1)`;
+                card2.style.zIndex = "10";
+            }
+
+            // FASE 3: CARD 3 (35% a 100%)
+            if (stackProgress <= 0.35) {
+                card3.style.transform = `translateY(60px) scale(0.86)`;
                 card3.style.zIndex = "10";
+            } else if (stackProgress > 0.35 && stackProgress <= 0.70) {
+                let p3In = (stackProgress - 0.35) / 0.35;
+                let scale3 = 0.86 + (p3In * 0.14);
+                let y3 = 60 - (p3In * 60);
+                card3.style.transform = `translateY(${y3}px) scale(${scale3})`;
+                card3.style.zIndex = "25";
+            } else {
+                card3.style.transform = `translateY(0px) scale(1)`;
+                card3.style.zIndex = "40";
             }
         });
     </script>
