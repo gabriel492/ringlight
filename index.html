@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LZ � Production & Digital Studio</title>
+    <title>LZ — Production & Digital Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,10 +36,6 @@
                     fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                         display: ['"Cinzel"', 'serif'],
-                    },
-                    letterSpacing: {
-                        'widest-xl': '0.25em',
-                        'mega': '0.35em',
                     }
                 }
             }
@@ -57,9 +53,6 @@
             background: #422f25;
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #c2a895;
-        }
 
         .glass-panel-brown {
             background: rgba(20, 13, 10, 0.82);
@@ -68,35 +61,25 @@
             border: 1px solid rgba(226, 210, 195, 0.18);
         }
 
-        .glass-panel-beige {
-            background: rgba(244, 237, 230, 0.12);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 210, 195, 0.25);
+        .glass-panel-beige-light {
+            background: rgba(244, 237, 230, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(66, 47, 37, 0.2);
         }
 
-        .glow-hover:hover {
-            box-shadow: 0 0 35px -5px rgba(194, 168, 149, 0.25);
-            border-color: rgba(226, 210, 195, 0.35);
-        }
-
-        .text-gradient-beige {
-            background: linear-gradient(135deg, #ffffff 0%, #f4ede6 40%, #c2a895 100%);
+        /* Gradiente Bege de Alta Definição */
+        .text-beige-pure {
+            background: linear-gradient(135deg, #FAF7F4 0%, #E6D7CA 50%, #C2A895 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         #custom-cursor {
             pointer-events: none;
-            transition: transform 0.15s ease-out, width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
+            transition: transform 0.15s ease-out;
         }
 
-        .uncompressed-title {
-            font-stretch: 100%;
-            font-size-adjust: none;
-        }
-
-        /* Estilo do Slider de Fotos em Segundo Plano com 85% de Opacidade */
         .bg-slide {
             position: absolute;
             inset: 0;
@@ -105,18 +88,84 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
-            transform: scale(1);
+            transition: opacity 1.5s ease-in-out;
         }
 
         .bg-slide.active {
-            opacity: 0.85; /* Opacidade ajustada para 85% */
-            transform: scale(1.05);
+            opacity: 0.85;
         }
 
-        /* Sombras leves de texto para garantir leitura perfeita sobre imagens claras */
-        .text-shadow-md {
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        .zoom-hero-wrapper {
+            height: 400vh;
+            position: relative;
+        }
+
+        .sticky-hero-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #zoom-lz-logo {
+            will-change: transform, opacity;
+            transform-origin: center center;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+            transform: translateZ(0);
+        }
+
+        #hero-white-overlay {
+            pointer-events: none;
+            will-change: opacity;
+        }
+
+        .reveal-column {
+            height: 100%;
+            transition: transform 0.1s linear, opacity 0.1s linear;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        .scroll-reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.1s linear, transform 0.1s linear;
+            will-change: opacity, transform;
+        }
+
+        .char-span {
+            display: inline-block;
+            opacity: 0.12;
+            transform: translateY(6px);
+            transition: opacity 0.12s ease, transform 0.12s ease, color 0.12s ease;
+            white-space: pre;
+        }
+        .char-span.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            color: #1e1410;
+        }
+
+        /* Classes auxiliares para transição dos links do menu */
+        .nav-link-item {
+            transition: color 0.3s ease;
+        }
+        .nav-link-dark {
+            color: #2d1f18 !important;
+        }
+        .nav-link-dark:hover {
+            color: #140d0a !important;
+        }
+        .nav-link-light {
+            color: #e6d7ca !important;
+        }
+        .nav-link-light:hover {
+            color: #ffffff !important;
         }
     </style>
 </head>
@@ -125,213 +174,192 @@
     <!-- Cursor Interativo -->
     <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-beige-300/60 bg-beige-200/10 z-50 transform -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
 
-    <!-- Camada de Fotos de Fundo com 85% de Opacidade -->
+    <!-- Background Inicial em Slides -->
     <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <div id="bg-slides-container" class="relative w-full h-full">
             <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
             <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&auto=format&fit=crop&q=80');"></div>
             <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
-            <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1600&auto=format&fit=crop&q=80');"></div>
-            <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=1600&auto=format&fit=crop&q=80');"></div>
         </div>
 
-        <!-- Suave gradiente de contraste para leitura -->
         <div class="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-brown-950/40 to-brown-950/80"></div>
+        
+        <!-- Fundo Branco Progressivo -->
+        <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
     </div>
 
-    <!-- Cabe&ccedil;alho / Navega&ccedil;&atilde;o -->
+    <!-- Navegação -->
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brown-700 via-brown-600 to-beige-300 p-[1px] transition-transform duration-300 group-hover:scale-105">
                     <div class="w-full h-full bg-brown-950 rounded-[11px] flex items-center justify-center">
-                        <span class="font-display font-black text-xl text-gradient-beige tracking-widest">LZ</span>
+                        <span class="font-display font-black text-xl text-beige-pure tracking-widest">LZ</span>
                     </div>
                 </div>
-                <span class="font-display font-extrabold text-2xl tracking-widest text-beige-100 group-hover:text-beige-300 transition-colors drop-shadow">LZ STUDIO<span class="text-beige-400">.</span></span>
+                <span id="nav-title" class="font-display font-extrabold text-2xl tracking-widest text-beige-100 transition-colors">LZ STUDIO<span class="text-beige-400">.</span></span>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl">
-                <a href="#about" class="text-xs font-semibold uppercase tracking-widest text-beige-200/90 hover:text-beige-100 transition-colors">Sobre</a>
-                <a href="#services" class="text-xs font-semibold uppercase tracking-widest text-beige-200/90 hover:text-beige-100 transition-colors">Servi&ccedil;os</a>
-                <a href="#portfolio" class="text-xs font-semibold uppercase tracking-widest text-beige-200/90 hover:text-beige-100 transition-colors">Portf&oacute;lio</a>
+            <nav id="nav-links" class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl transition-all duration-300">
+                <a href="#about" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Sobre</a>
+                <a href="#services" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Servi&ccedil;os</a>
+                <a href="#portfolio" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Portf&oacute;lio</a>
             </nav>
 
             <div class="hidden md:flex items-center gap-4">
-                <a href="#contact" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-beige-300 to-beige-500 hover:from-beige-200 hover:to-beige-400 text-brown-950 shadow-lg shadow-brown-950/50 transition-all duration-300 hover:scale-105">
+                <a href="#contact" id="nav-cta" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-beige-300 to-beige-500 hover:from-beige-200 hover:to-beige-400 text-brown-950 shadow-lg transition-all duration-300 hover:scale-105">
                     Entre em Contato
                 </a>
             </div>
-
-            <button id="mobile-menu-btn" class="md:hidden text-2xl text-beige-200 focus:outline-none p-2" aria-label="Abrir Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full px-6 py-6 glass-panel-brown border-t border-beige-200/10 flex flex-col gap-4 shadow-2xl">
-            <a href="#about" class="mobile-link text-base font-semibold tracking-wider text-beige-200 py-2 border-b border-brown-800">Sobre</a>
-            <a href="#services" class="mobile-link text-base font-semibold tracking-wider text-beige-200 py-2 border-b border-brown-800">Servi&ccedil;os</a>
-            <a href="#portfolio" class="mobile-link text-base font-semibold tracking-wider text-beige-200 py-2 border-b border-brown-800">Portf&oacute;lio</a>
-            <a href="#contact" class="mobile-link mt-2 w-full py-3 text-center rounded-xl bg-beige-300 text-brown-950 font-bold uppercase tracking-wider">Entre em Contato</a>
         </div>
     </header>
 
-    <!-- Conte&uacute;do Principal -->
-    <main class="relative z-10 pt-32">
+    <!-- Conteúdo Principal -->
+    <main class="relative z-10">
 
-        <!-- Se&ccedil;&atilde;o Hero com Monograma LZ em Grandes Propor&ccedil;&otilde;es -->
-        <section class="min-h-[85vh] flex items-center justify-center px-6 lg:px-16 relative">
-            <div class="max-w-6xl mx-auto text-center space-y-8">
-                
-                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-beige text-beige-100 text-xs font-semibold tracking-mega uppercase shadow-lg">
-                    <span class="w-2 h-2 rounded-full bg-beige-300 animate-ping"></span>
-                    Cinematografia &amp; Dire&ccedil;&atilde;o de Imagem
-                </div>
+        <!-- Área de Zoom LZ & Fundo Branco com Split do Sobre -->
+        <div class="zoom-hero-wrapper" id="hero-wrapper">
+            <div class="sticky-hero-container">
 
-                <div class="py-2">
-                    <h1 class="uncompressed-title font-display text-8xl md:text-[11rem] lg:text-[14rem] font-black tracking-widest leading-none text-gradient-beige hover:scale-105 transition-transform duration-700 cursor-default select-none drop-shadow-2xl">
-                        LZ
-                    </h1>
-                </div>
+                <!-- Monograma LZ -->
+                <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
+                    <div id="hero-tag" class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-brown text-beige-100 text-xs font-semibold tracking-widest uppercase shadow-lg transition-opacity duration-300">
+                        <span class="w-2 h-2 rounded-full bg-beige-300 animate-ping"></span>
+                        Cinematografia &amp; Dire&ccedil;&atilde;o de Imagem
+                    </div>
 
-                <p class="text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide text-shadow-md">
-                    Est&uacute;dio audiovisual especializado em fotografia editorial, produ&ccedil;&otilde;es cinematogr&aacute;ficas e dire&ccedil;&atilde;o de marcas de alto padr&atilde;o.
-                </p>
+                    <div class="py-2 flex justify-center items-center">
+                        <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black tracking-widest leading-none text-beige-pure select-none drop-shadow-2xl">
+                            LZ
+                        </h1>
+                    </div>
 
-                <div class="flex flex-wrap justify-center items-center gap-5 pt-6">
-                    <a href="#portfolio" class="px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest text-brown-950 bg-beige-200 hover:bg-beige-100 shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-3">
-                        <span>Ver Portf&oacute;lio</span>
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                    <a href="#services" class="px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest text-beige-100 glass-panel-brown hover:bg-brown-800/80 transition-all duration-300 hover:scale-105 shadow-xl">
-                        Especialidades
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Se&ccedil;&atilde;o Sobre -->
-        <section id="about" class="py-28 px-6 lg:px-16 max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="glass-panel-brown p-8 md:p-10 rounded-3xl space-y-6">
-                    <span class="text-beige-400 text-xs font-bold uppercase tracking-mega">Sobre o Est&uacute;dio</span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
-                        Transformamos Narrativas em Arte Visual Memor&aacute;vel
-                    </h2>
-                    <p class="text-beige-200/90 text-base md:text-lg leading-relaxed font-light">
-                        No est&uacute;dio LZ, cada frame &eacute; planejado com precis&atilde;o. Atuamos na interse&ccedil;&atilde;o entre a est&eacute;tica cl&aacute;ssica e o dinamismo da produ&ccedil;&atilde;o moderna de v&iacute;deo e fotografia.
+                    <p id="hero-subtext" class="text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide transition-opacity duration-300">
+                        Est&uacute;dio audiovisual especializado em fotografia editorial e dire&ccedil;&atilde;o cinematogr&aacute;fica.
                     </p>
                 </div>
 
-                <div class="relative">
-                    <div class="glass-panel-brown rounded-3xl p-4 border border-beige-200/15 overflow-hidden shadow-2xl">
-                        <div class="relative h-96 rounded-2xl overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Produ��o LZ" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-transparent to-transparent"></div>
+                <!-- Seção Sobre o Estúdio Integrada -->
+                <div id="split-about-section" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden">
+                    
+                    <!-- Lado Esquerdo: Foto Dividida em Colunas -->
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container">
+                        <!-- Colunas inseridas via JS -->
+                    </div>
+
+                    <!-- Lado Direito: Conteúdo em Fundo Claro -->
+                    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white">
+                        <div class="space-y-6 max-w-xl">
+                            <span id="about-badge" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
+                                Sobre o Est&uacute;dio
+                            </span>
+                            
+                            <h2 id="about-title" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
+                                Transformamos Narrativas em Arte Visual Memor&aacute;vel
+                            </h2>
+                            
+                            <p id="typewriter-text" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
+                                No est&uacute;dio LZ, cada frame &eacute; planejado com precis&atilde;o cir&uacute;rgica. Atuamos na interse&ccedil;&atilde;o exata entre a eleg&acirc;ncia da est&eacute;tica cl&aacute;ssica e a inova&ccedil;&atilde;o tecnol&oacute;gica da fotografia e cinematografia moderna.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Se&ccedil;&atilde;o Servi&ccedil;os -->
-        <section id="services" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
-            <div class="glass-panel-brown text-center max-w-3xl mx-auto p-8 rounded-3xl space-y-4 mb-16">
-                <span class="text-beige-400 text-xs font-bold uppercase tracking-mega">Servi&ccedil;os Oferecidos</span>
-                <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100">
-                    Produ&ccedil;&otilde;es Sob Medida
-                </h2>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-panel-brown p-8 rounded-3xl border border-beige-200/10 glow-hover">
-                    <i class="fa-solid fa-video text-3xl text-beige-200 mb-6"></i>
-                    <h3 class="font-display font-bold text-2xl text-beige-100 mb-3">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
-                    <p class="text-beige-200/90 text-sm leading-relaxed">Filmes publicit&aacute;rios, institucionais e conte&uacute;dos cinematogr&aacute;ficos em alta defini&ccedil;&atilde;o com est&eacute;tica refinada.</p>
+        <!-- Demais Seções -->
+        <div class="bg-white text-brown-950 relative z-20 transition-colors">
+            <!-- Seção Serviços -->
+            <section id="services" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Servi&ccedil;os Oferecidos</span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
+                        Produ&ccedil;&otilde;es Sob Medida
+                    </h2>
                 </div>
 
-                <div class="glass-panel-brown p-8 rounded-3xl border border-beige-200/10 glow-hover">
-                    <i class="fa-solid fa-camera text-3xl text-beige-200 mb-6"></i>
-                    <h3 class="font-display font-bold text-2xl text-beige-100 mb-3">Fotografia Editorial</h3>
-                    <p class="text-beige-200/90 text-sm leading-relaxed">Ensaios e campanhas com ilumina&ccedil;&atilde;o de est&uacute;dio e enquadramentos autorais.</p>
-                </div>
-
-                <div class="glass-panel-brown p-8 rounded-3xl border border-beige-200/10 glow-hover">
-                    <i class="fa-solid fa-clapperboard text-3xl text-beige-200 mb-6"></i>
-                    <h3 class="font-display font-bold text-2xl text-beige-100 mb-3">Dire&ccedil;&atilde;o Criativa</h3>
-                    <p class="text-beige-200/90 text-sm leading-relaxed">Constru&ccedil;&atilde;o de narrativas, branding de imagem e desenvolvimento de conceito visual para marcas.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Se&ccedil;&atilde;o Portf&oacute;lio -->
-        <section id="portfolio" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
-            <div class="glass-panel-brown text-center max-w-3xl mx-auto p-8 rounded-3xl space-y-4 mb-16">
-                <span class="text-beige-400 text-xs font-bold uppercase tracking-mega">Galeria</span>
-                <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100">
-                    Trabalhos Recentes
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass-panel-brown rounded-2xl overflow-hidden border border-beige-200/10 group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80" alt="Projeto 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-beige-50 p-8 rounded-3xl border border-beige-200 shadow-sm hover:shadow-xl transition-all">
+                        <i class="fa-solid fa-video text-3xl text-brown-700 mb-6"></i>
+                        <h3 class="font-display font-bold text-2xl text-brown-950 mb-3">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
+                        <p class="text-brown-700 text-sm leading-relaxed">Filmes publicit&aacute;rios e conte&uacute;dos cinematogr&aacute;ficos com est&eacute;tica refinada.</p>
                     </div>
-                    <div class="p-6">
-                        <h4 class="font-display font-bold text-lg text-beige-100">Campanha Editorial</h4>
-                        <p class="text-xs text-beige-300/90 mt-1">Fotografia &amp; Dire&ccedil;&atilde;o</p>
+
+                    <div class="bg-beige-50 p-8 rounded-3xl border border-beige-200 shadow-sm hover:shadow-xl transition-all">
+                        <i class="fa-solid fa-camera text-3xl text-brown-700 mb-6"></i>
+                        <h3 class="font-display font-bold text-2xl text-brown-950 mb-3">Fotografia Editorial</h3>
+                        <p class="text-brown-700 text-sm leading-relaxed">Ensaios e campanhas com ilumina&ccedil;&atilde;o de est&uacute;dio e enquadramentos autorais.</p>
+                    </div>
+
+                    <div class="bg-beige-50 p-8 rounded-3xl border border-beige-200 shadow-sm hover:shadow-xl transition-all">
+                        <i class="fa-solid fa-clapperboard text-3xl text-brown-700 mb-6"></i>
+                        <h3 class="font-display font-bold text-2xl text-brown-950 mb-3">Dire&ccedil;&atilde;o Criativa</h3>
+                        <p class="text-brown-700 text-sm leading-relaxed">Constru&ccedil;&atilde;o de narrativas e desenvolvimento de conceito visual para marcas.</p>
                     </div>
                 </div>
+            </section>
 
-                <div class="glass-panel-brown rounded-2xl overflow-hidden border border-beige-200/10 group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Projeto 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-display font-bold text-lg text-beige-100">Filme Curto</h4>
-                        <p class="text-xs text-beige-300/90 mt-1">Cinematografia</p>
-                    </div>
+            <!-- Seção Portfólio -->
+            <section id="portfolio" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
+                        Trabalhos Recentes
+                    </h2>
                 </div>
 
-                <div class="glass-panel-brown rounded-2xl overflow-hidden border border-beige-200/10 group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" alt="Projeto 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="rounded-2xl overflow-hidden border border-beige-200 shadow-md group">
+                        <div class="h-72 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80" alt="Projeto 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 bg-beige-50">
+                            <h4 class="font-display font-bold text-lg text-brown-950">Campanha Editorial</h4>
+                            <p class="text-xs text-brown-600 mt-1">Fotografia &amp; Dire&ccedil;&atilde;o</p>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="font-display font-bold text-lg text-beige-100">Moda &amp; Retrato</h4>
-                        <p class="text-xs text-beige-300/90 mt-1">Produ&ccedil;&atilde;o Visual</p>
+
+                    <div class="rounded-2xl overflow-hidden border border-beige-200 shadow-md group">
+                        <div class="h-72 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Projeto 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 bg-beige-50">
+                            <h4 class="font-display font-bold text-lg text-brown-950">Filme Curto</h4>
+                            <p class="text-xs text-brown-600 mt-1">Cinematografia</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl overflow-hidden border border-beige-200 shadow-md group">
+                        <div class="h-72 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" alt="Projeto 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 bg-beige-50">
+                            <h4 class="font-display font-bold text-lg text-brown-950">Moda &amp; Retrato</h4>
+                            <p class="text-xs text-brown-600 mt-1">Produ&ccedil;&atilde;o Visual</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Formul&aacute;rio de Contato -->
-        <section id="contact" class="py-24 px-6 lg:px-16 max-w-5xl mx-auto">
-            <div class="glass-panel-brown p-8 md:p-14 rounded-3xl border border-beige-200/15 shadow-2xl text-center">
-                <h2 class="font-display text-3xl md:text-5xl font-bold text-beige-100 mb-6">Inicie Seu Projeto</h2>
-                <form id="contact-form" class="space-y-6 max-w-xl mx-auto text-left">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-beige-300 mb-2">Nome Completo</label>
-                        <input type="text" required placeholder="Seu nome" class="w-full px-4 py-3 rounded-xl glass-panel-brown border border-beige-200/20 text-beige-100 placeholder-beige-300/50 focus:outline-none focus:border-beige-300">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-beige-300 mb-2">E-mail</label>
-                        <input type="email" required placeholder="seuemail@dominio.com" class="w-full px-4 py-3 rounded-xl glass-panel-brown border border-beige-200/20 text-beige-100 placeholder-beige-300/50 focus:outline-none focus:border-beige-300">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-beige-300 mb-2">Mensagem</label>
-                        <textarea rows="4" required placeholder="Descreva a sua ideia ou projeto..." class="w-full px-4 py-3 rounded-xl glass-panel-brown border border-beige-200/20 text-beige-100 placeholder-beige-300/50 focus:outline-none focus:border-beige-300"></textarea>
-                    </div>
-                    <button type="submit" class="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest text-brown-950 bg-beige-300 hover:bg-beige-200 transition-all shadow-lg">
-                        Enviar Mensagem
-                    </button>
-                </form>
-            </div>
-        </section>
+            <!-- Contato -->
+            <section id="contact" class="py-24 px-6 lg:px-16 max-w-4xl mx-auto">
+                <div class="bg-beige-50 p-8 md:p-12 rounded-3xl border border-beige-200 shadow-xl text-center">
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-brown-950 mb-6">Inicie Seu Projeto</h2>
+                    <form class="space-y-4 max-w-lg mx-auto text-left">
+                        <input type="text" placeholder="Seu nome" class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 focus:outline-none">
+                        <input type="email" placeholder="Seu e-mail" class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 focus:outline-none">
+                        <textarea rows="4" placeholder="Sua mensagem..." class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 focus:outline-none"></textarea>
+                        <button type="button" class="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-brown-900 hover:bg-brown-800 transition-all">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer class="border-t border-beige-200/10 py-8 text-center text-xs text-beige-300/70 glass-panel-brown">
+    <footer class="bg-brown-950 border-t border-brown-800 py-8 text-center text-xs text-beige-300 relative z-20">
         &copy; 2026 LZ Studio. Todos os direitos reservados.
     </footer>
 
@@ -342,25 +370,188 @@
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
-        // Menu Mobile
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Alternador de Fotos em Segundo Plano (Carrossel Autom&aacute;tico)
+        // Alternador de Fotos em Segundo Plano
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
-
-        function nextSlide() {
+        setInterval(() => {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }
+        }, 5000);
 
-        // Troca de foto a cada 5 segundos
-        setInterval(nextSlide, 5000);
+        // Montagem das Colunas da Foto Esquerda
+        const columnsContainer = document.getElementById('columns-container');
+        const numColumns = 5;
+        const imageUrl = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop&q=80";
+
+        for (let i = 0; i < numColumns; i++) {
+            const col = document.createElement('div');
+            col.className = 'reveal-column flex-1 relative overflow-hidden h-full';
+            
+            const imgInner = document.createElement('div');
+            imgInner.style.position = 'absolute';
+            imgInner.style.top = '0';
+            imgInner.style.bottom = '0';
+            imgInner.style.width = `${numColumns * 100}%`;
+            imgInner.style.left = `-${i * 100}%`;
+            imgInner.style.backgroundImage = `url('${imageUrl}')`;
+            imgInner.style.backgroundSize = 'cover';
+            imgInner.style.backgroundPosition = 'center';
+
+            col.appendChild(imgInner);
+            columnsContainer.appendChild(col);
+        }
+        const columnElements = document.querySelectorAll('.reveal-column');
+
+        // Divisão do Texto em Spans
+        const typewriterParagraph = document.getElementById('typewriter-text');
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = typewriterParagraph.innerHTML;
+        const decodedText = tempDiv.textContent || tempDiv.innerText;
+        
+        typewriterParagraph.innerHTML = '';
+        
+        const charSpans = [];
+        Array.from(decodedText).forEach(char => {
+            const span = document.createElement('span');
+            span.className = 'char-span';
+            span.textContent = char;
+            typewriterParagraph.appendChild(span);
+            charSpans.push(span);
+        });
+
+        // Elementos de Revelação do Título
+        const aboutBadge = document.getElementById('about-badge');
+        const aboutTitle = document.getElementById('about-title');
+
+        // Lógica Principal de Scroll
+        const heroWrapper = document.getElementById('hero-wrapper');
+        const lzLogo = document.getElementById('zoom-lz-logo');
+        const heroTag = document.getElementById('hero-tag');
+        const heroSubtext = document.getElementById('hero-subtext');
+        const whiteOverlay = document.getElementById('hero-white-overlay');
+        const splitAboutSection = document.getElementById('split-about-section');
+        const navTitle = document.getElementById('nav-title');
+        const navLinks = document.getElementById('nav-links');
+        const navLinkItems = document.querySelectorAll('.nav-link-item');
+        const navCta = document.getElementById('nav-cta');
+
+        window.addEventListener('scroll', () => {
+            const wrapperRect = heroWrapper.getBoundingClientRect();
+            const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
+            
+            let progress = -wrapperRect.top / wrapperHeight;
+            progress = Math.max(0, Math.min(1, progress));
+
+            // 1. Transição Suave para Fundo Branco
+            const whiteProgress = Math.min(1, progress / 0.35);
+            whiteOverlay.style.opacity = whiteProgress;
+
+            // Transição de Cor do Menu para Marrom no Fundo Claro
+            if (whiteProgress > 0.5) {
+                // Título LZ STUDIO
+                navTitle.classList.remove('text-beige-100');
+                navTitle.classList.add('text-brown-950');
+
+                // Container do Menu
+                navLinks.classList.remove('glass-panel-brown');
+                navLinks.classList.add('glass-panel-beige-light');
+
+                // Links do Menu trocam para Marrom
+                navLinkItems.forEach(item => {
+                    item.classList.remove('nav-link-light');
+                    item.classList.add('nav-link-dark');
+                });
+
+                // Botão de Contato
+                navCta.classList.remove('from-beige-300', 'to-beige-500', 'text-brown-950');
+                navCta.classList.add('bg-brown-950', 'text-beige-100');
+            } else {
+                // Retorna ao estilo Escuro/Bege original
+                navTitle.classList.add('text-beige-100');
+                navTitle.classList.remove('text-brown-950');
+
+                navLinks.classList.add('glass-panel-brown');
+                navLinks.classList.remove('glass-panel-beige-light');
+
+                navLinkItems.forEach(item => {
+                    item.classList.add('nav-link-light');
+                    item.classList.remove('nav-link-dark');
+                });
+
+                navCta.classList.add('from-beige-300', 'to-beige-500', 'text-brown-950');
+                navCta.classList.remove('bg-brown-950', 'text-beige-100');
+            }
+
+            // 2. Crescimento Suave do Monograma LZ
+            const scale = 1 + (progress * 12);
+            lzLogo.style.transform = `scale(${scale})`;
+
+            // Esconde os textos iniciais
+            const fadeHero = Math.max(0, 1 - (progress * 3.5));
+            heroTag.style.opacity = fadeHero;
+            heroSubtext.style.opacity = fadeHero;
+
+            // 3. Oculta o Monograma LZ antes da seção Sobre
+            if (progress > 0.28) {
+                const logoFade = Math.max(0, 1 - ((progress - 0.28) / 0.12));
+                lzLogo.style.opacity = logoFade;
+            } else {
+                lzLogo.style.opacity = 1;
+            }
+
+            // Ativa o container "Sobre o Estúdio"
+            if (progress > 0.38) {
+                splitAboutSection.style.opacity = 1;
+                splitAboutSection.style.pointerEvents = 'auto';
+            } else {
+                splitAboutSection.style.opacity = 0;
+                splitAboutSection.style.pointerEvents = 'none';
+            }
+
+            // 4. Revelação do Título
+            if (progress >= 0.40) {
+                const titleProgress = Math.min(1, Math.max(0, (progress - 0.40) / 0.15));
+                
+                aboutBadge.style.opacity = titleProgress;
+                aboutBadge.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
+
+                aboutTitle.style.opacity = titleProgress;
+                aboutTitle.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
+            } else {
+                aboutBadge.style.opacity = 0;
+                aboutTitle.style.opacity = 0;
+            }
+
+            // 5. Efeito das Colunas da Foto
+            if (progress >= 0.42) {
+                const columnProgress = Math.min(1, Math.max(0, (progress - 0.42) / 0.30));
+                
+                columnElements.forEach((col, index) => {
+                    const colDelay = index * 0.12;
+                    const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress - colDelay) / 0.52));
+                    
+                    const translateY = 100 - (colIndividualProgress * 100);
+                    col.style.transform = `translateY(${translateY}%)`;
+                    col.style.opacity = colIndividualProgress;
+                });
+            }
+
+            // 6. Efeito das Letras Aparecendo
+            if (progress >= 0.55) {
+                const textProgress = Math.min(1, Math.max(0, (progress - 0.55) / 0.40));
+                const totalChars = charSpans.length;
+                const charsToReveal = Math.floor(textProgress * totalChars);
+
+                charSpans.forEach((span, index) => {
+                    if (index <= charsToReveal) {
+                        span.classList.add('revealed');
+                    } else {
+                        span.classList.remove('revealed');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
