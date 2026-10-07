@@ -110,48 +110,40 @@
             overflow: hidden;
         }
 
-        #zoom-lz-logo {
+        /* Otimizações de GPU para elementos animados */
+        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .reveal-column, .stacked-card, #about-text-container-1 {
             will-change: transform, opacity;
-            transform-origin: center center;
             backface-visibility: hidden;
-            -webkit-font-smoothing: antialiased;
-            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            transform-style: preserve-3d;
         }
 
-        #hero-white-overlay {
-            pointer-events: none;
-            will-change: opacity;
-        }
-
-        .hero-fade-element {
-            will-change: opacity, transform;
-            transition: opacity 0.1s linear, transform 0.1s linear;
+        #zoom-lz-logo {
+            transform-origin: center center;
         }
 
         .reveal-column {
             height: 100%;
-            transition: transform 0.1s linear, opacity 0.1s linear;
-            transform: translateY(100%);
+            transform: translate3d(0, 100%, 0);
             opacity: 0;
         }
 
         .scroll-reveal-element {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.1s linear, transform 0.1s linear;
+            transform: translate3d(0, 30px, 0);
             will-change: opacity, transform;
         }
 
         .char-span {
             display: inline-block;
             opacity: 0.12;
-            transform: translateY(6px);
+            transform: translate3d(0, 6px, 0);
             transition: opacity 0.12s ease, transform 0.12s ease, color 0.12s ease;
             white-space: pre;
         }
         .char-span.revealed {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
             color: #1e1410;
         }
 
@@ -188,8 +180,6 @@
         }
 
         .stacked-card {
-            will-change: transform, opacity;
-            transition: transform 0.05s linear;
             transform-origin: center center;
             opacity: 1 !important;
         }
@@ -451,7 +441,7 @@
     <script>
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
-            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+            if (cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
         const slides = document.querySelectorAll('.bg-slide');
@@ -462,7 +452,9 @@
             slides[currentSlide].classList.add('active');
         }, 5000);
 
-        const numColumns = 5;
+        // Ajusta dinamicamente a quantidade de colunas para telas menores
+        const isMobile = window.innerWidth < 768;
+        const numColumns = isMobile ? 2 : 5;
 
         // Função utilitária para gerar colunas da imagem
         function buildColumns(containerId, imageUrl) {
@@ -506,12 +498,11 @@
             return charSpans;
         }
 
-        // Montagem Seção 1
+        // Montagem Seções 1 e 2
         const columns1 = buildColumns('columns-container-1', "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop&q=80");
         const charSpans1 = prepareTypewriterText('typewriter-text-1');
         const aboutTextContainer1 = document.getElementById('about-text-container-1');
 
-        // Montagem Seção 2 (Imagem 2)
         const columns2 = buildColumns('columns-container-2', "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&auto=format&fit=crop&q=80");
         const charSpans2 = prepareTypewriterText('typewriter-text-2');
 
@@ -538,12 +529,33 @@
         const card2 = document.getElementById('service-card-2');
         const card3 = document.getElementById('service-card-3');
 
+        // -------------------------------------------------------------
+        // SISTEMA DE INTERPOLAÇÃO (LERP) & ANIMATION LOOP (FLUIDEZ TOTAL)
+        // -------------------------------------------------------------
+        let currentProgress = 0;
+        let targetProgress = 0;
+
+        let currentStackProgress = 0;
+        let targetStackProgress = 0;
+
+        // Atualiza a posição real do scroll na memória sem travar a thread
         window.addEventListener('scroll', () => {
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
-            
-            let progress = -wrapperRect.top / wrapperHeight;
-            progress = Math.max(0, Math.min(1, progress));
+            targetProgress = Math.max(0, Math.min(1, -wrapperRect.top / wrapperHeight));
+
+            const stackRect = servicesStackWrapper.getBoundingClientRect();
+            const stackHeight = servicesStackWrapper.offsetHeight - window.innerHeight;
+            targetStackProgress = Math.max(0, Math.min(1, -stackRect.top / stackHeight));
+        }, { passive: true });
+
+        // Loop contínuo otimizado para 60/120 FPS
+        function animate() {
+            // Interpolação suave (Lerp) - fator 0.08 garante movimento aveludado no mobile
+            currentProgress += (targetProgress - currentProgress) * 0.08;
+            currentStackProgress += (targetStackProgress - currentStackProgress) * 0.08;
+
+            const progress = currentProgress;
 
             // Fundo Branco do Hero
             const whiteProgress = Math.min(1, progress / 0.20);
@@ -581,16 +593,16 @@
 
             // Animação de Zoom do Logo
             const scale = 1 + (progress * 16);
-            lzLogo.style.transform = `scale(${scale})`;
+            lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
 
             const fadeHero = Math.max(0, 1 - (progress * 6.0));
             const translateYHero = -(progress * 40);
 
             heroTag.style.opacity = fadeHero;
-            heroTag.style.transform = `translateY(${translateYHero}px)`;
+            heroTag.style.transform = `translate3d(0, ${translateYHero}px, 0)`;
 
             heroSubtext.style.opacity = fadeHero;
-            heroSubtext.style.transform = `translateY(${translateYHero * 0.5}px)`;
+            heroSubtext.style.transform = `translate3d(0, ${translateYHero * 0.5}px, 0)`;
 
             if (progress > 0.15) {
                 const logoFade = Math.max(0, 1 - ((progress - 0.15) / 0.08));
@@ -599,55 +611,46 @@
                 lzLogo.style.opacity = 1;
             }
 
-            // -------------------------------------------------------------
-            // ETAPA 1: PRIMEIRA SEÇÃO "SOBRE" (Progress 0.22 a 0.58)
-            // -------------------------------------------------------------
+            // PRIMEIRA SEÇÃO "SOBRE"
             if (progress >= 0.22 && progress <= 0.58) {
                 splitAboutSection1.style.opacity = 1;
                 splitAboutSection1.style.pointerEvents = 'auto';
 
-                // Títulos e Badge da Seção 1
                 const titleProgress = Math.min(1, Math.max(0, (progress - 0.22) / 0.08));
                 aboutBadge1.style.opacity = titleProgress;
-                aboutBadge1.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
+                aboutBadge1.style.transform = `translate3d(0, ${30 - (titleProgress * 30)}px, 0)`;
 
                 aboutTitle1.style.opacity = titleProgress;
-                aboutTitle1.style.transform = `translateY(${30 - (titleProgress * 30)}px)`;
+                aboutTitle1.style.transform = `translate3d(0, ${30 - (titleProgress * 30)}px, 0)`;
 
-                // Colunas da Imagem 1 e Saída Sincronizada do Texto
                 if (progress <= 0.44) {
-                    // ENTRADA: sobem por colunas de 0.24 a 0.40
                     const columnProgress = Math.min(1, Math.max(0, (progress - 0.24) / 0.12));
                     columns1.forEach((col, index) => {
                         const colDelay = index * 0.12;
                         const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress - colDelay) / 0.52));
                         const translateY = 100 - (colIndividualProgress * 100);
-                        col.style.transform = `translateY(${translateY}%)`;
+                        col.style.transform = `translate3d(0, ${translateY}%, 0)`;
                         col.style.opacity = colIndividualProgress;
                     });
 
-                    // Reset do Container de Texto durante a entrada
                     aboutTextContainer1.style.opacity = 1;
-                    aboutTextContainer1.style.transform = 'translateY(0px)';
+                    aboutTextContainer1.style.transform = 'translate3d(0, 0px, 0)';
                 } else {
-                    // SAÍDA: imagem sobe em colunas E o bloco de texto sobe suavemente junto
                     const exitProgress = Math.min(1, Math.max(0, (progress - 0.44) / 0.12));
                     
                     columns1.forEach((col, index) => {
                         const colDelay = index * 0.12;
                         const colIndividualExit = Math.min(1, Math.max(0, (exitProgress - colDelay) / 0.52));
                         const translateY = -(colIndividualExit * 100);
-                        col.style.transform = `translateY(${translateY}%)`;
+                        col.style.transform = `translate3d(0, ${translateY}%, 0)`;
                         col.style.opacity = 1 - colIndividualExit;
                     });
 
-                    // Animação de saída do texto sincronizada
                     const textExitProgress = Math.min(1, Math.max(0, (progress - 0.44) / 0.12));
                     aboutTextContainer1.style.opacity = 1 - textExitProgress;
-                    aboutTextContainer1.style.transform = `translateY(${-textExitProgress * 60}px)`;
+                    aboutTextContainer1.style.transform = `translate3d(0, ${-textExitProgress * 60}px, 0)`;
                 }
 
-                // Texto Typewriter 1
                 const textProgress = Math.min(1, Math.max(0, (progress - 0.32) / 0.18));
                 const totalChars1 = charSpans1.length;
                 const charsToReveal1 = Math.floor(textProgress * totalChars1);
@@ -664,32 +667,27 @@
                 splitAboutSection1.style.pointerEvents = 'none';
             }
 
-            // -------------------------------------------------------------
-            // ETAPA 2: SEGUNDA SEÇÃO "ESPELHADA" (Progress 0.50 a 1.0)
-            // -------------------------------------------------------------
+            // SEGUNDA SEÇÃO "ESPELHADA"
             if (progress > 0.50) {
                 splitAboutSection2.style.opacity = 1;
                 splitAboutSection2.style.pointerEvents = 'auto';
 
-                // Títulos e Badge
                 const titleProgress2 = Math.min(1, Math.max(0, (progress - 0.50) / 0.08));
                 aboutBadge2.style.opacity = titleProgress2;
-                aboutBadge2.style.transform = `translateY(${30 - (titleProgress2 * 30)}px)`;
+                aboutBadge2.style.transform = `translate3d(0, ${30 - (titleProgress2 * 30)}px, 0)`;
 
                 aboutTitle2.style.opacity = titleProgress2;
-                aboutTitle2.style.transform = `translateY(${30 - (titleProgress2 * 30)}px)`;
+                aboutTitle2.style.transform = `translate3d(0, ${30 - (titleProgress2 * 30)}px, 0)`;
 
-                // Colunas da Imagem 2 (Entrada suave por colunas do lado direito)
                 const columnProgress2 = Math.min(1, Math.max(0, (progress - 0.52) / 0.14));
                 columns2.forEach((col, index) => {
                     const colDelay = index * 0.12;
                     const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress2 - colDelay) / 0.52));
                     const translateY = 100 - (colIndividualProgress * 100);
-                    col.style.transform = `translateY(${translateY}%)`;
+                    col.style.transform = `translate3d(0, ${translateY}%, 0)`;
                     col.style.opacity = colIndividualProgress;
                 });
 
-                // Texto Typewriter 2
                 const textProgress2 = Math.min(1, Math.max(0, (progress - 0.62) / 0.22));
                 const totalChars2 = charSpans2.length;
                 const charsToReveal2 = Math.floor(textProgress2 * totalChars2);
@@ -706,54 +704,50 @@
                 splitAboutSection2.style.pointerEvents = 'none';
             }
 
-            // -------------------------------------------------------------
-            // LÓGICA DA PILHA DE CARDS
-            // -------------------------------------------------------------
-            const stackRect = servicesStackWrapper.getBoundingClientRect();
-            const stackHeight = servicesStackWrapper.offsetHeight - window.innerHeight;
-            
-            let stackProgress = -stackRect.top / stackHeight;
-            stackProgress = Math.max(0, Math.min(1, stackProgress));
+            // PILHA DE CARDS COM LERP
+            const stackProgress = currentStackProgress;
 
-            // FASE 1: CARD 1 (0% a 35%)
             if (stackProgress <= 0.35) {
                 let p1 = stackProgress / 0.35;
-                card1.style.transform = `translateY(${-p1 * 120}vh)`;
+                card1.style.transform = `translate3d(0, ${-p1 * 120}vh, 0)`;
             } else {
-                card1.style.transform = `translateY(-120vh)`;
+                card1.style.transform = `translate3d(0, -120vh, 0)`;
             }
 
-            // FASE 2: CARD 2 (0% a 70%)
             if (stackProgress <= 0.35) {
                 let p2In = stackProgress / 0.35;
                 let scale2 = 0.93 + (p2In * 0.07);
                 let y2 = 30 - (p2In * 30);
-                card2.style.transform = `translateY(${y2}px) scale(${scale2})`;
+                card2.style.transform = `translate3d(0, ${y2}px, 0) scale3d(${scale2}, ${scale2}, 1)`;
                 card2.style.zIndex = "20";
             } else if (stackProgress > 0.35 && stackProgress <= 0.70) {
                 let p2Out = (stackProgress - 0.35) / 0.35;
-                card2.style.transform = `translateY(${-p2Out * 120}vh) scale(1)`;
+                card2.style.transform = `translate3d(0, ${-p2Out * 120}vh, 0) scale3d(1, 1, 1)`;
                 card2.style.zIndex = "30";
             } else {
-                card2.style.transform = `translateY(-120vh) scale(1)`;
+                card2.style.transform = `translate3d(0, -120vh, 0) scale3d(1, 1, 1)`;
                 card2.style.zIndex = "10";
             }
 
-            // FASE 3: CARD 3 (35% a 100%)
             if (stackProgress <= 0.35) {
-                card3.style.transform = `translateY(60px) scale(0.86)`;
+                card3.style.transform = `translate3d(0, 60px, 0) scale3d(0.86, 0.86, 1)`;
                 card3.style.zIndex = "10";
             } else if (stackProgress > 0.35 && stackProgress <= 0.70) {
                 let p3In = (stackProgress - 0.35) / 0.35;
                 let scale3 = 0.86 + (p3In * 0.14);
                 let y3 = 60 - (p3In * 60);
-                card3.style.transform = `translateY(${y3}px) scale(${scale3})`;
+                card3.style.transform = `translate3d(0, ${y3}px, 0) scale3d(${scale3}, ${scale3}, 1)`;
                 card3.style.zIndex = "25";
             } else {
-                card3.style.transform = `translateY(0px) scale(1)`;
+                card3.style.transform = `translate3d(0, 0px, 0) scale3d(1, 1, 1)`;
                 card3.style.zIndex = "40";
             }
-        });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Inicia o loop de animação contínuo
+        requestAnimationFrame(animate);
     </script>
 </body>
 </html>
