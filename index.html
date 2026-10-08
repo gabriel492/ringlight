@@ -110,7 +110,7 @@
             overflow: hidden;
         }
 
-        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .reveal-column, .stacked-card, #about-text-container-1, #about-text-container-2 {
+        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .reveal-column, .vision-stacked-card, #about-text-container-1, #about-text-container-2 {
             will-change: transform, opacity;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -163,12 +163,12 @@
             color: #ffffff !important;
         }
 
-        .services-stack-wrapper {
+        .vision-stack-wrapper {
             height: 300vh;
             position: relative;
         }
 
-        .services-sticky-container {
+        .vision-sticky-container {
             position: sticky;
             top: 0;
             height: 100vh;
@@ -179,9 +179,10 @@
             overflow: hidden;
         }
 
-        .stacked-card {
+        .vision-stacked-card {
             transform-origin: center center;
             opacity: 1 !important;
+            transition: transform 0.1s linear;
         }
 
         .carousel-container {
@@ -253,13 +254,6 @@
             padding: 2rem;
             text-align: center;
         }
-
-        #contact-modal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        #contact-modal-content {
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
@@ -290,15 +284,9 @@
 
             <nav id="nav-links" class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl transition-all duration-300">
                 <a href="#about" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Sobre</a>
-                <a href="#services" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Servi&ccedil;os</a>
                 <a href="#portfolio" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Portf&oacute;lio</a>
+                <a href="#contact-section" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Contato</a>
             </nav>
-
-            <div class="hidden md:flex items-center gap-4">
-                <button onclick="openContactModal()" id="nav-cta" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-beige-300 to-beige-500 hover:from-beige-200 hover:to-beige-400 text-brown-950 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                    Entre em Contato
-                </button>
-            </div>
 
             <button onclick="toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl glass-panel-brown flex items-center justify-center text-beige-100 text-lg transition-colors cursor-pointer z-50">
                 <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
@@ -307,11 +295,8 @@
 
         <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brown-900/95 backdrop-blur-xl border-b border-brown-800 py-6 px-6 shadow-2xl flex flex-col gap-4 transform -translate-y-full opacity-0 pointer-events-none transition-all duration-300 md:hidden">
             <a href="#about" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Sobre</a>
-            <a href="#services" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Servi&ccedil;os</a>
             <a href="#portfolio" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Portf&oacute;lio</a>
-            <button onclick="toggleMobileMenu(); openContactModal();" class="w-full mt-2 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-beige-300 to-beige-500 text-brown-950 shadow-md">
-                Entre em Contato
-            </button>
+            <a href="#contact-section" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Contato</a>
         </div>
     </header>
 
@@ -380,95 +365,65 @@
             </div>
         </div>
 
-        <!-- SEÇÃO DE TRANSIÇÃO COM IMAGEM DE FUNDO (Estilo Tela Inicial) -->
-        <section class="relative h-[70vh] w-full flex items-center justify-center overflow-hidden z-20">
-            <div class="absolute inset-0 w-full h-full">
-                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-brown-950/80 via-brown-950/50 to-brown-950/90"></div>
-            </div>
-            
-            <div class="relative z-10 text-center max-w-4xl mx-auto px-6 space-y-4">
-                <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.3em] inline-block glass-panel-brown px-6 py-2 rounded-full">Exclusividade &amp; Prop&oacute;sito</span>
-                <h2 class="font-display text-3xl md:text-6xl font-bold text-beige-100 tracking-wide drop-shadow-lg">
-                    A Ess&ecirc;ncia do Olhar Cinematogr&aacute;fico
-                </h2>
-                <p class="text-beige-200 text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                    Cada projeto &eacute; tratado como uma obra de arte &uacute;nica, refletindo identidade, sofistica\u00e7\u00e3o e impacto visual duradouro.
-                </p>
-            </div>
-        </section>
-
-        <!-- Demais Seções em Fundo Claro -->
-        <div class="bg-white text-brown-950 relative z-20 transition-colors">
-            
-            <div id="services" class="services-stack-wrapper">
-                <div class="services-sticky-container px-4 sm:px-6 lg:px-16">
+        <!-- SEÇÃO STICKY TRIPLA (Exclusividade & Propósito) -->
+        <div id="vision-stack" class="vision-stack-wrapper bg-brown-950">
+            <div class="vision-sticky-container px-4 sm:px-6 lg:px-16">
+                
+                <div class="relative w-full max-w-4xl h-[480px] md:h-[450px] flex justify-center items-center">
                     
-                    <div id="services-header-container" class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3 mb-6 md:mb-12">
-                        <span id="services-badge" class="scroll-reveal-element text-brown-600 text-xs font-bold uppercase tracking-widest inline-block">Servi&ccedil;os Oferecidos</span>
-                        <h2 id="services-title" class="scroll-reveal-element font-display text-2xl md:text-5xl font-bold tracking-wide text-brown-950">
-                            Produ&ccedil;&otilde;es Sob Medida
-                        </h2>
+                    <!-- Card 1 -->
+                    <div id="vision-card-1" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-30">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">01 / Exclusividade</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                O Olhar Cinematogr&aacute;fico &Uacute;nico
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Cada projeto desenvolvido no est&uacute;dio &eacute; tratado como uma obra de arte singular, refletindo identidade, sofistica&ccedil;&atilde;o e impacto visual duradouro.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="relative w-full max-w-2xl h-[460px] md:h-[420px] flex justify-center items-center">
-                        
-                        <div id="service-card-1" class="stacked-card absolute w-full bg-beige-50 p-6 md:p-10 rounded-3xl border border-beige-300 shadow-2xl flex flex-col justify-between h-full z-30">
-                            <div>
-                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
-                                    <i class="fa-solid fa-video"></i>
-                                </div>
-                                <span class="text-brown-500 font-display font-bold text-xs md:text-sm uppercase tracking-widest">01 / Produ&ccedil;&atilde;o</span>
-                                <h3 class="font-display font-extrabold text-2xl md:text-4xl text-brown-950 mt-1 md:mt-2 mb-2 md:mb-4">Produ&ccedil;&atilde;o de V&iacute;deo</h3>
-                                <p class="text-brown-800 text-sm md:text-lg leading-relaxed font-normal">
-                                    Filmes publicit&aacute;rios, document&aacute;rios e conte&uacute;dos cinematogr&aacute;ficos desenvolvidos com narrativa envolvente, tratamento de cor avan&ccedil;ado e est&eacute;tica refinada.
-                                </p>
-                            </div>
-                            <div class="flex justify-between items-center pt-4 md:pt-6 border-t border-beige-200 mt-2">
-                                <span class="text-[10px] md:text-xs font-bold text-brown-600 tracking-widest uppercase">Dire&ccedil;&atilde;o &amp; Edi&ccedil;&atilde;o</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700 text-sm"></i>
-                            </div>
+                    <!-- Card 2 -->
+                    <div id="vision-card-2" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-20">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">02 / Precis&atilde;o</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                Precis&atilde;o Cir&uacute;rgica em Cada Frame
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Dominamos a luz, a cor e a narrativa para transformar momentos efêmeros em memórias visuais de altíssimo padrão editorial e comercial.
+                            </p>
                         </div>
+                    </div>
 
-                        <div id="service-card-2" class="stacked-card absolute w-full bg-beige-100 p-6 md:p-10 rounded-3xl border border-beige-300 shadow-2xl flex flex-col justify-between h-full z-20">
-                            <div>
-                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
-                                    <i class="fa-solid fa-camera"></i>
-                                </div>
-                                <span class="text-brown-500 font-display font-bold text-xs md:text-sm uppercase tracking-widest">02 / Editorial</span>
-                                <h3 class="font-display font-extrabold text-2xl md:text-4xl text-brown-950 mt-1 md:mt-2 mb-2 md:mb-4">Fotografia Editorial</h3>
-                                <p class="text-brown-800 text-sm md:text-lg leading-relaxed font-normal">
-                                    Ensaios conceituais e campanhas de moda com ilumina&ccedil;&atilde;o de est&uacute;dio de alta precis&atilde;o, enquadramentos autorais e acabamento fotogr&aacute;fico impec&aacute;vel.
-                                </p>
-                            </div>
-                            <div class="flex justify-between items-center pt-4 md:pt-6 border-t border-beige-200 mt-2">
-                                <span class="text-[10px] md:text-xs font-bold text-brown-600 tracking-widest uppercase">Campanhas &amp; Lookbooks</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-700 text-sm"></i>
-                            </div>
+                    <!-- Card 3 -->
+                    <div id="vision-card-3" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-10">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Prop&oacute;sito</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                Conex&otilde;es Reais &amp; Vis&atilde;o Futurista
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Unimos tendências globais de design e tecnologia de ponta para conectar marcas e pessoas através de um storytelling visual incomparável.
+                            </p>
                         </div>
-
-                        <div id="service-card-3" class="stacked-card absolute w-full bg-beige-200 p-6 md:p-10 rounded-3xl border border-beige-400 shadow-2xl flex flex-col justify-between h-full z-10">
-                            <div>
-                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
-                                    <i class="fa-solid fa-clapperboard"></i>
-                                </div>
-                                <span class="text-brown-700 font-display font-bold text-xs md:text-sm uppercase tracking-widest">03 / Conceito</span>
-                                <h3 class="font-display font-extrabold text-2xl md:text-4xl text-brown-950 mt-1 md:mt-2 mb-2 md:mb-4">Dire&ccedil;&atilde;o Criativa</h3>
-                                <p class="text-brown-900 text-sm md:text-lg leading-relaxed font-normal">
-                                    Constru&ccedil;&atilde;o completa da identidade visual para marcas e projetos art&iacute;sticos, desde o moodboard e storyboard at&eacute; a supervis&atilde;o da entrega final.
-                                </p>
-                            </div>
-                            <div class="flex justify-between items-center pt-4 md:pt-6 border-t border-beige-300 mt-2">
-                                <span class="text-[10px] md:text-xs font-bold text-brown-800 tracking-widest uppercase">Estrat&eacute;gia Visual</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-brown-800 text-sm"></i>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
-            </div>
 
+            </div>
+        </div>
+
+        <!-- Portfólio / Carrossel -->
+        <div class="bg-white text-brown-950 relative z-20 transition-colors">
+            
             <section id="portfolio" class="py-24 overflow-hidden relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
                     <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
@@ -481,6 +436,7 @@
                 <div class="carousel-container py-6" id="portfolio-carousel">
                     <div class="carousel-track" id="carousel-track">
                         
+                        <!-- Card 1 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -506,6 +462,7 @@
                             </div>
                         </div>
 
+                        <!-- Card 2 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -531,6 +488,7 @@
                             </div>
                         </div>
 
+                        <!-- Card 3 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -556,6 +514,7 @@
                             </div>
                         </div>
 
+                        <!-- Card 4 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -581,6 +540,7 @@
                             </div>
                         </div>
 
+                        <!-- Card 5 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -606,18 +566,153 @@
                             </div>
                         </div>
 
+                        <!-- CARD FINAL DO CARROSSEL: NOS MANDE MENSAGEM -->
+                        <div class="carousel-card cursor-pointer" onclick="openContactModal()">
+                            <div class="card-inner">
+                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-4 shadow-lg">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-xl text-beige-100 mb-2">Tem um projeto em mente?</h4>
+                                    <p class="text-xs text-beige-300 mb-6 leading-relaxed">Nos mande uma mensagem e vamos dar vida à sua ideia.</p>
+                                    <span class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-md">
+                                        Entrar em Contato
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
+
+            <!-- SEÇÃO DE CONTATO DEPOIS DO CARROSSEL -->
+            <section id="contact-section" class="py-20 px-6 lg:px-16 bg-beige-100 border-t border-beige-200">
+                <div class="max-w-4xl mx-auto bg-white border border-beige-300 rounded-3xl shadow-2xl p-8 md:p-14 relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-beige-200/50 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <span class="text-brown-600 text-xs font-bold uppercase tracking-widest bg-beige-200/60 px-4 py-1 rounded-full">Fale Conosco</span>
+                        <h3 class="font-display font-bold text-3xl md:text-4xl text-brown-950 mt-3 mb-2">Inicie seu Projeto com a LZ</h3>
+                        <p class="text-brown-700 text-sm md:text-base">Escolha seu canal preferido ou envie os detalhes do seu projeto diretamente por aqui.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                        <a href="https://wa.me/5500000000000" target="_blank" class="flex items-center gap-4 p-5 rounded-2xl bg-beige-50 border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-emerald-400 transition-colors shrink-0">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-brown-500 uppercase tracking-wider group-hover:text-beige-300">Instantâneo</span>
+                                <span class="font-bold text-sm">WhatsApp</span>
+                            </div>
+                        </a>
+
+                        <a href="https://instagram.com" target="_blank" class="flex items-center gap-4 p-5 rounded-2xl bg-beige-50 border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
+                            <div class="w-12 h-12 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-pink-400 transition-colors shrink-0">
+                                <i class="fa-brands fa-instagram text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-brown-500 uppercase tracking-wider group-hover:text-beige-300">Portfólio & Direct</span>
+                                <span class="font-bold text-sm">Instagram</span>
+                            </div>
+                        </a>
+
+                        <a href="mailto:contato@lzstudio.com" class="flex items-center gap-4 p-5 rounded-2xl bg-beige-50 border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-amber-400 transition-colors shrink-0">
+                                <i class="fa-regular fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-brown-500 uppercase tracking-wider group-hover:text-beige-300">Propostas</span>
+                                <span class="font-bold text-sm">E-mail</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <form class="space-y-4 max-w-2xl mx-auto bg-beige-50/50 p-6 md:p-8 rounded-2xl border border-beige-200" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! Retornaremos em breve.'); this.reset();">
+                        <h4 class="font-display font-bold text-base text-brown-950 text-center mb-4">Envie os Detalhes do Escopo</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
+                            <input type="email" placeholder="Seu e-mail profissional" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
+                        </div>
+                        <textarea rows="4" placeholder="Conte-nos sobre o seu projeto, prazos ou expectativas..." required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700"></textarea>
+                        <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest text-beige-100 bg-brown-900 hover:bg-brown-800 transition-all shadow-md">
+                            Enviar Mensagem para a LZ
+                        </button>
+                    </form>
+                </div>
+            </section>
+
         </div>
     </main>
 
-    <footer class="bg-brown-950 border-t border-brown-800 py-8 text-center text-xs text-beige-300 relative z-25">
-        &copy; 2026 LZ Studio. Todos os direitos reservados.
+    <!-- RODAPÉ COMPLETO -->
+    <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 border-t border-brown-800 relative z-25">
+        <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            
+            <div class="space-y-4 md:col-span-1">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brown-700 via-brown-600 to-beige-300 p-[1px]">
+                        <div class="w-full h-full bg-brown-950 rounded-[11px] flex items-center justify-center">
+                            <span class="font-display font-black text-xl text-beige-pure tracking-widest">LZ</span>
+                        </div>
+                    </div>
+                    <span class="font-display font-extrabold text-xl tracking-widest text-beige-100">LZ STUDIO<span class="text-beige-400">.</span></span>
+                </div>
+                <p class="text-xs text-beige-300 leading-relaxed font-light">
+                    Estúdio de cinematografia e fotografia editorial dedicado a criar narrativas visuais autênticas e marcantes.
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navega&ccedil;&atilde;o</h4>
+                <ul class="space-y-2 text-xs text-beige-300">
+                    <li><a href="#about" class="hover:text-beige-100 transition-colors">Sobre o Estúdio</a></li>
+                    <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
+                    <li><a href="#contact-section" class="hover:text-beige-100 transition-colors">Fale Conosco</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Atendimento</h4>
+                <p class="text-xs text-beige-300 leading-relaxed">
+                    Segunda a Sexta: 09h às 19h<br>
+                    Atendimento global sob consulta.
+                </p>
+                <p class="text-xs text-beige-300">
+                    <i class="fa-regular fa-envelope mr-1"></i> contato@lzstudio.com
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Redes Sociais</h4>
+                <div class="flex items-center gap-3">
+                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                    </a>
+                    <a href="https://wa.me/5500000000000" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                    </a>
+                    <a href="mailto:contato@lzstudio.com" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
+                        <i class="fa-regular fa-envelope text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-16 pt-6 border-t border-brown-900 flex flex-col sm:flex-row items-center justify-between text-xs text-beige-400 gap-4">
+            <p>&copy; 2026 LZ Studio. Todos os direitos reservados.</p>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-beige-200 transition-colors">Termos de Uso</a>
+                <a href="#" class="hover:text-beige-200 transition-colors">Política de Privacidade</a>
+            </div>
+        </div>
     </footer>
 
-    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none">
-        <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto">
+    <!-- MODAL DE CONTATO (Disparado pelo card final do carrossel) -->
+    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto transition-transform duration-300">
             
             <button onclick="closeContactModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-beige-200 text-brown-950 flex items-center justify-center hover:bg-beige-300 transition-colors">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -631,7 +726,7 @@
                 <p class="text-xs text-brown-600 mt-1">Escolha um canal ou inicie seu projeto diretamente</p>
             </div>
 
-            <div id="linktree-links" class="space-y-3">
+            <div class="space-y-3">
                 <a href="https://wa.me/5500000000000" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-emerald-400 transition-colors">
@@ -661,28 +756,6 @@
                     </div>
                     <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
                 </a>
-
-                <button onclick="toggleProjectForm()" class="w-full flex items-center justify-between p-4 rounded-2xl bg-brown-900 text-beige-100 hover:bg-brown-800 transition-all group shadow-md cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-beige-300 text-brown-950 flex items-center justify-center">
-                            <i class="fa-solid fa-rocket text-sm"></i>
-                        </div>
-                        <span class="font-bold text-sm">Inicie seu Projeto</span>
-                    </div>
-                    <i id="form-toggle-icon" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
-                </button>
-            </div>
-
-            <div id="project-form-container" class="hidden mt-4 pt-4 border-t border-beige-200 transition-all">
-                <form class="space-y-3" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso!'); closeContactModal();">
-                    <h4 class="font-display font-bold text-sm text-brown-950 mb-2">Detalhes do Projeto</h4>
-                    <input type="text" placeholder="Seu nome" required class="w-full px-4 py-2.5 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none">
-                    <input type="email" placeholder="Seu e-mail" required class="w-full px-4 py-2.5 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none">
-                    <textarea rows="3" placeholder="Observação / Escopo do projeto" required class="w-full px-4 py-2.5 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none"></textarea>
-                    <button type="submit" class="w-full py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-brown-900 hover:bg-brown-800 transition-all">
-                        Enviar Proposta
-                    </button>
-                </form>
             </div>
 
         </div>
@@ -703,13 +776,6 @@
             modal.classList.add('opacity-0', 'pointer-events-none');
             content.classList.remove('scale-100');
             content.classList.add('scale-95');
-        }
-
-        function toggleProjectForm() {
-            const formContainer = document.getElementById('project-form-container');
-            const icon = document.getElementById('form-toggle-icon');
-            formContainer.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
         }
 
         function toggleMobileMenu() {
@@ -802,19 +868,6 @@
         const aboutBadge2 = document.getElementById('about-badge-2');
         const aboutTitle2 = document.getElementById('about-title-2');
 
-        const servicesBadge = document.getElementById('services-badge');
-        const servicesTitle = document.getElementById('services-title');
-        const originalServicesTitleText = servicesTitle.innerText;
-        servicesTitle.innerHTML = '';
-        const servicesTitleSpans = [];
-        Array.from(originalServicesTitleText).forEach(char => {
-            const span = document.createElement('span');
-            span.className = 'char-span';
-            span.textContent = char;
-            servicesTitle.appendChild(span);
-            servicesTitleSpans.push(span);
-        });
-
         const heroWrapper = document.getElementById('hero-wrapper');
         const lzLogo = document.getElementById('zoom-lz-logo');
         const heroTag = document.getElementById('hero-tag');
@@ -826,27 +879,25 @@
         const navTitle = document.getElementById('nav-title');
         const navLinks = document.getElementById('nav-links');
         const navLinkItems = document.querySelectorAll('.nav-link-item');
-        const navCta = document.getElementById('nav-cta');
 
-        const servicesStackWrapper = document.getElementById('services');
-        const card1 = document.getElementById('service-card-1');
-        const card2 = document.getElementById('service-card-2');
-        const card3 = document.getElementById('service-card-3');
-        const portfolioSection = document.getElementById('portfolio');
+        const visionStackWrapper = document.getElementById('vision-stack');
+        const vCard1 = document.getElementById('vision-card-1');
+        const vCard2 = document.getElementById('vision-card-2');
+        const vCard3 = document.getElementById('vision-card-3');
 
         let currentProgress = 0;
         let targetProgress = 0;
-        let currentStackProgress = 0;
-        let targetStackProgress = 0;
+        let currentVisionProgress = 0;
+        let targetVisionProgress = 0;
 
         window.addEventListener('scroll', () => {
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
             targetProgress = Math.max(0, Math.min(1.05, -wrapperRect.top / wrapperHeight));
 
-            const stackRect = servicesStackWrapper.getBoundingClientRect();
-            const stackHeight = servicesStackWrapper.offsetHeight - window.innerHeight;
-            targetStackProgress = Math.max(0, Math.min(1, -stackRect.top / stackHeight));
+            const visionRect = visionStackWrapper.getBoundingClientRect();
+            const visionHeight = visionStackWrapper.offsetHeight - window.innerHeight;
+            targetVisionProgress = Math.max(0, Math.min(1, -visionRect.top / visionHeight));
         }, { passive: true });
 
         const track = document.getElementById('carousel-track');
@@ -922,7 +973,7 @@
 
         function animate() {
             currentProgress += (targetProgress - currentProgress) * 0.08;
-            currentStackProgress += (targetStackProgress - currentStackProgress) * 0.08;
+            currentVisionProgress += (targetVisionProgress - currentVisionProgress) * 0.08;
 
             const progress = currentProgress;
             const whiteProgress = Math.min(1, progress / 0.12);
@@ -937,8 +988,6 @@
                     item.classList.remove('nav-link-light');
                     item.classList.add('nav-link-dark');
                 });
-                navCta.classList.remove('from-beige-300', 'to-beige-500', 'text-brown-950');
-                navCta.classList.add('bg-brown-950', 'text-beige-100');
             } else {
                 navTitle.classList.add('text-beige-100');
                 navTitle.classList.remove('text-brown-950');
@@ -948,8 +997,6 @@
                     item.classList.add('nav-link-light');
                     item.classList.remove('nav-link-dark');
                 });
-                navCta.classList.add('from-beige-300', 'to-beige-500', 'text-brown-950');
-                navCta.classList.remove('bg-brown-950', 'text-beige-100');
             }
 
             const scale = 1 + (progress * 16);
@@ -1011,7 +1058,7 @@
                 splitAboutSection1.style.pointerEvents = 'none';
             }
 
-            // SOBRE 2 (NOSSA FILOSOFIA) - INTERVALO AMPLIADO COM MAIS TEMPO DE LEITURA
+            // SOBRE 2 (NOSSA FILOSOFIA)
             if (progress >= 0.55 && progress <= 1.02) {
                 splitAboutSection2.style.opacity = 1;
                 splitAboutSection2.style.pointerEvents = 'auto';
@@ -1054,73 +1101,52 @@
                 splitAboutSection2.style.pointerEvents = 'none';
             }
 
-            const stackProgress = currentStackProgress;
-            
-            const servicesTextProgress = Math.min(1, Math.max(0, stackProgress / 0.15));
-            const badgeReveal = Math.min(1, servicesTextProgress * 2);
-            servicesBadge.style.opacity = badgeReveal;
-            servicesBadge.style.transform = `translate3d(0, ${20 - (badgeReveal * 20)}px, 0)`;
-
-            const charsToRevealServices = Math.floor(servicesTextProgress * servicesTitleSpans.length);
-            servicesTitleSpans.forEach((span, index) => {
-                if (index <= charsToRevealServices) span.classList.add('revealed');
-                else span.classList.remove('revealed');
-            });
-
-            if (stackProgress <= 0.0) {
-                card1.style.transform = `translate3d(0, 0px, 0) scale3d(1, 1, 1)`;
-                card1.style.zIndex = "30";
-            } else if (stackProgress > 0.0 && stackProgress <= 0.30) {
-                let p1 = stackProgress / 0.30;
-                card1.style.transform = `translate3d(0, ${-p1 * 120}vh, 0)`;
-                card1.style.zIndex = "30";
+            // ANIMAÇÃO DOS CARDS STICKY TRIPLOS (VISION STACK)
+            const vProgress = currentVisionProgress;
+            if (vProgress <= 0.0) {
+                vCard1.style.transform = `translate3d(0, 0px, 0) scale3d(1, 1, 1)`;
+                vCard1.style.zIndex = "30";
+            } else if (vProgress > 0.0 && vProgress <= 0.33) {
+                let p1 = vProgress / 0.33;
+                vCard1.style.transform = `translate3d(0, ${-p1 * 120}vh, 0)`;
+                vCard1.style.zIndex = "30";
             } else {
-                card1.style.transform = `translate3d(0, -120vh, 0)`;
-                card1.style.zIndex = "10";
+                vCard1.style.transform = `translate3d(0, -120vh, 0)`;
+                vCard1.style.zIndex = "10";
             }
 
-            if (stackProgress <= 0.0) {
-                card2.style.transform = `translate3d(0, 30px, 0) scale3d(0.94, 0.94, 1)`;
-                card2.style.zIndex = "20";
-            } else if (stackProgress > 0.0 && stackProgress <= 0.30) {
-                let p2In = stackProgress / 0.30;
+            if (vProgress <= 0.0) {
+                vCard2.style.transform = `translate3d(0, 30px, 0) scale3d(0.94, 0.94, 1)`;
+                vCard2.style.zIndex = "20";
+            } else if (vProgress > 0.0 && vProgress <= 0.33) {
+                let p2In = vProgress / 0.33;
                 let scale2 = 0.94 + (p2In * 0.06);
-                card2.style.transform = `translate3d(0, ${30 - (p2In * 30)}px, 0) scale3d(${scale2}, ${scale2}, 1)`;
-                card2.style.zIndex = "20";
-            } else if (stackProgress > 0.30 && stackProgress <= 0.60) {
-                let p2Out = (stackProgress - 0.30) / 0.30;
-                card2.style.transform = `translate3d(0, ${-p2Out * 120}vh, 0)`;
-                card2.style.zIndex = "30";
-            } else if (stackProgress > 0.60) {
-                card2.style.transform = `translate3d(0, -120vh, 0)`;
-                card2.style.zIndex = "10";
+                vCard2.style.transform = `translate3d(0, ${30 - (p2In * 30)}px, 0) scale3d(${scale2}, ${scale2}, 1)`;
+                vCard2.style.zIndex = "20";
+            } else if (vProgress > 0.33 && vProgress <= 0.66) {
+                let p2Out = (vProgress - 0.33) / 0.33;
+                vCard2.style.transform = `translate3d(0, ${-p2Out * 120}vh, 0)`;
+                vCard2.style.zIndex = "30";
+            } else if (vProgress > 0.66) {
+                vCard2.style.transform = `translate3d(0, -120vh, 0)`;
+                vCard2.style.zIndex = "10";
             }
 
-            if (stackProgress <= 0.30) {
-                card3.style.transform = `translate3d(0, 60px, 0) scale3d(0.88, 0.88, 1)`;
-                card3.style.zIndex = "10";
-            } else if (stackProgress > 0.30 && stackProgress <= 0.60) {
-                let p3In = (stackProgress - 0.30) / 0.30;
+            if (vProgress <= 0.33) {
+                vCard3.style.transform = `translate3d(0, 60px, 0) scale3d(0.88, 0.88, 1)`;
+                vCard3.style.zIndex = "10";
+            } else if (vProgress > 0.33 && vProgress <= 0.66) {
+                let p3In = (vProgress - 0.33) / 0.33;
                 let scale3 = 0.88 + (p3In * 0.12);
-                card3.style.transform = `translate3d(0, ${60 - (p3In * 60)}px, 0) scale3d(${scale3}, ${scale3}, 1)`;
-                card3.style.zIndex = "20";
-            } else if (stackProgress > 0.60 && stackProgress <= 0.90) {
-                let p3Out = (stackProgress - 0.60) / 0.30;
-                card3.style.transform = `translate3d(0, ${-p3Out * 120}vh, 0)`; 
-                card3.style.zIndex = "30";
+                vCard3.style.transform = `translate3d(0, ${60 - (p3In * 60)}px, 0) scale3d(${scale3}, ${scale3}, 1)`;
+                vCard3.style.zIndex = "20";
+            } else if (vProgress > 0.66 && vProgress <= 1.0) {
+                let p3Out = (vProgress - 0.66) / 0.34;
+                vCard3.style.transform = `translate3d(0, ${-p3Out * 120}vh, 0)`;
+                vCard3.style.zIndex = "30";
             } else {
-                card3.style.transform = `translate3d(0, -120vh, 0)`;
-                card3.style.zIndex = "30";
-            }
-
-            if (stackProgress <= 0.60) {
-                portfolioSection.style.transform = `translate3d(0, 100vh, 0)`;
-            } else if (stackProgress > 0.60 && stackProgress <= 0.90) {
-                let portfolioProgress = (stackProgress - 0.60) / 0.30;
-                let portfolioTranslate = 100 - (portfolioProgress * 100);
-                portfolioSection.style.transform = `translate3d(0, ${portfolioTranslate}vh, 0)`;
-            } else {
-                portfolioSection.style.transform = `translate3d(0, 0vh, 0)`;
+                vCard3.style.transform = `translate3d(0, -120vh, 0)`;
+                vCard3.style.zIndex = "30";
             }
 
             if (!isDown) {
