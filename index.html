@@ -95,7 +95,7 @@
         }
 
         .zoom-hero-wrapper {
-            height: 600vh;
+            height: 1000vh;
             position: relative;
         }
 
@@ -184,7 +184,6 @@
             opacity: 1 !important;
         }
 
-        /* Estilos do Carrossel e Flip Card 3D */
         .carousel-container {
             overflow: hidden;
             width: 100%;
@@ -265,10 +264,8 @@
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
 
-    <!-- Cursor Interativo -->
     <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-beige-300/60 bg-beige-200/10 z-50 transform -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
 
-    <!-- Background em Slides -->
     <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <div id="bg-slides-container" class="relative w-full h-full">
             <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
@@ -280,7 +277,6 @@
         <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
     </div>
 
-    <!-- Navegação -->
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
@@ -304,13 +300,11 @@
                 </button>
             </div>
 
-            <!-- Botão Menu Hambúrguer (Mobile) -->
             <button onclick="toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl glass-panel-brown flex items-center justify-center text-beige-100 text-lg transition-colors cursor-pointer z-50">
                 <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
             </button>
         </div>
 
-        <!-- Menu Mobile Dropdown -->
         <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brown-900/95 backdrop-blur-xl border-b border-brown-800 py-6 px-6 shadow-2xl flex flex-col gap-4 transform -translate-y-full opacity-0 pointer-events-none transition-all duration-300 md:hidden">
             <a href="#about" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Sobre</a>
             <a href="#services" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Servi&ccedil;os</a>
@@ -323,7 +317,6 @@
 
     <main class="relative z-10">
 
-        <!-- Zoom Hero e Seções Sobre 1 & 2 -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
@@ -344,7 +337,6 @@
                     </p>
                 </div>
 
-                <!-- SEÇÃO SOBRE 1 -->
                 <div id="split-about-section" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden transition-opacity duration-300">
                     <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container-1"></div>
 
@@ -365,7 +357,6 @@
                     </div>
                 </div>
 
-                <!-- SEÇÃO SOBRE 2 (NOSSA FILOSOFIA) -->
                 <div id="split-about-section-2" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden transition-opacity duration-300">
                     <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white order-2 md:order-1" id="about-text-container-2">
                         <div class="space-y-6 max-w-xl">
@@ -389,14 +380,30 @@
             </div>
         </div>
 
+        <!-- SEÇÃO DE TRANSIÇÃO COM IMAGEM DE FUNDO (Estilo Tela Inicial) -->
+        <section class="relative h-[70vh] w-full flex items-center justify-center overflow-hidden z-20">
+            <div class="absolute inset-0 w-full h-full">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-brown-950/80 via-brown-950/50 to-brown-950/90"></div>
+            </div>
+            
+            <div class="relative z-10 text-center max-w-4xl mx-auto px-6 space-y-4">
+                <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.3em] inline-block glass-panel-brown px-6 py-2 rounded-full">Exclusividade &amp; Prop&oacute;sito</span>
+                <h2 class="font-display text-3xl md:text-6xl font-bold text-beige-100 tracking-wide drop-shadow-lg">
+                    A Ess&ecirc;ncia do Olhar Cinematogr&aacute;fico
+                </h2>
+                <p class="text-beige-200 text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                    Cada projeto &eacute; tratado como uma obra de arte &uacute;nica, refletindo identidade, sofistica\u00e7\u00e3o e impacto visual duradouro.
+                </p>
+            </div>
+        </section>
+
         <!-- Demais Seções em Fundo Claro -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             
-            <!-- Seção Serviços: Cards Empilhados -->
             <div id="services" class="services-stack-wrapper">
                 <div class="services-sticky-container px-4 sm:px-6 lg:px-16">
                     
-                    <!-- CABEÇALHO DA SEÇÃO DE SERVIÇOS FIXO -->
                     <div id="services-header-container" class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3 mb-6 md:mb-12">
                         <span id="services-badge" class="scroll-reveal-element text-brown-600 text-xs font-bold uppercase tracking-widest inline-block">Servi&ccedil;os Oferecidos</span>
                         <h2 id="services-title" class="scroll-reveal-element font-display text-2xl md:text-5xl font-bold tracking-wide text-brown-950">
@@ -406,7 +413,6 @@
 
                     <div class="relative w-full max-w-2xl h-[460px] md:h-[420px] flex justify-center items-center">
                         
-                        <!-- Card 1 -->
                         <div id="service-card-1" class="stacked-card absolute w-full bg-beige-50 p-6 md:p-10 rounded-3xl border border-beige-300 shadow-2xl flex flex-col justify-between h-full z-30">
                             <div>
                                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
@@ -424,7 +430,6 @@
                             </div>
                         </div>
 
-                        <!-- Card 2 -->
                         <div id="service-card-2" class="stacked-card absolute w-full bg-beige-100 p-6 md:p-10 rounded-3xl border border-beige-300 shadow-2xl flex flex-col justify-between h-full z-20">
                             <div>
                                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
@@ -442,7 +447,6 @@
                             </div>
                         </div>
 
-                        <!-- Card 3 -->
                         <div id="service-card-3" class="stacked-card absolute w-full bg-beige-200 p-6 md:p-10 rounded-3xl border border-beige-400 shadow-2xl flex flex-col justify-between h-full z-10">
                             <div>
                                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brown-900 text-beige-100 flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md">
@@ -465,7 +469,6 @@
                 </div>
             </div>
 
-            <!-- Portfólio / Carrossel Arrastável com Flip 3D (Moeda) -->
             <section id="portfolio" class="py-24 overflow-hidden relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
                     <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
@@ -478,7 +481,6 @@
                 <div class="carousel-container py-6" id="portfolio-carousel">
                     <div class="carousel-track" id="carousel-track">
                         
-                        <!-- Card 1 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -504,7 +506,6 @@
                             </div>
                         </div>
 
-                        <!-- Card 2 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -530,7 +531,6 @@
                             </div>
                         </div>
 
-                        <!-- Card 3 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -556,7 +556,6 @@
                             </div>
                         </div>
 
-                        <!-- Card 4 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -582,7 +581,6 @@
                             </div>
                         </div>
 
-                        <!-- Card 5 -->
                         <div class="carousel-card" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -618,7 +616,6 @@
         &copy; 2026 LZ Studio. Todos os direitos reservados.
     </footer>
 
-    <!-- MODAL DE CONTATO ESTILO LINKTREE -->
     <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none">
         <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto">
             
@@ -852,9 +849,8 @@
             targetStackProgress = Math.max(0, Math.min(1, -stackRect.top / stackHeight));
         }, { passive: true });
 
-        // CARROSSEL COM SUPORTE A DRAG/SWIPE E FLIP 3D
         const track = document.getElementById('carousel-track');
-        track.innerHTML += track.innerHTML; // Duplica para efeito infinito contínuo
+        track.innerHTML += track.innerHTML;
 
         let carouselPosition = 0;
         let autoSpeed = 0.8;
@@ -884,7 +880,7 @@
             if (!isDown) return;
             hasDragged = true;
             const x = e.pageX;
-            const walk = (x - startX) * 1.8; // Velocidade do arraste
+            const walk = (x - startX) * 1.8;
             carouselPosition = scrollLeft - walk;
             
             const maxScroll = track.scrollWidth / 2;
@@ -894,7 +890,6 @@
             track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
         });
 
-        // Touch para mobile
         carouselContainer.addEventListener('touchstart', (e) => {
             isDown = true;
             hasDragged = false;
@@ -920,7 +915,6 @@
             track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
         }, { passive: true });
 
-        // Função de Flip 3D (Moeda) ao clicar no card (somente se não foi um arraste)
         function flipCard(card) {
             if (hasDragged) return;
             card.classList.toggle('flipped');
@@ -1017,19 +1011,26 @@
                 splitAboutSection1.style.pointerEvents = 'none';
             }
 
-            // SOBRE 2
-            if (progress >= 0.52 && progress <= 1.02) {
+            // SOBRE 2 (NOSSA FILOSOFIA) - INTERVALO AMPLIADO COM MAIS TEMPO DE LEITURA
+            if (progress >= 0.55 && progress <= 1.02) {
                 splitAboutSection2.style.opacity = 1;
                 splitAboutSection2.style.pointerEvents = 'auto';
 
-                const titleProgress2 = Math.min(1, Math.max(0, (progress - 0.52) / 0.08));
+                const titleProgress2 = Math.min(1, Math.max(0, (progress - 0.55) / 0.08));
                 aboutBadge2.style.opacity = titleProgress2;
                 aboutBadge2.style.transform = `translate3d(0, ${30 - (titleProgress2 * 30)}px, 0)`;
                 aboutTitle2.style.opacity = titleProgress2;
                 aboutTitle2.style.transform = `translate3d(0, ${30 - (titleProgress2 * 30)}px, 0)`;
 
-                if (progress <= 0.84) {
-                    const columnProgress2 = Math.min(1, Math.max(0, (progress - 0.54) / 0.12));
+                const textProgress2 = Math.min(1, Math.max(0, (progress - 0.65) / 0.25));
+                const charsToReveal2 = Math.floor(textProgress2 * charSpans2.length);
+                charSpans2.forEach((span, index) => {
+                    if (index <= charsToReveal2) span.classList.add('revealed');
+                    else span.classList.remove('revealed');
+                });
+
+                if (progress <= 0.93) {
+                    const columnProgress2 = Math.min(1, Math.max(0, (progress - 0.57) / 0.12));
                     columns2.forEach((col, index) => {
                         const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress2 - (index * 0.12)) / 0.52));
                         col.style.transform = `translate3d(0, ${100 - (colIndividualProgress * 100)}%, 0)`;
@@ -1038,7 +1039,7 @@
                     aboutTextContainer2.style.opacity = 1;
                     aboutTextContainer2.style.transform = 'translate3d(0, 0px, 0)';
                 } else {
-                    const exitProgress2 = Math.min(1, Math.max(0, (progress - 0.84) / 0.18));
+                    const exitProgress2 = Math.min(1, Math.max(0, (progress - 0.93) / 0.09));
                     columns2.forEach((col, index) => {
                         const colIndividualExit = Math.min(1, Math.max(0, (exitProgress2 - (index * 0.12)) / 0.52));
                         col.style.transform = `translate3d(0, ${-(colIndividualExit * 100)}%, 0)`;
@@ -1048,12 +1049,6 @@
                     aboutTextContainer2.style.transform = `translate3d(0, ${-exitProgress2 * 60}px, 0)`;
                 }
 
-                const textProgress2 = Math.min(1, Math.max(0, (progress - 0.62) / 0.22));
-                const charsToReveal2 = Math.floor(textProgress2 * charSpans2.length);
-                charSpans2.forEach((span, index) => {
-                    if (index <= charsToReveal2) span.classList.add('revealed');
-                    else span.classList.remove('revealed');
-                });
             } else {
                 splitAboutSection2.style.opacity = 0;
                 splitAboutSection2.style.pointerEvents = 'none';
@@ -1128,7 +1123,6 @@
                 portfolioSection.style.transform = `translate3d(0, 0vh, 0)`;
             }
 
-            // Movimento automático contínuo do carrossel quando não estiver sendo arrastado
             if (!isDown) {
                 carouselPosition += autoSpeed;
                 const maxScroll = track.scrollWidth / 2;
