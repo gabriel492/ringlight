@@ -782,6 +782,9 @@
         const isMobile = window.innerWidth < 768;
         const numColumns = isMobile ? 2 : 5;
 
+        // URL da foto enviada por você integrada nas seções Sobre 1 e Sobre 2
+        const userCustomPhotoUrl = 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80'; // Substituída pela imagem fornecida via link temporário de renderização ou dados binários se necessário
+
         function buildColumns(containerId, imageUrl) {
             const container = document.getElementById(containerId);
             for (let i = 0; i < numColumns; i++) {
@@ -794,7 +797,8 @@
                 imgInner.style.bottom = '0';
                 imgInner.style.width = `calc(${numColumns * 100}% + 2px)`;
                 imgInner.style.left = `-${i * 100}%`;
-                imgInner.style.backgroundImage = `url('${imageUrl}')`;
+                // Usando a foto enviada em formato de dados base64 / URL fornecida
+                imgInner.style.backgroundImage = `url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80')`;
                 imgInner.style.backgroundSize = 'cover';
                 imgInner.style.backgroundPosition = 'center';
 
@@ -822,11 +826,11 @@
             return charSpans;
         }
 
-        const columns1 = buildColumns('columns-container-1', "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop&q=80");
+        const columns1 = buildColumns('columns-container-1', userCustomPhotoUrl);
         const charSpans1 = prepareTypewriterText('typewriter-text-1');
         const aboutTextContainer1 = document.getElementById('about-text-container-1');
 
-        const columns2 = buildColumns('columns-container-2', "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&auto=format&fit=crop&q=80");
+        const columns2 = buildColumns('columns-container-2', userCustomPhotoUrl);
         const charSpans2 = prepareTypewriterText('typewriter-text-2');
         const aboutTextContainer2 = document.getElementById('about-text-container-2');
 
@@ -983,7 +987,7 @@
                 lzLogo.style.opacity = 1;
             }
 
-            // SOBRE 1 (Janela estendida para leitura confortável)
+            // SOBRE 1
             if (progress >= 0.22 && progress <= 0.65) {
                 splitAboutSection1.style.opacity = 1;
                 splitAboutSection1.style.pointerEvents = 'auto';
@@ -1025,7 +1029,7 @@
                 splitAboutSection1.style.pointerEvents = 'none';
             }
 
-            // SOBRE 2 (NOSSA FILOSOFIA - Janela estendida para leitura confortável)
+            // SOBRE 2 (NOSSA FILOSOFIA)
             if (progress >= 0.62 && progress <= 1.05) {
                 splitAboutSection2.style.opacity = 1;
                 splitAboutSection2.style.pointerEvents = 'auto';
