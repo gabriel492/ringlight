@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark scroll-smooth">
+<html lang="pt-BR" class="dark scroll-smooth" style="cursor: auto !important;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,10 @@
     </script>
 
     <style>
+        * {
+            cursor: auto !important;
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -72,11 +76,6 @@
             background: linear-gradient(135deg, #FAF7F4 0%, #E6D7CA 50%, #C2A895 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        #custom-cursor {
-            pointer-events: none;
-            transition: transform 0.15s ease-out;
         }
 
         .bg-slide {
@@ -257,8 +256,6 @@
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
-
-    <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-beige-300/60 bg-beige-200/10 z-50 transform -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
 
     <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <div id="bg-slides-container" class="relative w-full h-full">
@@ -764,11 +761,6 @@
             if (e.target.id === 'contact-modal') {
                 closeContactModal();
             }
-        });
-
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => {
-            if (cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
         const slides = document.querySelectorAll('.bg-slide');
