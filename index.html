@@ -78,6 +78,21 @@
             -webkit-text-fill-color: transparent;
         }
 
+        /* Estilo customizado inspirado na logo fornecida (L e Z sobrepostos) */
+        .custom-logo-graphic {
+            display: inline-flex;
+            align-items: baseline;
+            line-height: 1;
+        }
+        .custom-logo-graphic .letter-l {
+            color: #644518;
+            letter-spacing: -0.1em;
+        }
+        .custom-logo-graphic .letter-z {
+            position: relative;
+            margin-left: -0.15em;
+        }
+
         .bg-slide {
             position: absolute;
             inset: 0;
@@ -93,7 +108,7 @@
             opacity: 0.85;
         }
 
-        /* Altura reduzida para acelerar o efeito do zoom em mais 50% */
+        /* Altura reduzida para acelerar o efeito do zoom */
         .zoom-hero-wrapper {
             height: 600vh;
             position: relative;
@@ -282,7 +297,7 @@
 
             <nav id="nav-links" class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl transition-all duration-300">
                 <a href="#about" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Sobre</a>
-                <a href="#portfolio" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Portf&oacute;lio</a>
+                <a href="#portfolio" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Portfólio</a>
                 <button onclick="openContactModal()" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest bg-transparent border-none cursor-pointer p-0">Contato</button>
             </nav>
 
@@ -293,7 +308,7 @@
 
         <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brown-900/95 backdrop-blur-xl border-b border-brown-800 py-6 px-6 shadow-2xl flex flex-col gap-4 transform -translate-y-full opacity-0 pointer-events-none transition-all duration-300 md:hidden">
             <a href="#about" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Sobre</a>
-            <a href="#portfolio" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Portf&oacute;lio</a>
+            <a href="#portfolio" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Portfólio</a>
             <button onclick="toggleMobileMenu(); openContactModal();" class="text-left text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800 bg-transparent w-full">Contato</button>
         </div>
     </header>
@@ -305,13 +320,13 @@
 
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
                     <div class="py-2 flex justify-center items-center">
-                        <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black tracking-widest leading-none text-beige-pure select-none drop-shadow-2xl">
-                            LZ
+                        <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black tracking-widest leading-none select-none drop-shadow-2xl custom-logo-graphic">
+                            <span class="letter-l" style="color: #c2a895;">L</span><span class="letter-z text-beige-pure">Z</span>
                         </h1>
                     </div>
 
                     <p id="hero-subtext" class="hero-fade-element text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
-                        Est&uacute;dio audiovisual especializado em fotografia editorial e dire&ccedil;&atilde;o cinematogr&aacute;fica.
+                        Estúdio audiovisual especializado em fotografia editorial e direção cinematográfica.
                     </p>
                 </div>
 
@@ -321,15 +336,15 @@
                     <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white" id="about-text-container-1">
                         <div class="space-y-6 max-w-xl">
                             <span id="about-badge-1" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
-                                Sobre o Est&uacute;dio
+                                Sobre o Estúdio
                             </span>
                             
                             <h2 id="about-title-1" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
-                                Transformamos Narrativas em Arte Visual Memor&aacute;vel
+                                Transformamos Narrativas em Arte Visual Memorável
                             </h2>
                             
                             <p id="typewriter-text-1" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
-                                No LZ Audiovisual, cada frame &eacute; planejado com precis&atilde;o cir&uacute;rgica. Atuamos na interse&ccedil;&atilde;o exata entre a eleg&acirc;ncia da est&eacute;tica cl&aacute;ssica e a inova&ccedil;&atilde;o tecnol&oacute;gica da fotografia e cinematografia moderna.
+                                No LZ Audiovisual, cada frame é planejado com precisão cirúrgica. Atuamos na interseção exata entre a elegância da estética clássica e a inovação tecnológica da fotografia e cinematografia moderna.
                             </p>
                         </div>
                     </div>
@@ -343,11 +358,11 @@
                             </span>
                             
                             <h2 id="about-title-2" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
-                                Est&eacute;tica Apurada &amp; Vis&atilde;o Singular
+                                Estética Apurada &amp; Visão Singular
                             </h2>
                             
                             <p id="typewriter-text-2" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
-                                Acreditamos que imagens aut&ecirc;nticas nascem da sensibilidade e da t&eacute;cnica em perfeita harmonia. Nossa busca cont&iacute;nua pelo extraordin&aacute;rio redefine padr&otilde;es visuais e gera conex&otilde;es profundas e duradouras.
+                                Acreditamos que imagens autênticas nascem da sensibilidade e da técnica em perfeita harmonia. Nossa busca contínua pelo extraordinário redefine padrões visuais e gera conexões profundas e duradouras.
                             </p>
                         </div>
                     </div>
@@ -371,10 +386,10 @@
                         <div class="relative z-10 space-y-3">
                             <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">01 / Exclusividade</span>
                             <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                O Olhar Cinematogr&aacute;fico &Uacute;nico
+                                O Olhar Cinematográfico Único
                             </h3>
                             <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
-                                Cada projeto desenvolvido no est&uacute;dio &eacute; tratado como uma obra de arte singular, refletindo identidade, sofistica&ccedil;&atilde;o e impacto visual duradouro.
+                                Cada projeto desenvolvido no estúdio é tratado como uma obra de arte singular, refletindo identidade, sofisticação e impacto visual duradouro.
                             </p>
                         </div>
                     </div>
@@ -384,9 +399,9 @@
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&auto=format&fit=crop&q=80');"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
                         <div class="relative z-10 space-y-3">
-                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">02 / Precis&atilde;o</span>
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">02 / Precisão</span>
                             <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                Precis&atilde;o Cir&uacute;rgica em Cada Frame
+                                Precisão Cirúrgica em Cada Frame
                             </h3>
                             <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
                                 Dominamos a luz, a cor e a narrativa para transformar momentos efêmeros em memórias visuais de altíssimo padrão editorial e comercial.
@@ -399,9 +414,9 @@
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
                         <div class="relative z-10 space-y-3">
-                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Prop&oacute;sito</span>
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Propósito</span>
                             <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                Conex&otilde;es Reais &amp; Vis&atilde;o Futurista
+                                Conexões Reais &amp; Visão Futurista
                             </h3>
                             <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
                                 Unimos tendências globais de design e tecnologia de ponta para conectar marcas e pessoas através de um storytelling visual incomparável.
@@ -438,7 +453,7 @@
                                     </div>
                                     <div class="p-6">
                                         <h4 class="font-display font-bold text-lg text-brown-950">Campanha Editorial</h4>
-                                        <p class="text-xs text-brown-600 mt-1">Fotografia &amp; Dire&ccedil;&atilde;o</p>
+                                        <p class="text-xs text-brown-600 mt-1">Fotografia &amp; Direção</p>
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -490,7 +505,7 @@
                                     </div>
                                     <div class="p-6">
                                         <h4 class="font-display font-bold text-lg text-brown-950">Moda &amp; Retrato</h4>
-                                        <p class="text-xs text-brown-600 mt-1">Produ&ccedil;&atilde;o Visual</p>
+                                        <p class="text-xs text-brown-600 mt-1">Produção Visual</p>
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -516,7 +531,7 @@
                                     </div>
                                     <div class="p-6">
                                         <h4 class="font-display font-bold text-lg text-brown-950">Comercial Global</h4>
-                                        <p class="text-xs text-brown-600 mt-1">Dire&ccedil;&atilde;o de Arte</p>
+                                        <p class="text-xs text-brown-600 mt-1">Direção de Arte</p>
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -541,7 +556,7 @@
                                         <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
                                     </div>
                                     <div class="p-6">
-                                        <h4 class="font-display font-bold text-lg text-brown-950">Est&eacute;tica Minimalista</h4>
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Estética Minimalista</h4>
                                         <p class="text-xs text-brown-600 mt-1">Lookbook</p>
                                     </div>
                                 </div>
@@ -549,7 +564,7 @@
                                     <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
                                         <i class="fa-brands fa-instagram"></i>
                                     </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Est&eacute;tica Minimalista</h4>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
                                     <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
                                     <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
                                         <span>Ver no Instagram</span>
@@ -625,7 +640,7 @@
             </div>
 
             <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navega&ccedil;&atilde;o</h4>
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navegação</h4>
                 <ul class="space-y-2 text-xs text-beige-300">
                     <li><a href="#about" class="hover:text-beige-100 transition-colors">Sobre o Estúdio</a></li>
                     <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
@@ -996,7 +1011,7 @@
                         col.style.opacity = 1 - colIndividualExit;
                     });
                     aboutTextContainer1.style.opacity = 1 - exitProgress;
-                    aboutTextContainer1.style.transform = `translate3d(0, ${-exitProgress * 60}px, 0)`;
+                    aboutTextContainer1.style.transform = `translate3d(0, ${-exitProgress * 60}px, 0)';
                 }
 
                 const textProgress = Math.min(1, Math.max(0, (progress - 0.32) / 0.18));
@@ -1045,7 +1060,7 @@
                         col.style.opacity = 1 - colIndividualExit;
                     });
                     aboutTextContainer2.style.opacity = 1 - exitProgress2;
-                    aboutTextContainer2.style.transform = `translate3d(0, ${-exitProgress2 * 60}px, 0)`;
+                    aboutTextContainer2.style.transform = `translate3d(0, ${-exitProgress2 * 60}px, 0)';
                 }
 
             } else {
