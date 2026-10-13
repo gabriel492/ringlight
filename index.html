@@ -78,7 +78,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Estilização exata extraída do ficheiro fornecido */
+        /* Estilização exata do monograma LZ */
         .exact-logo-lz {
             display: inline-flex;
             align-items: baseline;
@@ -290,12 +290,9 @@
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brown-700 via-brown-600 to-beige-300 p-[1px] transition-transform duration-300 group-hover:scale-105">
-                    <div class="w-full h-full bg-brown-950 rounded-[11px] flex items-center justify-center exact-logo-lz">
-                        <span class="font-display font-black text-lg letter-l">L</span><span class="font-display font-black text-lg letter-z">Z</span>
-                    </div>
+                <div class="flex items-center justify-center exact-logo-lz transition-transform duration-300 group-hover:scale-105">
+                    <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
                 </div>
-                <span id="nav-title" class="font-display font-extrabold text-2xl tracking-widest text-beige-100 transition-colors">LZ AUDIOVISUAL</span>
             </a>
 
             <nav id="nav-links" class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl transition-all duration-300">
@@ -630,12 +627,9 @@
             
             <div class="space-y-4 md:col-span-1">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brown-700 via-brown-600 to-beige-300 p-[1px]">
-                        <div class="w-full h-full bg-brown-950 rounded-[11px] flex items-center justify-center exact-logo-lz">
-                            <span class="font-display font-black text-lg letter-l">L</span><span class="font-display font-black text-lg letter-z">Z</span>
-                        </div>
+                    <div class="flex items-center justify-center exact-logo-lz">
+                        <span class="font-display font-black text-xl letter-l">L</span><span class="font-display font-black text-xl letter-z">Z</span>
                     </div>
-                    <span class="font-display font-extrabold text-xl tracking-widest text-beige-100">LZ AUDIOVISUAL</span>
                 </div>
                 <p class="text-xs text-beige-300 leading-relaxed font-light">
                     Estúdio de cinematografia e fotografia editorial dedicado a criar narrativas visuais autênticas e marcantes.
@@ -697,7 +691,7 @@
             </button>
 
             <div class="text-center mb-6">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brown-900 to-brown-800 text-beige-100 flex items-center justify-center mx-auto mb-3 shadow-lg exact-logo-lz">
+                <div class="flex items-center justify-center mx-auto mb-3 exact-logo-lz">
                     <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
                 </div>
                 <h3 class="font-display font-bold text-2xl text-brown-950">Fale Conosco</h3>
@@ -850,7 +844,6 @@
         const splitAboutSection1 = document.getElementById('split-about-section');
         const splitAboutSection2 = document.getElementById('split-about-section-2');
 
-        const navTitle = document.getElementById('nav-title');
         const navLinks = document.getElementById('nav-links');
         const navLinkItems = document.querySelectorAll('.nav-link-item');
 
@@ -954,8 +947,6 @@
             whiteOverlay.style.opacity = whiteProgress;
 
             if (whiteProgress > 0.5) {
-                navTitle.classList.remove('text-beige-100');
-                navTitle.classList.add('text-brown-950');
                 navLinks.classList.remove('glass-panel-brown');
                 navLinks.classList.add('glass-panel-beige-light');
                 navLinkItems.forEach(item => {
@@ -963,8 +954,6 @@
                     item.classList.add('nav-link-dark');
                 });
             } else {
-                navTitle.classList.add('text-beige-100');
-                navTitle.classList.remove('text-brown-950');
                 navLinks.classList.add('glass-panel-brown');
                 navLinks.classList.remove('glass-panel-beige-light');
                 navLinkItems.forEach(item => {
