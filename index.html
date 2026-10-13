@@ -103,8 +103,9 @@
             opacity: 0.85;
         }
 
+        /* Altura aumentada em 20% para desacelerar o efeito de scroll */
         .zoom-hero-wrapper {
-            height: 150vh;
+            height: 180vh;
             position: relative;
         }
 
@@ -250,13 +251,14 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO -->
+        <!-- HERO SECTION COM LOGO AUMENTADO EM 20% -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
                     <div class="py-2 flex justify-center items-center">
-                        <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black leading-none select-none drop-shadow-2xl exact-logo-lz">
+                        <!-- Aumentado em cerca de 20% (de text-[13rem] para text-[15.5rem]) -->
+                        <h1 id="zoom-lz-logo" class="font-display text-9xl md:text-[13rem] lg:text-[15.5rem] font-black leading-none select-none drop-shadow-2xl exact-logo-lz">
                             <span class="letter-l">L</span><span class="letter-z">Z</span>
                         </h1>
                     </div>
@@ -269,7 +271,7 @@
             </div>
         </div>
 
-        <!-- SEÇÃO SOBRE MIM (LOGOTIPO TERMINA O ZOOM E ENTRA DIRETO AQUI) -->
+        <!-- SEÇÃO SOBRE MIM (APARECE IMEDIATAMENTE APÓS O TÉRMINO DO LZ) -->
         <section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
             <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
                 <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
