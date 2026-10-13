@@ -103,9 +103,8 @@
             opacity: 0.85;
         }
 
-        /* Altura aumentada em 20% para desacelerar o efeito de scroll */
         .zoom-hero-wrapper {
-            height: 180vh;
+            height: 230vh;
             position: relative;
         }
 
@@ -251,13 +250,12 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM LOGO AUMENTADO EM 20% -->
+        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
                     <div class="py-2 flex justify-center items-center">
-                        <!-- Aumentado em cerca de 20% (de text-[13rem] para text-[15.5rem]) -->
                         <h1 id="zoom-lz-logo" class="font-display text-9xl md:text-[13rem] lg:text-[15.5rem] font-black leading-none select-none drop-shadow-2xl exact-logo-lz">
                             <span class="letter-l">L</span><span class="letter-z">Z</span>
                         </h1>
@@ -271,89 +269,7 @@
             </div>
         </div>
 
-        <!-- SEÇÃO SOBRE MIM (APARECE IMEDIATAMENTE APÓS O TÉRMINO DO LZ) -->
-        <section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
-            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
-                <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
-                <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-r from-transparent to-brown-950 pointer-events-none"></div>
-                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
-            </div>
-
-            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
-                <div class="space-y-6 max-w-xl">
-                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
-                        Sobre Mim
-                    </span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
-                        Sensibilidade &amp; Direção Cinematográfica
-                    </h2>
-                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
-                        Sou a mente criativa por trás da LZ Audiovisual. Minha paixão é transformar momentos autênticos e histórias únicas em produções visuais memoráveis de padrão editorial.
-                    </p>
-                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
-                        Com olhar atento aos detalhes, iluminação e composição narrativa, meu objetivo é registrar a essência de cada projeto com elegância, sofisticação e alma.
-                    </p>
-                    <div class="pt-4">
-                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
-                            Conheça Nosso Trabalho
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEÇÃO STICKY TRIPLA -->
-        <div id="vision-stack" class="vision-stack-wrapper bg-brown-950">
-            <div class="vision-sticky-container px-4 sm:px-6 lg:px-16">
-                
-                <div class="relative w-full max-w-4xl h-[480px] md:h-[450px] flex justify-center items-center">
-                    <div id="vision-card-1" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-30">
-                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
-                        <div class="relative z-10 space-y-3">
-                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">01 / Exclusividade</span>
-                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                O Olhar Cinematográfico Único
-                            </h3>
-                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
-                                Cada projeto desenvolvido no estúdio é tratado como uma obra de arte singular, refletindo identidade, sofisticação e impacto visual duradouro.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div id="vision-card-2" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-20">
-                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&auto=format&fit=crop&q=80');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
-                        <div class="relative z-10 space-y-3">
-                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">02 / Precisão</span>
-                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                Precisão Cirúrgica em Cada Frame
-                            </h3>
-                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
-                                Dominamos a luz, a cor e a narrativa para transformar momentos efêmeros em memórias visuais de altíssimo padrão editorial e comercial.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div id="vision-card-3" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-10">
-                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
-                        <div class="relative z-10 space-y-3">
-                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Propósito</span>
-                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                Conexões Reais &amp; Visão Futurista
-                            </h3>
-                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
-                                Unimos tendências globais de design e tecnologia de ponta para conectar marcas e pessoas através de um storytelling visual incomparável.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Portfólio / Carrossel -->
+        <!-- TRABALHOS RECENTES (LOGO APÓS O TÉRMINO DO EFEITO LZ) -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             <section id="portfolio" class="py-24 overflow-hidden relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
@@ -508,7 +424,91 @@
                     </div>
                 </div>
             </section>
+        </div>
 
+        <!-- SEÇÃO SOBRE MIM -->
+        <section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
+            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
+                <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-r from-transparent to-brown-950 pointer-events-none"></div>
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
+            </div>
+
+            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
+                <div class="space-y-6 max-w-xl">
+                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
+                        Sobre Mim
+                    </span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
+                        Sensibilidade &amp; Direção Cinematográfica
+                    </h2>
+                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
+                        Sou a mente criativa por trás da LZ Audiovisual. Minha paixão é transformar momentos autênticos e histórias únicas em produções visuais memoráveis de padrão editorial.
+                    </p>
+                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
+                        Com olhar atento aos detalhes, iluminação e composição narrativa, meu objetivo é registrar a essência de cada projeto com elegância, sofisticação e alma.
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
+                            Conheça Nosso Trabalho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO STICKY TRIPLA -->
+        <div id="vision-stack" class="vision-stack-wrapper bg-brown-950">
+            <div class="vision-sticky-container px-4 sm:px-6 lg:px-16">
+                
+                <div class="relative w-full max-w-4xl h-[480px] md:h-[450px] flex justify-center items-center">
+                    <div id="vision-card-1" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-30">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">01 / Exclusividade</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                O Olhar Cinematográfico Único
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Cada projeto desenvolvido no estúdio é tratado como uma obra de arte singular, refletindo identidade, sofisticação e impacto visual duradouro.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="vision-card-2" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-20">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">02 / Precisão</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                Precisão Cirúrgica em Cada Frame
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Dominamos a luz, a cor e a narrativa para transformar momentos efêmeros em memórias visuais de altíssimo padrão editorial e comercial.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="vision-card-3" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-10">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Propósito</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                Conexões Reais &amp; Visão Futurista
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Unimos tendências globais de design e tecnologia de ponta para conectar marcas e pessoas através de um storytelling visual incomparável.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bg-white text-brown-950 relative z-20 transition-colors">
             <section id="contact-section" class="py-20 px-6 lg:px-16 bg-beige-100 border-t border-beige-200">
                 <div class="max-w-3xl mx-auto bg-white border border-beige-300 rounded-3xl shadow-2xl p-8 md:p-14 relative overflow-hidden">
                     <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-beige-200/50 rounded-full blur-2xl pointer-events-none"></div>
