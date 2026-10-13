@@ -93,9 +93,9 @@
             opacity: 0.85;
         }
 
-        /* Altura reduzida para acelerar o efeito do zoom em 50% */
+        /* Altura reduzida para acelerar o efeito do zoom em mais 50% */
         .zoom-hero-wrapper {
-            height: 900vh;
+            height: 600vh;
             position: relative;
         }
 
@@ -277,7 +277,7 @@
                         <span class="font-display font-black text-xl text-beige-pure tracking-widest">LZ</span>
                     </div>
                 </div>
-                <span id="nav-title" class="font-display font-extrabold text-2xl tracking-widest text-beige-100 transition-colors">LZ AUDIOVISUAL<span class="text-beige-400">.</span></span>
+                <span id="nav-title" class="font-display font-extrabold text-2xl tracking-widest text-beige-100 transition-colors">LZ AUDIOVISUAL</span>
             </a>
 
             <nav id="nav-links" class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl transition-all duration-300">
@@ -304,11 +304,6 @@
             <div class="sticky-hero-container">
 
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
-                    <div id="hero-tag" class="hero-fade-element inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel-brown text-beige-100 text-xs font-semibold tracking-widest uppercase shadow-lg">
-                        <span class="w-2 h-2 rounded-full bg-beige-300 animate-ping"></span>
-                        Cinematografia &amp; Dire&ccedil;&atilde;o de Imagem
-                    </div>
-
                     <div class="py-2 flex justify-center items-center">
                         <h1 id="zoom-lz-logo" class="font-display text-8xl md:text-[11rem] lg:text-[13rem] font-black tracking-widest leading-none text-beige-pure select-none drop-shadow-2xl">
                             LZ
@@ -622,7 +617,7 @@
                             <span class="font-display font-black text-xl text-beige-pure tracking-widest">LZ</span>
                         </div>
                     </div>
-                    <span class="font-display font-extrabold text-xl tracking-widest text-beige-100">LZ AUDIOVISUAL<span class="text-beige-400">.</span></span>
+                    <span class="font-display font-extrabold text-xl tracking-widest text-beige-100">LZ AUDIOVISUAL</span>
                 </div>
                 <p class="text-xs text-beige-300 leading-relaxed font-light">
                     Estúdio de cinematografia e fotografia editorial dedicado a criar narrativas visuais autênticas e marcantes.
@@ -832,7 +827,6 @@
 
         const heroWrapper = document.getElementById('hero-wrapper');
         const lzLogo = document.getElementById('zoom-lz-logo');
-        const heroTag = document.getElementById('hero-tag');
         const heroSubtext = document.getElementById('hero-subtext');
         const whiteOverlay = document.getElementById('hero-white-overlay');
         const splitAboutSection1 = document.getElementById('split-about-section');
@@ -964,12 +958,8 @@
             const scale = 1 + (progress * 16);
             lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
 
-            const fadeHero = Math.max(0, 1 - (progress * 6.0));
             const translateYHero = -(progress * 40);
-
-            heroTag.style.opacity = fadeHero;
-            heroTag.style.transform = `translate3d(0, ${translateYHero}px, 0)`;
-            heroSubtext.style.opacity = fadeHero;
+            heroSubtext.style.opacity = Math.max(0, 1 - (progress * 6.0));
             heroSubtext.style.transform = `translate3d(0, ${translateYHero * 0.5}px, 0)`;
 
             if (progress > 0.15) {
