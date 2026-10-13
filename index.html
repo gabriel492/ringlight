@@ -117,9 +117,9 @@
             opacity: 0.85;
         }
 
-        /* Altura reduzida para acelerar o efeito do zoom em 50% */
+        /* Altura reduzida para acelerar o efeito do zoom */
         .zoom-hero-wrapper {
-            height: 600vh;
+            height: 400vh;
             position: relative;
         }
 
@@ -169,22 +169,6 @@
             opacity: 1;
             transform: translate3d(0, 0, 0);
             color: #1e1410;
-        }
-
-        .nav-link-item {
-            transition: color 0.3s ease;
-        }
-        .nav-link-dark {
-            color: #2d1f18 !important;
-        }
-        .nav-link-dark:hover {
-            color: #140d0a !important;
-        }
-        .nav-link-light {
-            color: #e6d7ca !important;
-        }
-        .nav-link-light:hover {
-            color: #ffffff !important;
         }
 
         .vision-stack-wrapper {
@@ -303,21 +287,9 @@
                 <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30">AUDIOVISUAL</span>
             </a>
 
-            <nav id="nav-links" class="hidden md:flex items-center gap-8 glass-panel-brown px-8 py-3 rounded-full shadow-2xl transition-all duration-300">
-                <a href="#about" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Sobre</a>
-                <a href="#portfolio" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest">Portfólio</a>
-                <button onclick="openContactModal()" class="nav-link-item nav-link-light text-xs font-bold uppercase tracking-widest bg-transparent border-none cursor-pointer p-0">Contato</button>
-            </nav>
-
-            <button onclick="toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl glass-panel-brown flex items-center justify-center text-beige-100 text-lg transition-colors cursor-pointer z-50">
-                <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+            <button onclick="openContactModal()" class="glass-panel-brown px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest text-beige-100 hover:bg-brown-900 transition-all cursor-pointer">
+                Contato
             </button>
-        </div>
-
-        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brown-900/95 backdrop-blur-xl border-b border-brown-800 py-6 px-6 shadow-2xl flex flex-col gap-4 transform -translate-y-full opacity-0 pointer-events-none transition-all duration-300 md:hidden">
-            <a href="#about" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Sobre</a>
-            <a href="#portfolio" onclick="toggleMobileMenu()" class="text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800">Portfólio</a>
-            <button onclick="toggleMobileMenu(); openContactModal();" class="text-left text-beige-100 text-sm font-bold uppercase tracking-widest py-2 border-b border-brown-800 bg-transparent w-full">Contato</button>
         </div>
     </header>
 
@@ -647,7 +619,6 @@
             <div class="space-y-3">
                 <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navegação</h4>
                 <ul class="space-y-2 text-xs text-beige-300">
-                    <li><a href="#about" class="hover:text-beige-100 transition-colors">Sobre o Estúdio</a></li>
                     <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
                     <li><button onclick="openContactModal()" class="bg-transparent border-none text-xs text-beige-300 hover:text-beige-100 transition-colors cursor-pointer p-0 text-left">Fale Conosco</button></li>
                 </ul>
@@ -758,21 +729,6 @@
             content.classList.add('scale-95');
         }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('mobile-menu-icon');
-            const isClosed = menu.classList.contains('-translate-y-full');
-            if (isClosed) {
-                menu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            } else {
-                menu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            }
-        }
-
         document.getElementById('contact-modal').addEventListener('click', (e) => {
             if (e.target.id === 'contact-modal') {
                 closeContactModal();
@@ -843,9 +799,6 @@
         const whiteOverlay = document.getElementById('hero-white-overlay');
         const splitAboutSection1 = document.getElementById('split-about-section');
         const splitAboutSection2 = document.getElementById('split-about-section-2');
-
-        const navLinks = document.getElementById('nav-links');
-        const navLinkItems = document.querySelectorAll('.nav-link-item');
 
         const visionStackWrapper = document.getElementById('vision-stack');
         const vCard1 = document.getElementById('vision-card-1');
@@ -945,22 +898,6 @@
             const progress = currentProgress;
             const whiteProgress = Math.min(1, progress / 0.12);
             whiteOverlay.style.opacity = whiteProgress;
-
-            if (whiteProgress > 0.5) {
-                navLinks.classList.remove('glass-panel-brown');
-                navLinks.classList.add('glass-panel-beige-light');
-                navLinkItems.forEach(item => {
-                    item.classList.remove('nav-link-light');
-                    item.classList.add('nav-link-dark');
-                });
-            } else {
-                navLinks.classList.add('glass-panel-brown');
-                navLinks.classList.remove('glass-panel-beige-light');
-                navLinkItems.forEach(item => {
-                    item.classList.add('nav-link-light');
-                    item.classList.remove('nav-link-dark');
-                });
-            }
 
             const scale = 1 + (progress * 16);
             lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
