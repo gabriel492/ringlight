@@ -65,19 +65,6 @@
             border: 1px solid rgba(226, 210, 195, 0.18);
         }
 
-        .glass-panel-beige-light {
-            background: rgba(244, 237, 230, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(66, 47, 37, 0.2);
-        }
-
-        .text-beige-pure {
-            background: linear-gradient(135deg, #FAF7F4 0%, #E6D7CA 50%, #C2A895 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         /* Estilização exata do monograma LZ */
         .exact-logo-lz {
             display: inline-flex;
@@ -117,7 +104,6 @@
             opacity: 0.85;
         }
 
-        /* Altura reduzida para acelerar o efeito do zoom */
         .zoom-hero-wrapper {
             height: 400vh;
             position: relative;
@@ -134,7 +120,7 @@
             overflow: hidden;
         }
 
-        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .reveal-column, .vision-stacked-card, #about-text-container-1, #about-text-container-2 {
+        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .vision-stacked-card {
             will-change: transform, opacity;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -143,32 +129,6 @@
 
         #zoom-lz-logo {
             transform-origin: center center;
-        }
-
-        .reveal-column {
-            height: 100%;
-            transform: translate3d(0, 100%, 0);
-            opacity: 0;
-            margin-right: -1px;
-        }
-
-        .scroll-reveal-element {
-            opacity: 0;
-            transform: translate3d(0, 30px, 0);
-            will-change: opacity, transform;
-        }
-
-        .char-span {
-            display: inline-block;
-            opacity: 0.12;
-            transform: translate3d(0, 6px, 0);
-            transition: opacity 0.12s ease, transform 0.12s ease, color 0.12s ease;
-            white-space: pre;
-        }
-        .char-span.revealed {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-            color: #1e1410;
         }
 
         .vision-stack-wrapper {
@@ -295,6 +255,7 @@
 
     <main class="relative z-10">
 
+        <!-- HERO SECTION -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
@@ -310,48 +271,43 @@
                     </p>
                 </div>
 
-                <div id="split-about-section" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden transition-opacity duration-300">
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex" id="columns-container-1"></div>
-
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white" id="about-text-container-1">
-                        <div class="space-y-6 max-w-xl">
-                            <span id="about-badge-1" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
-                                Sobre o Estúdio
-                            </span>
-                            
-                            <h2 id="about-title-1" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
-                                Transformamos Narrativas em Arte Visual Memorável
-                            </h2>
-                            
-                            <p id="typewriter-text-1" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
-                                No LZ Audiovisual, cada frame é planejado com precisão cirúrgica. Atuamos na interseção exata entre a elegância da estética clássica e a inovação tecnológica da fotografia e cinematografia moderna.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="split-about-section-2" class="absolute inset-0 w-full h-full z-30 opacity-0 pointer-events-none flex flex-col md:flex-row items-center overflow-hidden transition-opacity duration-300">
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center px-8 md:px-16 lg:px-24 bg-white order-2 md:order-1" id="about-text-container-2">
-                        <div class="space-y-6 max-w-xl">
-                            <span id="about-badge-2" class="scroll-reveal-element text-brown-800 text-xs font-extrabold uppercase tracking-widest bg-beige-100 px-4 py-1.5 rounded-full inline-block border border-beige-300">
-                                Nossa Filosofia
-                            </span>
-                            
-                            <h2 id="about-title-2" class="scroll-reveal-element font-display text-3xl md:text-5xl font-bold tracking-tight text-brown-950 leading-tight">
-                                Estética Apurada &amp; Visão Singular
-                            </h2>
-                            
-                            <p id="typewriter-text-2" class="text-brown-800 text-base md:text-xl leading-relaxed font-normal">
-                                Acreditamos que imagens autênticas nascem da sensibilidade e da técnica em perfeita harmonia. Nossa busca contínua pelo extraordinário redefine padrões visuais e gera conexões profundas e duradouras.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden flex order-1 md:order-2" id="columns-container-2"></div>
-                </div>
-
             </div>
         </div>
+
+        <!-- SEÇÃO SOBRE MIM (DIVISÃO DE TELA COM FOTO E EFEITO ESFUMAÇADO) -->
+        <section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
+            <!-- Esquerda: Imagem em Tela Cheia -->
+            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
+                <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
+                <!-- Efeito esfumaçado/sombra na borda direita (junção central) -->
+                <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-r from-transparent to-brown-950 pointer-events-none"></div>
+                <!-- Efeito esfumaçado na parte inferior para mobile -->
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
+            </div>
+
+            <!-- Direita: Conteúdo de Texto -->
+            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
+                <div class="space-y-6 max-w-xl">
+                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
+                        Sobre Mim
+                    </span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
+                        Sensibilidade &amp; Direção Cinematográfica
+                    </h2>
+                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
+                        Sou a mente criativa por trás da LZ Audiovisual. Minha paixão é transformar momentos autênticos e histórias únicas em produções visuais memoráveis de padrão editorial.
+                    </p>
+                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
+                        Com olhar atento aos detalhes, iluminação e composição narrativa, meu objetivo é registrar a essência de cada projeto com elegância, sofisticação e alma.
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg">
+                            Conheça Nosso Trabalho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- SEÇÃO STICKY TRIPLA (Exclusividade & Propósito) -->
         <div id="vision-stack" class="vision-stack-wrapper bg-brown-950">
@@ -619,6 +575,7 @@
             <div class="space-y-3">
                 <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navegação</h4>
                 <ul class="space-y-2 text-xs text-beige-300">
+                    <li><a href="#about-me" class="hover:text-beige-100 transition-colors">Sobre Mim</a></li>
                     <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
                     <li><button onclick="openContactModal()" class="bg-transparent border-none text-xs text-beige-300 hover:text-beige-100 transition-colors cursor-pointer p-0 text-left">Fale Conosco</button></li>
                 </ul>
@@ -735,70 +692,10 @@
             }
         });
 
-        const isMobile = window.innerWidth < 768;
-        const numColumns = isMobile ? 2 : 5;
-
-        const userCustomPhotoUrl = 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80';
-
-        function buildColumns(containerId, imageUrl) {
-            const container = document.getElementById(containerId);
-            for (let i = 0; i < numColumns; i++) {
-                const col = document.createElement('div');
-                col.className = 'reveal-column flex-1 relative overflow-hidden h-full';
-                
-                const imgInner = document.createElement('div');
-                imgInner.style.position = 'absolute';
-                imgInner.style.top = '0';
-                imgInner.style.bottom = '0';
-                imgInner.style.width = `calc(${numColumns * 100}% + 2px)`;
-                imgInner.style.left = `-${i * 100}%`;
-                imgInner.style.backgroundImage = `url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80')`;
-                imgInner.style.backgroundSize = 'cover';
-                imgInner.style.backgroundPosition = 'center';
-
-                col.appendChild(imgInner);
-                container.appendChild(col);
-            }
-            return container.querySelectorAll('.reveal-column');
-        }
-
-        function prepareTypewriterText(elementId) {
-            const paragraph = document.getElementById(elementId);
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = paragraph.innerHTML;
-            const decodedText = tempDiv.textContent || tempDiv.innerText;
-            paragraph.innerHTML = '';
-            
-            const charSpans = [];
-            Array.from(decodedText).forEach(char => {
-                const span = document.createElement('span');
-                span.className = 'char-span';
-                span.textContent = char;
-                paragraph.appendChild(span);
-                charSpans.push(span);
-            });
-            return charSpans;
-        }
-
-        const columns1 = buildColumns('columns-container-1', userCustomPhotoUrl);
-        const charSpans1 = prepareTypewriterText('typewriter-text-1');
-        const aboutTextContainer1 = document.getElementById('about-text-container-1');
-
-        const columns2 = buildColumns('columns-container-2', userCustomPhotoUrl);
-        const charSpans2 = prepareTypewriterText('typewriter-text-2');
-        const aboutTextContainer2 = document.getElementById('about-text-container-2');
-
-        const aboutBadge1 = document.getElementById('about-badge-1');
-        const aboutTitle1 = document.getElementById('about-title-1');
-        const aboutBadge2 = document.getElementById('about-badge-2');
-        const aboutTitle2 = document.getElementById('about-title-2');
-
         const heroWrapper = document.getElementById('hero-wrapper');
         const lzLogo = document.getElementById('zoom-lz-logo');
         const heroSubtext = document.getElementById('hero-subtext');
         const whiteOverlay = document.getElementById('hero-white-overlay');
-        const splitAboutSection1 = document.getElementById('split-about-section');
-        const splitAboutSection2 = document.getElementById('split-about-section-2');
 
         const visionStackWrapper = document.getElementById('vision-stack');
         const vCard1 = document.getElementById('vision-card-1');
@@ -910,91 +807,6 @@
                 lzLogo.style.opacity = Math.max(0, 1 - ((progress - 0.15) / 0.08));
             } else {
                 lzLogo.style.opacity = 1;
-            }
-
-            // SOBRE 1
-            if (progress >= 0.22 && progress <= 0.65) {
-                splitAboutSection1.style.opacity = 1;
-                splitAboutSection1.style.pointerEvents = 'auto';
-
-                const titleProgress = Math.min(1, Math.max(0, (progress - 0.22) / 0.08));
-                aboutBadge1.style.opacity = titleProgress;
-                aboutBadge1.style.transform = `translate3d(0, ${30 - (titleProgress * 30)}px, 0)`;
-                aboutTitle1.style.opacity = titleProgress;
-                aboutTitle1.style.transform = `translate3d(0, ${30 - (titleProgress * 30)}px, 0)`;
-
-                if (progress <= 0.52) {
-                    const columnProgress = Math.min(1, Math.max(0, (progress - 0.24) / 0.12));
-                    columns1.forEach((col, index) => {
-                        const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress - (index * 0.12)) / 0.52));
-                        col.style.transform = `translate3d(0, ${100 - (colIndividualProgress * 100)}%, 0)`;
-                        col.style.opacity = colIndividualProgress;
-                    });
-                    aboutTextContainer1.style.opacity = 1;
-                    aboutTextContainer1.style.transform = 'translate3d(0, 0px, 0)';
-                } else {
-                    const exitProgress = Math.min(1, Math.max(0, (progress - 0.52) / 0.13));
-                    columns1.forEach((col, index) => {
-                        const colIndividualExit = Math.min(1, Math.max(0, (exitProgress - (index * 0.12)) / 0.52));
-                        col.style.transform = `translate3d(0, ${-(colIndividualExit * 100)}%, 0)`;
-                        col.style.opacity = 1 - colIndividualExit;
-                    });
-                    aboutTextContainer1.style.opacity = 1 - exitProgress;
-                    aboutTextContainer1.style.transform = `translate3d(0, ${-exitProgress * 60}px, 0)`;
-                }
-
-                const textProgress = Math.min(1, Math.max(0, (progress - 0.32) / 0.18));
-                const charsToReveal1 = Math.floor(textProgress * charSpans1.length);
-                charSpans1.forEach((span, index) => {
-                    if (index <= charsToReveal1) span.classList.add('revealed');
-                    else span.classList.remove('revealed');
-                });
-            } else {
-                splitAboutSection1.style.opacity = 0;
-                splitAboutSection1.style.pointerEvents = 'none';
-            }
-
-            // SOBRE 2 (NOSSA FILOSOFIA)
-            if (progress >= 0.62 && progress <= 1.05) {
-                splitAboutSection2.style.opacity = 1;
-                splitAboutSection2.style.pointerEvents = 'auto';
-
-                const titleProgress2 = Math.min(1, Math.max(0, (progress - 0.62) / 0.08));
-                aboutBadge2.style.opacity = titleProgress2;
-                aboutBadge2.style.transform = `translate3d(0, ${30 - (titleProgress2 * 30)}px, 0)`;
-                aboutTitle2.style.opacity = titleProgress2;
-                aboutTitle2.style.transform = `translate3d(0, ${30 - (titleProgress2 * 30)}px, 0)`;
-
-                const textProgress2 = Math.min(1, Math.max(0, (progress - 0.72) / 0.25));
-                const charsToReveal2 = Math.floor(textProgress2 * charSpans2.length);
-                charSpans2.forEach((span, index) => {
-                    if (index <= charsToReveal2) span.classList.add('revealed');
-                    else span.classList.remove('revealed');
-                });
-
-                if (progress <= 0.96) {
-                    const columnProgress2 = Math.min(1, Math.max(0, (progress - 0.64) / 0.12));
-                    columns2.forEach((col, index) => {
-                        const colIndividualProgress = Math.min(1, Math.max(0, (columnProgress2 - (index * 0.12)) / 0.52));
-                        col.style.transform = `translate3d(0, ${100 - (colIndividualProgress * 100)}%, 0)`;
-                        col.style.opacity = colIndividualProgress;
-                    });
-                    aboutTextContainer2.style.opacity = 1;
-                    aboutTextContainer2.style.transform = 'translate3d(0, 0px, 0)';
-                } else {
-                    const exitProgress2 = Math.min(1, Math.max(0, (progress - 0.96) / 0.09));
-                    columns2.forEach((col, index) => {
-                        const colIndividualExit = Math.min(1, Math.max(0, (exitProgress2 - (index * 0.12)) / 0.52));
-                        col.style.transform = `translate3d(0, ${-(colIndividualExit * 100)}%, 0)`;
-                        col.style.opacity = 1 - colIndividualExit;
-                    });
-                    aboutTextContainer2.style.opacity = 1 - exitProgress2;
-                    aboutTextContainer2.style.transform = `translate3d(0, ${-exitProgress2 * 60}px, 0)`;
-                }
-
-            } else {
-                splitAboutSection2.style.opacity = 0;
-                splitAboutSection2.style.pointerEvents = 'none';
             }
 
             // ANIMAÇÃO DOS CARDS STICKY TRIPLOS (VISION STACK)
