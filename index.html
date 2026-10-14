@@ -110,8 +110,9 @@
             opacity: 0.85;
         }
 
+        /* 1. Altura ajustada do wrapper do hero para 160vh */
         .zoom-hero-wrapper {
-            height: 250vh;
+            height: 160vh;
             position: relative;
         }
 
@@ -245,7 +246,7 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM OVERLAY BRANCO SEGUIDO PELO OVERLAY PRETO -->
+        <!-- HERO SECTION -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
                 <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -260,7 +261,7 @@
                     
                     <!-- EFEITO BRANCO -->
                     <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
-                    <!-- EFEITO PRETO (LOGOS APÓS O BRANCO) -->
+                    <!-- EFEITO PRETO -->
                     <div id="hero-black-overlay" class="absolute inset-0 bg-black opacity-0 z-15"></div>
                 </div>
 
@@ -775,12 +776,15 @@
 
             const progress = currentProgress;
 
-            // Efeito branco atinge pico em ~30% do progresso de rolagem
-            whiteOverlay.style.opacity = Math.min(1, progress * 3.5);
+            // 2. Ajuste do overlay branco (aparece apenas no final do zoom)
+            whiteOverlay.style.opacity = Math.max(
+                0,
+                Math.min(1, (progress - 0.78) / 0.22)
+            );
 
-            // Efeito preto entra exatamente quando o branco está no ápice (de 0.3 a 0.6)
-            if (progress > 0.28) {
-                blackOverlay.style.opacity = Math.min(1, (progress - 0.28) * 3.5);
+            // Efeito preto complementar (mantido proporcional no final)
+            if (progress > 0.75) {
+                blackOverlay.style.opacity = Math.min(1, (progress - 0.75) * 4.0);
             } else {
                 blackOverlay.style.opacity = 0;
             }
@@ -792,8 +796,12 @@
             heroSubtext.style.opacity = Math.max(0, 1 - (progress * 6.0));
             heroSubtext.style.transform = `translate3d(0, ${translateYHero * 0.5}px, 0)`;
 
-            if (progress > 0.15) {
-                lzLogo.style.opacity = Math.max(0, 1 - ((progress - 0.15) / 0.08));
+            // 3. Ajuste do desaparecimento tardio do logo
+            if (progress > 0.72) {
+                lzLogo.style.opacity = Math.max(
+                    0,
+                    1 - ((progress - 0.72) / 0.12)
+                );
             } else {
                 lzLogo.style.opacity = 1;
             }
