@@ -169,9 +169,17 @@
         }
 
         @media (max-width: 520px) {
+            /* 1 card por vez, centralizado: recuo igual nos dois lados e card ocupando todo o espaço interno */
+            .gallery-row {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                scroll-padding-left: 1rem;
+                scroll-padding-right: 1rem;
+            }
             .grid-card {
-                flex: 0 0 85vw;
+                flex: 0 0 100%;
                 height: 620px;
+                scroll-snap-align: center;
             }
         }
 
@@ -719,7 +727,7 @@
                 </div>
             </section>
             <!-- degradê bem suave: bege se dissolvendo aos poucos no rodapé -->
-            <div aria-hidden="true" class="h-20 md:h-24 pointer-events-none" style="background: linear-gradient(to bottom, rgb(244,237,230) 0.0%, rgb(243,236,229) 8.3%, rgb(236,229,222) 16.7%, rgb(221,214,207) 25.0%, rgb(197,190,184) 33.3%, rgb(166,159,154) 41.7%, rgb(132,125,120) 50.0%, rgb(98,91,86) 58.3%, rgb(67,60,56) 66.7%, rgb(43,36,33) 75.0%, rgb(28,21,18) 83.3%, rgb(21,14,11) 91.7%, rgb(20,13,10) 100.0%);"></div>
+            <div aria-hidden="true" class="h-14 md:h-16 pointer-events-none" style="background: linear-gradient(to bottom, rgb(244,237,230) 0.0%, rgb(243,236,229) 8.3%, rgb(236,229,222) 16.7%, rgb(221,214,207) 25.0%, rgb(197,190,184) 33.3%, rgb(166,159,154) 41.7%, rgb(132,125,120) 50.0%, rgb(98,91,86) 58.3%, rgb(67,60,56) 66.7%, rgb(43,36,33) 75.0%, rgb(28,21,18) 83.3%, rgb(21,14,11) 91.7%, rgb(20,13,10) 100.0%);"></div>
         </div>
     </main>
 
