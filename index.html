@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
-    <!-- Script oficial do Instagram para os embeds -->
     <script async src="//www.instagram.com/embed.js"></script>
 
     <script>
@@ -226,23 +225,19 @@
                     <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
                         Trabalhos Recentes
                     </h2>
-                    <p class="text-xs text-brown-500 uppercase tracking-wider">Teste das duas soluções de Reels nos primeiros cards</p>
+                    <p class="text-xs text-brown-500 uppercase tracking-wider">Clique em qualquer card para ver mais detalhes</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- CARD 1: SOLUÇÃO 1 (Vídeo Local "teste2.mp4" em loop no card) -->
+                    <!-- CARD 1: SOLUÇÃO 1 (Vídeo Local "teste2.mp4" limpo, sem texto na frente) -->
                     <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                         <div class="card-inner">
                             <div class="card-front">
-                                <div class="h-64 overflow-hidden relative bg-black">
+                                <div class="w-full h-full overflow-hidden relative bg-black">
                                     <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
                                         <source src="teste2.mp4" type="video/mp4">
                                         Seu navegador não suporta vídeo.
                                     </video>
-                                </div>
-                                <div class="p-6">
-                                    <h4 class="font-display font-bold text-lg text-brown-950">Reel (Vídeo Local)</h4>
-                                    <p class="text-xs text-brown-600 mt-1">Solução 1: Reprodução Automática</p>
                                 </div>
                             </div>
                             <div class="card-back">
@@ -259,22 +254,18 @@
                         </div>
                     </div>
 
-                    <!-- CARD 2: SOLUÇÃO 2 (Embed Nativo do Instagram) -->
+                    <!-- CARD 2: SOLUÇÃO 2 (Embed do Instagram) -->
                     <div class="bg-white rounded-2xl p-4 border border-brown-900/20 shadow-md flex flex-col items-center justify-center overflow-hidden" style="height: 420px;">
                         <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DeXIA1upaEY/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
                         </blockquote>
                     </div>
 
-                    <!-- Card 3 -->
+                    <!-- Card 3 (Sem texto na frente) -->
                     <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                         <div class="card-inner">
                             <div class="card-front">
-                                <div class="h-64 overflow-hidden relative">
+                                <div class="w-full h-full overflow-hidden relative">
                                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
-                                </div>
-                                <div class="p-6">
-                                    <h4 class="font-display font-bold text-lg text-brown-950">Moda &amp; Retrato</h4>
-                                    <p class="text-xs text-brown-600 mt-1">Produção Visual</p>
                                 </div>
                             </div>
                             <div class="card-back">
@@ -291,16 +282,12 @@
                         </div>
                     </div>
 
-                    <!-- Card 4 -->
+                    <!-- Card 4 (Sem texto na frente) -->
                     <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                         <div class="card-inner">
                             <div class="card-front">
-                                <div class="h-64 overflow-hidden relative">
+                                <div class="w-full h-full overflow-hidden relative">
                                     <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
-                                </div>
-                                <div class="p-6">
-                                    <h4 class="font-display font-bold text-lg text-brown-950">Comercial Global</h4>
-                                    <p class="text-xs text-brown-600 mt-1">Direção de Arte</p>
                                 </div>
                             </div>
                             <div class="card-back">
@@ -317,16 +304,12 @@
                         </div>
                     </div>
 
-                    <!-- Card 5 -->
+                    <!-- Card 5 (Sem texto na frente) -->
                     <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                         <div class="card-inner">
                             <div class="card-front">
-                                <div class="h-64 overflow-hidden relative">
+                                <div class="w-full h-full overflow-hidden relative">
                                     <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
-                                </div>
-                                <div class="p-6">
-                                    <h4 class="font-display font-bold text-lg text-brown-950">Estética Minimalista</h4>
-                                    <p class="text-xs text-brown-600 mt-1">Lookbook</p>
                                 </div>
                             </div>
                             <div class="card-back">
