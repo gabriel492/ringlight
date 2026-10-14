@@ -107,7 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL EXATAMENTE 4 CARDS SEM SOBRAS --- */
+        /* --- CARROSSEL SIMÉTRICO E PERFEITO --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -121,7 +121,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1.5rem 1.5rem 3rem 1.5rem;
+            padding: 1.5rem 0.75rem 3rem 0.75rem; /* Margem simétrica nas duas pontas */
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -134,7 +134,7 @@
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 4.5rem) / 4);
+            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards exatos considerando 3 gaps */
             min-width: 230px;
             scroll-snap-align: start;
             height: 560px;
@@ -251,7 +251,7 @@
             background: #000;
         }
 
-        /* --- ESTILO FORMULÁRIO ESTILO REFERÊNCIA --- */
+        /* --- ESTILO FORMULÁRIO FALE CONOSCO --- */
         .custom-input {
             width: 100%;
             background-color: #1e1410;
@@ -675,12 +675,11 @@
             </div>
         </section>
 
-        <!-- NOVO FALE CONOSCO - INSPIRADO NA IMAGEM DE REFERÊNCIA -->
+        <!-- FALE CONOSCO ESTILO REFERÊNCIA -->
         <div class="bg-brown-950 text-beige-100 relative z-20 transition-colors">
             <section id="contact-section" class="py-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
                     
-                    <!-- LADO ESQUERDO: TEXTO DE CHAMADA -->
                     <div class="space-y-6 md:pr-6">
                         <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-beige-100 leading-tight">
                             Quer saber mais sobre nossos serviços ou precisa de um orçamento personalizado?
@@ -690,7 +689,6 @@
                         </p>
                     </div>
 
-                    <!-- LADO DIREITO: FORMULÁRIO MINIMALISTA EM LINHA -->
                     <form class="space-y-6" onsubmit="event.preventDefault(); showSuccessMessage(); this.reset();">
                         <div>
                             <input type="text" placeholder="Qual o seu nome?" required class="custom-input">
@@ -704,7 +702,6 @@
                             <textarea rows="4" placeholder="Digite a sua mensagem e responderemos em breve, ok? :-)" required class="custom-input resize-none"></textarea>
                         </div>
 
-                        <!-- BOTÃO NO CANTO DIREITO (ESTILO REFERÊNCIA) -->
                         <div class="flex justify-end pt-2">
                             <button type="submit" class="px-10 py-3 rounded-full bg-beige-100 text-brown-950 font-bold text-xs tracking-widest uppercase hover:bg-white transition-all shadow-lg cursor-pointer">
                                 Enviar
