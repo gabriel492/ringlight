@@ -107,7 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- ESTRUTURA DO CARROSSEL --- */
+        /* --- CARROSSEL RESPONSIVO (EXATAMENTE 4 CARDS NO DESKTOP) --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -117,10 +117,10 @@
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 2rem;
+            gap: 1.5rem;
             overflow-x: auto;
             scroll-behavior: smooth;
-            padding: 1.5rem 1rem 3rem 1rem;
+            padding: 1.5rem 0.5rem 3rem 0.5rem;
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -130,14 +130,32 @@
             display: none;
         }
 
-        /* --- CARD FLIP (PERSPECTIVA E DIMENSÃO) --- */
+        /* Responsividade dos Cards: 4 visíveis em desktop, adaptando em tablets e mobile */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            width: 290px;
-            height: 580px;
+            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards visíveis considerando 3 gaps de 1.5rem */
+            min-width: 250px;
+            height: 560px;
             margin: 0;
-            flex: 0 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-card {
+                flex: 0 0 calc((100% - 3rem) / 3); /* 3 cards em notebooks/tablets grandes */
+            }
+        }
+
+        @media (max-width: 850px) {
+            .grid-card {
+                flex: 0 0 calc((100% - 1.5rem) / 2); /* 2 cards em tablets */
+            }
+        }
+
+        @media (max-width: 550px) {
+            .grid-card {
+                flex: 0 0 85%; /* 1 card em destaque em telemóveis */
+            }
         }
 
         .card-inner {
@@ -296,7 +314,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL AUTOMÁTICO EXPAMPINDO O NÚMERO DE CARDS -->
+                <!-- CARROSSEL RESPONSIVO AUTOMÁTICO -->
                 <div class="gallery-carousel-container" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
@@ -406,7 +424,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 5 (Novo Adicionado: Estética Minimalista) -->
+                        <!-- CARD 5 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -431,7 +449,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 6 (Novo Adicionado: Direção de Arte) -->
+                        <!-- CARD 6 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -456,7 +474,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 7 (Novo Adicionado: Cinema & Produção) -->
+                        <!-- CARD 7 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -738,18 +756,18 @@
         function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
             if (!row) return;
-            const scrollAmount = 320;
+            const cardWidth = row.querySelector('.grid-card').offsetWidth + 24; // largura do card + gap
             if (direction === 'left') {
                 if (row.scrollLeft <= 0) {
                     row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
                 } else {
-                    row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    row.scrollBy({ left: -cardWidth, behavior: 'smooth' });
                 }
             } else {
                 if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 10) {
                     row.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
-                    row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    row.scrollBy({ left: cardWidth, behavior: 'smooth' });
                 }
             }
         }
@@ -760,7 +778,7 @@
         function startAutoPlay() {
             autoPlayTimer = setInterval(() => {
                 scrollCarousel('right');
-            }, 3000); // Avança automaticamente a cada 3 segundos
+            }, 3000);
         }
 
         function stopAutoPlay() {
@@ -780,9 +798,9 @@
         function showSuccessMessage() {
             const successBox = document.getElementById('form-success');
             if (successBox) {
-                successBox.classList.remove('hidden');
+                successBox.classList.add('hidden');
                 setTimeout(() => {
-                    successBox.classList.add('hidden');
+                    successBox.classList.remove('hidden');
                 }, 5000);
             }
         }
