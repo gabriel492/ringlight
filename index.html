@@ -107,7 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL COM MARGEM E SEM SOBRAS NAS EXTREMIDADES --- */
+        /* --- CARROSSEL DE PONTA A PONTA RESPONSIVO (EXATAMENTE 4 CARDS NO DESKTOP) --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -121,7 +121,9 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1.5rem 3rem 3rem 3rem;
+            padding: 1.5rem 4vw 3rem 4vw;
+            width: 100%;
+            box-sizing: border-box;
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -131,11 +133,12 @@
             display: none;
         }
 
+        /* Cálculo exato para 4 cards visíveis em desktop considerando o gap (1.5rem = 24px) */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 10.5rem) / 4);
-            min-width: 220px;
+            flex: 0 0 calc((100% - (3 * 1.5rem)) / 4);
+            min-width: 260px;
             scroll-snap-align: start;
             height: 560px;
             margin: 0;
@@ -144,23 +147,19 @@
 
         @media (max-width: 1200px) {
             .grid-card {
-                flex: 0 0 calc((100% - 7.5rem) / 3);
+                flex: 0 0 calc((100% - (2 * 1.5rem)) / 3);
             }
         }
 
-        @media (max-width: 768px) {
-            .gallery-row {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
+        @media (max-width: 900px) {
             .grid-card {
                 flex: 0 0 calc((100% - 1.5rem) / 2);
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 580px) {
             .grid-card {
-                flex: 0 0 100%;
+                flex: 0 0 85vw;
             }
         }
 
@@ -258,16 +257,13 @@
             justify-content: center;
         }
 
-        /* ALTERADO DE object-cover PARA object-contain PARA NÃO CORTAR NENHUMA PARTE DA IMAGEM/VÍDEO */
         .iphone-screen img, 
         .iphone-screen video {
             width: 100%;
             height: 100%;
-            object-fit: contain; 
-            background-color: #000;
+            object-fit: cover;
         }
 
-        /* --- ESTILO FORMULÁRIO FALE CONOSCO --- */
         .custom-input {
             width: 100%;
             background-color: #1e1410;
@@ -337,7 +333,6 @@
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
             
-            <!-- SEÇÃO DE PILARES -->
             <section class="py-20 px-6 lg:px-16 max-w-7xl mx-auto border-b border-beige-200">
                 <div class="text-center max-w-2xl mx-auto mb-16">
                     <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.3em] bg-beige-200/60 px-4 py-1.5 rounded-full">Metodologia LZ</span>
@@ -397,8 +392,9 @@
                 </div>
             </section>
 
-            <section id="portfolio" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto relative z-20">
-                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-2">
+            <!-- SEÇÃO PORTFÓLIO DE PONTA A PONTA -->
+            <section id="portfolio" class="py-16 relative z-20 w-full">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between mb-8">
                     <div>
                         <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.25em]">Portfólio Interativo</span>
                         <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brown-950 mt-1">
@@ -415,8 +411,8 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL -->
-                <div class="gallery-carousel-container" id="carousel-container">
+                <!-- CARROSSEL RESPONSIVO DE PONTA A PONTA -->
+                <div class="gallery-carousel-container w-full" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
                         <!-- CARD 1 -->
@@ -691,7 +687,6 @@
             </div>
         </section>
 
-        <!-- FALE CONOSCO ESTILO REFERÊNCIA -->
         <div class="bg-brown-950 text-beige-100 relative z-20 transition-colors">
             <section id="contact-section" class="py-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
