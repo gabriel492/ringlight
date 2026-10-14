@@ -124,6 +124,8 @@
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
             padding: 1.5rem 1rem 3.5rem 1rem;
+            scroll-padding-left: 1rem;   /* alinha o card ao mesmo recuo do padding: sem sobra do card seguinte */
+            scroll-padding-right: 1rem;
             width: 100%;
             box-sizing: border-box;
             scrollbar-width: none;
@@ -157,6 +159,8 @@
             .gallery-row {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
+                scroll-padding-left: 1.5rem;
+                scroll-padding-right: 1.5rem;
             }
             .grid-card {
                 flex: 0 0 calc((100% - 1.25rem) / 2);
@@ -863,8 +867,11 @@
             const cardElem = row.querySelector('.grid-card');
             if (!cardElem) return;
 
-            const cardWidth = cardElem.offsetWidth + 20; 
-            const jumpDistance = cardWidth * 4;
+            const gap = parseFloat(getComputedStyle(row).columnGap) || 20;
+            const cardWidth = cardElem.offsetWidth + gap;
+            // anda exatamente a quantidade de cards visíveis (4 no desktop, 3, 2 ou 1 nas telas menores)
+            const visibleCards = Math.max(1, Math.floor(row.clientWidth / cardWidth));
+            const jumpDistance = cardWidth * visibleCards;
 
             if (direction === 'left') {
                 if (row.scrollLeft <= 10) {
