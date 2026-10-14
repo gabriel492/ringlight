@@ -206,7 +206,7 @@
 
     <main class="relative z-10 pt-20">
 
-        <!-- HERO SECTION (Sem efeito sticky) -->
+        <!-- HERO SECTION -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
                 <div class="bg-video-container">
@@ -420,6 +420,17 @@
             </div>
         </section>
 
+        <!-- FAIXA DE TRANSIÇÃO / MANIFESTO (Evita que as seções fiquem coladas) -->
+        <section class="py-20 bg-brown-900 border-t border-b border-brown-800 text-center px-6 relative z-20">
+            <div class="max-w-4xl mx-auto space-y-4">
+                <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.3em]">Manifesto Visual</span>
+                <h3 class="font-display text-2xl md:text-4xl text-beige-100 font-bold leading-relaxed">
+                    "Capturar a alma de cada instante através da luz, do movimento e de uma estética atemporal."
+                </h3>
+                <div class="w-16 h-0.5 bg-beige-400/40 mx-auto mt-6"></div>
+            </div>
+        </section>
+
         <!-- SEÇÃO SOBRE A LZ 2 (Invertida com a foto lz.jpg) -->
         <section id="about-lz" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row-reverse items-center overflow-hidden border-t border-brown-800">
             <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
@@ -451,7 +462,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DE VISÃO (Substituindo o antigo efeito sticky por blocos simples e elegantes) -->
+        <!-- SEÇÃO DE VISÃO -->
         <section class="py-24 bg-brown-900 border-t border-brown-800 px-6 lg:px-16">
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-brown-950 p-8 rounded-3xl border border-beige-300/20 space-y-4">
@@ -633,7 +644,6 @@
             }
         });
 
-        // Carrossel infinito automático e interativo
         const track = document.getElementById('carousel-track');
         track.innerHTML += track.innerHTML;
 
@@ -705,7 +715,6 @@
             card.classList.toggle('flipped');
         }
 
-        // Loop de animação contínua apenas para o carrossel (sem efeitos sticky no scroll)
         function animate() {
             if (!isDown) {
                 carouselPosition += autoSpeed;
