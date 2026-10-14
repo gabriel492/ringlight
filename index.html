@@ -135,22 +135,23 @@
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 1.5rem;
+            gap: 1rem;
             overflow-x: hidden; /* quem move a faixa é a rolagem da página */
             padding: 0.5rem 0.25rem 1.5rem;
         }
         .gallery-row .grid-card {
             flex: 0 0 auto;
             /* acompanha a altura da tela para o card nunca ficar cortado */
-            width: clamp(190px, calc((100vh - 330px) * 0.5625), 290px);
+            width: clamp(220px, calc((100vh - 200px) * 0.5625), 340px);
+            max-width: none;
             margin: 0;
         }
-        /* tablet: 3 cards visíveis | computador: 5 cards visíveis (gap = 1.5rem) */
+        /* tablet: 3 cards visíveis | computador: 5 cards visíveis (gap = 1rem) */
         @media (min-width: 640px) {
-            .gallery-row .grid-card { width: calc((100% - 3rem) / 3); }
+            .gallery-row .grid-card { width: calc((100% - 2rem) / 3); }
         }
         @media (min-width: 1024px) {
-            .gallery-row .grid-card { width: calc((100% - 6rem) / 5); }
+            .gallery-row .grid-card { width: calc((100% - 4rem) / 5); }
         }
 
         /* Efeito: rolar para baixo = galeria anda para o lado */
@@ -255,17 +256,9 @@
         </div>
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
-            <section id="portfolio" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto relative z-20">
+            <section id="portfolio" class="py-12 px-4 lg:px-8 max-w-[1800px] mx-auto relative z-20">
                 <div id="gallery-track">
                 <div id="gallery-sticky">
-                <div class="text-center max-w-3xl mx-auto space-y-4 mb-8">
-                    <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
-                        Trabalhos Recentes
-                    </h2>
-                    <p class="text-xs text-brown-500 uppercase tracking-wider">Role a página para navegar • Clique em um card para ver mais detalhes</p>
-                </div>
-
                 <div id="gallery-row" class="gallery-row">
                     <!-- CARD 1: Vídeo Local em Proporção 9:16 -->
                     <div class="grid-card cursor-pointer" onclick="flipCard(this)">
