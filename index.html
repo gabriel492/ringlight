@@ -107,16 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL DE CARDS --- */
-        .grid-card {
-            perspective: 1000px;
-            background: transparent;
-            width: 270px;
-            height: 550px;
-            margin: 0;
-            flex: 0 0 auto;
-        }
-
+        /* --- ESTRUTURA DO CARROSSEL --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -126,12 +117,27 @@
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 1.5rem;
+            gap: 2rem;
             overflow-x: auto;
             scroll-behavior: smooth;
-            padding: 1rem 0.5rem 2rem 0.5rem;
-            scrollbar-width: thin;
+            padding: 1.5rem 1rem 3rem 1rem;
+            scrollbar-width: none; /* Oculta a barra de rolagem mantendo a funcionalidade */
+            -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* --- CARD FLIP (PERSPECTIVA E DIMENSÃO) --- */
+        .grid-card {
+            perspective: 1000px;
+            background: transparent;
+            width: 290px;
+            height: 580px;
+            margin: 0;
+            flex: 0 0 auto;
         }
 
         .card-inner {
@@ -153,8 +159,7 @@
             height: 100%;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            border-radius: 2.8rem;
-            overflow: hidden;
+            border-radius: 3rem;
         }
 
         .card-front {
@@ -174,44 +179,60 @@
             justify-content: center;
             padding: 2rem;
             text-align: center;
-            border: 1px solid rgba(66, 47, 37, 0.5);
-            box-shadow: 0 15px 30px -10px rgba(20, 13, 10, 0.5);
-            border-radius: 2.8rem;
+            border: 2px solid #422f25;
+            box-shadow: 0 20px 40px -10px rgba(20, 13, 10, 0.4);
+            border-radius: 3rem;
         }
 
-        /* --- MOCKUP DO IPHONE E TELA --- */
-        .iphone-mockup-wrapper {
+        /* --- MOLDURA DO IPHONE EM CSS REFINADO (SEM DEPENDER DE IMAGEM PNG COM ERROS) --- */
+        .iphone-device {
             position: relative;
             width: 100%;
             height: 100%;
+            background: #1c1a21;
+            border-radius: 3rem;
+            box-shadow: 
+                0 0 0 3px #383342,
+                0 0 0 5px #18161d,
+                0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            padding: 8px;
+        }
+
+        /* Ilha Dinâmica (Dynamic Island) */
+        .iphone-notch {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85px;
+            height: 24px;
+            background-color: #000000;
+            border-radius: 20px;
+            z-index: 10;
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-radius: 2.8rem;
+            justify-content: flex-end;
+            padding-right: 8px;
         }
 
-        /* Ajuste fino: Recorta o vídeo exatamente na área visível da tela do iPhone */
-        .iphone-screen-content {
-            position: absolute;
-            top: 3.5%;
-            left: 6.8%;
-            width: 86.4%;
-            height: 93%;
-            border-radius: 2.2rem;
-            overflow: hidden;
-            background: #000;
-            z-index: 1;
+        /* Lente da Câmera na Ilha */
+        .iphone-camera {
+            width: 10px;
+            height: 10px;
+            background: #0d0f1d;
+            border: 1px solid #1a1e36;
+            border-radius: 50%;
         }
 
-        .iphone-frame-img {
-            position: absolute;
-            inset: 0;
+        /* Ecrã Interno com Borda Arredondada Real */
+        .iphone-screen {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: fill;
-            pointer-events: none;
-            z-index: 2;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            background: #000;
         }
     </style>
 </head>
@@ -268,6 +289,7 @@
                             Trabalhos Recentes
                         </h2>
                     </div>
+                    <!-- Botões manuais do Carrossel -->
                     <div class="flex items-center gap-3 mt-4 md:mt-0">
                         <button onclick="scrollCarousel('left')" aria-label="Anterior" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
                             <i class="fa-solid fa-arrow-left text-sm"></i>
@@ -278,22 +300,22 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL DE CARDS -->
-                <div class="gallery-carousel-container">
+                <!-- CARROSSEL AUTOMÁTICO -->
+                <div class="gallery-carousel-container" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
                         <!-- CARD 1 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <div class="iphone-mockup-wrapper">
-                                        <div class="iphone-screen-content">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
                                             <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
                                                 <source src="teste2.mp4" type="video/mp4">
                                                 Seu navegador não suporta vídeo.
                                             </video>
                                         </div>
-                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -314,14 +336,14 @@
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <div class="iphone-mockup-wrapper">
-                                        <div class="iphone-screen-content">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
                                             <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
                                                 <source src="teste4.mp4" type="video/mp4">
                                                 Seu navegador não suporta vídeo.
                                             </video>
                                         </div>
-                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -342,11 +364,11 @@
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <div class="iphone-mockup-wrapper">
-                                        <div class="iphone-screen-content">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
                                             <img src="teste3.jpeg" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
                                         </div>
-                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -367,11 +389,11 @@
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <div class="iphone-mockup-wrapper">
-                                        <div class="iphone-screen-content">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
                                             <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
                                         </div>
-                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
                                     </div>
                                 </div>
                                 <div class="card-back">
@@ -391,7 +413,7 @@
                         <!-- CARD 5 (CTA) -->
                         <div class="grid-card cursor-pointer" onclick="openContactModal()">
                             <div class="card-inner">
-                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30 rounded-[2.8rem] h-full w-full shadow-lg">
+                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border-2 border-brown-700 rounded-[3rem] h-full w-full shadow-lg">
                                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-6 shadow-lg">
                                         <i class="fa-solid fa-paper-plane"></i>
                                     </div>
@@ -641,16 +663,49 @@
             card.classList.toggle('flipped');
         }
 
+        // FUNÇÃO DE SCROLL DO CARROSSEL
         function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
             if (!row) return;
-            const scrollAmount = 300;
+            const scrollAmount = 320;
             if (direction === 'left') {
-                row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                if (row.scrollLeft <= 0) {
+                    row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
+                } else {
+                    row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
             } else {
-                row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 10) {
+                    row.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
             }
         }
+
+        // LÓGICA DE ROLAGEM AUTOMÁTICA (AUTOPLAY)
+        let autoPlayTimer = null;
+
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(() => {
+                scrollCarousel('right');
+            }, 3500); // Passa a cada 3.5 segundos
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+        }
+
+        const carouselElem = document.getElementById('carousel-container');
+        if (carouselElem) {
+            carouselElem.addEventListener('mouseenter', stopAutoPlay);
+            carouselElem.addEventListener('mouseleave', startAutoPlay);
+            carouselElem.addEventListener('touchstart', stopAutoPlay, { passive: true });
+            carouselElem.addEventListener('touchend', startAutoPlay, { passive: true });
+        }
+
+        // Iniciar Autoplay
+        startAutoPlay();
 
         function showSuccessMessage() {
             const successBox = document.getElementById('form-success');
