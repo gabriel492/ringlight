@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
-    <script async src="//www.instagram.com/embed.js"></script>
 
     <script>
         tailwind.config = {
@@ -60,13 +59,6 @@
             border-radius: 4px;
         }
 
-        .glass-panel-brown {
-            background: rgba(20, 13, 10, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 210, 195, 0.18);
-        }
-
         .exact-logo-lz {
             display: inline-flex;
             align-items: baseline;
@@ -91,9 +83,6 @@
             top: 0;
             left: 0;
             overflow: hidden;
-            border-radius: 0;
-            box-shadow: none;
-            border: none;
         }
 
         .bg-video {
@@ -118,22 +107,16 @@
             overflow: hidden;
         }
 
-        #zoom-lz-logo {
-            transform-origin: center center;
-        }
-
-        /* 9:16 Aspect Ratio for Cards */
+        /* --- AJUSTES DO MOCKUP DO IPHONE E CARROSSEL --- */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            aspect-ratio: 9 / 19;
-            width: 100%;
-            max-width: 290px;
+            width: 280px;
+            height: 570px;
             margin: 0 auto;
             flex: 0 0 auto;
         }
 
-        /* Carrossel Horizontal Tradicional */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -142,7 +125,7 @@
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 1.5rem;
+            gap: 2rem;
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 1rem 0.5rem 2rem 0.5rem;
@@ -168,14 +151,13 @@
             height: 100%;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            border-radius: 1.5rem;
+            border-radius: 2.5rem;
             overflow: hidden;
         }
 
         .card-front {
             background-color: transparent;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
@@ -192,9 +174,9 @@
             text-align: center;
             border: 1px solid rgba(66, 47, 37, 0.5);
             box-shadow: 0 15px 30px -10px rgba(20, 13, 10, 0.5);
+            border-radius: 2.5rem;
         }
 
-        /* Estilização da Mockup de iPhone nos Cards */
         .iphone-mockup-wrapper {
             position: relative;
             width: 100%;
@@ -202,30 +184,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
+        /* Ajuste preciso da tela por baixo do contorno do iPhone */
         .iphone-screen-content {
             position: absolute;
-            /* Ajustes finos baseados na proporção interna da moldura do iPhone */
-            top: 3.5%;
-            left: 5.5%;
-            width: 89%;
-            height: 93%;
-            border-radius: 2rem;
+            top: 2.5%;
+            left: 5%;
+            width: 90%;
+            height: 95%;
+            border-radius: 2.3rem;
             overflow: hidden;
             background: #000;
             z-index: 1;
         }
 
+        /* A imagem da moldura é escalada para cobrir o card sem margens */
         .iphone-frame-img {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             pointer-events: none;
             z-index: 2;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
         }
     </style>
 </head>
@@ -282,7 +265,6 @@
                             Trabalhos Recentes
                         </h2>
                     </div>
-                    <!-- Botões de Navegação do Carrossel -->
                     <div class="flex items-center gap-3 mt-4 md:mt-0">
                         <button onclick="scrollCarousel('left')" aria-label="Anterior" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
                             <i class="fa-solid fa-arrow-left text-sm"></i>
@@ -293,11 +275,10 @@
                     </div>
                 </div>
 
-                <!-- Container do Carrossel -->
                 <div class="gallery-carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
-                        <!-- CARD 1: Vídeo Local com Moldura iPhone -->
+                        <!-- CARD 1 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -325,7 +306,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 2: Vídeo Local 2 com Moldura iPhone -->
+                        <!-- CARD 2 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -353,7 +334,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 3: Moda & Retrato com Moldura iPhone -->
+                        <!-- CARD 3 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -378,7 +359,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 4: Comercial Global com Moldura iPhone -->
+                        <!-- CARD 4 -->
                         <div class="grid-card cursor-pointer" onclick="flipCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
@@ -403,32 +384,7 @@
                             </div>
                         </div>
 
-                        <!-- CARD 5: Estética Minimalista com Moldura iPhone -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-mockup-wrapper">
-                                        <div class="iphone-screen-content">
-                                            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
-                                        </div>
-                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Trabalhos em estúdio valorizando a simplicidade, luz suave e composição limpa.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 6: Call To Action -->
+                        <!-- CARD 5 (CTA) -->
                         <div class="grid-card cursor-pointer" onclick="openContactModal()">
                             <div class="card-inner">
                                 <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30 rounded-3xl h-full w-full shadow-lg">
@@ -681,11 +637,10 @@
             card.classList.toggle('flipped');
         }
 
-        // Função para navegação suave do Carrossel por botões
         function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
             if (!row) return;
-            const scrollAmount = 320; // largura aproximada do card + gap
+            const scrollAmount = 310;
             if (direction === 'left') {
                 row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
             } else {
