@@ -107,29 +107,31 @@
             overflow: hidden;
         }
 
-        /* --- AJUSTES DO MOCKUP DO IPHONE E CARROSSEL --- */
+        /* --- CARROSSEL DE CARDS --- */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            width: 280px;
-            height: 570px;
-            margin: 0 auto;
+            width: 270px;
+            height: 550px;
+            margin: 0;
             flex: 0 0 auto;
         }
 
         .gallery-carousel-container {
             position: relative;
             width: 100%;
+            overflow: hidden;
         }
 
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 2rem;
+            gap: 1.5rem;
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 1rem 0.5rem 2rem 0.5rem;
             scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
         }
 
         .card-inner {
@@ -151,7 +153,7 @@
             height: 100%;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            border-radius: 2.5rem;
+            border-radius: 2.8rem;
             overflow: hidden;
         }
 
@@ -174,9 +176,10 @@
             text-align: center;
             border: 1px solid rgba(66, 47, 37, 0.5);
             box-shadow: 0 15px 30px -10px rgba(20, 13, 10, 0.5);
-            border-radius: 2.5rem;
+            border-radius: 2.8rem;
         }
 
+        /* --- MOCKUP DO IPHONE E TELA --- */
         .iphone-mockup-wrapper {
             position: relative;
             width: 100%;
@@ -185,28 +188,28 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            border-radius: 2.8rem;
         }
 
-        /* Ajuste preciso da tela por baixo do contorno do iPhone */
+        /* Ajuste fino: Recorta o vídeo exatamente na área visível da tela do iPhone */
         .iphone-screen-content {
             position: absolute;
-            top: 2.5%;
-            left: 5%;
-            width: 90%;
-            height: 95%;
-            border-radius: 2.3rem;
+            top: 3.5%;
+            left: 6.8%;
+            width: 86.4%;
+            height: 93%;
+            border-radius: 2.2rem;
             overflow: hidden;
             background: #000;
             z-index: 1;
         }
 
-        /* A imagem da moldura é escalada para cobrir o card sem margens */
         .iphone-frame-img {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: fill;
             pointer-events: none;
             z-index: 2;
         }
@@ -275,6 +278,7 @@
                     </div>
                 </div>
 
+                <!-- CARROSSEL DE CARDS -->
                 <div class="gallery-carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
@@ -387,7 +391,7 @@
                         <!-- CARD 5 (CTA) -->
                         <div class="grid-card cursor-pointer" onclick="openContactModal()">
                             <div class="card-inner">
-                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30 rounded-3xl h-full w-full shadow-lg">
+                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30 rounded-[2.8rem] h-full w-full shadow-lg">
                                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-6 shadow-lg">
                                         <i class="fa-solid fa-paper-plane"></i>
                                     </div>
@@ -640,7 +644,7 @@
         function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
             if (!row) return;
-            const scrollAmount = 310;
+            const scrollAmount = 300;
             if (direction === 'left') {
                 row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
             } else {
