@@ -234,7 +234,6 @@
         </div>
 
         <div class="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-brown-950/40 to-brown-950/80"></div>
-        <!-- OVERLAY BRANCO RESTAURADO -->
         <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
     </div>
 
@@ -251,7 +250,7 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO E FADE BRANCO -->
+        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
@@ -270,7 +269,7 @@
             </div>
         </div>
 
-        <!-- TRABALHOS RECENTES (EMBOCANDO LOGO APÓS A TRANSIÇÃO BRANCA) -->
+        <!-- TRABALHOS RECENTES -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             <section id="portfolio" class="py-24 overflow-hidden relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
@@ -766,8 +765,8 @@
 
             const progress = currentProgress;
 
-            // O fundo branco preenche suavemente de 0 a 1 conforme você rola
-            whiteOverlay.style.opacity = Math.min(1, progress * 1.2);
+            // O flash branco agora acompanha o mesmo ritmo do zoom do LZ
+            whiteOverlay.style.opacity = Math.min(1, progress * 3.5);
 
             const scale = 1 + (progress * 16);
             lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
