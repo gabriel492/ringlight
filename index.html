@@ -107,7 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL SIMÉTRICO E PERFEITO --- */
+        /* --- CARROSSEL COM MARGEM E SEM SOBRAS NAS EXTREMIDADES --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -115,17 +115,17 @@
         }
 
         .gallery-row {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    padding: 1.5rem 1.5rem 3rem 4rem; /* Altere o último valor (4rem, por exemplo) para a margem esquerda desejada */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-}
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 1.5rem 3rem 3rem 3rem; /* Margem lateral simétrica de 3rem */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+        }
 
         .gallery-row::-webkit-scrollbar {
             display: none;
@@ -134,21 +134,25 @@
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards exatos considerando 3 gaps */
-            min-width: 230px;
+            flex: 0 0 calc((100% - 10.5rem) / 4);
+            min-width: 220px;
             scroll-snap-align: start;
             height: 560px;
-            margin: 2;
+            margin: 0;
             box-sizing: border-box;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .grid-card {
-                flex: 0 0 calc((100% - 3rem) / 3);
+                flex: 0 0 calc((100% - 7.5rem) / 3);
             }
         }
 
         @media (max-width: 768px) {
+            .gallery-row {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
             .grid-card {
                 flex: 0 0 calc((100% - 1.5rem) / 2);
             }
