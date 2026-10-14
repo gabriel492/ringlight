@@ -103,7 +103,6 @@
             opacity: 0.85;
         }
 
-        /* Altura ajustada para corresponder exatamente ao fim da animação do scroll */
         .zoom-hero-wrapper {
             height: 170vh;
             position: relative;
@@ -120,7 +119,7 @@
             overflow: hidden;
         }
 
-        #zoom-lz-logo, .hero-fade-element, .vision-stacked-card {
+        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .vision-stacked-card {
             will-change: transform, opacity;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -235,6 +234,8 @@
         </div>
 
         <div class="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-brown-950/40 to-brown-950/80"></div>
+        <!-- OVERLAY BRANCO RESTAURADO -->
+        <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
     </div>
 
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
@@ -250,7 +251,7 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO -->
+        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO E FADE BRANCO -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
 
@@ -269,7 +270,7 @@
             </div>
         </div>
 
-        <!-- TRABALHOS RECENTES (LOGO APÓS O TÉRMINO DO EFEITO LZ) -->
+        <!-- TRABALHOS RECENTES (EMBOCANDO LOGO APÓS A TRANSIÇÃO BRANCA) -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             <section id="portfolio" class="py-24 overflow-hidden relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
@@ -666,6 +667,7 @@
         const heroWrapper = document.getElementById('hero-wrapper');
         const lzLogo = document.getElementById('zoom-lz-logo');
         const heroSubtext = document.getElementById('hero-subtext');
+        const whiteOverlay = document.getElementById('hero-white-overlay');
 
         const visionStackWrapper = document.getElementById('vision-stack');
         const vCard1 = document.getElementById('vision-card-1');
@@ -680,7 +682,7 @@
         window.addEventListener('scroll', () => {
             const wrapperRect = heroWrapper.getBoundingClientRect();
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
-            targetProgress = Math.max(0, Math.min(1.05, -wrapperRect.top / wrapperHeight));
+            targetProgress = Math.max(0, Math.min(1.0, -wrapperRect.top / wrapperHeight));
 
             const visionRect = visionStackWrapper.getBoundingClientRect();
             const visionHeight = visionStackWrapper.offsetHeight - window.innerHeight;
@@ -763,6 +765,9 @@
             currentVisionProgress += (targetVisionProgress - currentVisionProgress) * 0.08;
 
             const progress = currentProgress;
+
+            // O fundo branco preenche suavemente de 0 a 1 conforme você rola
+            whiteOverlay.style.opacity = Math.min(1, progress * 1.2);
 
             const scale = 1 + (progress * 16);
             lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
