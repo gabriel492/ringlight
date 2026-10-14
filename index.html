@@ -117,11 +117,11 @@
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 2rem;
+            gap: 1.5rem;
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1.5rem 0.5rem 3rem 0.5rem;
+            padding: 1.5rem 1.5rem 3rem 1.5rem;
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -134,8 +134,8 @@
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 6rem) / 4);
-            min-width: 240px;
+            flex: 0 0 calc((100% - 4.5rem) / 4);
+            min-width: 230px;
             scroll-snap-align: start;
             height: 560px;
             margin: 0;
@@ -144,13 +144,13 @@
 
         @media (max-width: 1100px) {
             .grid-card {
-                flex: 0 0 calc((100% - 4rem) / 3);
+                flex: 0 0 calc((100% - 3rem) / 3);
             }
         }
 
         @media (max-width: 768px) {
             .grid-card {
-                flex: 0 0 calc((100% - 2rem) / 2);
+                flex: 0 0 calc((100% - 1.5rem) / 2);
             }
         }
 
@@ -250,6 +250,29 @@
             overflow: hidden;
             background: #000;
         }
+
+        /* --- ESTILO FORMULÁRIO ESTILO REFERÊNCIA --- */
+        .custom-input {
+            width: 100%;
+            background-color: #1e1410;
+            color: #f4ede6;
+            padding: 1.25rem 1.5rem;
+            border: none;
+            border-bottom: 2px solid #f4ede6;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .custom-input::placeholder {
+            color: #a89284;
+            font-weight: 300;
+        }
+
+        .custom-input:focus {
+            border-bottom-color: #d4c0b0;
+            background-color: #271a15;
+        }
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
@@ -298,17 +321,16 @@
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
             
-            <!-- NOVA SEÇÃO DE PILARES / ABORDAGEM -->
+            <!-- SEÇÃO DE PILARES -->
             <section class="py-20 px-6 lg:px-16 max-w-7xl mx-auto border-b border-beige-200">
                 <div class="text-center max-w-2xl mx-auto mb-16">
                     <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.3em] bg-beige-200/60 px-4 py-1.5 rounded-full">Metodologia LZ</span>
                     <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950 mt-4">
-                        Do Conceito à Impacto Real
+                        Do Conceito ao Impacto Real
                     </h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
-                    <!-- COLUNA 01 -->
                     <div class="bg-white p-8 md:p-10 rounded-3xl border border-beige-300 shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
                         <div>
                             <span class="font-display font-black text-4xl text-brown-400/40 block mb-4">01</span>
@@ -325,7 +347,6 @@
                         </div>
                     </div>
 
-                    <!-- COLUNA 02 -->
                     <div class="bg-white p-8 md:p-10 rounded-3xl border border-beige-300 shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
                         <div>
                             <span class="font-display font-black text-4xl text-brown-400/40 block mb-4">02</span>
@@ -342,7 +363,6 @@
                         </div>
                     </div>
 
-                    <!-- COLUNA 03 -->
                     <div class="bg-white p-8 md:p-10 rounded-3xl border border-beige-300 shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
                         <div>
                             <span class="font-display font-black text-4xl text-brown-400/40 block mb-4">03</span>
@@ -655,30 +675,47 @@
             </div>
         </section>
 
-        <div class="bg-white text-brown-950 relative z-20 transition-colors">
-            <section id="contact-section" class="py-20 px-6 lg:px-16 bg-beige-100 border-t border-beige-200">
-                <div class="max-w-3xl mx-auto bg-white border border-beige-300 rounded-3xl shadow-2xl p-8 md:p-14 relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-beige-200/50 rounded-full blur-2xl pointer-events-none"></div>
+        <!-- NOVO FALE CONOSCO - INSPIRADO NA IMAGEM DE REFERÊNCIA -->
+        <div class="bg-brown-950 text-beige-100 relative z-20 transition-colors">
+            <section id="contact-section" class="py-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
                     
-                    <div class="text-center max-w-xl mx-auto mb-10">
-                        <span class="text-brown-600 text-xs font-bold uppercase tracking-widest bg-beige-200/60 px-4 py-1 rounded-full">Fale Conosco</span>
-                        <h3 class="font-display font-bold text-3xl md:text-4xl text-brown-950 mt-3 mb-2">Inicie seu Projeto com a LZ</h3>
-                        <p class="text-brown-700 text-sm md:text-base">Preencha os campos abaixo com os detalhes do seu escopo e retornaremos em breve.</p>
+                    <!-- LADO ESQUERDO: TEXTO DE CHAMADA -->
+                    <div class="space-y-6 md:pr-6">
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-beige-100 leading-tight">
+                            Quer saber mais sobre nossos serviços ou precisa de um orçamento personalizado?
+                        </h2>
+                        <p class="text-beige-300 text-base md:text-lg font-light leading-relaxed">
+                            Envie-nos uma mensagem agora mesmo! Ficaremos felizes em lhe atender e transformar suas ideias em realidade.
+                        </p>
                     </div>
 
-                    <form class="space-y-4 max-w-2xl mx-auto bg-beige-50/50 p-6 md:p-8 rounded-2xl border border-beige-200" onsubmit="event.preventDefault(); showSuccessMessage(); this.reset();">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
-                            <input type="email" placeholder="Seu e-mail profissional" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
+                    <!-- LADO DIREITO: FORMULÁRIO MINIMALISTA EM LINHA -->
+                    <form class="space-y-6" onsubmit="event.preventDefault(); showSuccessMessage(); this.reset();">
+                        <div>
+                            <input type="text" placeholder="Qual o seu nome?" required class="custom-input">
                         </div>
-                        <textarea rows="4" placeholder="Conte-nos sobre o seu projeto, prazos ou expectativas..." required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700"></textarea>
-                        <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest text-beige-100 bg-brown-900 hover:bg-brown-800 transition-all shadow-md cursor-pointer">
-                            Enviar Mensagem para a LZ
-                        </button>
+
+                        <div>
+                            <input type="email" placeholder="Digite o seu email" required class="custom-input">
+                        </div>
+
+                        <div>
+                            <textarea rows="4" placeholder="Digite a sua mensagem e responderemos em breve, ok? :-)" required class="custom-input resize-none"></textarea>
+                        </div>
+
+                        <!-- BOTÃO NO CANTO DIREITO (ESTILO REFERÊNCIA) -->
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="px-10 py-3 rounded-full bg-beige-100 text-brown-950 font-bold text-xs tracking-widest uppercase hover:bg-white transition-all shadow-lg cursor-pointer">
+                                Enviar
+                            </button>
+                        </div>
+
+                        <div id="form-success" class="hidden mt-4 p-4 bg-emerald-900/60 border border-emerald-500 text-emerald-200 rounded-xl text-center text-xs font-semibold">
+                            Mensagem enviada com sucesso! Entraremos em contato em breve.
+                        </div>
                     </form>
-                    <div id="form-success" class="hidden mt-4 p-4 bg-emerald-100 text-emerald-800 rounded-xl text-center text-xs font-semibold">
-                        Mensagem enviada com sucesso! Entraremos em contato em breve.
-                    </div>
+
                 </div>
             </section>
         </div>
@@ -823,7 +860,7 @@
             const cardElem = row.querySelector('.grid-card');
             if (!cardElem) return;
 
-            const cardWidth = cardElem.offsetWidth + 32; 
+            const cardWidth = cardElem.offsetWidth + 24; 
             const jumpDistance = cardWidth * 4;
 
             if (direction === 'left') {
