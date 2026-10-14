@@ -1,25 +1,893 @@
-<!-- SEÇÃO SOBRE MIM 1 -->
-<section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
-    <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
-        <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
-        <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-r from-transparent to-brown-950 pointer-events-none"></div>
-        <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth" style="cursor: auto !important;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LZ — Audiovisual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brown: {
+                            950: '#140d0a',
+                            900: '#1e1410',
+                            800: '#2d1f18',
+                            700: '#422f25',
+                            600: '#5c4336',
+                            500: '#7a5a4a',
+                        },
+                        beige: {
+                            50: '#faf7f4',
+                            100: '#f4ede6',
+                            200: '#e6d7ca',
+                            300: '#d4c0b0',
+                            400: '#c2a895',
+                            500: '#ab8d79',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Cinzel"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            cursor: auto !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #140d0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #422f25;
+            border-radius: 4px;
+        }
+
+        .glass-panel-brown {
+            background: rgba(20, 13, 10, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 210, 195, 0.18);
+        }
+
+        .exact-logo-lz {
+            display: inline-flex;
+            align-items: baseline;
+            line-height: 1;
+        }
+        .exact-logo-lz .letter-l {
+            color: #644518;
+            letter-spacing: -0.28em;
+        }
+        .exact-logo-lz .letter-z {
+            color: #644518;
+            position: relative;
+            top: 0.2em;
+            letter-spacing: -0.0025em;
+            margin-left: 0.05em;
+        }
+
+        .bg-video-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        .zoom-hero-wrapper {
+            height: 160vh;
+            position: relative;
+        }
+
+        .sticky-hero-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #zoom-lz-logo, #hero-white-overlay, #hero-black-overlay, .hero-fade-element, .vision-stacked-card {
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+
+        #zoom-lz-logo {
+            transform-origin: center center;
+        }
+
+        .vision-stack-wrapper {
+            height: 300vh;
+            position: relative;
+        }
+
+        .vision-sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .vision-stacked-card {
+            transform-origin: center center;
+            opacity: 1 !important;
+            transition: transform 0.1s linear;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .carousel-container:active {
+            cursor: grabbing;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .carousel-card {
+            width: 340px;
+            flex-shrink: 0;
+            perspective: 1000px;
+            background: transparent;
+            height: 390px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .carousel-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(226, 210, 195, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-front {
+            background-color: #faf7f4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-back {
+            background-color: #1e1410;
+            color: #f4ede6;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
+
+    <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="flex items-center justify-center exact-logo-lz transition-transform duration-300 group-hover:scale-105">
+                    <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
+                </div>
+                <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30">AUDIOVISUAL</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- HERO SECTION -->
+        <div class="zoom-hero-wrapper" id="hero-wrapper">
+            <div class="sticky-hero-container">
+                <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+                    <div class="bg-video-container">
+                        <video autoplay muted loop playsinline class="bg-video">
+                            <source src="1013 (1).mp4" type="video/mp4">
+                            O seu navegador não suporta vídeos HTML5.
+                        </video>
+                        <div class="absolute inset-0 bg-brown-950/30"></div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-brown-950/40 via-transparent to-brown-950/60"></div>
+                    
+                    <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
+                    <div id="hero-black-overlay" class="absolute inset-0 bg-black opacity-0 z-15"></div>
+                </div>
+
+                <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
+                    <div class="py-2 flex justify-center items-center">
+                        <h1 id="zoom-lz-logo" class="font-display text-9xl md:text-[13rem] lg:text-[15.5rem] font-black leading-none select-none drop-shadow-2xl exact-logo-lz">
+                            <span class="letter-l">L</span><span class="letter-z">Z</span>
+                        </h1>
+                    </div>
+
+                    <p id="hero-subtext" class="hero-fade-element text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
+                        Estúdio audiovisual especializado em fotografia editorial e direção cinematográfica.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRABALHOS RECENTES -->
+        <div class="bg-white text-brown-950 relative z-20 transition-colors">
+            <section id="portfolio" class="py-24 overflow-hidden relative z-20">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 px-6 lg:px-16">
+                    <span class="text-brown-600 text-xs font-bold uppercase tracking-widest">Galeria</span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950">
+                        Trabalhos Recentes
+                    </h2>
+                    <p class="text-xs text-brown-500 uppercase tracking-wider">Arraste para navegar • Clique no card para girar</p>
+                </div>
+
+                <div class="carousel-container py-6" id="portfolio-carousel">
+                    <div class="carousel-track" id="carousel-track">
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80" alt="Campanha Editorial" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Campanha Editorial</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Fotografia &amp; Direção</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Campanha Editorial</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Filme Curto" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Filme Curto</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Cinematografia</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Filme Curto</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Moda &amp; Retrato</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Produção Visual</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Moda &amp; Retrato</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Comercial Global</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Direção de Arte</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Comercial Global</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="h-64 overflow-hidden relative">
+                                        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="font-display font-bold text-lg text-brown-950">Estética Minimalista</h4>
+                                        <p class="text-xs text-brown-600 mt-1">Lookbook</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
+                                    <p class="text-xs text-beige-300 mt-1 mb-6">Confira os bastidores e fotos completas em nosso perfil.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card cursor-pointer" onclick="openContactModal()">
+                            <div class="card-inner">
+                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-4 shadow-lg">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-xl text-beige-100 mb-2">Tem um projeto em mente?</h4>
+                                    <p class="text-xs text-beige-300 mb-6 leading-relaxed">Nos mande uma mensagem e vamos dar vida à sua ideia.</p>
+                                    <span class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-md">
+                                        Entrar em Contato
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SEÇÃO SOBRE MIM 1 -->
+        <section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
+            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
+                <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-r from-transparent to-brown-950 pointer-events-none"></div>
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
+            </div>
+
+            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
+                <div class="space-y-6 max-w-xl">
+                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
+                        Sobre Mim
+                    </span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
+                        Sensibilidade &amp; Direção Cinematográfica
+                    </h2>
+                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
+                        Sou a mente criativa por trás da LZ Audiovisual. Minha paixão é transformar momentos autênticos e histórias únicas em produções visuais memoráveis de padrão editorial.
+                    </p>
+                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
+                        Com olhar atento aos detalhes, iluminação e composição narrativa, meu objetivo é registrar a essência de cada projeto com elegância, sofisticação e alma.
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
+                            Conheça Nosso Trabalho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE A LZ 2 (Invertida com a nova foto lz.jpg) -->
+        <section id="about-lz" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row-reverse items-center overflow-hidden border-t border-brown-800">
+            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
+                <img src="lz.jpg" alt="LZ Audiovisual Bastidores" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-l from-transparent to-brown-950 pointer-events-none"></div>
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
+            </div>
+
+            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
+                <div class="space-y-6 max-w-xl">
+                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
+                        A Essência LZ
+                    </span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
+                        Inovação &amp; Identidade Visual Marcante
+                    </h2>
+                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
+                        Na LZ Audiovisual, cada conceito é estruturado para transcender o comum. Unimos design autêntico, direção de arte e excelência técnica para destacar a sua marca no mercado.
+                    </p>
+                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
+                        Do planejamento à entrega final, o nosso compromisso é construir narrativas visuais sólidas que geram conexão profunda e valor inestimável para os nossos clientes.
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
+                            Iniciar Seu Projeto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO STICKY TRIPLA -->
+        <div id="vision-stack" class="vision-stack-wrapper bg-brown-950">
+            <div class="vision-sticky-container px-4 sm:px-6 lg:px-16">
+                
+                <div class="relative w-full max-w-4xl h-[480px] md:h-[450px] flex justify-center items-center">
+                    <div id="vision-card-1" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-30">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">01 / Exclusividade</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                O Olhar Cinematográfico Único
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Cada projeto desenvolvido no estúdio é tratado como uma obra de arte singular, refletindo identidade, sofisticação e impacto visual duradouro.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="vision-card-2" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-20">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">02 / Precisão</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                Precisão Cirúrgica em Cada Frame
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Dominamos a luz, a cor e a narrativa para transformar momentos efêmeros em memórias visuais de altíssimo padrão editorial e comercial.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="vision-card-3" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-10">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
+                        <div class="relative z-10 space-y-3">
+                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Propósito</span>
+                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
+                                Conexões Reais &amp; Visão Futurista
+                            </h3>
+                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                Unimos tendências globais de design e tecnologia de ponta para conectar marcas e pessoas através de um storytelling visual incomparável.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bg-white text-brown-950 relative z-20 transition-colors">
+            <section id="contact-section" class="py-20 px-6 lg:px-16 bg-beige-100 border-t border-beige-200">
+                <div class="max-w-3xl mx-auto bg-white border border-beige-300 rounded-3xl shadow-2xl p-8 md:p-14 relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-beige-200/50 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <span class="text-brown-600 text-xs font-bold uppercase tracking-widest bg-beige-200/60 px-4 py-1 rounded-full">Fale Conosco</span>
+                        <h3 class="font-display font-bold text-3xl md:text-4xl text-brown-950 mt-3 mb-2">Inicie seu Projeto com a LZ</h3>
+                        <p class="text-brown-700 text-sm md:text-base">Preencha os campos abaixo com os detalhes do seu escopo e retornaremos em breve.</p>
+                    </div>
+
+                    <form class="space-y-4 max-w-2xl mx-auto bg-beige-50/50 p-6 md:p-8 rounded-2xl border border-beige-200" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! Retornaremos em breve.'); this.reset();">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
+                            <input type="email" placeholder="Seu e-mail profissional" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
+                        </div>
+                        <textarea rows="4" placeholder="Conte-nos sobre o seu projeto, prazos ou expectativas..." required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700"></textarea>
+                        <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest text-beige-100 bg-brown-900 hover:bg-brown-800 transition-all shadow-md cursor-pointer">
+                            Enviar Mensagem para a LZ
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 border-t border-brown-800 relative z-25">
+        <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div class="space-y-4 md:col-span-1">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center justify-center exact-logo-lz">
+                        <span class="font-display font-black text-xl letter-l">L</span><span class="font-display font-black text-xl letter-z">Z</span>
+                    </div>
+                </div>
+                <p class="text-xs text-beige-300 leading-relaxed font-light">
+                    Estúdio de cinematografia e fotografia editorial dedicado a criar narrativas visuais autênticas e marcantes.
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navegação</h4>
+                <ul class="space-y-2 text-xs text-beige-300">
+                    <li><a href="#about-me" class="hover:text-beige-100 transition-colors">Sobre Mim</a></li>
+                    <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
+                    <li><button onclick="openContactModal()" class="bg-transparent border-none text-xs text-beige-300 hover:text-beige-100 transition-colors cursor-pointer p-0 text-left">Fale Conosco</button></li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Atendimento</h4>
+                <p class="text-xs text-beige-300 leading-relaxed">
+                    Segunda a Sexta: 09h às 19h<br>
+                    Atendimento global sob consulta.
+                </p>
+                <p class="text-xs text-beige-300">
+                    <i class="fa-regular fa-envelope mr-1"></i> contato@lzaudiovisual.com
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Redes Sociais</h4>
+                <div class="flex items-center gap-3">
+                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                    </a>
+                    <a href="https://wa.me/5500000000000" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                    </a>
+                    <a href="mailto:contato@lzaudiovisual.com" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
+                        <i class="fa-regular fa-envelope text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-16 pt-6 border-t border-brown-900 flex flex-col sm:flex-row items-center justify-between text-xs text-beige-400 gap-4">
+            <p>&copy; 2026 LZ Audiovisual. Todos os direitos reservados.</p>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-beige-200 transition-colors">Termos de Uso</a>
+                <a href="#" class="hover:text-beige-200 transition-colors">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto transition-transform duration-300">
+            <button onclick="closeContactModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-beige-200 text-brown-950 flex items-center justify-center hover:bg-beige-300 transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="flex items-center justify-center mx-auto mb-3 exact-logo-lz">
+                    <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
+                </div>
+                <h3 class="font-display font-bold text-2xl text-brown-950">Fale Conosco</h3>
+                <p class="text-xs text-brown-600 mt-1">Escolha um canal ou inicie seu projeto diretamente</p>
+            </div>
+
+            <div class="space-y-3">
+                <a href="https://wa.me/5500000000000" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-emerald-400 transition-colors">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </div>
+                        <span class="font-bold text-sm">WhatsApp</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <a href="https://instagram.com" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-pink-400 transition-colors">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </div>
+                        <span class="font-bold text-sm">Instagram</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <a href="mailto:contato@lzaudiovisual.com" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-amber-400 transition-colors">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </div>
+                        <span class="font-bold text-sm">E-mail Profissional</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
     </div>
 
-    <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
-        <!-- Conteúdo do texto 1 -->
-    </div>
-</section>
+    <script>
+        function openContactModal() {
+            const modal = document.getElementById('contact-modal');
+            const content = document.getElementById('contact-modal-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
 
-<!-- SEÇÃO SOBRE MIM 2 (Invertida com a nova foto lz.jpg) -->
-<section id="about-lz-story" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row-reverse items-center overflow-hidden border-t border-brown-800">
-    <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
-        <img src="lz.jpg" alt="Bastidores LZ Audiovisual" class="w-full h-full object-cover object-center">
-        <div class="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-l from-transparent to-brown-950 pointer-events-none"></div>
-        <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
-    </div>
+        function closeContactModal() {
+            const modal = document.getElementById('contact-modal');
+            const content = document.getElementById('contact-modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
 
-    <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
-        <!-- Conteúdo do texto 2 -->
-    </div>
-</section>
+        document.getElementById('contact-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'contact-modal') {
+                closeContactModal();
+            }
+        });
+
+        const heroWrapper = document.getElementById('hero-wrapper');
+        const lzLogo = document.getElementById('zoom-lz-logo');
+        const heroSubtext = document.getElementById('hero-subtext');
+        const whiteOverlay = document.getElementById('hero-white-overlay');
+        const blackOverlay = document.getElementById('hero-black-overlay');
+
+        const visionStackWrapper = document.getElementById('vision-stack');
+        const vCard1 = document.getElementById('vision-card-1');
+        const vCard2 = document.getElementById('vision-card-2');
+        const vCard3 = document.getElementById('vision-card-3');
+
+        let currentProgress = 0;
+        let targetProgress = 0;
+        let currentVisionProgress = 0;
+        let targetVisionProgress = 0;
+
+        window.addEventListener('scroll', () => {
+            const wrapperRect = heroWrapper.getBoundingClientRect();
+            const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
+            targetProgress = Math.max(0, Math.min(1.0, -wrapperRect.top / wrapperHeight));
+
+            const visionRect = visionStackWrapper.getBoundingClientRect();
+            const visionHeight = visionStackWrapper.offsetHeight - window.innerHeight;
+            targetVisionProgress = Math.max(0, Math.min(1, -visionRect.top / visionHeight));
+        }, { passive: true });
+
+        const track = document.getElementById('carousel-track');
+        track.innerHTML += track.innerHTML;
+
+        let carouselPosition = 0;
+        let autoSpeed = 0.8;
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let hasDragged = false;
+
+        const carouselContainer = document.getElementById('portfolio-carousel');
+
+        carouselContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            hasDragged = false;
+            startX = e.pageX;
+            scrollLeft = carouselPosition;
+        });
+
+        carouselContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        carouselContainer.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        carouselContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            hasDragged = true;
+            const x = e.pageX;
+            const walk = (x - startX) * 1.8;
+            carouselPosition = scrollLeft - walk;
+            
+            const maxScroll = track.scrollWidth / 2;
+            if (carouselPosition >= maxScroll) carouselPosition = 0;
+            if (carouselPosition < 0) carouselPosition = maxScroll - 1;
+            
+            track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
+        });
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            isDown = true;
+            hasDragged = false;
+            startX = e.touches[0].pageX;
+            scrollLeft = carouselPosition;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', () => {
+            isDown = false;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            hasDragged = true;
+            const x = e.touches[0].pageX;
+            const walk = (x - startX) * 1.8;
+            carouselPosition = scrollLeft - walk;
+
+            const maxScroll = track.scrollWidth / 2;
+            if (carouselPosition >= maxScroll) carouselPosition = 0;
+            if (carouselPosition < 0) carouselPosition = maxScroll - 1;
+
+            track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
+        }, { passive: true });
+
+        function flipCard(card) {
+            if (hasDragged) return;
+            card.classList.toggle('flipped');
+        }
+
+        function animate() {
+            currentProgress += (targetProgress - currentProgress) * 0.08;
+            currentVisionProgress += (targetVisionProgress - currentVisionProgress) * 0.08;
+
+            const progress = currentProgress;
+
+            whiteOverlay.style.opacity = Math.max(
+                0,
+                Math.min(1, (progress - 0.78) / 0.22)
+            );
+
+            if (progress > 0.75) {
+                blackOverlay.style.opacity = Math.min(1, (progress - 0.75) * 4.0);
+            } else {
+                blackOverlay.style.opacity = 0;
+            }
+
+            const scale = 1 + (progress * 16);
+            lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
+
+            const translateYHero = -(progress * 40);
+            heroSubtext.style.opacity = Math.max(0, 1 - (progress * 6.0));
+            heroSubtext.style.transform = `translate3d(0, ${translateYHero * 0.5}px, 0)`;
+
+            if (progress > 0.72) {
+                lzLogo.style.opacity = Math.max(
+                    0,
+                    1 - ((progress - 0.72) / 0.12)
+                );
+            } else {
+                lzLogo.style.opacity = 1;
+            }
+
+            const vProgress = currentVisionProgress;
+            if (vProgress <= 0.0) {
+                vCard1.style.transform = `translate3d(0, 0px, 0) scale3d(1, 1, 1)`;
+                vCard1.style.zIndex = "30";
+            } else if (vProgress > 0.0 && vProgress <= 0.33) {
+                let p1 = vProgress / 0.33;
+                vCard1.style.transform = `translate3d(0, ${-p1 * 120}vh, 0)`;
+                vCard1.style.zIndex = "30";
+            } else {
+                vCard1.style.transform = `translate3d(0, -120vh, 0)`;
+                vCard1.style.zIndex = "10";
+            }
+
+            if (vProgress <= 0.0) {
+                vCard2.style.transform = `translate3d(0, 30px, 0) scale3d(0.94, 0.94, 1)`;
+                vCard2.style.zIndex = "20";
+            } else if (vProgress > 0.0 && vProgress <= 0.33) {
+                let p2In = vProgress / 0.33;
+                let scale2 = 0.94 + (p2In * 0.06);
+                vCard2.style.transform = `translate3d(0, ${30 - (p2In * 30)}px, 0) scale3d(${scale2}, ${scale2}, 1)`;
+                vCard2.style.zIndex = "20";
+            } else if (vProgress > 0.33 && vProgress <= 0.66) {
+                let p2Out = (vProgress - 0.33) / 0.33;
+                vCard2.style.transform = `translate3d(0, ${-p2Out * 120}vh, 0)`;
+                vCard2.style.zIndex = "30";
+            } else if (vProgress > 0.66) {
+                vCard2.style.transform = `translate3d(0, -120vh, 0)`;
+                vCard2.style.zIndex = "10";
+            }
+
+            if (vProgress <= 0.33) {
+                vCard3.style.transform = `translate3d(0, 60px, 0) scale3d(0.88, 0.88, 1)`;
+                vCard3.style.zIndex = "10";
+            } else if (vProgress > 0.33 && vProgress <= 0.66) {
+                let p3In = (vProgress - 0.33) / 0.33;
+                let scale3 = 0.88 + (p3In * 0.12);
+                vCard3.style.transform = `translate3d(0, ${60 - (p3In * 60)}px, 0) scale3d(${scale3}, ${scale3}, 1)`;
+                vCard3.style.zIndex = "20";
+            } else if (vProgress > 0.66 && vProgress <= 1.0) {
+                let p3Out = (vProgress - 0.66) / 0.34;
+                vCard3.style.transform = `translate3d(0, ${-p3Out * 120}vh, 0)`;
+                vCard3.style.zIndex = "30";
+            } else {
+                vCard3.style.transform = `translate3d(0, -120vh, 0)`;
+                vCard3.style.zIndex = "30";
+            }
+
+            if (!isDown) {
+                carouselPosition += autoSpeed;
+                const maxScroll = track.scrollWidth / 2;
+                if (carouselPosition >= maxScroll) {
+                    carouselPosition = 0;
+                }
+                track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
