@@ -103,9 +103,9 @@
             opacity: 0.85;
         }
 
-        /* Altura exata de 1 tela para o wrapper do hero */
+        /* Altura ampliada para permitir o efeito de scroll gradual */
         .zoom-hero-wrapper {
-            height: 170vh;
+            height: 230vh;
             position: relative;
         }
 
@@ -239,7 +239,7 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION: O VÍDEO OCUPA EXATAMENTE 1 TELA (100vh) -->
+        <!-- HERO SECTION: VÍDEO E ZOOM DO LOGOTIPO RESTRITOS À PRIMEIRA TELA -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
                 <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -250,6 +250,7 @@
                         </video>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-brown-950/40 to-brown-950/80"></div>
+                    <!-- EFEITO BRANCO RESTAURADO -->
                     <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
                 </div>
 
@@ -763,6 +764,7 @@
 
             const progress = currentProgress;
 
+            // Restaura o fade branco sincronizado com o zoom
             whiteOverlay.style.opacity = Math.min(1, progress * 3.5);
 
             const scale = 1 + (progress * 16);
