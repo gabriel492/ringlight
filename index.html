@@ -82,7 +82,6 @@
             margin-left: 0.05em;
         }
 
-        /* VÍDEO DIMINUÍDO E CENTRALIZADO EM FORMATO DE CARD/MOLDURA */
         .bg-video-container {
             position: absolute;
             width: 85%;
@@ -112,7 +111,7 @@
         }
 
         .zoom-hero-wrapper {
-            height: 230vh;
+            height: 250vh;
             position: relative;
         }
 
@@ -127,7 +126,7 @@
             overflow: hidden;
         }
 
-        #zoom-lz-logo, #hero-white-overlay, .hero-fade-element, .vision-stacked-card {
+        #zoom-lz-logo, #hero-white-overlay, #hero-black-overlay, .hero-fade-element, .vision-stacked-card {
             will-change: transform, opacity;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -246,7 +245,7 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM VÍDEO DIMINUÍDO E CENTRALIZADO -->
+        <!-- HERO SECTION COM OVERLAY BRANCO SEGUIDO PELO OVERLAY PRETO -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
                 <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -258,7 +257,11 @@
                         <div class="absolute inset-0 bg-brown-950/20"></div>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-b from-brown-950/40 via-transparent to-brown-950/60"></div>
+                    
+                    <!-- EFEITO BRANCO -->
                     <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
+                    <!-- EFEITO PRETO (LOGOS APÓS O BRANCO) -->
+                    <div id="hero-black-overlay" class="absolute inset-0 bg-black opacity-0 z-15"></div>
                 </div>
 
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
@@ -673,6 +676,7 @@
         const lzLogo = document.getElementById('zoom-lz-logo');
         const heroSubtext = document.getElementById('hero-subtext');
         const whiteOverlay = document.getElementById('hero-white-overlay');
+        const blackOverlay = document.getElementById('hero-black-overlay');
 
         const visionStackWrapper = document.getElementById('vision-stack');
         const vCard1 = document.getElementById('vision-card-1');
@@ -771,7 +775,15 @@
 
             const progress = currentProgress;
 
+            // Efeito branco atinge pico em ~30% do progresso de rolagem
             whiteOverlay.style.opacity = Math.min(1, progress * 3.5);
+
+            // Efeito preto entra exatamente quando o branco está no ápice (de 0.3 a 0.6)
+            if (progress > 0.28) {
+                blackOverlay.style.opacity = Math.min(1, (progress - 0.28) * 3.5);
+            } else {
+                blackOverlay.style.opacity = 0;
+            }
 
             const scale = 1 + (progress * 16);
             lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
