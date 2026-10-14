@@ -120,7 +120,6 @@
             transform-origin: center center;
         }
 
-        /* Estilo dos cards em Grelha (Substituindo o carrossel) */
         .grid-card {
             perspective: 1000px;
             background: transparent;
@@ -173,6 +172,7 @@
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
 
+    <!-- HEADER COM BOTÃO DE CONTATO NO CANTO SUPERIOR DIREITO -->
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16 bg-brown-950/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
@@ -181,6 +181,11 @@
                 </div>
                 <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30">AUDIOVISUAL</span>
             </a>
+
+            <button onclick="openContactModal()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-md cursor-pointer flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                <span>Contato</span>
+            </button>
         </div>
     </header>
 
@@ -212,7 +217,7 @@
             </div>
         </div>
 
-        <!-- TRABALHOS RECENTES (Substituído por Grelha Responsiva) -->
+        <!-- TRABALHOS RECENTES (GRELHA) -->
         <div class="bg-white text-brown-950 relative z-20 transition-colors">
             <section id="portfolio" class="py-24 px-6 lg:px-16 max-w-7xl mx-auto relative z-20">
                 <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
@@ -354,7 +359,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 6 (Contato rápido) -->
+                    <!-- Card 6 -->
                     <div class="grid-card cursor-pointer" onclick="openContactModal()">
                         <div class="card-inner">
                             <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30">
@@ -415,7 +420,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO SOBRE A LZ 2 (Invertida com a foto lz.jpg) -->
+        <!-- SEÇÃO SOBRE A LZ 2 (Invertida com a foto lz.jpg)[cite: 2] -->
         <section id="about-lz" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row-reverse items-center overflow-hidden border-t border-brown-800">
             <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
                 <img src="lz.jpg" alt="LZ Audiovisual Bastidores" class="w-full h-full object-cover object-center">
@@ -557,6 +562,7 @@
         </div>
     </footer>
 
+    <!-- MODAL DE CONTATO -->
     <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto transition-transform duration-300">
             <button onclick="closeContactModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-beige-200 text-brown-950 flex items-center justify-center hover:bg-beige-300 transition-colors cursor-pointer">
@@ -628,7 +634,6 @@
             }
         });
 
-        // Função para virar o card da grelha ao toque ou clique
         function flipCard(card) {
             card.classList.toggle('flipped');
         }
