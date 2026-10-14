@@ -281,30 +281,86 @@
 
         .custom-input {
             width: 100%;
-            background-color: #1e1410;
-            color: #f4ede6;
+            background-color: #eadfd3;
+            color: #140d0a;
             padding: 1.25rem 1.5rem;
             border: none;
-            border-bottom: 2px solid #f4ede6;
+            border-bottom: 2px solid #140d0a;
             font-size: 0.95rem;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .custom-input::placeholder {
-            color: #a89284;
+            color: #8a7566;
             font-weight: 300;
         }
 
         .custom-input:focus {
-            border-bottom-color: #d4c0b0;
-            background-color: #271a15;
+            border-bottom-color: #5c4336;
+            background-color: #e2d4c5;
+        }
+
+        /* --- NAVBAR LIQUID GLASS --- */
+        .liquid-glass {
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.10) 100%),
+                rgba(20, 13, 10, 0.50);
+            -webkit-backdrop-filter: blur(22px) saturate(185%) brightness(1.05);
+            backdrop-filter: blur(22px) saturate(185%) brightness(1.05);
+            border: 1px solid rgba(255,255,255,0.22);
+            box-shadow:
+                inset 0 1.5px 0 rgba(255,255,255,0.55),
+                inset 1px 0 0 rgba(255,255,255,0.18),
+                inset 0 -1px 1px rgba(255,255,255,0.15),
+                inset 0 0 22px rgba(255,255,255,0.07),
+                0 12px 32px -8px rgba(0,0,0,0.45),
+                0 2px 6px rgba(0,0,0,0.2);
+        }
+        .liquid-glass.scrolled {
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.03) 40%, rgba(255,255,255,0.09) 100%),
+                rgba(20, 13, 10, 0.62);
+        }
+        /* reflexo de luz curvo no vidro */
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(120% 140% at 12% -20%, rgba(255,255,255,0.35), transparent 45%),
+                radial-gradient(90% 120% at 95% 130%, rgba(255,255,255,0.14), transparent 50%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+        /* brilho que desliza de tempos em tempos */
+        .liquid-glass::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -60%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.18), transparent);
+            transform: skewX(-20deg);
+            animation: glassSheen 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .liquid-glass > * { position: relative; z-index: 1; }
+        @keyframes glassSheen {
+            0%, 70%, 100% { left: -60%; }
+            85% { left: 120%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .liquid-glass::after { animation: none; }
         }
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
 
-    <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16 bg-brown-950/80 backdrop-blur-md">
+    <header id="navbar" class="liquid-glass fixed top-3 md:top-5 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-6xl z-40 rounded-full py-3 px-5 md:px-8 transition-all duration-500">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="flex items-center justify-center exact-logo-lz transition-transform duration-300 group-hover:scale-105">
@@ -313,7 +369,7 @@
                 <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30">AUDIOVISUAL</span>
             </a>
 
-            <button onclick="openContactModal()" class="bg-transparent border-none text-beige-200 hover:text-white font-sans text-xs tracking-[0.2em] uppercase transition-colors cursor-pointer p-0">
+            <button onclick="openContactModal()" class="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-beige-100 hover:text-white font-sans text-xs tracking-[0.2em] uppercase transition-all cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
                 Contato
             </button>
         </div>
@@ -415,14 +471,6 @@
                         <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brown-950 mt-1">
                             Trabalhos Recentes
                         </h2>
-                    </div>
-                    <div class="flex items-center gap-3 mt-4 md:mt-0">
-                        <button onclick="scrollCarousel('left')" aria-label="Anterior" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
-                            <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </button>
-                        <button onclick="scrollCarousel('right')" aria-label="Próximo" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </button>
                     </div>
                 </div>
 
@@ -686,15 +734,15 @@
             </div>
         </section>
 
-        <div class="bg-brown-950 text-beige-100 relative z-20 transition-colors">
+        <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
             <section id="contact-section" class="py-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
                     
                     <div class="space-y-6 md:pr-6">
-                        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-beige-100 leading-tight">
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-brown-950 leading-tight">
                             Quer saber mais sobre nossos serviços ou precisa de um orçamento personalizado?
                         </h2>
-                        <p class="text-beige-300 text-base md:text-lg font-light leading-relaxed">
+                        <p class="text-brown-600 text-base md:text-lg font-light leading-relaxed">
                             Envie-nos uma mensagem agora mesmo! Ficaremos felizes em lhe atender e transformar suas ideias em realidade.
                         </p>
                     </div>
@@ -713,22 +761,24 @@
                         </div>
 
                         <div class="flex justify-end pt-2">
-                            <button type="submit" class="px-10 py-3 rounded-full bg-beige-100 text-brown-950 font-bold text-xs tracking-widest uppercase hover:bg-white transition-all shadow-lg cursor-pointer">
+                            <button type="submit" class="px-10 py-3 rounded-full bg-brown-950 text-beige-100 font-bold text-xs tracking-widest uppercase hover:bg-brown-800 transition-all shadow-lg cursor-pointer">
                                 Enviar
                             </button>
                         </div>
 
-                        <div id="form-success" class="hidden mt-4 p-4 bg-emerald-900/60 border border-emerald-500 text-emerald-200 rounded-xl text-center text-xs font-semibold">
+                        <div id="form-success" class="hidden mt-4 p-4 bg-emerald-100 border border-emerald-600 text-emerald-900 rounded-xl text-center text-xs font-semibold">
                             Mensagem enviada com sucesso! Entraremos em contato em breve.
                         </div>
                     </form>
 
                 </div>
             </section>
+            <!-- degradê esfumaçado: bege se dissolvendo no rodapé -->
+            <div aria-hidden="true" class="h-48 md:h-56 pointer-events-none" style="background: linear-gradient(to bottom, #f4ede6 0%, #d4c0b0 22%, #9a7b69 50%, #422f25 78%, #140d0a 100%);"></div>
         </div>
     </main>
 
-    <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 border-t border-brown-800 relative z-25">
+    <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 relative z-25">
         <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div class="space-y-4 md:col-span-1">
                 <div class="flex items-center gap-3">
@@ -918,6 +968,13 @@
                     successBox.classList.add('hidden');
                 }, 5000);
             }
+        }
+    
+        const navGlass = document.getElementById('navbar');
+        if (navGlass) {
+            const onNavScroll = () => navGlass.classList.toggle('scrolled', window.scrollY > 40);
+            window.addEventListener('scroll', onNavScroll, { passive: true });
+            onNavScroll();
         }
     </script>
 </body>
