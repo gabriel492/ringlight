@@ -107,21 +107,22 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL SEM CARDS CORTADOS --- */
+        /* --- CARROSSEL COM ESPAÇAMENTO PERFEITO NAS BORDAS --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
             overflow: hidden;
+            padding: 0.5rem 0; /* Espaço para evitar cortar sombras no topo/fundo */
         }
 
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 1.5rem;
+            gap: 1.25rem;
             overflow-x: auto;
             scroll-behavior: smooth;
-            scroll-snap-type: x mandatory; /* FORÇA O ALINHAMENTO EXATO DO CARD */
-            padding: 1rem 0 2.5rem 0;
+            scroll-snap-type: x mandatory;
+            padding: 1rem 1.25rem 2.5rem 1.25rem; /* PADDING LATERAL IMPORTANTE: Evita cortar o 1º e último card */
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -131,12 +132,12 @@
             display: none;
         }
 
-        /* Cálculo exato para que os cards caibam 100% no espaço visível sem cortar nenhum */
+        /* Cálculo considerando os gaps e os paddings laterais */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards exatos por linha */
-            scroll-snap-align: start; /* O card para travado no início */
+            flex: 0 0 calc((100% - 3.75rem) / 4); /* 4 cards exatos perfeitamente encaixados */
+            scroll-snap-align: start;
             height: 550px;
             margin: 0;
             box-sizing: border-box;
@@ -144,19 +145,19 @@
 
         @media (max-width: 1100px) {
             .grid-card {
-                flex: 0 0 calc((100% - 3rem) / 3); /* 3 cards exatos */
+                flex: 0 0 calc((100% - 2.5rem) / 3);
             }
         }
 
         @media (max-width: 768px) {
             .grid-card {
-                flex: 0 0 calc((100% - 1.5rem) / 2); /* 2 cards exatos */
+                flex: 0 0 calc((100% - 1.25rem) / 2);
             }
         }
 
         @media (max-width: 500px) {
             .grid-card {
-                flex: 0 0 100%; /* 1 card total na tela */
+                flex: 0 0 100%;
             }
         }
 
@@ -316,7 +317,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL ALINHADO PERFECTAMENTE -->
+                <!-- CONTAINER DO CARROSSEL CORRIGIDO -->
                 <div class="gallery-carousel-container" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
@@ -761,7 +762,7 @@
             const cardElem = row.querySelector('.grid-card');
             if (!cardElem) return;
 
-            const cardWidth = cardElem.offsetWidth + 24; // Largura exata do card + gap
+            const cardWidth = cardElem.offsetWidth + 20; // Largura exata do card + gap
             if (direction === 'left') {
                 if (row.scrollLeft <= 10) {
                     row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
