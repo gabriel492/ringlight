@@ -309,6 +309,25 @@
             background-color: #e2d4c5;
         }
 
+
+        /* --- CELULAR: cards aparecem em sequência quando a rolagem chega ao carrossel --- */
+        @media (max-width: 768px) {
+            .cards-anim .grid-card {
+                opacity: 0;
+                transform: translateY(28px);
+                transition: opacity 0.8s ease, transform 0.8s ease;
+            }
+            .cards-anim.cards-in .grid-card {
+                opacity: 1;
+                transform: none;
+            }
+            .cards-anim.cards-in .grid-card:nth-child(2) { transition-delay: 0.15s; }
+            .cards-anim.cards-in .grid-card:nth-child(3) { transition-delay: 0.3s; }
+            .cards-anim.cards-in .grid-card:nth-child(n+4) { transition-delay: 0.45s; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .cards-anim .grid-card { opacity: 1; transform: none; transition: none; }
+        }
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
@@ -917,6 +936,63 @@
             }
         }
     
-</script>
+
+        // --- SOMENTE CELULAR: trava a rolagem por um instante quando o carrossel chega na tela ---
+        (function () {
+            const isPhone = window.matchMedia('(max-width: 768px) and (pointer: coarse)').matches;
+            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const box = document.getElementById('carousel-container');
+            if (!isPhone || !box) return;
+
+            const root = document.documentElement;
+            root.classList.add('cards-anim');
+            if (reduced) { root.classList.add('cards-in'); return; }
+
+            const LOCK_MS = 2500;       // tempo que a tela fica travada (em milissegundos)
+            let done = false, locking = false, y0 = 0, t0 = 0, dir = 1, prev = window.scrollY;
+
+            const block = (e) => { if (e.cancelable) e.preventDefault(); };
+            const hold = () => {        // segura a tela no lugar caso sobre alguma inércia da rolagem
+                if (locking && Date.now() - t0 > 1200 && Math.abs(window.scrollY - y0) > 3) window.scrollTo(0, y0);
+            };
+            function unlock() {
+                locking = false;
+                window.removeEventListener('touchmove', block);
+                window.removeEventListener('wheel', block);
+                window.removeEventListener('scroll', hold);
+            }
+            function lock() {
+                if (done) return;
+                done = locking = true;
+                t0 = Date.now();
+                root.classList.add('cards-in');
+                const r = box.getBoundingClientRect();
+                const offset = Math.max((window.innerHeight - r.height) / 2, 72); // 72px = espaço do menu do topo
+                y0 = Math.round(r.top + window.scrollY - offset);
+                window.addEventListener('touchmove', block, { passive: false });
+                window.addEventListener('wheel', block, { passive: false });
+                window.addEventListener('scroll', hold);
+                window.scrollTo({ top: y0, behavior: 'smooth' });
+                setTimeout(unlock, LOCK_MS);
+            }
+
+            window.addEventListener('scroll', () => {
+                dir = window.scrollY >= prev ? 1 : -1;
+                prev = window.scrollY;
+            }, { passive: true });
+
+            new IntersectionObserver((entries) => {
+                entries.forEach((e) => {
+                    if (!e.isIntersecting) return;
+                    if (dir > 0) lock(); else root.classList.add('cards-in');
+                });
+            }, { threshold: 0.5 }).observe(box);
+
+            // garantia: se por algum motivo a trava não disparar, os cards aparecem mesmo assim
+            new IntersectionObserver((entries) => {
+                entries.forEach((e) => { if (e.isIntersecting) root.classList.add('cards-in'); });
+            }, { threshold: 0.15 }).observe(box);
+        })();
+    </script>
 </body>
 </html>
