@@ -142,7 +142,7 @@
             flex: 0 0 calc((100% - (3 * 1.25rem)) / 4);
             min-width: 220px;
             scroll-snap-align: start;
-            height: 620px; /* Altura mantida */
+            height: 620px;
             margin: 0;
             box-sizing: border-box;
         }
@@ -215,6 +215,7 @@
             border-radius: 2.8rem;
         }
 
+        /* MOLDURA DO IPHONE COM 5% DE REDUÇÃO (scale: 0.95) */
         .iphone-device {
             position: relative;
             width: 100%;
@@ -227,6 +228,8 @@
                 0 15px 30px -5px rgba(0, 0, 0, 0.4);
             overflow: hidden;
             padding: 7px;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
         }
 
         .iphone-notch {
