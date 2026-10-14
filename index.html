@@ -82,19 +82,17 @@
             margin-left: 0.05em;
         }
 
+        /* Vídeo ajustado para tela cheia absoluta */
         .bg-video-container {
             position: absolute;
-            width: 85%;
-            max-width: 950px;
-            height: 65vh;
-            max-height: 550px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 1.5rem;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(226, 210, 195, 0.2);
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
         }
 
         .bg-video {
@@ -104,13 +102,12 @@
             transform: translate(-50%, -50%);
             min-width: 100%;
             min-height: 100%;
-            width: auto;
-            height: auto;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0.85;
         }
 
-        /* 1. Altura ajustada do wrapper do hero para 160vh */
         .zoom-hero-wrapper {
             height: 160vh;
             position: relative;
@@ -246,7 +243,7 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION -->
+        <!-- HERO SECTION COM VÍDEO EM TELA CHEIA -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="sticky-hero-container">
                 <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -255,7 +252,7 @@
                             <source src="1013 (1).mp4" type="video/mp4">
                             O seu navegador não suporta vídeos HTML5.
                         </video>
-                        <div class="absolute inset-0 bg-brown-950/20"></div>
+                        <div class="absolute inset-0 bg-brown-950/30"></div>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-b from-brown-950/40 via-transparent to-brown-950/60"></div>
                     
@@ -776,13 +773,11 @@
 
             const progress = currentProgress;
 
-            // 2. Ajuste do overlay branco (aparece apenas no final do zoom)
             whiteOverlay.style.opacity = Math.max(
                 0,
                 Math.min(1, (progress - 0.78) / 0.22)
             );
 
-            // Efeito preto complementar (mantido proporcional no final)
             if (progress > 0.75) {
                 blackOverlay.style.opacity = Math.min(1, (progress - 0.75) * 4.0);
             } else {
@@ -796,7 +791,6 @@
             heroSubtext.style.opacity = Math.max(0, 1 - (progress * 6.0));
             heroSubtext.style.transform = `translate3d(0, ${translateYHero * 0.5}px, 0)`;
 
-            // 3. Ajuste do desaparecimento tardio do logo
             if (progress > 0.72) {
                 lzLogo.style.opacity = Math.max(
                     0,
