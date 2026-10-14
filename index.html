@@ -107,7 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL DE PONTA A PONTA RESPONSIVO (EXATAMENTE 4 CARDS NO DESKTOP) --- */
+        /* --- CARROSSEL RESPONSIVO (EXATAMENTE 4 CARDS NO DESKTOP COM MAIOR ALTURA E MARGEM) --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -121,7 +121,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1.5rem 4vw 3rem 4vw;
+            padding: 1.5rem 3.5rem 3.5rem 3.5rem; /* Margem ajustada nas pontas */
             width: 100%;
             box-sizing: border-box;
             scrollbar-width: none;
@@ -133,33 +133,39 @@
             display: none;
         }
 
-        /* Cálculo exato para 4 cards visíveis em desktop considerando o gap (1.5rem = 24px) */
+        /* Ajuste do cálculo exato para 4 cards na tela descontando o padding lateral e os gaps */
         .grid-card {
             perspective: 1000px;
             background: transparent;
             flex: 0 0 calc((100% - (3 * 1.5rem)) / 4);
-            min-width: 260px;
+            min-width: 250px;
             scroll-snap-align: start;
-            height: 560px;
+            height: 620px; /* Altura aumentada */
             margin: 0;
             box-sizing: border-box;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1280px) {
             .grid-card {
                 flex: 0 0 calc((100% - (2 * 1.5rem)) / 3);
             }
         }
 
         @media (max-width: 900px) {
+            .gallery-row {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
             .grid-card {
                 flex: 0 0 calc((100% - 1.5rem) / 2);
+                height: 560px;
             }
         }
 
         @media (max-width: 580px) {
             .grid-card {
                 flex: 0 0 85vw;
+                height: 540px;
             }
         }
 
@@ -411,7 +417,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL RESPONSIVO DE PONTA A PONTA -->
+                <!-- CARROSSEL RESPONSIVO DE PONTA A PONTA (4 CARDS) -->
                 <div class="gallery-carousel-container w-full" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
