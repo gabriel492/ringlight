@@ -121,7 +121,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1.5rem 3rem 3rem 3rem; /* Margem lateral simétrica de 3rem */
+            padding: 1.5rem 3rem 3rem 3rem;
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -253,6 +253,18 @@
             border-radius: 2.4rem;
             overflow: hidden;
             background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ALTERADO DE object-cover PARA object-contain PARA NÃO CORTAR NENHUMA PARTE DA IMAGEM/VÍDEO */
+        .iphone-screen img, 
+        .iphone-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            background-color: #000;
         }
 
         /* --- ESTILO FORMULÁRIO FALE CONOSCO --- */
@@ -414,7 +426,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
+                                            <video autoplay muted loop playsinline class="pointer-events-none">
                                                 <source src="teste2.mp4" type="video/mp4">
                                                 Seu navegador não suporta vídeo.
                                             </video>
@@ -442,7 +454,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
+                                            <video autoplay muted loop playsinline class="pointer-events-none">
                                                 <source src="teste4.mp4" type="video/mp4">
                                                 Seu navegador não suporta vídeo.
                                             </video>
@@ -470,7 +482,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <img src="teste3.jpeg" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
+                                            <img src="teste3.jpeg" alt="Moda & Retrato" class="pointer-events-none">
                                         </div>
                                     </div>
                                 </div>
@@ -495,7 +507,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
+                                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="pointer-events-none">
                                         </div>
                                     </div>
                                 </div>
@@ -520,7 +532,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
+                                            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="pointer-events-none">
                                         </div>
                                     </div>
                                 </div>
@@ -545,7 +557,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Direção de Arte" class="w-full h-full object-cover pointer-events-none">
+                                            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Direção de Arte" class="pointer-events-none">
                                         </div>
                                     </div>
                                 </div>
@@ -570,7 +582,7 @@
                                     <div class="iphone-device">
                                         <div class="iphone-notch"><div class="iphone-camera"></div></div>
                                         <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80" alt="Produção Cinematográfica" class="w-full h-full object-cover pointer-events-none">
+                                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80" alt="Produção Cinematográfica" class="pointer-events-none">
                                         </div>
                                     </div>
                                 </div>
