@@ -107,22 +107,21 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL COM ESPAÇAMENTO PERFEITO NAS BORDAS --- */
+        /* --- CARROSSEL COM 4 CARDS VISÍVEIS E SEM CORTES NAS BORDAS --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
-            overflow: hidden;
-            padding: 0.5rem 0; /* Espaço para evitar cortar sombras no topo/fundo */
+            overflow: visible; /* Garante que sombras externas não sejam cortadas */
         }
 
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 1.25rem;
+            gap: 2rem; /* Espaçamento generoso entre os cards */
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1rem 1.25rem 2.5rem 1.25rem; /* PADDING LATERAL IMPORTANTE: Evita cortar o 1º e último card */
+            padding: 1.5rem 2rem 3rem 2rem; /* Respiro lateral amplo para evitar cortes */
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -132,32 +131,33 @@
             display: none;
         }
 
-        /* Cálculo considerando os gaps e os paddings laterais */
+        /* Exatamente 4 cards visíveis em ecrãs de computador */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 3.75rem) / 4); /* 4 cards exatos perfeitamente encaixados */
+            flex: 0 0 calc((100% - 6rem) / 4); /* 3 gaps de 2rem = 6rem divididos por 4 cards */
+            min-width: 260px;
             scroll-snap-align: start;
-            height: 550px;
+            height: 560px;
             margin: 0;
             box-sizing: border-box;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .grid-card {
-                flex: 0 0 calc((100% - 2.5rem) / 3);
+                flex: 0 0 calc((100% - 4rem) / 3); /* 3 cards em tablets grandes/notebooks */
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .grid-card {
-                flex: 0 0 calc((100% - 1.25rem) / 2);
+                flex: 0 0 calc((100% - 2rem) / 2); /* 2 cards em tablets */
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 550px) {
             .grid-card {
-                flex: 0 0 100%;
+                flex: 0 0 100%; /* 1 card em telemóveis */
             }
         }
 
@@ -299,8 +299,8 @@
         </div>
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
-            <section id="portfolio" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto relative z-20">
-                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-2">
+            <section id="portfolio" class="py-16 px-4 lg:px-12 max-w-[1400px] mx-auto relative z-20">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-4">
                     <div>
                         <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.25em]">Portfólio Interativo</span>
                         <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brown-950 mt-1">
@@ -317,7 +317,7 @@
                     </div>
                 </div>
 
-                <!-- CONTAINER DO CARROSSEL CORRIGIDO -->
+                <!-- CARROSSEL -->
                 <div class="gallery-carousel-container" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
@@ -755,14 +755,14 @@
             card.classList.toggle('flipped');
         }
 
-        // FUNÇÃO DE ROLAGEM SUAVE DO CARROSSEL
+        // FUNÇÃO DE ROLAGEM DO CARROSSEL
         function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
             if (!row) return;
             const cardElem = row.querySelector('.grid-card');
             if (!cardElem) return;
 
-            const cardWidth = cardElem.offsetWidth + 20; // Largura exata do card + gap
+            const cardWidth = cardElem.offsetWidth + 32; // Largura exata do card + gap de 2rem (32px)
             if (direction === 'left') {
                 if (row.scrollLeft <= 10) {
                     row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
