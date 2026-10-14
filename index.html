@@ -115,17 +115,17 @@
         }
 
         .gallery-row {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 1.5rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-            padding: 1.5rem 0.75rem 3rem 0.75rem; /* Margem simétrica nas duas pontas */
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            -webkit-overflow-scrolling: touch;
-        }
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 1.5rem 1.5rem 3rem 4rem; /* Altere o último valor (4rem, por exemplo) para a margem esquerda desejada */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
 
         .gallery-row::-webkit-scrollbar {
             display: none;
@@ -134,7 +134,7 @@
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((90% - 4.5rem) / 4); /* 4 cards exatos considerando 3 gaps */
+            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards exatos considerando 3 gaps */
             min-width: 230px;
             scroll-snap-align: start;
             height: 560px;
