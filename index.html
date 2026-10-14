@@ -50,6 +50,7 @@
 
         ::-webkit-scrollbar {
             width: 8px;
+            height: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #140d0a;
@@ -121,51 +122,32 @@
             transform-origin: center center;
         }
 
-        /* 9:16 Instagram Aspect Ratio for Cards */
+        /* 9:16 Aspect Ratio for Cards */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            aspect-ratio: 9 / 16;
+            aspect-ratio: 9 / 19;
             width: 100%;
-            max-width: 310px;
+            max-width: 290px;
             margin: 0 auto;
+            flex: 0 0 auto;
         }
 
-        /* Cards lado a lado (rolagem horizontal) */
+        /* Carrossel Horizontal Tradicional */
+        .gallery-carousel-container {
+            position: relative;
+            width: 100%;
+        }
+
         .gallery-row {
             display: flex;
             flex-wrap: nowrap;
-            gap: 1rem;
-            overflow-x: hidden; /* quem move a faixa é a rolagem da página */
-            padding: 0.5rem 0.25rem 1.5rem;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 1rem 0.5rem 2rem 0.5rem;
+            scrollbar-width: thin;
         }
-        .gallery-row .grid-card {
-            flex: 0 0 auto;
-            /* acompanha a altura da tela para o card nunca ficar cortado */
-            width: clamp(220px, calc((100vh - 200px) * 0.5625), 340px);
-            max-width: none;
-            margin: 0;
-        }
-        /* tablet: 3 cards visíveis | computador: 5 cards visíveis (gap = 1rem) */
-        @media (min-width: 640px) {
-            .gallery-row .grid-card { width: calc((100% - 2rem) / 3); }
-        }
-        @media (min-width: 1024px) {
-            .gallery-row .grid-card { width: calc((100% - 4rem) / 5); }
-        }
-
-        /* Efeito: rolar para baixo = galeria anda para o lado */
-        #gallery-sticky {
-            position: sticky;
-            top: 5rem; /* altura do menu fixo */
-            min-height: calc(100vh - 5rem);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        /* sem animação (ou sem JS): volta a ser uma faixa que o usuário arrasta/rola */
-        .no-scroll-link #gallery-sticky { position: static; min-height: 0; }
-        .no-scroll-link .gallery-row { overflow-x: auto; }
 
         .card-inner {
             position: relative;
@@ -186,16 +168,16 @@
             height: 100%;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            border-radius: 1.25rem;
+            border-radius: 1.5rem;
             overflow: hidden;
-            border: 1px solid rgba(66, 47, 37, 0.25);
-            box-shadow: 0 15px 30px -10px rgba(20, 13, 10, 0.25);
         }
 
         .card-front {
-            background-color: #faf7f4;
+            background-color: transparent;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-back {
@@ -208,6 +190,42 @@
             justify-content: center;
             padding: 2rem;
             text-align: center;
+            border: 1px solid rgba(66, 47, 37, 0.5);
+            box-shadow: 0 15px 30px -10px rgba(20, 13, 10, 0.5);
+        }
+
+        /* Estilização da Mockup de iPhone nos Cards */
+        .iphone-mockup-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .iphone-screen-content {
+            position: absolute;
+            /* Ajustes finos baseados na proporção interna da moldura do iPhone */
+            top: 3.5%;
+            left: 5.5%;
+            width: 89%;
+            height: 93%;
+            border-radius: 2rem;
+            overflow: hidden;
+            background: #000;
+            z-index: 1;
+        }
+
+        .iphone-frame-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: 2;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
         }
     </style>
 </head>
@@ -256,148 +274,178 @@
         </div>
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
-            <section id="portfolio" class="py-12 px-4 lg:px-8 max-w-[1800px] mx-auto relative z-20">
-                <div id="gallery-track">
-                <div id="gallery-sticky">
-                <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-brown-950 text-center mb-6">
-                    Trabalhos Recentes
-                </h2>
-
-                <div id="gallery-row" class="gallery-row">
-                    <!-- CARD 1: Vídeo Local em Proporção 9:16 -->
-                    <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <div class="w-full h-full overflow-hidden relative bg-black">
-                                    <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
-                                        <source src="teste2.mp4" type="video/mp4">
-                                        Seu navegador não suporta vídeo.
-                                    </video>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </div>
-                                <h4 class="font-display font-bold text-lg text-beige-100">Reel em Vídeo</h4>
-                                <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Produção audiovisual com estética cinematográfica e formato otimizado para o Instagram Reels.</p>
-                                <a href="https://www.instagram.com/reel/DeXIA1upaEY/?psln=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                    <span>Ver no Instagram</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
+            <section id="portfolio" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto relative z-20">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-4">
+                    <div>
+                        <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.25em]">Portfólio Interativo</span>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brown-950 mt-1">
+                            Trabalhos Recentes
+                        </h2>
                     </div>
-
-                    <!-- CARD 2: Instagram Reel Frame -->
-                    <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <div class="w-full h-full overflow-hidden relative bg-black">
-                                    <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
-                                        <source src="teste4.mp4" type="video/mp4">
-                                        Seu navegador não suporta vídeo.
-                                    </video>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </div>
-                                <h4 class="font-display font-bold text-lg text-beige-100">Campanha Editorial</h4>
-                                <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Captação e pós-produção focadas na narrativa visual de marcas de luxo.</p>
-                                <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                    <span>Ver no Instagram</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD 3: Moda & Retrato -->
-                    <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <div class="w-full h-full overflow-hidden relative">
-                                    <img src="teste3.jpeg" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </div>
-                                <h4 class="font-display font-bold text-lg text-beige-100">Moda &amp; Retrato</h4>
-                                <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Confira os bastidores e ensaios fotográficos completos em nosso perfil oficial.</p>
-                                <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                    <span>Ver no Instagram</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD 4: Comercial Global -->
-                    <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <div class="w-full h-full overflow-hidden relative">
-                                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </div>
-                                <h4 class="font-display font-bold text-lg text-beige-100">Comercial Global</h4>
-                                <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Projetos comerciais desenvolvidos para plataformas digitais e presença de marca.</p>
-                                <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                    <span>Ver no Instagram</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD 5: Estética Minimalista -->
-                    <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <div class="w-full h-full overflow-hidden relative">
-                                    <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </div>
-                                <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
-                                <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Trabalhos em estúdio valorizando a simplicidade, luz suave e composição limpa.</p>
-                                <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                    <span>Ver no Instagram</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD 6: Call To Action -->
-                    <div class="grid-card cursor-pointer" onclick="openContactModal()">
-                        <div class="card-inner">
-                            <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-6 shadow-lg">
-                                    <i class="fa-solid fa-paper-plane"></i>
-                                </div>
-                                <h4 class="font-display font-bold text-xl text-beige-100 mb-3">Tem um projeto em mente?</h4>
-                                <p class="text-xs text-beige-300 mb-8 leading-relaxed">Nos mande uma mensagem e vamos dar vida à sua ideia audiovisual.</p>
-                                <span class="px-6 py-3 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-md">
-                                    Entrar em Contato
-                                </span>
-                            </div>
-                        </div>
+                    <!-- Botões de Navegação do Carrossel -->
+                    <div class="flex items-center gap-3 mt-4 md:mt-0">
+                        <button onclick="scrollCarousel('left')" aria-label="Anterior" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
+                            <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </button>
+                        <button onclick="scrollCarousel('right')" aria-label="Próximo" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
                     </div>
                 </div>
-                </div><!-- /gallery-sticky -->
-                </div><!-- /gallery-track -->
+
+                <!-- Container do Carrossel -->
+                <div class="gallery-carousel-container">
+                    <div id="gallery-row" class="gallery-row">
+                        
+                        <!-- CARD 1: Vídeo Local com Moldura iPhone -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-mockup-wrapper">
+                                        <div class="iphone-screen-content">
+                                            <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
+                                                <source src="teste2.mp4" type="video/mp4">
+                                                Seu navegador não suporta vídeo.
+                                            </video>
+                                        </div>
+                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Reel em Vídeo</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Produção audiovisual com estética cinematográfica e formato otimizado para o Instagram Reels.</p>
+                                    <a href="https://www.instagram.com/reel/DeXIA1upaEY/?psln=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 2: Vídeo Local 2 com Moldura iPhone -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-mockup-wrapper">
+                                        <div class="iphone-screen-content">
+                                            <video autoplay muted loop playsinline class="w-full h-full object-cover pointer-events-none">
+                                                <source src="teste4.mp4" type="video/mp4">
+                                                Seu navegador não suporta vídeo.
+                                            </video>
+                                        </div>
+                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Campanha Editorial</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Captação e pós-produção focadas na narrativa visual de marcas de luxo.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 3: Moda & Retrato com Moldura iPhone -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-mockup-wrapper">
+                                        <div class="iphone-screen-content">
+                                            <img src="teste3.jpeg" alt="Moda & Retrato" class="w-full h-full object-cover pointer-events-none">
+                                        </div>
+                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Moda &amp; Retrato</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Confira os bastidores e ensaios fotográficos completos em nosso perfil oficial.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 4: Comercial Global com Moldura iPhone -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-mockup-wrapper">
+                                        <div class="iphone-screen-content">
+                                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="w-full h-full object-cover pointer-events-none">
+                                        </div>
+                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Comercial Global</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Projetos comerciais desenvolvidos para plataformas digitais e presença de marca.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 5: Estética Minimalista com Moldura iPhone -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-mockup-wrapper">
+                                        <div class="iphone-screen-content">
+                                            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
+                                        </div>
+                                        <img src="image_771e7e.png" alt="Moldura iPhone" class="iphone-frame-img">
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Trabalhos em estúdio valorizando a simplicidade, luz suave e composição limpa.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 6: Call To Action -->
+                        <div class="grid-card cursor-pointer" onclick="openContactModal()">
+                            <div class="card-inner">
+                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border border-beige-300/30 rounded-3xl h-full w-full shadow-lg">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-6 shadow-lg">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-xl text-beige-100 mb-3">Tem um projeto em mente?</h4>
+                                    <p class="text-xs text-beige-300 mb-8 leading-relaxed">Nos mande uma mensagem e vamos dar vida à sua ideia audiovisual.</p>
+                                    <span class="px-6 py-3 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-md">
+                                        Entrar em Contato
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -633,44 +681,17 @@
             card.classList.toggle('flipped');
         }
 
-        // Rolar a página para baixo move a galeria para o lado
-        (function () {
-            const track = document.getElementById('gallery-track');
-            const sticky = document.getElementById('gallery-sticky');
+        // Função para navegação suave do Carrossel por botões
+        function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
-            if (!track || !sticky || !row) return;
-
-            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-            let maxX = 0, ticking = false;
-
-            function setup() {
-                if (reduce.matches) { document.documentElement.classList.add('no-scroll-link'); track.style.height = ''; return; }
-                document.documentElement.classList.remove('no-scroll-link');
-                row.scrollLeft = 0;
-                maxX = row.scrollWidth - row.clientWidth;
-                // altura extra de rolagem = distância horizontal que a faixa precisa percorrer
-                track.style.height = (sticky.offsetHeight + Math.max(maxX, 0)) + 'px';
-                update();
+            if (!row) return;
+            const scrollAmount = 320; // largura aproximada do card + gap
+            if (direction === 'left') {
+                row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             }
-
-            function update() {
-                ticking = false;
-                if (maxX <= 0) return;
-                const total = track.offsetHeight - sticky.offsetHeight;
-                const stickyTop = parseFloat(getComputedStyle(sticky).top) || 0;
-                const scrolled = stickyTop - track.getBoundingClientRect().top;
-                const progress = Math.min(Math.max(scrolled / total, 0), 1);
-                row.scrollLeft = progress * maxX;
-            }
-
-            window.addEventListener('scroll', () => {
-                if (!ticking) { ticking = true; requestAnimationFrame(update); }
-            }, { passive: true });
-            window.addEventListener('resize', setup);
-            window.addEventListener('load', setup);
-            reduce.addEventListener && reduce.addEventListener('change', setup);
-            setup();
-        })();
+        }
 
         function showSuccessMessage() {
             const successBox = document.getElementById('form-success');
