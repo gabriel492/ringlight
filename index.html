@@ -82,6 +82,7 @@
             margin-left: 0.05em;
         }
 
+        /* O vídeo agora fica restrito exclusivamente ao container do Hero */
         .bg-video-container {
             position: absolute;
             inset: 0;
@@ -225,18 +226,6 @@
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
 
-    <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        <div class="bg-video-container">
-            <video autoplay muted loop playsinline class="bg-video">
-                <source src="1013 (1).mp4" type="video/mp4">
-                O seu navegador não suporta vídeos HTML5.
-            </video>
-        </div>
-
-        <div class="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-brown-950/40 to-brown-950/80"></div>
-        <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
-    </div>
-
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
@@ -250,10 +239,20 @@
 
     <main class="relative z-10">
 
-        <!-- HERO SECTION COM O ZOOM DO LOGOTIPO -->
+        <!-- HERO SECTION COM O VÍDEO RESTRITO APENAS AQUI -->
         <div class="zoom-hero-wrapper" id="hero-wrapper">
-            <div class="sticky-hero-container">
+            <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+                <div class="bg-video-container">
+                    <video autoplay muted loop playsinline class="bg-video">
+                        <source src="1013 (1).mp4" type="video/mp4">
+                        O seu navegador não suporta vídeos HTML5.
+                    </video>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-brown-950/40 to-brown-950/80"></div>
+                <div id="hero-white-overlay" class="absolute inset-0 bg-white opacity-0 z-10"></div>
+            </div>
 
+            <div class="sticky-hero-container">
                 <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 pointer-events-none relative z-20" id="hero-content">
                     <div class="py-2 flex justify-center items-center">
                         <h1 id="zoom-lz-logo" class="font-display text-9xl md:text-[13rem] lg:text-[15.5rem] font-black leading-none select-none drop-shadow-2xl exact-logo-lz">
@@ -265,7 +264,6 @@
                         Estúdio audiovisual especializado em fotografia editorial e direção cinematográfica.
                     </p>
                 </div>
-
             </div>
         </div>
 
@@ -493,354 +491,3 @@
                     <div id="vision-card-3" class="vision-stacked-card absolute w-full h-full rounded-3xl overflow-hidden border border-beige-300/20 shadow-2xl flex flex-col justify-end p-8 md:p-14 z-10">
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80');"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-transparent"></div>
-                        <div class="relative z-10 space-y-3">
-                            <span class="text-beige-300 text-xs font-bold uppercase tracking-[0.30em] inline-block glass-panel-brown px-5 py-1.5 rounded-full">03 / Propósito</span>
-                            <h3 class="font-display text-2xl md:text-4xl font-bold text-beige-100 tracking-wide">
-                                Conexões Reais &amp; Visão Futurista
-                            </h3>
-                            <p class="text-beige-200 text-sm md:text-base max-w-2xl font-light leading-relaxed">
-                                Unimos tendências globais de design e tecnologia de ponta para conectar marcas e pessoas através de um storytelling visual incomparável.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="bg-white text-brown-950 relative z-20 transition-colors">
-            <section id="contact-section" class="py-20 px-6 lg:px-16 bg-beige-100 border-t border-beige-200">
-                <div class="max-w-3xl mx-auto bg-white border border-beige-300 rounded-3xl shadow-2xl p-8 md:p-14 relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-beige-200/50 rounded-full blur-2xl pointer-events-none"></div>
-                    
-                    <div class="text-center max-w-xl mx-auto mb-10">
-                        <span class="text-brown-600 text-xs font-bold uppercase tracking-widest bg-beige-200/60 px-4 py-1 rounded-full">Fale Conosco</span>
-                        <h3 class="font-display font-bold text-3xl md:text-4xl text-brown-950 mt-3 mb-2">Inicie seu Projeto com a LZ</h3>
-                        <p class="text-brown-700 text-sm md:text-base">Preencha os campos abaixo com os detalhes do seu escopo e retornaremos em breve.</p>
-                    </div>
-
-                    <form class="space-y-4 max-w-2xl mx-auto bg-beige-50/50 p-6 md:p-8 rounded-2xl border border-beige-200" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! Retornaremos em breve.'); this.reset();">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
-                            <input type="email" placeholder="Seu e-mail profissional" required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700">
-                        </div>
-                        <textarea rows="4" placeholder="Conte-nos sobre o seu projeto, prazos ou expectativas..." required class="w-full px-4 py-3 rounded-xl bg-white border border-beige-300 text-brown-950 text-sm focus:outline-none focus:border-brown-700"></textarea>
-                        <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest text-beige-100 bg-brown-900 hover:bg-brown-800 transition-all shadow-md cursor-pointer">
-                            Enviar Mensagem para a LZ
-                        </button>
-                    </form>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 border-t border-brown-800 relative z-25">
-        <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            <div class="space-y-4 md:col-span-1">
-                <div class="flex items-center gap-3">
-                    <div class="flex items-center justify-center exact-logo-lz">
-                        <span class="font-display font-black text-xl letter-l">L</span><span class="font-display font-black text-xl letter-z">Z</span>
-                    </div>
-                </div>
-                <p class="text-xs text-beige-300 leading-relaxed font-light">
-                    Estúdio de cinematografia e fotografia editorial dedicado a criar narrativas visuais autênticas e marcantes.
-                </p>
-            </div>
-
-            <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navegação</h4>
-                <ul class="space-y-2 text-xs text-beige-300">
-                    <li><a href="#about-me" class="hover:text-beige-100 transition-colors">Sobre Mim</a></li>
-                    <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
-                    <li><button onclick="openContactModal()" class="bg-transparent border-none text-xs text-beige-300 hover:text-beige-100 transition-colors cursor-pointer p-0 text-left">Fale Conosco</button></li>
-                </ul>
-            </div>
-
-            <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Atendimento</h4>
-                <p class="text-xs text-beige-300 leading-relaxed">
-                    Segunda a Sexta: 09h às 19h<br>
-                    Atendimento global sob consulta.
-                </p>
-                <p class="text-xs text-beige-300">
-                    <i class="fa-regular fa-envelope mr-1"></i> contato@lzaudiovisual.com
-                </p>
-            </div>
-
-            <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Redes Sociais</h4>
-                <div class="flex items-center gap-3">
-                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
-                        <i class="fa-brands fa-instagram text-sm"></i>
-                    </a>
-                    <a href="https://wa.me/5500000000000" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
-                    </a>
-                    <a href="mailto:contato@lzaudiovisual.com" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
-                        <i class="fa-regular fa-envelope text-sm"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 lg:px-16 pt-6 border-t border-brown-900 flex flex-col sm:flex-row items-center justify-between text-xs text-beige-400 gap-4">
-            <p>&copy; 2026 LZ Audiovisual. Todos os direitos reservados.</p>
-            <div class="flex items-center gap-6">
-                <a href="#" class="hover:text-beige-200 transition-colors">Termos de Uso</a>
-                <a href="#" class="hover:text-beige-200 transition-colors">Política de Privacidade</a>
-            </div>
-        </div>
-    </footer>
-
-    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto transition-transform duration-300">
-            <button onclick="closeContactModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-beige-200 text-brown-950 flex items-center justify-center hover:bg-beige-300 transition-colors cursor-pointer">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="flex items-center justify-center mx-auto mb-3 exact-logo-lz">
-                    <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
-                </div>
-                <h3 class="font-display font-bold text-2xl text-brown-950">Fale Conosco</h3>
-                <p class="text-xs text-brown-600 mt-1">Escolha um canal ou inicie seu projeto diretamente</p>
-            </div>
-
-            <div class="space-y-3">
-                <a href="https://wa.me/5500000000000" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-emerald-400 transition-colors">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                        </div>
-                        <span class="font-bold text-sm">WhatsApp</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-
-                <a href="https://instagram.com" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-pink-400 transition-colors">
-                            <i class="fa-brands fa-instagram text-lg"></i>
-                        </div>
-                        <span class="font-bold text-sm">Instagram</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-
-                <a href="mailto:contato@lzaudiovisual.com" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-amber-400 transition-colors">
-                            <i class="fa-regular fa-envelope text-lg"></i>
-                        </div>
-                        <span class="font-bold text-sm">E-mail Profissional</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openContactModal() {
-            const modal = document.getElementById('contact-modal');
-            const content = document.getElementById('contact-modal-content');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
-        }
-
-        function closeContactModal() {
-            const modal = document.getElementById('contact-modal');
-            const content = document.getElementById('contact-modal-content');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-        }
-
-        document.getElementById('contact-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'contact-modal') {
-                closeContactModal();
-            }
-        });
-
-        const heroWrapper = document.getElementById('hero-wrapper');
-        const lzLogo = document.getElementById('zoom-lz-logo');
-        const heroSubtext = document.getElementById('hero-subtext');
-        const whiteOverlay = document.getElementById('hero-white-overlay');
-
-        const visionStackWrapper = document.getElementById('vision-stack');
-        const vCard1 = document.getElementById('vision-card-1');
-        const vCard2 = document.getElementById('vision-card-2');
-        const vCard3 = document.getElementById('vision-card-3');
-
-        let currentProgress = 0;
-        let targetProgress = 0;
-        let currentVisionProgress = 0;
-        let targetVisionProgress = 0;
-
-        window.addEventListener('scroll', () => {
-            const wrapperRect = heroWrapper.getBoundingClientRect();
-            const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
-            targetProgress = Math.max(0, Math.min(1.0, -wrapperRect.top / wrapperHeight));
-
-            const visionRect = visionStackWrapper.getBoundingClientRect();
-            const visionHeight = visionStackWrapper.offsetHeight - window.innerHeight;
-            targetVisionProgress = Math.max(0, Math.min(1, -visionRect.top / visionHeight));
-        }, { passive: true });
-
-        const track = document.getElementById('carousel-track');
-        track.innerHTML += track.innerHTML;
-
-        let carouselPosition = 0;
-        let autoSpeed = 0.8;
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        let hasDragged = false;
-
-        const carouselContainer = document.getElementById('portfolio-carousel');
-
-        carouselContainer.addEventListener('mousedown', (e) => {
-            isDown = true;
-            hasDragged = false;
-            startX = e.pageX;
-            scrollLeft = carouselPosition;
-        });
-
-        carouselContainer.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        carouselContainer.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        carouselContainer.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            hasDragged = true;
-            const x = e.pageX;
-            const walk = (x - startX) * 1.8;
-            carouselPosition = scrollLeft - walk;
-            
-            const maxScroll = track.scrollWidth / 2;
-            if (carouselPosition >= maxScroll) carouselPosition = 0;
-            if (carouselPosition < 0) carouselPosition = maxScroll - 1;
-            
-            track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
-        });
-
-        carouselContainer.addEventListener('touchstart', (e) => {
-            isDown = true;
-            hasDragged = false;
-            startX = e.touches[0].pageX;
-            scrollLeft = carouselPosition;
-        }, { passive: true });
-
-        carouselContainer.addEventListener('touchend', () => {
-            isDown = false;
-        }, { passive: true });
-
-        carouselContainer.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            hasDragged = true;
-            const x = e.touches[0].pageX;
-            const walk = (x - startX) * 1.8;
-            carouselPosition = scrollLeft - walk;
-
-            const maxScroll = track.scrollWidth / 2;
-            if (carouselPosition >= maxScroll) carouselPosition = 0;
-            if (carouselPosition < 0) carouselPosition = maxScroll - 1;
-
-            track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
-        }, { passive: true });
-
-        function flipCard(card) {
-            if (hasDragged) return;
-            card.classList.toggle('flipped');
-        }
-
-        function animate() {
-            currentProgress += (targetProgress - currentProgress) * 0.08;
-            currentVisionProgress += (targetVisionProgress - currentVisionProgress) * 0.08;
-
-            const progress = currentProgress;
-
-            // O flash branco agora acompanha o mesmo ritmo do zoom do LZ
-            whiteOverlay.style.opacity = Math.min(1, progress * 3.5);
-
-            const scale = 1 + (progress * 16);
-            lzLogo.style.transform = `scale3d(${scale}, ${scale}, 1)`;
-
-            const translateYHero = -(progress * 40);
-            heroSubtext.style.opacity = Math.max(0, 1 - (progress * 6.0));
-            heroSubtext.style.transform = `translate3d(0, ${translateYHero * 0.5}px, 0)`;
-
-            if (progress > 0.15) {
-                lzLogo.style.opacity = Math.max(0, 1 - ((progress - 0.15) / 0.08));
-            } else {
-                lzLogo.style.opacity = 1;
-            }
-
-            const vProgress = currentVisionProgress;
-            if (vProgress <= 0.0) {
-                vCard1.style.transform = `translate3d(0, 0px, 0) scale3d(1, 1, 1)`;
-                vCard1.style.zIndex = "30";
-            } else if (vProgress > 0.0 && vProgress <= 0.33) {
-                let p1 = vProgress / 0.33;
-                vCard1.style.transform = `translate3d(0, ${-p1 * 120}vh, 0)`;
-                vCard1.style.zIndex = "30";
-            } else {
-                vCard1.style.transform = `translate3d(0, -120vh, 0)`;
-                vCard1.style.zIndex = "10";
-            }
-
-            if (vProgress <= 0.0) {
-                vCard2.style.transform = `translate3d(0, 30px, 0) scale3d(0.94, 0.94, 1)`;
-                vCard2.style.zIndex = "20";
-            } else if (vProgress > 0.0 && vProgress <= 0.33) {
-                let p2In = vProgress / 0.33;
-                let scale2 = 0.94 + (p2In * 0.06);
-                vCard2.style.transform = `translate3d(0, ${30 - (p2In * 30)}px, 0) scale3d(${scale2}, ${scale2}, 1)`;
-                vCard2.style.zIndex = "20";
-            } else if (vProgress > 0.33 && vProgress <= 0.66) {
-                let p2Out = (vProgress - 0.33) / 0.33;
-                vCard2.style.transform = `translate3d(0, ${-p2Out * 120}vh, 0)`;
-                vCard2.style.zIndex = "30";
-            } else if (vProgress > 0.66) {
-                vCard2.style.transform = `translate3d(0, -120vh, 0)`;
-                vCard2.style.zIndex = "10";
-            }
-
-            if (vProgress <= 0.33) {
-                vCard3.style.transform = `translate3d(0, 60px, 0) scale3d(0.88, 0.88, 1)`;
-                vCard3.style.zIndex = "10";
-            } else if (vProgress > 0.33 && vProgress <= 0.66) {
-                let p3In = (vProgress - 0.33) / 0.33;
-                let scale3 = 0.88 + (p3In * 0.12);
-                vCard3.style.transform = `translate3d(0, ${60 - (p3In * 60)}px, 0) scale3d(${scale3}, ${scale3}, 1)`;
-                vCard3.style.zIndex = "20";
-            } else if (vProgress > 0.66 && vProgress <= 1.0) {
-                let p3Out = (vProgress - 0.66) / 0.34;
-                vCard3.style.transform = `translate3d(0, ${-p3Out * 120}vh, 0)`;
-                vCard3.style.zIndex = "30";
-            } else {
-                vCard3.style.transform = `translate3d(0, -120vh, 0)`;
-                vCard3.style.zIndex = "30";
-            }
-
-            if (!isDown) {
-                carouselPosition += autoSpeed;
-                const maxScroll = track.scrollWidth / 2;
-                if (carouselPosition >= maxScroll) {
-                    carouselPosition = 0;
-                }
-                track.style.transform = `translate3d(-${carouselPosition}px, 0, 0)`;
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        requestAnimationFrame(animate);
-    </script>
-</body>
-</html>
