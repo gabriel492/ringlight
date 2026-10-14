@@ -121,7 +121,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 1.5rem 1rem 3rem 1rem;
-            scrollbar-width: none; /* Oculta a barra de rolagem mantendo a funcionalidade */
+            scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
         }
@@ -184,7 +184,7 @@
             border-radius: 3rem;
         }
 
-        /* --- MOLDURA DO IPHONE EM CSS REFINADO (SEM DEPENDER DE IMAGEM PNG COM ERROS) --- */
+        /* --- MOLDURA DO IPHONE EM CSS REFINADO --- */
         .iphone-device {
             position: relative;
             width: 100%;
@@ -199,7 +199,6 @@
             padding: 8px;
         }
 
-        /* Ilha Dinâmica (Dynamic Island) */
         .iphone-notch {
             position: absolute;
             top: 15px;
@@ -216,7 +215,6 @@
             padding-right: 8px;
         }
 
-        /* Lente da Câmera na Ilha */
         .iphone-camera {
             width: 10px;
             height: 10px;
@@ -225,7 +223,6 @@
             border-radius: 50%;
         }
 
-        /* Ecrã Interno com Borda Arredondada Real */
         .iphone-screen {
             position: relative;
             width: 100%;
@@ -289,7 +286,6 @@
                             Trabalhos Recentes
                         </h2>
                     </div>
-                    <!-- Botões manuais do Carrossel -->
                     <div class="flex items-center gap-3 mt-4 md:mt-0">
                         <button onclick="scrollCarousel('left')" aria-label="Anterior" class="w-12 h-12 rounded-full bg-brown-900 text-beige-100 flex items-center justify-center hover:bg-brown-800 transition-all shadow-md cursor-pointer">
                             <i class="fa-solid fa-arrow-left text-sm"></i>
@@ -300,7 +296,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL AUTOMÁTICO -->
+                <!-- CARROSSEL AUTOMÁTICO EXPAMPINDO O NÚMERO DE CARDS -->
                 <div class="gallery-carousel-container" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
@@ -410,7 +406,82 @@
                             </div>
                         </div>
 
-                        <!-- CARD 5 (CTA) -->
+                        <!-- CARD 5 (Novo Adicionado: Estética Minimalista) -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
+                                            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="w-full h-full object-cover pointer-events-none">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Trabalhos em estúdio valorizando a simplicidade, luz suave e composição limpa.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 6 (Novo Adicionado: Direção de Arte) -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
+                                            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Direção de Arte" class="w-full h-full object-cover pointer-events-none">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Direção de Arte</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Criação de atmosferas cinematográficas marcantes e exclusivas.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 7 (Novo Adicionado: Cinema & Produção) -->
+                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="iphone-device">
+                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
+                                        <div class="iphone-screen">
+                                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80" alt="Produção Cinematográfica" class="w-full h-full object-cover pointer-events-none">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <h4 class="font-display font-bold text-lg text-beige-100">Cinema &amp; Produção</h4>
+                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Frames capturados com alta fidelidade visual e rigor técnico.</p>
+                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
+                                        <span>Ver no Instagram</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 8 (CTA) -->
                         <div class="grid-card cursor-pointer" onclick="openContactModal()">
                             <div class="card-inner">
                                 <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border-2 border-brown-700 rounded-[3rem] h-full w-full shadow-lg">
@@ -689,7 +760,7 @@
         function startAutoPlay() {
             autoPlayTimer = setInterval(() => {
                 scrollCarousel('right');
-            }, 3500); // Passa a cada 3.5 segundos
+            }, 3000); // Avança automaticamente a cada 3 segundos
         }
 
         function stopAutoPlay() {
@@ -704,7 +775,6 @@
             carouselElem.addEventListener('touchend', startAutoPlay, { passive: true });
         }
 
-        // Iniciar Autoplay
         startAutoPlay();
 
         function showSuccessMessage() {
