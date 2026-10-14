@@ -107,7 +107,7 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL RESPONSIVO (EXATAMENTE 4 CARDS NO DESKTOP) --- */
+        /* --- CARROSSEL SEM CARDS CORTADOS --- */
         .gallery-carousel-container {
             position: relative;
             width: 100%;
@@ -120,7 +120,8 @@
             gap: 1.5rem;
             overflow-x: auto;
             scroll-behavior: smooth;
-            padding: 1.5rem 0.5rem 3rem 0.5rem;
+            scroll-snap-type: x mandatory; /* FORÇA O ALINHAMENTO EXATO DO CARD */
+            padding: 1rem 0 2.5rem 0;
             scrollbar-width: none;
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
@@ -130,31 +131,32 @@
             display: none;
         }
 
-        /* Responsividade dos Cards: 4 visíveis em desktop, adaptando em tablets e mobile */
+        /* Cálculo exato para que os cards caibam 100% no espaço visível sem cortar nenhum */
         .grid-card {
             perspective: 1000px;
             background: transparent;
-            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards visíveis considerando 3 gaps de 1.5rem */
-            min-width: 250px;
-            height: 560px;
+            flex: 0 0 calc((100% - 4.5rem) / 4); /* 4 cards exatos por linha */
+            scroll-snap-align: start; /* O card para travado no início */
+            height: 550px;
             margin: 0;
+            box-sizing: border-box;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1100px) {
             .grid-card {
-                flex: 0 0 calc((100% - 3rem) / 3); /* 3 cards em notebooks/tablets grandes */
+                flex: 0 0 calc((100% - 3rem) / 3); /* 3 cards exatos */
             }
         }
 
-        @media (max-width: 850px) {
+        @media (max-width: 768px) {
             .grid-card {
-                flex: 0 0 calc((100% - 1.5rem) / 2); /* 2 cards em tablets */
+                flex: 0 0 calc((100% - 1.5rem) / 2); /* 2 cards exatos */
             }
         }
 
-        @media (max-width: 550px) {
+        @media (max-width: 500px) {
             .grid-card {
-                flex: 0 0 85%; /* 1 card em destaque em telemóveis */
+                flex: 0 0 100%; /* 1 card total na tela */
             }
         }
 
@@ -177,7 +179,7 @@
             height: 100%;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            border-radius: 3rem;
+            border-radius: 2.8rem;
         }
 
         .card-front {
@@ -199,31 +201,31 @@
             text-align: center;
             border: 2px solid #422f25;
             box-shadow: 0 20px 40px -10px rgba(20, 13, 10, 0.4);
-            border-radius: 3rem;
+            border-radius: 2.8rem;
         }
 
-        /* --- MOLDURA DO IPHONE EM CSS REFINADO --- */
+        /* --- MOLDURA DO IPHONE --- */
         .iphone-device {
             position: relative;
             width: 100%;
             height: 100%;
             background: #1c1a21;
-            border-radius: 3rem;
+            border-radius: 2.8rem;
             box-shadow: 
                 0 0 0 3px #383342,
                 0 0 0 5px #18161d,
-                0 20px 40px -10px rgba(0, 0, 0, 0.5);
+                0 15px 30px -5px rgba(0, 0, 0, 0.4);
             overflow: hidden;
-            padding: 8px;
+            padding: 7px;
         }
 
         .iphone-notch {
             position: absolute;
-            top: 15px;
+            top: 12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 85px;
-            height: 24px;
+            width: 80px;
+            height: 22px;
             background-color: #000000;
             border-radius: 20px;
             z-index: 10;
@@ -234,8 +236,8 @@
         }
 
         .iphone-camera {
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             background: #0d0f1d;
             border: 1px solid #1a1e36;
             border-radius: 50%;
@@ -245,7 +247,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            border-radius: 2.5rem;
+            border-radius: 2.4rem;
             overflow: hidden;
             background: #000;
         }
@@ -297,7 +299,7 @@
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
             <section id="portfolio" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto relative z-20">
-                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-4">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-2">
                     <div>
                         <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.25em]">Portfólio Interativo</span>
                         <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brown-950 mt-1">
@@ -314,7 +316,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSSEL RESPONSIVO AUTOMÁTICO -->
+                <!-- CARROSSEL ALINHADO PERFECTAMENTE -->
                 <div class="gallery-carousel-container" id="carousel-container">
                     <div id="gallery-row" class="gallery-row">
                         
@@ -502,7 +504,7 @@
                         <!-- CARD 8 (CTA) -->
                         <div class="grid-card cursor-pointer" onclick="openContactModal()">
                             <div class="card-inner">
-                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border-2 border-brown-700 rounded-[3rem] h-full w-full shadow-lg">
+                                <div class="card-front bg-brown-900 text-beige-100 flex flex-col items-center justify-center p-8 text-center border-2 border-brown-700 rounded-[2.8rem] h-full w-full shadow-lg">
                                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-beige-300 to-beige-500 text-brown-950 flex items-center justify-center text-2xl mb-6 shadow-lg">
                                         <i class="fa-solid fa-paper-plane"></i>
                                     </div>
@@ -752,19 +754,22 @@
             card.classList.toggle('flipped');
         }
 
-        // FUNÇÃO DE SCROLL DO CARROSSEL
+        // FUNÇÃO DE ROLAGEM SUAVE DO CARROSSEL
         function scrollCarousel(direction) {
             const row = document.getElementById('gallery-row');
             if (!row) return;
-            const cardWidth = row.querySelector('.grid-card').offsetWidth + 24; // largura do card + gap
+            const cardElem = row.querySelector('.grid-card');
+            if (!cardElem) return;
+
+            const cardWidth = cardElem.offsetWidth + 24; // Largura exata do card + gap
             if (direction === 'left') {
-                if (row.scrollLeft <= 0) {
+                if (row.scrollLeft <= 10) {
                     row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
                 } else {
                     row.scrollBy({ left: -cardWidth, behavior: 'smooth' });
                 }
             } else {
-                if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 10) {
+                if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 15) {
                     row.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
                     row.scrollBy({ left: cardWidth, behavior: 'smooth' });
@@ -772,7 +777,7 @@
             }
         }
 
-        // LÓGICA DE ROLAGEM AUTOMÁTICA (AUTOPLAY)
+        // AUTOPLAY
         let autoPlayTimer = null;
 
         function startAutoPlay() {
@@ -798,9 +803,9 @@
         function showSuccessMessage() {
             const successBox = document.getElementById('form-success');
             if (successBox) {
-                successBox.classList.add('hidden');
+                successBox.classList.remove('hidden');
                 setTimeout(() => {
-                    successBox.classList.remove('hidden');
+                    successBox.classList.add('hidden');
                 }, 5000);
             }
         }
