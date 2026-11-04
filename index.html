@@ -328,6 +328,58 @@
         @media (prefers-reduced-motion: reduce) {
             .cards-anim .grid-card { opacity: 1; transform: none; transition: none; }
         }
+
+        /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
+        .ps { position: relative; height: 520vh; height: 520svh; background: #140d0a; color: #f4ede6; }
+        .ps-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); }
+        .ps-head { position: absolute; left: 0; right: 0; top: 104px; text-align: center; padding: 0 16px; will-change: opacity, transform; }
+        .ps-kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
+        .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem, 15.5vw, 12rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #e8c98f 0%, #9a6a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .ps-phone { position: absolute; left: 50%; top: 50%; width: 390px; height: 844px; border-radius: 64px; background: #0b0706; box-shadow: 0 0 0 2px #5c4336, 0 0 0 5px #1e1410, 0 40px 90px rgba(0, 0, 0, 0.6); will-change: transform; transform: translate(-50%, 60vh); }
+        .ps-screen { position: absolute; inset: 12px; border-radius: 52px; overflow: hidden; background: #000; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .ps-screen > * { position: absolute; inset: 0; }
+        .ps-island { position: absolute; left: 50%; top: 22px; width: 112px; height: 32px; margin-left: -56px; border-radius: 20px; background: #000; z-index: 8; }
+        .ps-layer { will-change: transform, opacity; }
+        .ps-reel video, .ps-film video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ps-reel::after { content: ''; position: absolute; inset: 45% 0 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent); pointer-events: none; }
+        .ps-reel-top { position: absolute; z-index: 2; left: 24px; right: 24px; top: 70px; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6); }
+        .ps-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; object-position: 70% 15%; box-shadow: 0 0 0 2px #e8c98f; }
+        .ps-reel-bottom { position: absolute; z-index: 2; left: 24px; right: 24px; bottom: 44px; color: #fff; }
+        .ps-reel-bottom p { font-size: 15px; line-height: 1.4; margin-bottom: 16px; }
+        .ps-btn { display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 16px; background: #f4ede6; color: #140d0a; font-size: 16px; font-weight: 700; will-change: transform; }
+        .ps-page { background: #f4ede6; color: #140d0a; transform: translateY(101%); }
+        .ps-url { position: absolute; z-index: 3; left: 0; right: 0; top: 0; padding: 66px 24px 12px; background: #f4ede6; text-align: center; font-size: 13px; font-weight: 600; color: #5c4336; }
+        .ps-page-scroll { position: absolute; left: 0; right: 0; top: 96px; will-change: transform; padding-bottom: 130px; }
+        .ps-page-scroll img { display: block; width: 100%; }
+        .ps-page-copy { padding: 26px 24px; }
+        .ps-page-copy h4 { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+        .ps-page-copy p { font-size: 16px; line-height: 1.5; color: #5c4336; }
+        .ps-page .ps-btn { position: absolute; z-index: 3; left: 24px; right: 24px; bottom: 36px; background: #140d0a; color: #f4ede6; box-shadow: 0 10px 30px rgba(20, 13, 10, 0.35); }
+        .ps-chat { background: #1e1410; transform: translateX(101%); }
+        .ps-chat-top { position: absolute; left: 0; right: 0; top: 0; padding: 70px 24px 16px; display: flex; align-items: center; gap: 12px; background: #2d1f18; color: #f4ede6; font-size: 16px; font-weight: 700; }
+        .ps-chat-top small { display: block; font-size: 12px; font-weight: 500; color: #c2a895; }
+        .ps-bubbles { position: absolute; left: 20px; right: 20px; top: 156px; display: flex; flex-direction: column; gap: 14px; }
+        .ps-bubble { max-width: 82%; padding: 14px 16px; border-radius: 20px; font-size: 16px; line-height: 1.4; opacity: 0; will-change: transform, opacity; }
+        .ps-bubble.me { align-self: flex-end; background: #e6d7ca; color: #140d0a; border-bottom-right-radius: 6px; }
+        .ps-bubble.lz { align-self: flex-start; background: #422f25; color: #f4ede6; border-bottom-left-radius: 6px; }
+        .ps-film { inset: auto; left: 50%; top: 50%; width: 820px; height: 366px; margin: -183px 0 0 -410px; transform: rotate(-90deg); background: #000; opacity: 0; }
+        .ps-touch { position: absolute; z-index: 7; inset: auto; left: 0; top: 0; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75); opacity: 0; will-change: transform, opacity; }
+        .ps-notes { display: none; }
+        .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
+        .ps-end h3 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3.4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+        .ps-end p { max-width: 34rem; margin: 0 auto 18px; font-size: 0.95rem; line-height: 1.55; color: #d4c0b0; }
+        .ps-end button { padding: 13px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
+        .ps-end.is-on { pointer-events: auto; }
+        @media (min-width: 1024px) {
+            .ps-notes { display: block; position: absolute; inset: 0; pointer-events: none; }
+            .ps-note { position: absolute; top: 50%; width: min(24vw, 320px); opacity: 0; will-change: opacity, transform; }
+            .ps-note:nth-child(odd) { right: calc(50% + 250px); text-align: right; }
+            .ps-note:nth-child(even) { left: calc(50% + 250px); }
+            .ps-note span { display: block; margin-bottom: 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; color: #c2a895; }
+            .ps-note strong { display: block; font-family: 'Cinzel', serif; font-size: 1.75rem; line-height: 1.2; margin-bottom: 8px; }
+            .ps-note p { color: #d4c0b0; line-height: 1.55; }
+        }
+        .ps.ps-static { height: 100vh; height: 100svh; }
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
@@ -425,6 +477,61 @@
                         <p class="text-sm text-brown-700 font-medium mt-2">Turning vision into impact.</p>
                         <div class="flex flex-wrap justify-center gap-2 mt-5"><span class="px-3 py-1 rounded-full bg-beige-200/70 text-brown-800 text-[11px] font-semibold tracking-wide">Campaigns</span><span class="px-3 py-1 rounded-full bg-beige-200/70 text-brown-800 text-[11px] font-semibold tracking-wide">Optimization</span><span class="px-3 py-1 rounded-full bg-beige-200/70 text-brown-800 text-[11px] font-semibold tracking-wide">Engagement</span></div>
                     </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HISTÓRIA NO CELULAR: conduzida pela rolagem -->
+            <section class="ps" id="phone-story" aria-label="Do reel ao seu projeto">
+                <div class="ps-stage">
+                    <div class="ps-head">
+                        <p class="ps-kicker">Do primeiro olhar ao seu projeto</p>
+                        <p class="ps-title" aria-hidden="true">IMPACTO</p>
+                    </div>
+                    <div class="ps-notes">
+                        <div class="ps-note"><span>01</span><strong>Chama atenção</strong><p>Um vídeo com estética de cinema faz a sua marca ser notada.</p></div>
+                        <div class="ps-note"><span>02</span><strong>Mostra quem você é</strong><p>A identidade visual acompanha cada ponto de contato.</p></div>
+                        <div class="ps-note"><span>03</span><strong>Abre a conversa</strong><p>Quem se conecta com a sua história quer saber mais.</p></div>
+                    </div>
+                    <div class="ps-phone" aria-hidden="true">
+                        <div class="ps-island"></div>
+                        <div class="ps-screen">
+                            <div class="ps-layer ps-reel">
+                                <video muted loop playsinline preload="none" data-src="teste2.mp4"></video>
+                                <div class="ps-reel-top"><img class="ps-avatar" src="luiza.jpeg" alt="">lzaudiovisual</div>
+                                <div class="ps-reel-bottom">
+                                    <p>Sua história, com olhar de cinema.</p>
+                                    <div class="ps-btn" data-ps="reel-cta">Ver projeto</div>
+                                </div>
+                            </div>
+                            <div class="ps-layer ps-page">
+                                <div class="ps-url">lzaudiovisual.com</div>
+                                <div class="ps-page-scroll">
+                                    <img src="lz.jpg" alt="">
+                                    <div class="ps-page-copy">
+                                        <h4>Sensibilidade &amp; direção</h4>
+                                        <p>Fotografia editorial e direção cinematográfica para marcas que querem ser lembradas.</p>
+                                    </div>
+                                    <img src="luiza.jpeg" alt="">
+                                </div>
+                                <div class="ps-btn" data-ps="page-cta">Pedir orçamento</div>
+                            </div>
+                            <div class="ps-layer ps-chat">
+                                <div class="ps-chat-top"><img class="ps-avatar" src="luiza.jpeg" alt=""><div>LZ Audiovisual<small>online</small></div></div>
+                                <div class="ps-bubbles">
+                                    <div class="ps-bubble me">Olá! Quero um vídeo para a minha marca.</div>
+                                    <div class="ps-bubble lz">Que ótimo! Me conta a sua ideia.</div>
+                                    <div class="ps-bubble lz">Vamos transformar em filme.</div>
+                                </div>
+                            </div>
+                            <div class="ps-layer ps-film"><video muted loop playsinline preload="none" data-src="1013 (1).mp4"></video></div>
+                            <div class="ps-touch"></div>
+                        </div>
+                    </div>
+                    <div class="ps-end">
+                        <h3>A próxima história pode ser a sua.</h3>
+                        <p>Do conceito à entrega final, cuidamos de cada detalhe.</p>
+                        <button type="button" onclick="openContactModal()">Iniciar seu projeto</button>
                     </div>
                 </div>
             </section>
@@ -955,6 +1062,143 @@
                     observer.disconnect();
                 });
             }, { threshold: 0.15 }).observe(box);
+        })();
+
+        // --- HISTÓRIA NO CELULAR: o progresso da rolagem (0 a 1) define cada momento da cena ---
+        (function () {
+            const section = document.getElementById('phone-story');
+            if (!section) return;
+            const $ = (sel) => section.querySelector(sel);
+            const stage = $('.ps-stage'), phone = $('.ps-phone'), head = $('.ps-head'), page = $('.ps-page');
+            const chat = $('.ps-chat'), film = $('.ps-film'), touch = $('.ps-touch'), end = $('.ps-end');
+            const scroller = $('.ps-page-scroll'), reelCta = $('[data-ps="reel-cta"]'), pageCta = $('[data-ps="page-cta"]');
+            const bubbles = [...section.querySelectorAll('.ps-bubble')], notes = [...section.querySelectorAll('.ps-note')];
+            const reelVideo = $('.ps-reel video'), filmVideo = $('.ps-film video');
+            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            const PHONE_W = 390, PHONE_H = 844, SCREEN_W = 366, SCREEN_H = 820, HEADER = 88;
+            let W = 0, H = 0, portrait = 1, landscape = 1, portraitY = 0, landscapeY = 0, scrollMax = 0;
+            let target = 0, current = -1, frame = 0, visible = false;
+
+            const clamp = (v) => Math.min(1, Math.max(0, v));
+            const part = (p, a, b) => clamp((p - a) / (b - a));
+            const smooth = (t) => t * t * (3 - 2 * t);
+            const mix = (a, b, t) => a + (b - a) * t;
+
+            function measure() {
+                W = stage.clientWidth; H = stage.clientHeight;
+                portrait = Math.min((H - HEADER - 20) / PHONE_H, (W * 0.74) / PHONE_W, 0.82);
+                landscape = Math.min((W * 0.92) / PHONE_H, (H * 0.5) / PHONE_W);
+                portraitY = HEADER / 2;
+                landscapeY = HEADER + (PHONE_W * landscape) / 2 - H / 2;
+                end.style.top = (HEADER + PHONE_W * landscape + 22) + 'px';
+                scrollMax = Math.max(0, scroller.offsetHeight - (SCREEN_H - 96));
+            }
+
+            function pressAt(el, p, a, b) {
+                // leva o toque até o botão, usando coordenadas sem a escala do celular
+                let x = el.offsetWidth / 2, y = el.offsetHeight / 2, node = el;
+                while (node && !node.classList.contains('ps-screen')) { x += node.offsetLeft; y += node.offsetTop; node = node.offsetParent; }
+                const t = part(p, a, b);
+                const pressed = Math.sin(Math.PI * part(t, 0.45, 0.85));
+                touch.style.opacity = Math.sin(Math.PI * t) > 0.02 ? Math.min(1, Math.sin(Math.PI * t) * 2.5) : 0;
+                touch.style.transform = 'translate(' + (x + (1 - t) * 40) + 'px,' + (y + (1 - t) * 90) + 'px) scale(' + (1 - pressed * 0.28) + ')';
+                el.style.transform = 'scale(' + (1 - pressed * 0.05) + ')';
+            }
+
+            function render(p) {
+                const rise = smooth(part(p, 0, 0.08));
+                const turn = smooth(part(p, 0.72, 0.86));
+                const y = mix(H * 0.72, portraitY, rise);
+                phone.style.transform = 'translate(-50%,-50%) translate(0,' + mix(y, landscapeY, turn) + 'px) rotate(' + (turn * 90) + 'deg) scale(' + mix(portrait, landscape, turn) + ')';
+
+                head.style.opacity = 1 - smooth(part(p, 0.1, 0.22)) * 0.82 - smooth(part(p, 0.62, 0.72)) * 0.18;
+                head.style.transform = 'translateY(' + (-14 * rise) + 'px)';
+
+                if (p < 0.5) pressAt(reelCta, p, 0.17, 0.28); else pressAt(pageCta, p, 0.46, 0.56);
+                page.style.transform = 'translateY(' + (101 * (1 - smooth(part(p, 0.26, 0.34)))) + '%)';
+                scroller.style.transform = 'translateY(' + (-scrollMax * smooth(part(p, 0.35, 0.47))) + 'px)';
+                chat.style.transform = 'translateX(' + (101 * (1 - smooth(part(p, 0.54, 0.6)))) + '%)';
+                bubbles.forEach((b, i) => {
+                    const t = smooth(part(p, 0.59 + i * 0.035, 0.62 + i * 0.035));
+                    b.style.opacity = t;
+                    b.style.transform = 'translateY(' + (14 * (1 - t)) + 'px)';
+                });
+                film.style.opacity = smooth(part(p, 0.7, 0.75));
+
+                [[0.08, 0.25], [0.3, 0.5], [0.56, 0.7]].forEach(([a, b], i) => {
+                    if (!notes[i]) return;
+                    const t = smooth(part(p, a, a + 0.04)) * (1 - smooth(part(p, b - 0.04, b)));
+                    notes[i].style.opacity = t;
+                    notes[i].style.transform = 'translateY(calc(-50% + ' + (20 * (1 - t)) + 'px))';
+                });
+
+                const finish = smooth(part(p, 0.87, 0.95));
+                end.style.opacity = finish;
+                end.style.transform = 'translateY(' + (18 * (1 - finish)) + 'px)';
+                end.classList.toggle('is-on', finish > 0.6);
+
+                if (visible && !reduced) {
+                    setPlaying(reelVideo, p < 0.33);
+                    setPlaying(filmVideo, p > 0.66);
+                }
+            }
+
+            function setPlaying(video, on) {
+                if (on && video.paused) { const r = video.play(); if (r) r.catch(() => {}); }
+                else if (!on && !video.paused) video.pause();
+            }
+
+            function readScroll() {
+                const box = section.getBoundingClientRect();
+                target = clamp(-box.top / Math.max(1, box.height - H));
+                if (!frame) frame = requestAnimationFrame(tick);
+            }
+
+            function tick() {
+                frame = 0;
+                current = current < 0 ? target : current + (target - current) * 0.14;
+                if (Math.abs(target - current) < 0.0004) current = target;
+                render(current);
+                if (current !== target) frame = requestAnimationFrame(tick);
+            }
+
+            function loadVideos() {
+                [reelVideo, filmVideo].forEach((v) => {
+                    if (v.src || !v.dataset.src) return;
+                    v.src = v.dataset.src;
+                    v.preload = 'auto';
+                });
+            }
+
+            function refresh() { measure(); current = -1; readScroll(); }
+
+            measure();
+            window.addEventListener('resize', refresh);
+            window.addEventListener('load', refresh);
+            document.fonts && document.fonts.ready.then(refresh);
+            section.querySelectorAll('img').forEach((img) => img.addEventListener('load', measure));
+
+            if (reduced) {
+                section.classList.add('ps-static');
+                loadVideos();
+                measure();
+                render(1);
+                return;
+            }
+
+            new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) loadVideos();
+            }, { rootMargin: '100% 0px' }).observe(section);
+
+            new IntersectionObserver((entries) => {
+                visible = entries[0].isIntersecting;
+                if (visible) { current = -1; readScroll(); }
+                else { reelVideo.pause(); filmVideo.pause(); }
+            }).observe(section);
+
+            window.addEventListener('scroll', readScroll, { passive: true });
+            readScroll();
         })();
     </script>
 </body>
