@@ -380,26 +380,30 @@
             .ps-note p { color: #d4c0b0; line-height: 1.55; }
         }
         .ps.ps-static { height: 100vh; height: 100svh; }
+
+        /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
+        #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
+        #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
     </style>
 </head>
 <body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
 
-    <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16 bg-brown-950/80 backdrop-blur-md">
+    <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="flex items-center justify-center exact-logo-lz transition-transform duration-300 group-hover:scale-105">
                     <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
                 </div>
-                <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30">AUDIOVISUAL</span>
+                <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30 nav-text">AUDIOVISUAL</span>
             </a>
 
-            <button onclick="openContactModal()" class="bg-transparent border-none text-beige-200 hover:text-white font-sans text-xs tracking-[0.2em] uppercase transition-colors cursor-pointer p-0">
+            <button onclick="openContactModal()" class="nav-text bg-transparent border-none text-beige-200 hover:text-white font-sans text-xs tracking-[0.2em] uppercase transition-colors cursor-pointer p-0">
                 Contato
             </button>
         </div>
     </header>
 
-    <main class="relative z-10 pt-20">
+    <main class="relative z-10">
 
         <div class="zoom-hero-wrapper" id="hero-wrapper">
             <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -1146,6 +1150,41 @@
 
             window.addEventListener('scroll', readScroll, { passive: true });
             readScroll();
+        })();
+
+        // --- MENU TRANSPARENTE: usa texto escuro quando passa sobre uma seção clara ---
+        (function () {
+            const navbar = document.getElementById('navbar');
+            let waiting = false;
+
+            function sectionColor(node) {
+                for (; node; node = node.parentElement) {
+                    const rgba = getComputedStyle(node).backgroundColor.match(/[\d.]+/g).map(Number);
+                    if (rgba.length < 4 || rgba[3] > 0.5) return rgba;
+                }
+                return [0, 0, 0];
+            }
+
+            function update() {
+                waiting = false;
+                const under = document.elementsFromPoint(window.innerWidth / 2, navbar.offsetHeight / 2)
+                    .find((el) => !navbar.contains(el));
+                if (!under) return;
+                const block = under.closest('section, footer, .zoom-hero-wrapper') || under;
+                const [r, g, b] = sectionColor(block);
+                navbar.classList.toggle('nav-on-light', 0.299 * r + 0.587 * g + 0.114 * b > 150);
+            }
+
+            function schedule() {
+                if (waiting) return;
+                waiting = true;
+                requestAnimationFrame(update);
+            }
+
+            window.addEventListener('scroll', schedule, { passive: true });
+            window.addEventListener('resize', schedule);
+            window.addEventListener('load', schedule);
+            schedule();
         })();
     </script>
 </body>
