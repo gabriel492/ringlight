@@ -430,7 +430,7 @@
             </section>
 
             <!-- SEÇÃO PORTFÓLIO COM MAX-WIDTH 1200PX -->
-            <section id="portfolio" class="py-16 relative z-20 w-full px-4 lg:px-0">
+            <section id="portfolio" class="scroll-mt-16 py-16 relative z-20 w-full px-4 lg:px-0">
                 <div class="max-w-[1200px] mx-auto px-4 flex flex-col md:flex-row items-center justify-between mb-8">
                     <div>
                         <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.25em]">Portfólio Interativo</span>
@@ -637,12 +637,12 @@
                 <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
             </div>
 
-            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
-                <div class="space-y-6 max-w-xl">
+            <div class="w-full md:w-1/2 min-w-0 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-10 lg:px-16 xl:px-24 py-16 bg-brown-950 relative z-10">
+                <div class="space-y-6 max-w-xl min-w-0">
                     <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
                         Sobre Mim
                     </span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
+                    <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
                         Sensibilidade &amp; Direção Cinematográfica
                     </h2>
                     <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
@@ -652,9 +652,9 @@
                         Com olhar atento aos detalhes, iluminação e composição narrativa, meu objetivo é registrar a essência de cada projeto com elegância, sofisticação e alma.
                     </p>
                     <div class="pt-4">
-                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
+                        <a href="#portfolio" class="inline-block px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
                             Conheça Nosso Trabalho
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -937,7 +937,7 @@
         }
     
 
-        // --- SOMENTE CELULAR: trava a rolagem por um instante quando o carrossel chega na tela ---
+        // --- SOMENTE CELULAR: cards aparecem em sequência quando o carrossel chega na tela ---
         (function () {
             const isPhone = window.matchMedia('(max-width: 768px) and (pointer: coarse)').matches;
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -948,49 +948,12 @@
             root.classList.add('cards-anim');
             if (reduced) { root.classList.add('cards-in'); return; }
 
-            const LOCK_MS = 2500;       // tempo que a tela fica travada (em milissegundos)
-            let done = false, locking = false, y0 = 0, t0 = 0, dir = 1, prev = window.scrollY;
-
-            const block = (e) => { if (e.cancelable) e.preventDefault(); };
-            const hold = () => {        // segura a tela no lugar caso sobre alguma inércia da rolagem
-                if (locking && Date.now() - t0 > 1200 && Math.abs(window.scrollY - y0) > 3) window.scrollTo(0, y0);
-            };
-            function unlock() {
-                locking = false;
-                window.removeEventListener('touchmove', block);
-                window.removeEventListener('wheel', block);
-                window.removeEventListener('scroll', hold);
-            }
-            function lock() {
-                if (done) return;
-                done = locking = true;
-                t0 = Date.now();
-                root.classList.add('cards-in');
-                const r = box.getBoundingClientRect();
-                const offset = Math.max((window.innerHeight - r.height) / 2, 72); // 72px = espaço do menu do topo
-                y0 = Math.round(r.top + window.scrollY - offset);
-                window.addEventListener('touchmove', block, { passive: false });
-                window.addEventListener('wheel', block, { passive: false });
-                window.addEventListener('scroll', hold);
-                window.scrollTo({ top: y0, behavior: 'smooth' });
-                setTimeout(unlock, LOCK_MS);
-            }
-
-            window.addEventListener('scroll', () => {
-                dir = window.scrollY >= prev ? 1 : -1;
-                prev = window.scrollY;
-            }, { passive: true });
-
-            new IntersectionObserver((entries) => {
+            new IntersectionObserver((entries, observer) => {
                 entries.forEach((e) => {
                     if (!e.isIntersecting) return;
-                    if (dir > 0) lock(); else root.classList.add('cards-in');
+                    root.classList.add('cards-in');
+                    observer.disconnect();
                 });
-            }, { threshold: 0.5 }).observe(box);
-
-            // garantia: se por algum motivo a trava não disparar, os cards aparecem mesmo assim
-            new IntersectionObserver((entries) => {
-                entries.forEach((e) => { if (e.isIntersecting) root.classList.add('cards-in'); });
             }, { threshold: 0.15 }).observe(box);
         })();
     </script>
