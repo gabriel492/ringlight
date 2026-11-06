@@ -381,6 +381,19 @@
         }
         .ps.ps-static { height: 100vh; height: 100svh; }
 
+        /* --- CILINDRO DE VÍDEOS: o celular abre em volta da câmera e vira um carrossel 3D --- */
+        .ev { position: relative; height: 460vh; height: 460svh; background: #0e0908; }
+        .ev-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #0e0908; }
+        .ev-glow { position: absolute; inset: 0; pointer-events: none; background:
+            radial-gradient(ellipse 26% 42% at 30% 58%, rgba(196, 98, 63, 0.5), transparent 70%),
+            radial-gradient(ellipse 22% 36% at 70% 42%, rgba(212, 192, 176, 0.38), transparent 70%); will-change: opacity; }
+        .ev-ring { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; will-change: transform; }
+        .ev-panel { position: absolute; left: calc(var(--ev-w) / -2); top: calc(var(--ev-h) / -2); width: var(--ev-w); height: var(--ev-h); overflow: hidden; background: #1e1410; opacity: 0; will-change: transform, opacity; }
+        .ev-panel img, .ev-panel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ev-panel span { position: absolute; left: 8px; right: 8px; top: 66%; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1rem, 2.4vh, 1.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; text-transform: uppercase; color: #fff; text-shadow: 0 0 14px rgba(255, 255, 255, 0.85), 0 0 34px rgba(255, 255, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.45); }
+        .ev-frame { position: absolute; left: 50%; top: 50%; width: calc(var(--ev-w) + 34px); height: calc(var(--ev-h) + 34px); transform: translate(-50%, -50%); border-radius: 56px; border: 2px solid rgba(244, 237, 230, 0.4); background: rgba(20, 13, 10, 0.25); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6); pointer-events: none; will-change: opacity; }
+        .ev.ev-static { height: 100vh; height: 100svh; }
+
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
@@ -484,6 +497,15 @@
                         <p>Do conceito à entrega final, cuidamos de cada detalhe.</p>
                         <button type="button" onclick="openContactModal()">Iniciar seu projeto</button>
                     </div>
+                </div>
+            </section>
+
+            <!-- CILINDRO DE VÍDEOS: conduzido pela rolagem -->
+            <section class="ev" id="video-ring" aria-label="Nossos trabalhos em vídeo">
+                <div class="ev-stage" aria-hidden="true">
+                    <div class="ev-glow"></div>
+                    <div class="ev-ring"></div>
+                    <div class="ev-frame"></div>
                 </div>
             </section>
 
@@ -1185,6 +1207,143 @@
             window.addEventListener('resize', schedule);
             window.addEventListener('load', schedule);
             schedule();
+        })();
+
+        // --- CILINDRO DE VÍDEOS: a rolagem abre o celular, recua a câmera e gira o carrossel ---
+        (function () {
+            const section = document.getElementById('video-ring');
+            if (!section) return;
+            const stage = section.querySelector('.ev-stage'), ring = section.querySelector('.ev-ring');
+            const frame = section.querySelector('.ev-frame'), glow = section.querySelector('.ev-glow');
+            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Ordem a partir do painel central. Trocar aqui para mudar o conteúdo do carrossel.
+            const media = [
+                { name: 'historia', video: true, caption: 'Sua história' },
+                { name: 'detalhe', video: true, caption: 'Cada detalhe' },
+                { name: 'marca' },
+                { name: 'bastidor' },
+                { name: 'luiza' },
+                { name: 'olhar' },
+                { name: 'historia' },
+                { name: 'detalhe' },
+                { name: 'luiza' },
+                { name: 'bastidor', video: true },
+                { name: 'marca' },
+                { name: 'olhar', video: true, caption: 'Olhar de cinema' }
+            ];
+            const COUNT = media.length, STEP = 360 / COUNT;
+
+            const panels = media.map((item, i) => {
+                const el = document.createElement('div');
+                el.className = 'ev-panel';
+                el.innerHTML = item.video
+                    ? '<video muted loop playsinline preload="none" poster="clips/' + item.name + '.jpg" data-src="clips/' + item.name + '.mp4"></video>'
+                    : '<img src="clips/' + item.name + '.jpg" alt="" loading="lazy">';
+                if (item.caption) {
+                    const caption = document.createElement('span');
+                    caption.textContent = item.caption;
+                    el.appendChild(caption);
+                }
+                ring.appendChild(el);
+                return { el, k: i <= COUNT / 2 ? i : i - COUNT, caption: el.querySelector('span') };
+            });
+            const videos = [...section.querySelectorAll('video')];
+
+            const clamp = (v) => Math.min(1, Math.max(0, v));
+            const part = (p, a, b) => clamp((p - a) / (b - a));
+            const smooth = (t) => t * t * (3 - 2 * t);
+            const mix = (a, b, t) => a + (b - a) * t;
+
+            let W = 0, H = 0, radius = 0, camera = 0, far = 0;
+            let target = 0, current = 0, spin = 0, last = 0, frameId = 0, visible = false, loaded = false;
+
+            function measure() {
+                W = stage.clientWidth; H = stage.clientHeight;
+                const height = Math.min(H - 104, (W * 0.72) * 16 / 9, 780);
+                const width = height * 9 / 16;
+                radius = width / (2 * Math.tan(Math.PI / COUNT));
+                camera = radius * 1.35;
+                const scale = Math.min(W * 0.82, H * 0.62) / (radius * 2);
+                far = camera * (1 - 1 / scale);
+                stage.style.setProperty('--ev-w', width + 'px');
+                stage.style.setProperty('--ev-h', height + 'px');
+                stage.style.perspective = camera + 'px';
+            }
+
+            function render(p) {
+                const open = smooth(part(p, 0.12, 0.36));
+                const pull = smooth(part(p, 0.42, 0.86));
+                const turn = -300 * pull - spin * part(p, 0.6, 0.9);
+                ring.style.transform = 'translateZ(' + mix(radius, far, pull) + 'px) rotateX(' + (-26 * pull) + 'deg) rotateY(' + turn + 'deg)';
+
+                panels.forEach(({ el, k, caption }) => {
+                    const near = Math.abs(k) <= 3;
+                    const angle = k * STEP * (near ? open : 1);
+                    el.style.transform = 'rotateY(' + angle + 'deg) translateZ(' + (-radius) + 'px)';
+                    el.style.opacity = k === 0 ? 1 : near ? smooth(part(open, 0, 0.3)) : smooth(part(pull, 0.25, 0.45));
+                    if (caption) caption.style.opacity = 1 - smooth(part(p, 0.42, 0.5));
+                });
+                panels[0].el.style.borderRadius = mix(40, 0, part(p, 0.12, 0.24)) + 'px';
+                frame.style.opacity = 1 - part(p, 0.12, 0.2);
+                glow.style.opacity = 1 - part(p, 0.3, 0.5);
+            }
+
+            function readScroll() {
+                const box = section.getBoundingClientRect();
+                target = clamp(-box.top / Math.max(1, box.height - H));
+            }
+
+            function loop(now) {
+                const delta = Math.min(0.05, (now - last) / 1000 || 0);
+                last = now;
+                spin += delta * 8;
+                current += (target - current) * 0.14;
+                render(current);
+                frameId = visible ? requestAnimationFrame(loop) : 0;
+            }
+
+            function loadVideos() {
+                if (loaded) return;
+                loaded = true;
+                videos.forEach((v) => { v.src = v.dataset.src; v.preload = 'auto'; });
+            }
+
+            function setVideos(on) {
+                videos.forEach((v) => {
+                    if (on) { const r = v.play(); if (r) r.catch(() => {}); } else v.pause();
+                });
+            }
+
+            function refresh() { measure(); readScroll(); render(current); }
+
+            measure();
+            window.addEventListener('resize', refresh);
+
+            if (reduced) {
+                section.classList.add('ev-static');
+                measure();
+                render(1);
+                return;
+            }
+
+            new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) loadVideos();
+            }, { rootMargin: '100% 0px' }).observe(section);
+
+            new IntersectionObserver((entries) => {
+                visible = entries[0].isIntersecting;
+                setVideos(visible);
+                if (visible) {
+                    readScroll();
+                    current = target;
+                    if (!frameId) frameId = requestAnimationFrame(loop);
+                }
+            }).observe(section);
+
+            window.addEventListener('scroll', readScroll, { passive: true });
+            readScroll();
+            render(target);
         })();
     </script>
 </body>
