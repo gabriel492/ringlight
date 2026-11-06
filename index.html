@@ -776,7 +776,7 @@
                 el.className = 'ev-panel';
                 el.innerHTML = item.video
                     ? '<video muted loop playsinline preload="none" poster="clips/' + item.name + '.jpg" data-src="clips/' + item.name + '.mp4"></video>'
-                    : '<img src="clips/' + item.name + '.jpg" alt="" loading="lazy">';
+                    : '<img src="clips/' + item.name + '.jpg" alt="">';
                 if (item.caption) {
                     const caption = document.createElement('span');
                     caption.textContent = item.caption;
