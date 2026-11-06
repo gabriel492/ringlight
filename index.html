@@ -107,185 +107,6 @@
             overflow: hidden;
         }
 
-        /* --- CARROSSEL LIMITADO A MAX-WIDTH 1200px --- */
-        .gallery-carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .gallery-row {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 1.25rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-            padding: 1.5rem 1rem 3.5rem 1rem;
-            scroll-padding-left: 1rem;   /* alinha o card ao mesmo recuo do padding: sem sobra do card seguinte */
-            scroll-padding-right: 1rem;
-            width: 100%;
-            box-sizing: border-box;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .gallery-row::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Cálculo de 4 cards encaixados nos 1200px com gaps e paddings */
-        .grid-card {
-            perspective: 1000px;
-            background: transparent;
-            flex: 0 0 calc((100% - (3 * 1.25rem)) / 4);
-            min-width: 220px;
-            scroll-snap-align: start;
-            height: 620px;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        @media (max-width: 1024px) {
-            .grid-card {
-                flex: 0 0 calc((100% - (2 * 1.25rem)) / 3);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .gallery-row {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-                scroll-padding-left: 1.5rem;
-                scroll-padding-right: 1.5rem;
-            }
-            .grid-card {
-                flex: 0 0 calc((100% - 1.25rem) / 2);
-                height: 620px;
-            }
-        }
-
-        @media (max-width: 520px) {
-            /* 1 card por vez, centralizado: recuo igual nos dois lados e card ocupando todo o espaço interno */
-            .gallery-row {
-                padding-left: 1rem;
-                padding-right: 1rem;
-                scroll-padding-left: 1rem;
-                scroll-padding-right: 1rem;
-            }
-            .grid-card {
-                flex: 0 0 100%;
-                height: 620px;
-                scroll-snap-align: center;
-            }
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-
-        .grid-card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 2.8rem;
-        }
-
-        .card-front {
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-back {
-            background-color: #1e1410;
-            color: #f4ede6;
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-            border: 2px solid #422f25;
-            box-shadow: 0 20px 40px -10px rgba(20, 13, 10, 0.4);
-            border-radius: 2.8rem;
-        }
-
-        /* MOLDURA DO IPHONE COM 5% DE REDUÇÃO (scale: 0.95) */
-        .iphone-device {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #1c1a21;
-            border-radius: 2.8rem;
-            box-shadow: 
-                0 0 0 3px #383342,
-                0 0 0 5px #18161d,
-                0 15px 30px -5px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-            padding: 7px;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .iphone-notch {
-            position: absolute;
-            top: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 22px;
-            background-color: #000000;
-            border-radius: 20px;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 8px;
-        }
-
-        .iphone-camera {
-            width: 9px;
-            height: 9px;
-            background: #0d0f1d;
-            border: 1px solid #1a1e36;
-            border-radius: 50%;
-        }
-
-        .iphone-screen {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 2.4rem;
-            overflow: hidden;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .iphone-screen img, 
-        .iphone-screen video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
 
         .custom-input {
             width: 100%;
@@ -310,24 +131,6 @@
         }
 
 
-        /* --- CELULAR: cards aparecem em sequência quando a rolagem chega ao carrossel --- */
-        @media (max-width: 768px) {
-            .cards-anim .grid-card {
-                opacity: 0;
-                transform: translateY(28px);
-                transition: opacity 0.8s ease, transform 0.8s ease;
-            }
-            .cards-anim.cards-in .grid-card {
-                opacity: 1;
-                transform: none;
-            }
-            .cards-anim.cards-in .grid-card:nth-child(2) { transition-delay: 0.15s; }
-            .cards-anim.cards-in .grid-card:nth-child(3) { transition-delay: 0.3s; }
-            .cards-anim.cards-in .grid-card:nth-child(n+4) { transition-delay: 0.45s; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .cards-anim .grid-card { opacity: 1; transform: none; transition: none; }
-        }
 
         /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
         .ps { position: relative; height: 520vh; height: 520svh; background: #140d0a; color: #f4ede6; }
@@ -392,6 +195,9 @@
         .ev-panel img, .ev-panel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
         .ev-panel span { position: absolute; left: 8px; right: 8px; top: 66%; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1rem, 2.4vh, 1.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; text-transform: uppercase; color: #fff; text-shadow: 0 0 14px rgba(255, 255, 255, 0.85), 0 0 34px rgba(255, 255, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.45); }
         .ev-frame { position: absolute; left: 50%; top: 50%; width: calc(var(--ev-w) + 34px); height: calc(var(--ev-h) + 34px); transform: translate(-50%, -50%); border-radius: 56px; border: 2px solid rgba(244, 237, 230, 0.4); background: rgba(20, 13, 10, 0.25); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6); pointer-events: none; will-change: opacity; }
+        .ev-title { position: absolute; left: 0; right: 0; bottom: clamp(20px, 5vh, 52px); text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
+        .ev-title p { margin-bottom: 4px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
+        .ev-title h2 { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; letter-spacing: 0.04em; color: #f4ede6; }
         .ev.ev-static { height: 100vh; height: 100svh; }
 
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
@@ -501,210 +307,14 @@
             </section>
 
             <!-- CILINDRO DE VÍDEOS: conduzido pela rolagem -->
-            <section class="ev" id="video-ring" aria-label="Nossos trabalhos em vídeo">
-                <div class="ev-stage" aria-hidden="true">
-                    <div class="ev-glow"></div>
-                    <div class="ev-ring"></div>
-                    <div class="ev-frame"></div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO PORTFÓLIO COM MAX-WIDTH 1200PX -->
-            <section id="portfolio" class="scroll-mt-16 py-16 relative z-20 w-full px-4 lg:px-0">
-                <div class="max-w-[1200px] mx-auto px-4 flex flex-col md:flex-row items-center justify-between mb-8">
-                    <div>
-                        <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.25em]">Portfólio Interativo</span>
-                        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brown-950 mt-1">
-                            Trabalhos Recentes
-                        </h2>
-                    </div>
-                </div>
-
-                <!-- CARROSSEL MAX-WIDTH 1200px -->
-                <div class="gallery-carousel-container" id="carousel-container">
-                    <div id="gallery-row" class="gallery-row">
-                        
-                        <!-- CARD 1 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <video autoplay muted loop playsinline class="pointer-events-none">
-                                                <source src="teste2.mp4" type="video/mp4">
-                                                Seu navegador não suporta vídeo.
-                                            </video>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Reel em Vídeo</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Produção audiovisual com estética cinematográfica e formato otimizado para o Instagram Reels.</p>
-                                    <a href="https://www.instagram.com/reel/DeXIA1upaEY/?psln=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 2 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <video autoplay muted loop playsinline class="pointer-events-none">
-                                                <source src="teste4.mp4" type="video/mp4">
-                                                Seu navegador não suporta vídeo.
-                                            </video>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Campanha Editorial</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Captação e pós-produção focadas na narrativa visual de marcas de luxo.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 3 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <img src="teste3.jpeg" alt="Moda & Retrato" class="pointer-events-none">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Moda &amp; Retrato</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Confira os bastidores e ensaios fotográficos completos em nosso perfil oficial.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 4 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80" alt="Comercial Global" class="pointer-events-none">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Comercial Global</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Projetos comerciais desenvolvidos para plataformas digitais e presença de marca.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 5 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Estética Minimalista" class="pointer-events-none">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Estética Minimalista</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Trabalhos em estúdio valorizando a simplicidade, luz suave e composição limpa.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 6 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80" alt="Direção de Arte" class="pointer-events-none">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Direção de Arte</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Criação de atmosferas cinematográficas marcantes e exclusivas.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CARD 7 -->
-                        <div class="grid-card cursor-pointer" onclick="flipCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="iphone-device">
-                                        <div class="iphone-notch"><div class="iphone-camera"></div></div>
-                                        <div class="iphone-screen">
-                                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80" alt="Produção Cinematográfica" class="pointer-events-none">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="w-12 h-12 rounded-2xl bg-brown-800 text-pink-400 flex items-center justify-center text-xl mb-4 shadow-md">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </div>
-                                    <h4 class="font-display font-bold text-lg text-beige-100">Cinema &amp; Produção</h4>
-                                    <p class="text-xs text-beige-300 mt-2 mb-6 leading-relaxed">Frames capturados com alta fidelidade visual e rigor técnico.</p>
-                                    <a href="https://instagram.com" target="_blank" onclick="event.stopPropagation()" class="px-5 py-2.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-2">
-                                        <span>Ver no Instagram</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
+            <section class="ev" id="portfolio">
+                <div class="ev-stage">
+                    <div class="ev-glow" aria-hidden="true"></div>
+                    <div class="ev-ring" aria-hidden="true"></div>
+                    <div class="ev-frame" aria-hidden="true"></div>
+                    <div class="ev-title">
+                        <p>Trabalhos recentes</p>
+                        <h2>Portfólio</h2>
                     </div>
                 </div>
             </section>
@@ -953,59 +563,6 @@
             }
         });
 
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-        }
-
-        function scrollCarousel(direction) {
-            const row = document.getElementById('gallery-row');
-            if (!row) return;
-            const cardElem = row.querySelector('.grid-card');
-            if (!cardElem) return;
-
-            const gap = parseFloat(getComputedStyle(row).columnGap) || 20;
-            const cardWidth = cardElem.offsetWidth + gap;
-            // anda exatamente a quantidade de cards visíveis (4 no desktop, 3, 2 ou 1 nas telas menores)
-            const visibleCards = Math.max(1, Math.floor(row.clientWidth / cardWidth));
-            const jumpDistance = cardWidth * visibleCards;
-
-            if (direction === 'left') {
-                if (row.scrollLeft <= 10) {
-                    row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
-                } else {
-                    row.scrollBy({ left: -jumpDistance, behavior: 'smooth' });
-                }
-            } else {
-                if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 15) {
-                    row.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    row.scrollBy({ left: jumpDistance, behavior: 'smooth' });
-                }
-            }
-        }
-
-        let autoPlayTimer = null;
-
-        function startAutoPlay() {
-            autoPlayTimer = setInterval(() => {
-                scrollCarousel('right');
-            }, 4000);
-        }
-
-        function stopAutoPlay() {
-            if (autoPlayTimer) clearInterval(autoPlayTimer);
-        }
-
-        const carouselElem = document.getElementById('carousel-container');
-        if (carouselElem) {
-            carouselElem.addEventListener('mouseenter', stopAutoPlay);
-            carouselElem.addEventListener('mouseleave', startAutoPlay);
-            carouselElem.addEventListener('touchstart', stopAutoPlay, { passive: true });
-            carouselElem.addEventListener('touchend', startAutoPlay, { passive: true });
-        }
-
-        startAutoPlay();
-
         function showSuccessMessage() {
             const successBox = document.getElementById('form-success');
             if (successBox) {
@@ -1015,27 +572,6 @@
                 }, 5000);
             }
         }
-    
-
-        // --- SOMENTE CELULAR: cards aparecem em sequência quando o carrossel chega na tela ---
-        (function () {
-            const isPhone = window.matchMedia('(max-width: 768px) and (pointer: coarse)').matches;
-            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const box = document.getElementById('carousel-container');
-            if (!isPhone || !box) return;
-
-            const root = document.documentElement;
-            root.classList.add('cards-anim');
-            if (reduced) { root.classList.add('cards-in'); return; }
-
-            new IntersectionObserver((entries, observer) => {
-                entries.forEach((e) => {
-                    if (!e.isIntersecting) return;
-                    root.classList.add('cards-in');
-                    observer.disconnect();
-                });
-            }, { threshold: 0.15 }).observe(box);
-        })();
 
         // --- HISTÓRIA NO CELULAR: o progresso da rolagem (0 a 1) define cada momento da cena ---
         (function () {
@@ -1211,10 +747,11 @@
 
         // --- CILINDRO DE VÍDEOS: a rolagem abre o celular, recua a câmera e gira o carrossel ---
         (function () {
-            const section = document.getElementById('video-ring');
+            const section = document.getElementById('portfolio');
             if (!section) return;
             const stage = section.querySelector('.ev-stage'), ring = section.querySelector('.ev-ring');
             const frame = section.querySelector('.ev-frame'), glow = section.querySelector('.ev-glow');
+            const title = section.querySelector('.ev-title');
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             // Ordem a partir do painel central. Trocar aqui para mudar o conteúdo do carrossel.
@@ -1275,7 +812,7 @@
                 const open = smooth(part(p, 0.12, 0.36));
                 const pull = smooth(part(p, 0.42, 0.86));
                 const turn = -300 * pull - spin * part(p, 0.6, 0.9);
-                ring.style.transform = 'translateZ(' + mix(radius, far, pull) + 'px) rotateX(' + (-26 * pull) + 'deg) rotateY(' + turn + 'deg)';
+                ring.style.transform = 'translateY(' + (-H * 0.07 * pull) + 'px) translateZ(' + mix(radius, far, pull) + 'px) rotateX(' + (-26 * pull) + 'deg) rotateY(' + turn + 'deg)';
 
                 panels.forEach(({ el, k, caption }) => {
                     const near = Math.abs(k) <= 3;
@@ -1287,6 +824,9 @@
                 panels[0].el.style.borderRadius = mix(40, 0, part(p, 0.12, 0.24)) + 'px';
                 frame.style.opacity = 1 - part(p, 0.12, 0.2);
                 glow.style.opacity = 1 - part(p, 0.3, 0.5);
+                const reveal = smooth(part(p, 0.72, 0.88));
+                title.style.opacity = reveal;
+                title.style.transform = 'translateY(' + (18 * (1 - reveal)) + 'px)';
             }
 
             function readScroll() {
