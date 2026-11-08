@@ -189,12 +189,7 @@
         .vf-kicker { margin-bottom: 18px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: #c2a895; }
         .vf-logo { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 8vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 16px; justify-content: flex-start; }
         .vf-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; max-width: 34rem; }
-        .vf-text { font-size: 1.05rem; line-height: 1.6; color: #e6d7ca; max-width: 30rem; margin-bottom: 30px; }
-        .vf-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-        .vf-btn { display: inline-block; padding: 15px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background-color 0.2s ease; }
-        .vf-btn:hover { background: #ffffff; }
-        .vf-btn-ghost { background: transparent; color: #f4ede6; box-shadow: inset 0 0 0 1px rgba(244, 237, 230, 0.5); }
-        .vf-btn-ghost:hover { background: rgba(244, 237, 230, 0.12); }
+        .vf-text { font-size: 1.05rem; line-height: 1.6; color: #e6d7ca; max-width: 30rem; }
         .vf-frame { position: relative; height: min(76vh, 640px); aspect-ratio: 9 / 16; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
         .vf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .vf-grid { position: absolute; inset: 0; pointer-events: none; background:
@@ -231,10 +226,8 @@
             .vf-copy { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 24px 44px; text-align: center; }
             .vf-logo { justify-content: center; font-size: 4rem; margin-bottom: 10px; }
             .vf-title { font-size: clamp(1.6rem, 6.4vw, 2.2rem); margin: 0 auto 10px; }
-            .vf-text { font-size: 0.95rem; margin: 0 auto 20px; }
-            .vf-actions { justify-content: center; }
-            .vf-btn-ghost { display: none; }
-        }
+            .vf-text { font-size: 0.95rem; margin: 0 auto; }
+                }
         @media (prefers-reduced-motion: reduce) { .vf-rec i { animation: none; } }
 
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
@@ -269,10 +262,6 @@
                     <p class="vf-logo exact-logo-lz" aria-hidden="true"><span class="letter-l">L</span><span class="letter-z">Z</span></p>
                     <h1 class="vf-title">Vídeos que fazem sua marca ser lembrada</h1>
                     <p class="vf-text">Roteiro, gravação e edição para redes sociais, eventos e marcas.</p>
-                    <div class="vf-actions">
-                        <button type="button" onclick="openContactModal()" class="vf-btn">Pedir orçamento</button>
-                        <a href="#portfolio" class="vf-btn vf-btn-ghost">Ver portfólio</a>
-                    </div>
                 </div>
                 <div class="vf-frame">
                     <video class="vf-video" autoplay muted loop playsinline preload="auto" poster="clips/hero.jpg">
