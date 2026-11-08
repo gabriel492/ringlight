@@ -209,6 +209,10 @@
         /* --- CONTATO: painel com a foto da Luiza e os três canais --- */
         .cm { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(20, 13, 10, 0.72); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0s linear 0.25s; }
         .cm.is-open { opacity: 1; visibility: visible; transition: opacity 0.25s ease; }
+        /* trava a página por trás sem mexer no overflow do html, que no celular quebrava os efeitos de rolagem */
+        .cm { touch-action: none; overscroll-behavior: contain; }
+        .cm-panel { touch-action: pan-y; }
+        .cm-body { overscroll-behavior: contain; }
         .cm-panel { position: relative; display: grid; grid-template-columns: 310px minmax(0, 1fr); width: min(780px, 100%); max-height: calc(100vh - 48px); overflow: hidden; border-radius: 8px; background: var(--lz-offwhite); color: var(--lz-escuro); box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5); transform: translateY(12px); transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1); }
         .cm.is-open .cm-panel { transform: none; }
         .cm-media { position: relative; min-height: 440px; overflow: hidden; }
@@ -591,7 +595,6 @@
             contactOpener = document.activeElement;
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
-            document.documentElement.style.overflow = 'hidden';
             setTimeout(() => modal.querySelector('.cm-close').focus(), 60);
         }
 
@@ -600,7 +603,6 @@
             if (!modal.classList.contains('is-open')) return;
             modal.classList.remove('is-open');
             modal.setAttribute('aria-hidden', 'true');
-            document.documentElement.style.overflow = '';
             if (contactOpener && contactOpener.focus) contactOpener.focus();
         }
 
@@ -775,7 +777,7 @@
                 else { reelVideo.pause(); filmVideo.pause(); }
             }).observe(section);
 
-            window.addEventListener('scroll', readScroll, { passive: true });
+            document.addEventListener('scroll', readScroll, { passive: true, capture: true });
             readScroll();
         })();
 
@@ -810,7 +812,7 @@
                 requestAnimationFrame(update);
             }
 
-            window.addEventListener('scroll', schedule, { passive: true });
+            document.addEventListener('scroll', schedule, { passive: true, capture: true });
             window.addEventListener('resize', schedule);
             window.addEventListener('load', schedule);
             window.addEventListener('lz:navcheck', schedule);
@@ -953,7 +955,7 @@
                 }
             }).observe(section);
 
-            window.addEventListener('scroll', readScroll, { passive: true });
+            document.addEventListener('scroll', readScroll, { passive: true, capture: true });
             readScroll();
             render(target);
         })();
