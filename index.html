@@ -250,6 +250,7 @@
         .ab-paint { position: absolute; display: flex; pointer-events: none; }
         .ab-paint span { flex: 1; }
         .ab-paint svg { display: block; flex: none; height: 100%; }
+        .ab-paint span + svg, .ab-paint svg + span { margin-left: -1px; }
         .ab-paint-left { left: -100vw; }
         .ab-paint-right { right: -100vw; }
         .ab-paint-big { top: -12%; bottom: -13%; z-index: 0; }
@@ -433,7 +434,7 @@
                 <div class="ab-media">
                     <div class="ab-paint ab-paint-big ab-paint-left" aria-hidden="true"><span></span><svg viewBox="0 0 200 1000" preserveAspectRatio="none"><path d="M0,0 H60 C150,50 175,190 150,380 C130,530 55,610 72,730 C86,830 70,930 40,1000 H0 Z"/></svg></div>
                     <svg class="ab-blob" viewBox="0 0 200 160" aria-hidden="true"><path d="M30,160 C0,120 10,40 80,14 C150,-10 210,40 196,100 C188,140 150,160 120,160 Z"/></svg>
-                    <div class="ab-paint ab-tongue ab-paint-left" aria-hidden="true"><span></span><svg viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,8 C40,6 70,10 92,22 C124,40 122,78 88,86 C60,92 30,94 0,95 Z"/></svg></div>
+                    <div class="ab-paint ab-tongue ab-paint-left" aria-hidden="true"><span></span><svg viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 C40,0 70,4 92,16 C124,34 124,80 88,92 C60,100 30,100 0,100 Z"/></svg></div>
                     <figure class="ab-frame">
                         <img src="luiza.jpeg" alt="Luiza, criadora da LZ Audiovisual" loading="lazy">
                         <figcaption class="ab-caption"><span>Oi, eu sou a Luiza.</span></figcaption>
@@ -449,7 +450,7 @@
             <div class="ab-row ab-row-flip" id="about-lz">
                 <div class="ab-media">
                     <div class="ab-paint ab-paint-big ab-paint-right" aria-hidden="true"><svg viewBox="0 0 200 1000" preserveAspectRatio="none"><path d="M200,0 H140 C60,40 40,170 70,330 C100,480 30,560 20,690 C10,820 60,920 90,1000 H200 Z"/></svg><span></span></div>
-                    <div class="ab-paint ab-tongue ab-paint-right" aria-hidden="true"><svg viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><path d="M120,8 C80,6 50,10 28,22 C-4,40 -2,78 32,86 C60,92 90,94 120,95 Z"/></svg><span></span></div>
+                    <div class="ab-paint ab-tongue ab-paint-right" aria-hidden="true"><svg viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><path d="M120,0 C80,0 50,4 28,16 C-4,34 -4,80 32,92 C60,100 90,100 120,100 Z"/></svg><span></span></div>
                     <figure class="ab-frame">
                         <img src="lz.jpg" alt="Luiza nos bastidores da LZ Audiovisual" loading="lazy">
                         <figcaption class="ab-caption"><span>Luz, movimento e uma estética que não envelhece.</span></figcaption>
