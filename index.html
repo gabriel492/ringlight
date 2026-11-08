@@ -124,8 +124,8 @@
         .ps-notes { display: none; }
         .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
         .ps-end h3 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3.4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
-        .ps-end p { max-width: 34rem; margin: 0 auto 18px; font-size: 0.95rem; line-height: 1.55; color: #d4c0b0; }
-        .ps-end button { padding: 13px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
+        .ps-end p { max-width: 34rem; margin: 0 auto 18px; font-size: 0.95rem; line-height: 1.55; color: #fbe9df; }
+        .ps-end button { padding: 13px 30px; border-radius: 999px; background: #f4ede6; color: #B9502D; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
         .ps-end.is-on { pointer-events: auto; }
         .ps-end.ps-end-side { right: auto; width: min(420px, 34vw); padding: 0; text-align: left; }
         .ps-end.ps-end-side h3 { font-size: clamp(2rem, 3vw, 2.8rem); }
@@ -332,6 +332,15 @@
             .ft-hours { grid-column: 1 / -1; order: 3; }
         }
 
+        /* --- FINAL DO "IMPACTO": o fundo vira terracota com as formas da parede --- */
+        .ps-warm { position: absolute; inset: 0; background: #B9502D; opacity: 0; pointer-events: none; will-change: opacity; }
+        .ps-blob { position: absolute; left: 0; top: 0; fill: #C9603A; will-change: transform; }
+        .ps-tongue { position: absolute; left: 0; display: flex; }
+        .ps-tongue span { flex: 1; background: #5B3128; }
+        .ps-tongue svg { flex: none; height: 100%; width: clamp(60px, 7vw, 110px); margin-left: -1px; fill: #5B3128; }
+        #navbar .exact-logo-lz span { transition: color 0.3s ease; }
+        #navbar.nav-on-warm .exact-logo-lz span { color: #F4F1EA; }
+
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
@@ -394,6 +403,10 @@
                         <div class="ps-note"><span>01</span><strong>Chama atenção</strong><p>Um vídeo com estética de cinema faz a sua marca ser notada.</p></div>
                         <div class="ps-note"><span>02</span><strong>Mostra quem você é</strong><p>A identidade visual acompanha cada ponto de contato.</p></div>
                         <div class="ps-note"><span>03</span><strong>Abre a conversa</strong><p>Quem se conecta com a sua história quer saber mais.</p></div>
+                    </div>
+                    <div class="ps-warm" aria-hidden="true">
+                        <svg class="ps-blob" viewBox="0 0 520 680" preserveAspectRatio="none"><path d="M60,0 H420 C500,60 520,200 470,330 C430,440 470,560 430,680 H40 C80,560 20,450 30,320 C40,190 0,80 60,0 Z"/></svg>
+                        <div class="ps-tongue"><span></span><svg viewBox="0 0 120 100" preserveAspectRatio="none"><path d="M0,0 C40,0 70,4 92,16 C124,34 124,80 88,92 C60,100 30,100 0,100 Z"/></svg></div>
                     </div>
                     <div class="ps-phone" aria-hidden="true">
                         <div class="ps-island"></div>
@@ -609,6 +622,7 @@
             const scroller = $('.ps-page-scroll'), reelCta = $('[data-ps="reel-cta"]'), pageCta = $('[data-ps="page-cta"]');
             const bubbles = [...section.querySelectorAll('.ps-bubble')], notes = [...section.querySelectorAll('.ps-note')];
             const reelVideo = $('.ps-reel video'), filmVideo = $('.ps-film video');
+            const warm = $('.ps-warm'), blob = $('.ps-blob'), tongue = $('.ps-tongue');
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             const PHONE_W = 390, PHONE_H = 844, SCREEN_W = 366, SCREEN_H = 820, HEADER = 88;
@@ -638,6 +652,15 @@
                     end.style.top = (HEADER + PHONE_H * endScale + 18) + 'px';
                 }
                 scrollMax = Math.max(0, scroller.offsetHeight - (SCREEN_H - 96));
+                // formas da parede posicionadas em volta do celular parado no final
+                const pw = PHONE_W * endScale, ph = PHONE_H * endScale, cx = W / 2 + endX, cy = H / 2 + endY;
+                blob.style.width = pw * 1.9 + 'px';
+                blob.style.height = (wide ? H : ph * 1.35) + 'px';
+                blob.style.left = cx - pw * 0.95 + 'px';
+                blob.style.top = (wide ? 0 : cy - ph * 0.675) + 'px';
+                tongue.style.width = cx + pw * 0.62 + 'px';
+                tongue.style.height = Math.max(40, ph * 0.11) + 'px';
+                tongue.style.top = cy + ph / 2 - ph * 0.14 + 'px';
             }
 
             function pressAt(el, p, a, b) {
@@ -677,6 +700,16 @@
                     notes[i].style.opacity = t;
                     notes[i].style.transform = 'translateY(calc(-50% + ' + (20 * (1 - t)) + 'px))';
                 });
+
+                const heat = smooth(part(p, 0.74, 0.86));
+                warm.style.opacity = heat;
+                blob.style.transform = 'scale(' + mix(0.9, 1, heat) + ')';
+                tongue.style.transform = 'translateX(' + (-100 * (1 - smooth(part(p, 0.8, 0.9)))) + '%)';
+                const isWarm = heat > 0.5;
+                if (section.dataset.warm !== String(isWarm)) {
+                    section.dataset.warm = String(isWarm);
+                    window.dispatchEvent(new Event('lz:navcheck'));
+                }
 
                 const finish = smooth(part(p, 0.87, 0.95));
                 end.style.opacity = finish;
@@ -765,8 +798,10 @@
                     .find((el) => !navbar.contains(el));
                 if (!under) return;
                 const block = under.closest('section, footer, .zoom-hero-wrapper') || under;
-                const [r, g, b] = sectionColor(block);
+                const [r, g, b] = block.dataset.warm === 'true' ? [185, 80, 45] : sectionColor(block);
                 navbar.classList.toggle('nav-on-light', 0.299 * r + 0.587 * g + 0.114 * b > 150);
+                // sobre terracota a logo terracota sumiria, então ela fica off-white
+                navbar.classList.toggle('nav-on-warm', r > 150 && g < 120 && b < 90);
             }
 
             function schedule() {
@@ -778,6 +813,7 @@
             window.addEventListener('scroll', schedule, { passive: true });
             window.addEventListener('resize', schedule);
             window.addEventListener('load', schedule);
+            window.addEventListener('lz:navcheck', schedule);
             schedule();
         })();
 
