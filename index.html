@@ -260,6 +260,29 @@
         }
         @media (prefers-reduced-motion: reduce) { .cm, .cm-panel { transition: none; } }
 
+        /* --- SOBRE: duas fotos verticais com legenda no estilo dos reels --- */
+        .ab { position: relative; z-index: 20; background: #1e1410; color: #f4ede6; padding: clamp(72px, 11vw, 140px) 24px; }
+        .ab-row { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); align-items: center; gap: clamp(40px, 8vw, 112px); }
+        .ab-row + .ab-row { margin-top: clamp(88px, 12vw, 160px); }
+        .ab-row-flip { grid-template-columns: minmax(0, 1fr) minmax(0, 360px); }
+        .ab-row-flip .ab-frame { order: 2; }
+        .ab-frame { position: relative; margin: 0; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: #140d0a; box-shadow: 0 0 0 1px rgba(244, 237, 230, 0.12), 0 30px 70px rgba(0, 0, 0, 0.45); }
+        .ab-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+        .ab-caption { position: absolute; left: 20px; right: 20px; bottom: 13%; text-align: center; font-size: 1.05rem; font-weight: 700; line-height: 1.7; }
+        .ab-caption span { padding: 3px 10px; border-radius: 6px; background: rgba(20, 13, 10, 0.82); color: #ffffff; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+        .ab-text { max-width: 34rem; }
+        .ab-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 24px; }
+        .ab-text p { font-size: 1.0625rem; line-height: 1.7; color: #d4c0b0; }
+        .ab-text p + p { margin-top: 16px; }
+        .ab-btn { margin-top: 32px; padding: 14px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background-color 0.2s ease; }
+        .ab-btn:hover { background: #ffffff; }
+        .ab-btn:focus-visible { outline: 2px solid #e0825d; outline-offset: 4px; }
+        @media (max-width: 767px) {
+            .ab-row, .ab-row-flip { grid-template-columns: 1fr; gap: 32px; }
+            .ab-row-flip .ab-frame { order: 0; }
+            .ab-frame { width: min(100%, 320px); margin: 0 auto; }
+        }
+
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
@@ -380,72 +403,29 @@
             </section>
         </div>
 
-        <section id="about-me" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row items-center overflow-hidden border-t border-brown-800">
-            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
-                <img src="luiza.jpeg" alt="Luiza — LZ Audiovisual" class="w-full h-full object-cover object-center">
-                <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-r from-transparent to-brown-950 pointer-events-none"></div>
-                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
-            </div>
-
-            <div class="w-full md:w-1/2 min-w-0 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-10 lg:px-16 xl:px-24 py-16 bg-brown-950 relative z-10">
-                <div class="space-y-6 max-w-xl min-w-0">
-                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
-                        Sobre Mim
-                    </span>
-                    <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
-                        Sensibilidade &amp; Direção Cinematográfica
-                    </h2>
-                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
-                        Sou a mente criativa por trás da LZ Audiovisual. Minha paixão é transformar momentos autênticos e histórias únicas em produções visuais memoráveis de padrão editorial.
-                    </p>
-                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
-                        Com olhar atento aos detalhes, iluminação e composição narrativa, meu objetivo é registrar a essência de cada projeto com elegância, sofisticação e alma.
-                    </p>
-                    <div class="pt-4">
-                        <a href="#portfolio" class="inline-block px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
-                            Conheça Nosso Trabalho
-                        </a>
-                    </div>
+        <section id="about-me" class="ab">
+            <div class="ab-row">
+                <figure class="ab-frame">
+                    <img src="luiza.jpeg" alt="Luiza, criadora da LZ Audiovisual" loading="lazy">
+                    <figcaption class="ab-caption"><span>Oi, eu sou a Luiza.</span></figcaption>
+                </figure>
+                <div class="ab-text">
+                    <h2 class="ab-title">Quem está por trás da câmera</h2>
+                    <p>Sou a Luiza, a mente criativa da LZ Audiovisual. Transformo momentos reais e histórias únicas em vídeos e fotos com acabamento editorial.</p>
+                    <p>Presto atenção em cada detalhe: a luz, o enquadramento e o ritmo da edição. O objetivo é que o resultado tenha a cara de quem está na frente da câmera.</p>
                 </div>
             </div>
-        </section>
 
-        <section class="py-20 border-t border-b border-beige-200 text-center px-6 relative z-20" style="background-color: rgb(244, 237, 230);">
-            <div class="max-w-4xl mx-auto space-y-4">
-                <span class="text-brown-600 text-xs font-bold uppercase tracking-[0.3em]">Manifesto Visual</span>
-                <h3 class="font-display text-2xl md:text-4xl text-brown-950 font-bold leading-relaxed">
-                    "Capturar a alma de cada instante através da luz, do movimento e de uma estética atemporal."
-                </h3>
-                <div class="w-16 h-0.5 bg-brown-600/40 mx-auto mt-6"></div>
-            </div>
-        </section>
-
-        <section id="about-lz" class="relative z-20 w-full min-h-screen bg-brown-950 flex flex-col md:flex-row-reverse items-center overflow-hidden border-t border-brown-800">
-            <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden">
-                <img src="lz.jpg" alt="LZ Audiovisual Bastidores" class="w-full h-full object-cover object-center">
-                <div class="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-l from-transparent to-brown-950 pointer-events-none"></div>
-                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brown-950 to-transparent md:hidden pointer-events-none"></div>
-            </div>
-
-            <div class="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-16 bg-brown-950 relative z-10">
-                <div class="space-y-6 max-w-xl">
-                    <span class="text-beige-400 text-xs font-bold uppercase tracking-[0.25em] bg-brown-900 border border-brown-800 px-4 py-1.5 rounded-full inline-block">
-                        A Essência LZ
-                    </span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-wide text-beige-100 leading-tight">
-                        Inovação &amp; Identidade Visual Marcante
-                    </h2>
-                    <p class="text-beige-300 text-base md:text-lg leading-relaxed font-light">
-                        Na LZ Audiovisual, cada conceito é estruturado para transcender o comum. Unimos design autêntico, direção de arte e excelência técnica para destacar a sua marca no mercado.
-                    </p>
-                    <p class="text-beige-400 text-sm md:text-base leading-relaxed font-light">
-                        Do planejamento à entrega final, o nosso compromisso é construir narrativas visuais sólidas que geram conexão profunda e valor inestimável para os nossos clientes.
-                    </p>
-                    <div class="pt-4">
-                        <button onclick="openContactModal()" class="px-8 py-3.5 rounded-full bg-beige-100 text-brown-950 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg cursor-pointer">
-                            Iniciar Seu Projeto
-                        </button>
-                    </div>
+            <div class="ab-row ab-row-flip" id="about-lz">
+                <figure class="ab-frame">
+                    <img src="lz.jpg" alt="Luiza nos bastidores da LZ Audiovisual" loading="lazy">
+                    <figcaption class="ab-caption"><span>Luz, movimento e uma estética que não envelhece.</span></figcaption>
+                </figure>
+                <div class="ab-text">
+                    <h2 class="ab-title">O jeito LZ de contar histórias</h2>
+                    <p>Cada projeto começa com uma conversa para entender a sua marca. Depois vêm o planejamento, a gravação e a edição, acompanhados de perto até a entrega.</p>
+                    <p>Direção de arte e cuidado técnico em cada etapa, para que a sua marca seja vista do jeito certo.</p>
+                    <button type="button" class="ab-btn" onclick="openContactModal()">Iniciar seu projeto</button>
                 </div>
             </div>
         </section>
