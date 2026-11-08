@@ -86,30 +86,6 @@
         }
 
 
-        .custom-input {
-            width: 100%;
-            background-color: #eadfd3;
-            color: #140d0a;
-            padding: 1.25rem 1.5rem;
-            border: none;
-            border-bottom: 2px solid #140d0a;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .custom-input::placeholder {
-            color: #8a7566;
-            font-weight: 300;
-        }
-
-        .custom-input:focus {
-            border-bottom-color: #5c4336;
-            background-color: #e2d4c5;
-        }
-
-
-
         /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
         .ps { position: relative; height: 520vh; height: 520svh; background: #140d0a; color: #f4ede6; }
         .ps-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); }
@@ -283,6 +259,27 @@
             .ab-frame { width: min(100%, 320px); margin: 0 auto; }
         }
 
+        /* --- CONTATO FINAL: formulário que abre o e-mail com a mensagem pronta --- */
+        .ct { position: relative; z-index: 20; background: #1e1410; color: #f4ede6; padding: clamp(72px, 10vw, 128px) 24px clamp(88px, 11vw, 144px); border-top: 1px solid rgba(244, 237, 230, 0.08); }
+        .ct-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(40px, 8vw, 112px); align-items: start; }
+        .ct-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+        .ct-intro p { font-size: 1.0625rem; line-height: 1.7; color: #d4c0b0; max-width: 26rem; }
+        .ct-intro .ct-alt { margin-top: 24px; font-size: 0.95rem; color: #c2a895; }
+        .ct-link { padding: 0; background: none; border: 0; color: #f4ede6; font: inherit; text-decoration: underline; text-decoration-color: rgba(244, 237, 230, 0.4); text-underline-offset: 4px; cursor: pointer; transition: text-decoration-color 0.2s ease; }
+        .ct-link:hover { text-decoration-color: #f4ede6; }
+        .ct-field + .ct-field { margin-top: 28px; }
+        .ct-field label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 600; color: #e6d7ca; }
+        .ct-field input, .ct-field textarea { display: block; width: 100%; padding: 10px 0 12px; background: transparent; border: 0; border-bottom: 1px solid rgba(244, 237, 230, 0.28); border-radius: 0; color: #f4ede6; font: inherit; font-size: 1.0625rem; resize: vertical; transition: border-color 0.2s ease; }
+        .ct-field input::placeholder, .ct-field textarea::placeholder { color: rgba(194, 168, 149, 0.6); }
+        .ct-field input:hover, .ct-field textarea:hover { border-bottom-color: rgba(244, 237, 230, 0.5); }
+        .ct-field input:focus, .ct-field textarea:focus { outline: none; border-bottom-color: #e0825d; box-shadow: 0 1px 0 0 #e0825d; }
+        .ct-field [aria-invalid="true"] { border-bottom-color: #f08a6a; }
+        .ct-error { margin-top: 6px; font-size: 0.85rem; color: #f08a6a; }
+        .ct-actions { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+        .ct-status { font-size: 0.9rem; line-height: 1.5; color: #d4c0b0; margin-top: 32px; }
+        .ct-link:focus-visible { outline: 2px solid #e0825d; outline-offset: 3px; border-radius: 2px; }
+        @media (max-width: 767px) { .ct-inner { grid-template-columns: 1fr; } }
+
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
@@ -430,48 +427,37 @@
             </div>
         </section>
 
-        <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
-            <section id="contact-section" class="py-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
-                    
-                    <div class="space-y-6 md:pr-6">
-                        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-brown-950 leading-tight">
-                            Quer saber mais sobre nossos serviços ou precisa de um orçamento personalizado?
-                        </h2>
-                        <p class="text-brown-600 text-base md:text-lg font-light leading-relaxed">
-                            Envie-nos uma mensagem agora mesmo! Ficaremos felizes em lhe atender e transformar suas ideias em realidade.
-                        </p>
-                    </div>
-
-                    <form class="space-y-6" onsubmit="event.preventDefault(); showSuccessMessage(); this.reset();">
-                        <div>
-                            <input type="text" placeholder="Qual o seu nome?" required class="custom-input">
-                        </div>
-
-                        <div>
-                            <input type="email" placeholder="Digite o seu email" required class="custom-input">
-                        </div>
-
-                        <div>
-                            <textarea rows="4" placeholder="Digite a sua mensagem e responderemos em breve, ok? :-)" required class="custom-input resize-none"></textarea>
-                        </div>
-
-                        <div class="flex justify-end pt-2">
-                            <button type="submit" class="px-10 py-3 rounded-full bg-brown-950 text-beige-100 font-bold text-xs tracking-widest uppercase hover:bg-brown-800 transition-all shadow-lg cursor-pointer">
-                                Enviar
-                            </button>
-                        </div>
-
-                        <div id="form-success" class="hidden mt-4 p-4 bg-emerald-100 border border-emerald-600 text-emerald-900 rounded-xl text-center text-xs font-semibold">
-                            Mensagem enviada com sucesso! Entraremos em contato em breve.
-                        </div>
-                    </form>
-
+        <section id="contact-section" class="ct">
+            <div class="ct-inner">
+                <div class="ct-intro">
+                    <h2 class="ct-title">Conte a sua ideia</h2>
+                    <p>Escreva o que você quer gravar e a Luiza responde com um orçamento.</p>
+                    <p class="ct-alt">Prefere conversar? <button type="button" class="ct-link" onclick="openContactModal()">Fale pelo WhatsApp ou Instagram</button>.</p>
                 </div>
-            </section>
-            <!-- degradê bem suave: bege se dissolvendo aos poucos no rodapé -->
-            <div aria-hidden="true" class="h-14 md:h-16 pointer-events-none" style="background: linear-gradient(to bottom, rgb(244,237,230) 0.0%, rgb(243,236,229) 8.3%, rgb(236,229,222) 16.7%, rgb(221,214,207) 25.0%, rgb(197,190,184) 33.3%, rgb(166,159,154) 41.7%, rgb(132,125,120) 50.0%, rgb(98,91,86) 58.3%, rgb(67,60,56) 66.7%, rgb(43,36,33) 75.0%, rgb(28,21,18) 83.3%, rgb(21,14,11) 91.7%, rgb(20,13,10) 100.0%);"></div>
-        </div>
+
+                <form class="ct-form" id="contact-form" novalidate>
+                    <div class="ct-field">
+                        <label for="ct-name">Seu nome</label>
+                        <input id="ct-name" name="nome" type="text" autocomplete="name" required placeholder="Ex.: Ana Souza…">
+                        <p class="ct-error" id="ct-name-error" hidden>Digite o seu nome.</p>
+                    </div>
+                    <div class="ct-field">
+                        <label for="ct-email">E-mail</label>
+                        <input id="ct-email" name="email" type="email" autocomplete="email" spellcheck="false" required placeholder="voce@email.com">
+                        <p class="ct-error" id="ct-email-error" hidden>Digite um e-mail válido, como voce@email.com.</p>
+                    </div>
+                    <div class="ct-field">
+                        <label for="ct-message">O que você quer gravar?</label>
+                        <textarea id="ct-message" name="mensagem" rows="4" required placeholder="Ex.: um vídeo para o lançamento da minha loja…"></textarea>
+                        <p class="ct-error" id="ct-message-error" hidden>Conte um pouco sobre o projeto.</p>
+                    </div>
+                    <div class="ct-actions">
+                        <button type="submit" class="ab-btn">Enviar mensagem</button>
+                        <p class="ct-status" id="ct-status" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 relative z-25">
@@ -576,16 +562,6 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeContactModal();
         });
-
-        function showSuccessMessage() {
-            const successBox = document.getElementById('form-success');
-            if (successBox) {
-                successBox.classList.remove('hidden');
-                setTimeout(() => {
-                    successBox.classList.add('hidden');
-                }, 5000);
-            }
-        }
 
         // --- HISTÓRIA NO CELULAR: o progresso da rolagem (0 a 1) define cada momento da cena ---
         (function () {
@@ -921,6 +897,43 @@
                 const seconds = Math.floor(frames / 30);
                 time.textContent = pad(Math.floor(seconds / 3600)) + ':' + pad(Math.floor(seconds / 60) % 60) + ':' + pad(seconds % 60) + ':' + pad(frames % 30);
             }, 1000 / 30);
+        })();
+
+        // --- CONTATO FINAL: valida os campos e abre o e-mail com a mensagem pronta ---
+        (function () {
+            const form = document.getElementById('contact-form');
+            if (!form) return;
+            const status = document.getElementById('ct-status');
+            const fields = [
+                { el: form.querySelector('#ct-name'), ok: (v) => v.trim().length > 0 },
+                { el: form.querySelector('#ct-email'), ok: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+                { el: form.querySelector('#ct-message'), ok: (v) => v.trim().length > 0 }
+            ];
+
+            function check(field) {
+                const valid = field.ok(field.el.value);
+                const error = document.getElementById(field.el.id + '-error');
+                field.el.setAttribute('aria-invalid', valid ? 'false' : 'true');
+                if (valid) field.el.removeAttribute('aria-describedby');
+                else field.el.setAttribute('aria-describedby', error.id);
+                error.hidden = valid;
+                return valid;
+            }
+
+            fields.forEach((field) => field.el.addEventListener('blur', () => {
+                if (field.el.getAttribute('aria-invalid') !== null || field.el.value) check(field);
+            }));
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const invalid = fields.filter((field) => !check(field));
+                if (invalid.length) { invalid[0].el.focus(); status.textContent = ''; return; }
+                const [name, email, message] = fields.map((field) => field.el.value.trim());
+                const subject = 'Orçamento pelo site — ' + name;
+                const body = message + '\n\n' + name + '\n' + email;
+                window.location.href = 'mailto:contato@lzaudiovisual.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                status.textContent = 'Abrimos o seu app de e-mail com a mensagem pronta. Confira e toque em enviar.';
+            });
         })();
     </script>
 </body>
