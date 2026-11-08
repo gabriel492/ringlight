@@ -2,17 +2,9 @@
 <html lang="pt-BR" class="dark scroll-smooth" style="cursor: auto !important;">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#140d0a">
-    <script>
-        // modo de teste: ?sem=portfolio, ?sem=impacto ou ?sem=portfolio,impacto esconde esses efeitos para achar o que trava a barra do Safari
-        (function () {
-            const sem = (new URLSearchParams(location.search).get('sem') || '').split(',');
-            const ids = { portfolio: '#portfolio', impacto: '#phone-story' };
-            const css = sem.map((k) => ids[k]).filter(Boolean).map((sel) => sel + '{display:none!important}').join('');
-            if (css) document.write('<style>' + css + '</style>');
-        })();
-    </script>
+    <style>html, body { background-color: #140d0a; }</style>
     <title>LZ — Audiovisual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -358,7 +350,7 @@
         #navbar .exact-logo-lz span { transition: color 0.3s ease; }
         #navbar.nav-on-warm .exact-logo-lz span { color: #F4F1EA; }
 
-        /* o site ocupa a tela inteira no iPhone, por baixo das barras; o conteúdo respeita as áreas seguras */
+        /* áreas seguras do iPhone (só têm efeito se o site for ocupar a tela inteira) */
         #navbar { padding-top: calc(1.5rem + env(safe-area-inset-top)); }
         .ft { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
         @media (max-width: 1023px) {
@@ -809,7 +801,6 @@
         // --- MENU TRANSPARENTE: usa texto escuro quando passa sobre uma seção clara ---
         (function () {
             const navbar = document.getElementById('navbar');
-            const themeMeta = document.querySelector('meta[name="theme-color"]');
             let waiting = false;
 
             function sectionColor(node) {
@@ -829,8 +820,6 @@
                 return block.dataset.warm === 'true' ? [185, 80, 45] : sectionColor(block);
             }
 
-            const css = (rgb) => 'rgb(' + rgb.map(Math.round).join(',') + ')';
-
             function update() {
                 waiting = false;
                 const top = colorAt(navbar.offsetHeight / 2);
@@ -839,12 +828,6 @@
                 navbar.classList.toggle('nav-on-light', 0.299 * r + 0.587 * g + 0.114 * b > 150);
                 // sobre terracota a logo terracota sumiria, então ela fica off-white
                 navbar.classList.toggle('nav-on-warm', r > 150 && g < 120 && b < 90);
-                const topColor = css(top);
-                if (themeMeta.content !== topColor) {
-                    themeMeta.content = topColor;
-                    document.documentElement.style.backgroundColor = topColor;
-                    document.body.style.backgroundColor = topColor;
-                }
             }
 
             function schedule() {
