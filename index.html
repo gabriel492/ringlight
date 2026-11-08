@@ -236,48 +236,75 @@
         }
         @media (prefers-reduced-motion: reduce) { .cm, .cm-panel { transition: none; } }
 
-        /* --- SOBRE: duas fotos verticais com legenda no estilo dos reels --- */
-        .ab { position: relative; z-index: 20; background: #1e1410; color: #f4ede6; padding: clamp(72px, 11vw, 140px) 24px; }
-        .ab-row { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); align-items: center; gap: clamp(40px, 8vw, 112px); }
-        .ab-row + .ab-row { margin-top: clamp(88px, 12vw, 160px); }
+        /* --- PALETA DA PAREDE DO ESTÚDIO --- */
+        :root { --lz-terracota: #C4562F; --lz-terracota-fundo: #B9502D; --lz-areia: #EDE3C3; --lz-marrom: #5B3128; --lz-offwhite: #F4F1EA; --lz-escuro: #140d0a; }
+
+        /* --- SOBRE: fotos verticais sobre as formas da parede do estúdio --- */
+        .ab { position: relative; z-index: 20; overflow: hidden; background: var(--lz-offwhite); color: var(--lz-escuro); padding: clamp(140px, 16vw, 220px) 24px clamp(150px, 16vw, 230px); }
+        .ab-curve { position: absolute; top: 0; left: 0; width: 100%; height: clamp(56px, 9vw, 120px); fill: #0e0908; }
+        .ab-row { position: relative; max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); align-items: center; gap: clamp(40px, 8vw, 112px); }
+        .ab-row + .ab-row { margin-top: clamp(120px, 14vw, 190px); }
         .ab-row-flip { grid-template-columns: minmax(0, 1fr) minmax(0, 360px); }
-        .ab-row-flip .ab-frame { order: 2; }
-        .ab-frame { position: relative; margin: 0; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: #140d0a; box-shadow: 0 0 0 1px rgba(244, 237, 230, 0.12), 0 30px 70px rgba(0, 0, 0, 0.45); }
+        .ab-row-flip .ab-media { order: 2; }
+        .ab-media { position: relative; }
+        .ab-paint { position: absolute; display: flex; pointer-events: none; }
+        .ab-paint span { flex: 1; }
+        .ab-paint svg { display: block; flex: none; height: 100%; }
+        .ab-paint-left { left: -100vw; }
+        .ab-paint-right { right: -100vw; }
+        .ab-paint-big { top: -12%; bottom: -13%; z-index: 0; }
+        .ab-paint-big svg { width: clamp(90px, 12vw, 170px); }
+        .ab-row:not(.ab-row-flip) .ab-paint-big { right: -14%; }
+        .ab-row:not(.ab-row-flip) .ab-paint-big span { background: var(--lz-terracota); }
+        .ab-row:not(.ab-row-flip) .ab-paint-big svg { fill: var(--lz-terracota); }
+        .ab-row-flip .ab-paint-big { left: -18%; }
+        .ab-row-flip .ab-paint-big span { background: var(--lz-areia); }
+        .ab-row-flip .ab-paint-big svg { fill: var(--lz-areia); }
+        .ab-blob { position: absolute; z-index: 0; top: -4%; right: -24%; width: 46%; fill: var(--lz-areia); }
+        .ab-tongue { z-index: 1; bottom: -7%; height: clamp(48px, 6vw, 84px); }
+        .ab-tongue span { background: var(--lz-marrom); }
+        .ab-tongue svg { width: clamp(70px, 8vw, 120px); fill: var(--lz-marrom); }
+        .ab-row:not(.ab-row-flip) .ab-tongue { right: -16%; }
+        .ab-row-flip .ab-tongue { left: -16%; }
+        .ab-frame { position: relative; z-index: 2; margin: 0; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: var(--lz-escuro); box-shadow: 0 30px 60px rgba(91, 49, 40, 0.35); }
         .ab-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
         .ab-caption { position: absolute; left: 20px; right: 20px; bottom: 13%; text-align: center; font-size: 1.05rem; font-weight: 700; line-height: 1.7; }
-        .ab-caption span { padding: 3px 10px; border-radius: 6px; background: rgba(20, 13, 10, 0.82); color: #ffffff; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-        .ab-text { max-width: 34rem; }
+        .ab-caption span { padding: 3px 10px; border-radius: 6px; background: var(--lz-marrom); color: #ffffff; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+        .ab-text { position: relative; z-index: 2; max-width: 34rem; }
         .ab-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 24px; }
-        .ab-text p { font-size: 1.0625rem; line-height: 1.7; color: #d4c0b0; }
+        .ab-text p { font-size: 1.0625rem; line-height: 1.7; color: var(--lz-marrom); }
         .ab-text p + p { margin-top: 16px; }
-        .ab-btn { margin-top: 32px; padding: 14px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background-color 0.2s ease; }
-        .ab-btn:hover { background: #ffffff; }
-        .ab-btn:focus-visible { outline: 2px solid #e0825d; outline-offset: 4px; }
+        .ab-btn { margin-top: 32px; padding: 14px 30px; border-radius: 999px; background: var(--lz-marrom); color: var(--lz-offwhite); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background-color 0.2s ease; }
+        .ab-btn:hover { background: #47251d; }
+        .ab-btn:focus-visible { outline: 2px solid var(--lz-marrom); outline-offset: 4px; }
         @media (max-width: 767px) {
-            .ab-row, .ab-row-flip { grid-template-columns: 1fr; gap: 32px; }
-            .ab-row-flip .ab-frame { order: 0; }
-            .ab-frame { width: min(100%, 320px); margin: 0 auto; }
+            .ab-row, .ab-row-flip { grid-template-columns: 1fr; gap: 56px; }
+            .ab-row-flip .ab-media { order: 0; }
+            .ab-media { width: min(76%, 300px); margin: 0 auto; }
         }
 
-        /* --- CONTATO FINAL: formulário que abre o e-mail com a mensagem pronta --- */
-        .ct { position: relative; z-index: 20; background: #1e1410; color: #f4ede6; padding: clamp(72px, 10vw, 128px) 24px clamp(88px, 11vw, 144px); border-top: 1px solid rgba(244, 237, 230, 0.08); }
+        /* --- CONTATO FINAL: seção terracota, formulário que abre o e-mail com a mensagem pronta --- */
+        .ct { position: relative; z-index: 21; background: var(--lz-terracota-fundo); color: var(--lz-offwhite); padding: clamp(48px, 7vw, 96px) 24px clamp(88px, 11vw, 144px); }
+        .ct-curve { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: clamp(50px, 8vw, 110px); fill: var(--lz-terracota-fundo); }
         .ct-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(40px, 8vw, 112px); align-items: start; }
         .ct-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
-        .ct-intro p { font-size: 1.0625rem; line-height: 1.7; color: #d4c0b0; max-width: 26rem; }
-        .ct-intro .ct-alt { margin-top: 24px; font-size: 0.95rem; color: #c2a895; }
-        .ct-link { padding: 0; background: none; border: 0; color: #f4ede6; font: inherit; text-decoration: underline; text-decoration-color: rgba(244, 237, 230, 0.4); text-underline-offset: 4px; cursor: pointer; transition: text-decoration-color 0.2s ease; }
-        .ct-link:hover { text-decoration-color: #f4ede6; }
+        .ct-intro p { font-size: 1.0625rem; line-height: 1.7; color: var(--lz-offwhite); max-width: 26rem; }
+        .ct-intro .ct-alt { margin-top: 24px; font-size: 0.95rem; }
+        .ct-link { padding: 0; background: none; border: 0; color: #ffffff; font: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.55); text-underline-offset: 4px; cursor: pointer; transition: text-decoration-color 0.2s ease; }
+        .ct-link:hover { text-decoration-color: #ffffff; }
         .ct-field + .ct-field { margin-top: 28px; }
-        .ct-field label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 600; color: #e6d7ca; }
-        .ct-field input, .ct-field textarea { display: block; width: 100%; padding: 10px 0 12px; background: transparent; border: 0; border-bottom: 1px solid rgba(244, 237, 230, 0.28); border-radius: 0; color: #f4ede6; font: inherit; font-size: 1.0625rem; resize: vertical; transition: border-color 0.2s ease; }
-        .ct-field input::placeholder, .ct-field textarea::placeholder { color: rgba(194, 168, 149, 0.6); }
-        .ct-field input:hover, .ct-field textarea:hover { border-bottom-color: rgba(244, 237, 230, 0.5); }
-        .ct-field input:focus, .ct-field textarea:focus { outline: none; border-bottom-color: #e0825d; box-shadow: 0 1px 0 0 #e0825d; }
-        .ct-field [aria-invalid="true"] { border-bottom-color: #f08a6a; }
-        .ct-error { margin-top: 6px; font-size: 0.85rem; color: #f08a6a; }
+        .ct-field label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 600; color: #ffffff; }
+        .ct-field input, .ct-field textarea { display: block; width: 100%; padding: 10px 0 12px; background: transparent; border: 0; border-bottom: 1.5px solid rgba(244, 241, 234, 0.6); border-radius: 0; color: #ffffff; font: inherit; font-size: 1.0625rem; resize: vertical; transition: border-color 0.2s ease; }
+        .ct-field input::placeholder, .ct-field textarea::placeholder { color: rgba(244, 241, 234, 0.72); }
+        .ct-field input:hover, .ct-field textarea:hover { border-bottom-color: var(--lz-offwhite); }
+        .ct-field input:focus, .ct-field textarea:focus { outline: none; border-bottom-color: #ffffff; box-shadow: 0 1.5px 0 0 #ffffff; }
+        .ct-field [aria-invalid="true"] { border-bottom-color: #3b1a12; }
+        .ct-error { margin-top: 8px; font-size: 0.875rem; font-weight: 600; color: #3b1a12; }
         .ct-actions { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
-        .ct-status { font-size: 0.9rem; line-height: 1.5; color: #d4c0b0; margin-top: 32px; }
-        .ct-link:focus-visible { outline: 2px solid #e0825d; outline-offset: 3px; border-radius: 2px; }
+        .ct .ab-btn { background: var(--lz-offwhite); color: var(--lz-terracota-fundo); }
+        .ct .ab-btn:hover { background: #ffffff; }
+        .ct .ab-btn:focus-visible, .ct-link:focus-visible { outline: 2px solid #ffffff; outline-offset: 4px; border-radius: 2px; }
+        .ct-status { font-size: 0.9rem; line-height: 1.5; color: var(--lz-offwhite); margin-top: 32px; }
         @media (max-width: 767px) { .ct-inner { grid-template-columns: 1fr; } }
 
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
@@ -401,11 +428,17 @@
         </div>
 
         <section id="about-me" class="ab">
+            <svg class="ab-curve" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 H1200 V30 C1060,30 1010,110 860,104 C700,98 690,40 520,46 C360,52 300,112 150,106 C80,103 30,80 0,70 Z"/></svg>
             <div class="ab-row">
-                <figure class="ab-frame">
-                    <img src="luiza.jpeg" alt="Luiza, criadora da LZ Audiovisual" loading="lazy">
-                    <figcaption class="ab-caption"><span>Oi, eu sou a Luiza.</span></figcaption>
-                </figure>
+                <div class="ab-media">
+                    <div class="ab-paint ab-paint-big ab-paint-left" aria-hidden="true"><span></span><svg viewBox="0 0 200 1000" preserveAspectRatio="none"><path d="M0,0 H60 C150,50 175,190 150,380 C130,530 55,610 72,730 C86,830 70,930 40,1000 H0 Z"/></svg></div>
+                    <svg class="ab-blob" viewBox="0 0 200 160" aria-hidden="true"><path d="M30,160 C0,120 10,40 80,14 C150,-10 210,40 196,100 C188,140 150,160 120,160 Z"/></svg>
+                    <div class="ab-paint ab-tongue ab-paint-left" aria-hidden="true"><span></span><svg viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,8 C40,6 70,10 92,22 C124,40 122,78 88,86 C60,92 30,94 0,95 Z"/></svg></div>
+                    <figure class="ab-frame">
+                        <img src="luiza.jpeg" alt="Luiza, criadora da LZ Audiovisual" loading="lazy">
+                        <figcaption class="ab-caption"><span>Oi, eu sou a Luiza.</span></figcaption>
+                    </figure>
+                </div>
                 <div class="ab-text">
                     <h2 class="ab-title">Quem está por trás da câmera</h2>
                     <p>Sou a Luiza, a mente criativa da LZ Audiovisual. Transformo momentos reais e histórias únicas em vídeos e fotos com acabamento editorial.</p>
@@ -414,10 +447,14 @@
             </div>
 
             <div class="ab-row ab-row-flip" id="about-lz">
-                <figure class="ab-frame">
-                    <img src="lz.jpg" alt="Luiza nos bastidores da LZ Audiovisual" loading="lazy">
-                    <figcaption class="ab-caption"><span>Luz, movimento e uma estética que não envelhece.</span></figcaption>
-                </figure>
+                <div class="ab-media">
+                    <div class="ab-paint ab-paint-big ab-paint-right" aria-hidden="true"><svg viewBox="0 0 200 1000" preserveAspectRatio="none"><path d="M200,0 H140 C60,40 40,170 70,330 C100,480 30,560 20,690 C10,820 60,920 90,1000 H200 Z"/></svg><span></span></div>
+                    <div class="ab-paint ab-tongue ab-paint-right" aria-hidden="true"><svg viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><path d="M120,8 C80,6 50,10 28,22 C-4,40 -2,78 32,86 C60,92 90,94 120,95 Z"/></svg><span></span></div>
+                    <figure class="ab-frame">
+                        <img src="lz.jpg" alt="Luiza nos bastidores da LZ Audiovisual" loading="lazy">
+                        <figcaption class="ab-caption"><span>Luz, movimento e uma estética que não envelhece.</span></figcaption>
+                    </figure>
+                </div>
                 <div class="ab-text">
                     <h2 class="ab-title">O jeito LZ de contar histórias</h2>
                     <p>Cada projeto começa com uma conversa para entender a sua marca. Depois vêm o planejamento, a gravação e a edição, acompanhados de perto até a entrega.</p>
@@ -428,6 +465,7 @@
         </section>
 
         <section id="contact-section" class="ct">
+            <svg class="ct-curve" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,110 V60 C140,20 260,10 400,40 C560,74 640,96 820,70 C980,46 1080,20 1200,30 V110 Z"/></svg>
             <div class="ct-inner">
                 <div class="ct-intro">
                     <h2 class="ct-title">Conte a sua ideia</h2>
