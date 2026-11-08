@@ -2,7 +2,7 @@
 <html lang="pt-BR" class="dark scroll-smooth" style="cursor: auto !important;">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#140d0a">
     <title>LZ — Audiovisual</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -200,7 +200,7 @@
             .vf-corner.tl, .vf-corner.tr { top: 78px; }
             .vf-corner.bl, .vf-corner.br { opacity: 0.5; }
             .vf-hud-top { top: 88px; left: 32px; right: 32px; }
-            .vf-copy { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 24px 44px; text-align: center; }
+            .vf-copy { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 24px calc(44px + env(safe-area-inset-bottom)); text-align: center; }
             .vf-logo { justify-content: center; font-size: 4rem; margin-bottom: 10px; }
             .vf-title { font-size: clamp(1.6rem, 6.4vw, 2.2rem); margin: 0 auto 10px; }
             .vf-text { font-size: 0.95rem; margin: 0 auto; }
@@ -350,6 +350,17 @@
         .lz-tint { position: fixed; left: 0; right: 0; height: 2px; z-index: 39; pointer-events: none; }
         .lz-tint-top { top: 0; }
         .lz-tint-bottom { bottom: 0; }
+        /* o site ocupa a tela inteira no iPhone, por baixo das barras; o conteúdo respeita as áreas seguras */
+        #navbar { padding-top: calc(1.5rem + env(safe-area-inset-top)); }
+        .ft { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+        @media (max-width: 1023px) {
+            .vf-corner.tl, .vf-corner.tr { top: calc(78px + env(safe-area-inset-top)); }
+            .vf-hud-top { top: calc(88px + env(safe-area-inset-top)); }
+            .vf-corner.bl, .vf-corner.br { bottom: calc(14px + env(safe-area-inset-bottom)); }
+        }
+        @media (max-width: 640px) {
+            .cm-body { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+        }
 
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
