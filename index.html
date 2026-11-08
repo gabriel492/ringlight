@@ -98,7 +98,10 @@
 
         /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
         .ps { position: relative; height: 520vh; height: 520svh; background: #140d0a; color: #f4ede6; }
-        .ps-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); }
+        /* as telas presas não encostam nas bordas nem têm cor própria: o Safari do iPhone pegava a cor delas para as barras e não soltava mais */
+        .ps-stage { position: sticky; top: 1px; height: calc(100vh - 2px); height: calc(100svh - 2px); overflow: hidden; background: transparent; }
+        .ps-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); pointer-events: none; }
+        .ps[data-warm="true"] { background: #B9502D; }
         .ps-head { position: absolute; left: 0; right: 0; top: 104px; text-align: center; padding: 0 16px; will-change: opacity, transform; }
         .ps-kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
         .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem, 15.5vw, 12rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #e8c98f 0%, #9a6a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -153,7 +156,7 @@
 
         /* --- CILINDRO DE VÍDEOS: o celular abre em volta da câmera e vira um carrossel 3D --- */
         .ev { position: relative; height: 460vh; height: 460svh; background: #0e0908; }
-        .ev-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #0e0908; }
+        .ev-stage { position: sticky; top: 1px; height: calc(100vh - 2px); height: calc(100svh - 2px); overflow: hidden; background: transparent; }
         .ev-glow { position: absolute; inset: 0; pointer-events: none; background:
             radial-gradient(ellipse 26% 42% at 30% 58%, rgba(196, 98, 63, 0.5), transparent 70%),
             radial-gradient(ellipse 22% 36% at 70% 42%, rgba(212, 192, 176, 0.38), transparent 70%); will-change: opacity; }
