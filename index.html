@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#140d0a">
     <title>LZ — Audiovisual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -784,6 +785,7 @@
         // --- MENU TRANSPARENTE: usa texto escuro quando passa sobre uma seção clara ---
         (function () {
             const navbar = document.getElementById('navbar');
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
             let waiting = false;
 
             function sectionColor(node) {
@@ -804,6 +806,9 @@
                 navbar.classList.toggle('nav-on-light', 0.299 * r + 0.587 * g + 0.114 * b > 150);
                 // sobre terracota a logo terracota sumiria, então ela fica off-white
                 navbar.classList.toggle('nav-on-warm', r > 150 && g < 120 && b < 90);
+                // a barra do navegador no celular acompanha a cor da seção que está no topo
+                const color = 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')';
+                if (themeMeta.content !== color) themeMeta.content = color;
             }
 
             function schedule() {
