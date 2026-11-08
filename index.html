@@ -346,10 +346,6 @@
         #navbar .exact-logo-lz span { transition: color 0.3s ease; }
         #navbar.nav-on-warm .exact-logo-lz span { color: #F4F1EA; }
 
-        /* --- BARRAS DO NAVEGADOR: faixas finas nas bordas com a cor da seção visível --- */
-        .lz-tint { position: fixed; left: 0; right: 0; height: 2px; z-index: 39; pointer-events: none; }
-        .lz-tint-top { top: 0; }
-        .lz-tint-bottom { bottom: 0; }
         /* o site ocupa a tela inteira no iPhone, por baixo das barras; o conteúdo respeita as áreas seguras */
         #navbar { padding-top: calc(1.5rem + env(safe-area-inset-top)); }
         .ft { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
@@ -812,18 +808,9 @@
                 return [0, 0, 0];
             }
 
-            // faixas fixas nas bordas: o Safari do iPhone usa a cor delas para pintar as barras de cima e de baixo
-            const tintTop = document.createElement('div');
-            const tintBottom = document.createElement('div');
-            tintTop.className = 'lz-tint lz-tint-top';
-            tintBottom.className = 'lz-tint lz-tint-bottom';
-            tintTop.setAttribute('aria-hidden', 'true');
-            tintBottom.setAttribute('aria-hidden', 'true');
-            document.body.append(tintTop, tintBottom);
-
             function colorAt(y) {
                 const under = document.elementsFromPoint(window.innerWidth / 2, y)
-                    .find((el) => !navbar.contains(el) && !el.classList.contains('lz-tint'));
+                    .find((el) => !navbar.contains(el));
                 if (!under) return null;
                 if (under === document.documentElement || under === document.body) return y > 20 ? colorAt(y - 16) : null;
                 const block = under.closest('section, footer, .zoom-hero-wrapper') || under;
@@ -841,15 +828,10 @@
                 // sobre terracota a logo terracota sumiria, então ela fica off-white
                 navbar.classList.toggle('nav-on-warm', r > 150 && g < 120 && b < 90);
                 const topColor = css(top);
-                const bottomColor = css(colorAt(window.innerHeight - 2) || top);
-                if (tintTop.style.backgroundColor !== topColor) {
-                    tintTop.style.backgroundColor = topColor;
+                if (themeMeta.content !== topColor) {
                     themeMeta.content = topColor;
                     document.documentElement.style.backgroundColor = topColor;
-                }
-                if (tintBottom.style.backgroundColor !== bottomColor) {
-                    tintBottom.style.backgroundColor = bottomColor;
-                    document.body.style.backgroundColor = bottomColor;
+                    document.body.style.backgroundColor = topColor;
                 }
             }
 
