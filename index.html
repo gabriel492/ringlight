@@ -808,7 +808,12 @@
                 navbar.classList.toggle('nav-on-warm', r > 150 && g < 120 && b < 90);
                 // a barra do navegador no celular acompanha a cor da seção que está no topo
                 const color = 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')';
-                if (themeMeta.content !== color) themeMeta.content = color;
+                if (themeMeta.content !== color) {
+                    themeMeta.content = color;
+                    // o Safari do iPhone pinta as barras de cima e de baixo com o fundo da página
+                    document.documentElement.style.backgroundColor = color;
+                    document.body.style.backgroundColor = color;
+                }
             }
 
             function schedule() {
