@@ -230,6 +230,35 @@
                 }
         @media (prefers-reduced-motion: reduce) { .vf-rec i { animation: none; } }
 
+        /* --- CONTATO: painel com a foto da Luiza e os três canais --- */
+        .cm { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(20, 13, 10, 0.72); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0s linear 0.25s; }
+        .cm.is-open { opacity: 1; visibility: visible; transition: opacity 0.25s ease; }
+        .cm-panel { display: grid; grid-template-columns: 300px minmax(0, 1fr); width: min(760px, 100%); max-height: calc(100vh - 48px); overflow: hidden; border-radius: 6px; background: #1e1410; color: #f4ede6; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.55); transform: translateY(12px); transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1); }
+        .cm.is-open .cm-panel { transform: none; }
+        .cm-photo { width: 100%; height: 100%; min-height: 420px; object-fit: cover; object-position: 50% 20%; }
+        .cm-body { position: relative; padding: 56px 44px 40px; display: flex; flex-direction: column; overflow-y: auto; }
+        .cm-close { position: absolute; top: 18px; right: 22px; padding: 6px 2px; font-size: 0.875rem; color: #c2a895; background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: color 0.2s ease, text-decoration-color 0.2s ease; }
+        .cm-close:hover { color: #f4ede6; text-decoration-color: currentColor; }
+        .cm-title { font-family: 'Cinzel', serif; font-size: 2.1rem; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
+        .cm-lead { font-size: 1rem; line-height: 1.6; color: #d4c0b0; max-width: 26rem; margin-bottom: 32px; }
+        .cm-list { list-style: none; margin: auto 0 0; padding: 0; border-top: 1px solid rgba(244, 237, 230, 0.16); }
+        .cm-list li { border-bottom: 1px solid rgba(244, 237, 230, 0.16); }
+        .cm-link { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 18px 0; }
+        .cm-name { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; transition: color 0.2s ease; }
+        .cm-detail { font-size: 0.875rem; color: #c2a895; text-align: right; overflow-wrap: anywhere; }
+        .cm-link:hover .cm-name { color: #e0825d; }
+        .cm-link:focus-visible, .cm-close:focus-visible { outline: 2px solid #e0825d; outline-offset: 4px; border-radius: 2px; }
+        @media (max-width: 640px) {
+            .cm { align-items: flex-end; padding: 0; }
+            .cm-panel { grid-template-columns: 1fr; width: 100%; max-height: 92vh; border-radius: 18px 18px 0 0; transform: translateY(100%); }
+            .cm-photo { height: 190px; min-height: 0; object-position: 50% 22%; }
+            .cm-body { padding: 28px 24px 32px; }
+            .cm-close { top: -168px; right: 16px; padding: 8px 14px; border-radius: 999px; color: #f4ede6; background: rgba(20, 13, 10, 0.6); }
+            .cm-title { font-size: 1.75rem; }
+            .cm-lead { margin-bottom: 22px; }
+        }
+        @media (prefers-reduced-motion: reduce) { .cm, .cm-panel { transition: none; } }
+
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
@@ -522,75 +551,49 @@
         </div>
     </footer>
 
-    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brown-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div id="contact-modal-content" class="bg-beige-50 border border-beige-300 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative transform scale-95 max-h-[90vh] overflow-y-auto transition-transform duration-300">
-            <button onclick="closeContactModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-beige-200 text-brown-950 flex items-center justify-center hover:bg-beige-300 transition-colors cursor-pointer">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="flex items-center justify-center mx-auto mb-3 exact-logo-lz">
-                    <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
-                </div>
-                <h3 class="font-display font-bold text-2xl text-brown-950">Fale Conosco</h3>
-                <p class="text-xs text-brown-600 mt-1">Escolha um canal ou inicie seu projeto diretamente</p>
-            </div>
-
-            <div class="space-y-3">
-                <a href="https://wa.me/5500000000000" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-emerald-400 transition-colors">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                        </div>
-                        <span class="font-bold text-sm">WhatsApp</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-
-                <a href="https://instagram.com" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-pink-400 transition-colors">
-                            <i class="fa-brands fa-instagram text-lg"></i>
-                        </div>
-                        <span class="font-bold text-sm">Instagram</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-
-                <a href="mailto:contato@lzaudiovisual.com" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-beige-200 text-brown-950 hover:bg-brown-900 hover:text-beige-100 transition-all group shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:bg-brown-800 group-hover:text-amber-400 transition-colors">
-                            <i class="fa-regular fa-envelope text-lg"></i>
-                        </div>
-                        <span class="font-bold text-sm">E-mail Profissional</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
-                </a>
+    <div id="contact-modal" class="cm" aria-hidden="true">
+        <div id="contact-modal-content" class="cm-panel" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+            <img class="cm-photo" src="luiza.jpeg" alt="Luiza, da LZ Audiovisual">
+            <div class="cm-body">
+                <button type="button" class="cm-close" onclick="closeContactModal()">Fechar</button>
+                <h2 id="cm-title" class="cm-title">Fale com a Luiza</h2>
+                <p class="cm-lead">Conte o que você quer gravar e combine os detalhes direto com ela.</p>
+                <ul class="cm-list">
+                    <li><a class="cm-link" href="https://wa.me/5500000000000" target="_blank" rel="noopener"><span class="cm-name">WhatsApp</span><span class="cm-detail">Abrir conversa</span></a></li>
+                    <li><a class="cm-link" href="https://instagram.com" target="_blank" rel="noopener"><span class="cm-name">Instagram</span><span class="cm-detail">Ver perfil</span></a></li>
+                    <li><a class="cm-link" href="mailto:contato@lzaudiovisual.com"><span class="cm-name">E-mail</span><span class="cm-detail">contato@lzaudiovisual.com</span></a></li>
+                </ul>
             </div>
         </div>
     </div>
 
     <script>
+        let contactOpener = null;
+
         function openContactModal() {
             const modal = document.getElementById('contact-modal');
-            const content = document.getElementById('contact-modal-content');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
+            contactOpener = document.activeElement;
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.documentElement.style.overflow = 'hidden';
+            setTimeout(() => modal.querySelector('.cm-close').focus(), 60);
         }
 
         function closeContactModal() {
             const modal = document.getElementById('contact-modal');
-            const content = document.getElementById('contact-modal-content');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
+            if (!modal.classList.contains('is-open')) return;
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.documentElement.style.overflow = '';
+            if (contactOpener && contactOpener.focus) contactOpener.focus();
         }
 
         document.getElementById('contact-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'contact-modal') {
-                closeContactModal();
-            }
+            if (e.target.id === 'contact-modal') closeContactModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeContactModal();
         });
 
         function showSuccessMessage() {
