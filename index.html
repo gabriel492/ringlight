@@ -76,28 +76,6 @@
             margin-left: 0.05em;
         }
 
-        .bg-video-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-        }
-
-        .bg-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.85;
-        }
-
         .zoom-hero-wrapper {
             height: 100vh;
             position: relative;
@@ -165,7 +143,7 @@
         .ps-bubble { max-width: 82%; padding: 14px 16px; border-radius: 20px; font-size: 16px; line-height: 1.4; opacity: 0; will-change: transform, opacity; }
         .ps-bubble.me { align-self: flex-end; background: #e6d7ca; color: #140d0a; border-bottom-right-radius: 6px; }
         .ps-bubble.lz { align-self: flex-start; background: #422f25; color: #f4ede6; border-bottom-left-radius: 6px; }
-        .ps-film { inset: auto; left: 50%; top: 50%; width: 820px; height: 366px; margin: -183px 0 0 -410px; transform: rotate(-90deg); background: #000; opacity: 0; }
+        .ps-film { background: #000; opacity: 0; }
         .ps-touch { position: absolute; z-index: 7; inset: auto; left: 0; top: 0; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75); opacity: 0; will-change: transform, opacity; }
         .ps-notes { display: none; }
         .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
@@ -173,6 +151,9 @@
         .ps-end p { max-width: 34rem; margin: 0 auto 18px; font-size: 0.95rem; line-height: 1.55; color: #d4c0b0; }
         .ps-end button { padding: 13px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
         .ps-end.is-on { pointer-events: auto; }
+        .ps-end.ps-end-side { right: auto; width: min(420px, 34vw); padding: 0; text-align: left; }
+        .ps-end.ps-end-side h3 { font-size: clamp(2rem, 3vw, 2.8rem); }
+        .ps-end.ps-end-side p { margin-left: 0; }
         @media (min-width: 1024px) {
             .ps-notes { display: block; position: absolute; inset: 0; pointer-events: none; }
             .ps-note { position: absolute; top: 50%; width: min(24vw, 320px); opacity: 0; will-change: opacity, transform; }
@@ -200,6 +181,62 @@
         .ev-title h2 { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; letter-spacing: 0.04em; color: #f4ede6; }
         .ev.ev-static { height: 100vh; height: 100svh; }
 
+        /* --- ABERTURA: visor de câmera com vídeo vertical --- */
+        .vf-hero { min-height: 100vh; min-height: 100svh; height: auto; background: #140d0a; color: #f4ede6; }
+        .vf-bg { position: absolute; inset: -60px; background: url('clips/hero-blur.jpg') center 30% / cover; filter: blur(34px) brightness(0.45) saturate(1.1); }
+        .vf-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 30%, rgba(14, 9, 8, 0.78) 100%); }
+        .vf-inner { position: relative; z-index: 2; width: 100%; max-width: 1180px; margin: 0 auto; padding: 104px 64px 72px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 64px; }
+        .vf-kicker { margin-bottom: 18px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: #c2a895; }
+        .vf-logo { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 8vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 16px; justify-content: flex-start; }
+        .vf-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; max-width: 34rem; }
+        .vf-text { font-size: 1.05rem; line-height: 1.6; color: #e6d7ca; max-width: 30rem; margin-bottom: 30px; }
+        .vf-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+        .vf-btn { display: inline-block; padding: 15px 30px; border-radius: 999px; background: #f4ede6; color: #140d0a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background-color 0.2s ease; }
+        .vf-btn:hover { background: #ffffff; }
+        .vf-btn-ghost { background: transparent; color: #f4ede6; box-shadow: inset 0 0 0 1px rgba(244, 237, 230, 0.5); }
+        .vf-btn-ghost:hover { background: rgba(244, 237, 230, 0.12); }
+        .vf-frame { position: relative; height: min(76vh, 640px); aspect-ratio: 9 / 16; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+        .vf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .vf-grid { position: absolute; inset: 0; pointer-events: none; background:
+            linear-gradient(90deg, transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(33.33% + 0.5px), transparent 0 calc(66.66% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(66.66% + 0.5px), transparent 0),
+            linear-gradient(transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(33.33% + 0.5px), transparent 0 calc(66.66% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(66.66% + 0.5px), transparent 0); }
+        .vf-shade { display: none; }
+        .vf-corner { position: absolute; width: 30px; height: 30px; border: 0 solid rgba(255, 255, 255, 0.9); pointer-events: none; }
+        .vf-corner.tl { top: 14px; left: 14px; border-top-width: 2px; border-left-width: 2px; }
+        .vf-corner.tr { top: 14px; right: 14px; border-top-width: 2px; border-right-width: 2px; }
+        .vf-corner.bl { bottom: 14px; left: 14px; border-bottom-width: 2px; border-left-width: 2px; }
+        .vf-corner.br { bottom: 14px; right: 14px; border-bottom-width: 2px; border-right-width: 2px; }
+        .vf-cross { position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; pointer-events: none; }
+        .vf-cross::before, .vf-cross::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.7); }
+        .vf-cross::before { left: 12px; top: 0; width: 2px; height: 26px; }
+        .vf-cross::after { top: 12px; left: 0; width: 26px; height: 2px; }
+        .vf-hud { position: absolute; left: 30px; right: 30px; display: flex; justify-content: space-between; align-items: center; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.06em; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8); pointer-events: none; }
+        .vf-hud-top { top: 22px; }
+        .vf-hud-bottom { bottom: 22px; }
+        .vf-rec { display: flex; align-items: center; gap: 7px; font-weight: 700; }
+        .vf-rec i { width: 10px; height: 10px; border-radius: 50%; background: #e5402e; box-shadow: 0 0 10px #e5402e; animation: vf-blink 1s steps(1) infinite; }
+        .vf-batt { display: inline-block; width: 22px; height: 11px; margin-left: 6px; padding: 1px; border: 1.5px solid #fff; border-radius: 2px; vertical-align: -1px; }
+        .vf-batt::after { content: ''; display: block; width: 72%; height: 100%; background: #fff; }
+        .vf-scroll { position: absolute; z-index: 2; left: 50%; bottom: 22px; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #c2a895; white-space: nowrap; }
+        @keyframes vf-blink { 50% { opacity: 0.15; } }
+        @media (max-width: 1023px) {
+            .vf-hero { align-items: stretch; }
+            .vf-bg, .vf-hero::after, .vf-scroll, .vf-kicker, .vf-grid, .vf-cross, .vf-hud-bottom { display: none; }
+            .vf-inner { position: static; display: block; padding: 0; max-width: none; }
+            .vf-frame { position: absolute; inset: 0; height: auto; aspect-ratio: auto; box-shadow: none; }
+            .vf-shade { display: block; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 13, 10, 0.95) 12%, rgba(20, 13, 10, 0.4) 44%, transparent 64%), linear-gradient(to bottom, rgba(20, 13, 10, 0.55), transparent 20%); }
+            .vf-corner.tl, .vf-corner.tr { top: 78px; }
+            .vf-corner.bl, .vf-corner.br { opacity: 0.5; }
+            .vf-hud-top { top: 88px; left: 32px; right: 32px; }
+            .vf-copy { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 24px 44px; text-align: center; }
+            .vf-logo { justify-content: center; font-size: 4rem; margin-bottom: 10px; }
+            .vf-title { font-size: clamp(1.6rem, 6.4vw, 2.2rem); margin: 0 auto 10px; }
+            .vf-text { font-size: 0.95rem; margin: 0 auto 20px; }
+            .vf-actions { justify-content: center; }
+            .vf-btn-ghost { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) { .vf-rec i { animation: none; } }
+
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
@@ -224,30 +261,34 @@
 
     <main class="relative z-10">
 
-        <div class="zoom-hero-wrapper" id="hero-wrapper">
-            <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-                <div class="bg-video-container">
-                    <video autoplay muted loop playsinline class="bg-video">
-                        <source src="1013 (1).mp4" type="video/mp4">
-                        O seu navegador não suporta vídeos HTML5.
+        <section class="zoom-hero-wrapper vf-hero" id="hero-wrapper">
+            <div class="vf-bg" aria-hidden="true"></div>
+            <div class="vf-inner">
+                <div class="vf-copy">
+                    <p class="vf-kicker">Videomaker · Fotografia</p>
+                    <p class="vf-logo exact-logo-lz" aria-hidden="true"><span class="letter-l">L</span><span class="letter-z">Z</span></p>
+                    <h1 class="vf-title">Vídeos que fazem sua marca ser lembrada</h1>
+                    <p class="vf-text">Roteiro, gravação e edição para redes sociais, eventos e marcas.</p>
+                    <div class="vf-actions">
+                        <button type="button" onclick="openContactModal()" class="vf-btn">Pedir orçamento</button>
+                        <a href="#portfolio" class="vf-btn vf-btn-ghost">Ver portfólio</a>
+                    </div>
+                </div>
+                <div class="vf-frame">
+                    <video class="vf-video" autoplay muted loop playsinline preload="auto" poster="clips/hero.jpg">
+                        <source src="clips/hero.mp4" type="video/mp4">
                     </video>
-                    <div class="absolute inset-0 bg-brown-950/30"></div>
+                    <div class="vf-grid" aria-hidden="true"></div>
+                    <div class="vf-shade" aria-hidden="true"></div>
+                    <span class="vf-corner tl" aria-hidden="true"></span><span class="vf-corner tr" aria-hidden="true"></span>
+                    <span class="vf-corner bl" aria-hidden="true"></span><span class="vf-corner br" aria-hidden="true"></span>
+                    <span class="vf-cross" aria-hidden="true"></span>
+                    <div class="vf-hud vf-hud-top" aria-hidden="true"><span class="vf-rec"><i></i>REC</span><span class="vf-time">00:00:00:00</span></div>
+                    <div class="vf-hud vf-hud-bottom" aria-hidden="true"><span>4K · 30fps</span><span>ISO 400 <b class="vf-batt"></b></span></div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-b from-brown-950/40 via-transparent to-brown-950/60"></div>
             </div>
-
-            <div class="max-w-6xl mx-auto text-center space-y-8 px-6 lg:px-16 relative z-20">
-                <div class="py-2 flex justify-center items-center">
-                    <h1 id="zoom-lz-logo" class="font-display text-9xl md:text-[13rem] lg:text-[15.5rem] font-black leading-none select-none drop-shadow-2xl exact-logo-lz">
-                        <span class="letter-l">L</span><span class="letter-z">Z</span>
-                    </h1>
-                </div>
-
-                <p id="hero-subtext" class="text-beige-100 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
-                    Estúdio audiovisual especializado em fotografia editorial e direção cinematográfica.
-                </p>
-            </div>
-        </div>
+            <p class="vf-scroll" aria-hidden="true">Role para ver mais</p>
+        </section>
 
         <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
             
@@ -294,7 +335,7 @@
                                     <div class="ps-bubble lz">Vamos transformar em filme.</div>
                                 </div>
                             </div>
-                            <div class="ps-layer ps-film"><video muted loop playsinline preload="none" data-src="1013 (1).mp4"></video></div>
+                            <div class="ps-layer ps-film"><video muted loop playsinline preload="none" data-src="clips/hero.mp4"></video></div>
                             <div class="ps-touch"></div>
                         </div>
                     </div>
@@ -586,7 +627,7 @@
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             const PHONE_W = 390, PHONE_H = 844, SCREEN_W = 366, SCREEN_H = 820, HEADER = 88;
-            let W = 0, H = 0, portrait = 1, landscape = 1, portraitY = 0, landscapeY = 0, scrollMax = 0;
+            let W = 0, H = 0, portrait = 1, endScale = 1, portraitY = 0, endX = 0, endY = 0, scrollMax = 0;
             let target = 0, current = -1, frame = 0, visible = false;
 
             const clamp = (v) => Math.min(1, Math.max(0, v));
@@ -597,10 +638,20 @@
             function measure() {
                 W = stage.clientWidth; H = stage.clientHeight;
                 portrait = Math.min((H - HEADER - 20) / PHONE_H, (W * 0.74) / PHONE_W, 0.82);
-                landscape = Math.min((W * 0.92) / PHONE_H, (H * 0.5) / PHONE_W);
                 portraitY = HEADER / 2;
-                landscapeY = HEADER + (PHONE_W * landscape) / 2 - H / 2;
-                end.style.top = (HEADER + PHONE_W * landscape + 22) + 'px';
+                // no final o celular continua em pé: no computador vai para a esquerda, no celular encolhe para o texto caber embaixo
+                const wide = W >= 1024;
+                endScale = wide ? portrait : Math.min(portrait, (H * 0.5) / PHONE_H);
+                endX = wide ? -Math.min(W * 0.18, 260) : 0;
+                endY = wide ? portraitY : HEADER + (PHONE_H * endScale) / 2 - H / 2;
+                end.classList.toggle('ps-end-side', wide);
+                if (wide) {
+                    end.style.left = (W / 2 + endX + (PHONE_W * endScale) / 2 + 56) + 'px';
+                    end.style.top = (H / 2 + portraitY - end.offsetHeight / 2) + 'px';
+                } else {
+                    end.style.left = '';
+                    end.style.top = (HEADER + PHONE_H * endScale + 18) + 'px';
+                }
                 scrollMax = Math.max(0, scroller.offsetHeight - (SCREEN_H - 96));
             }
 
@@ -619,7 +670,7 @@
                 const rise = smooth(part(p, 0, 0.08));
                 const turn = smooth(part(p, 0.72, 0.86));
                 const y = mix(H * 0.72, portraitY, rise);
-                phone.style.transform = 'translate(-50%,-50%) translate(0,' + mix(y, landscapeY, turn) + 'px) rotate(' + (turn * 90) + 'deg) scale(' + mix(portrait, landscape, turn) + ')';
+                phone.style.transform = 'translate(-50%,-50%) translate(' + (endX * turn) + 'px,' + mix(y, endY, turn) + 'px) scale(' + mix(portrait, endScale, turn) + ')';
 
                 head.style.opacity = 1 - smooth(part(p, 0.1, 0.22)) * 0.82 - smooth(part(p, 0.62, 0.72)) * 0.18;
                 head.style.transform = 'translateY(' + (-14 * rise) + 'px)';
@@ -884,6 +935,19 @@
             window.addEventListener('scroll', readScroll, { passive: true });
             readScroll();
             render(target);
+        })();
+
+        // --- ABERTURA: contador de tempo do visor, no formato HH:MM:SS:quadros ---
+        (function () {
+            const time = document.querySelector('.vf-time');
+            if (!time) return;
+            const start = performance.now();
+            const pad = (n) => String(n).padStart(2, '0');
+            setInterval(() => {
+                const frames = Math.floor((performance.now() - start) / (1000 / 30));
+                const seconds = Math.floor(frames / 30);
+                time.textContent = pad(Math.floor(seconds / 3600)) + ':' + pad(Math.floor(seconds / 60) % 60) + ':' + pad(seconds % 60) + ':' + pad(frames % 30);
+            }, 1000 / 30);
         })();
     </script>
 </body>
