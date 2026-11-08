@@ -209,28 +209,32 @@
         /* --- CONTATO: painel com a foto da Luiza e os três canais --- */
         .cm { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(20, 13, 10, 0.72); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0s linear 0.25s; }
         .cm.is-open { opacity: 1; visibility: visible; transition: opacity 0.25s ease; }
-        .cm-panel { display: grid; grid-template-columns: 300px minmax(0, 1fr); width: min(760px, 100%); max-height: calc(100vh - 48px); overflow: hidden; border-radius: 6px; background: #1e1410; color: #f4ede6; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.55); transform: translateY(12px); transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1); }
+        .cm-panel { position: relative; display: grid; grid-template-columns: 310px minmax(0, 1fr); width: min(780px, 100%); max-height: calc(100vh - 48px); overflow: hidden; border-radius: 8px; background: var(--lz-offwhite); color: var(--lz-escuro); box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5); transform: translateY(12px); transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1); }
         .cm.is-open .cm-panel { transform: none; }
-        .cm-photo { width: 100%; height: 100%; min-height: 420px; object-fit: cover; object-position: 50% 20%; }
-        .cm-body { position: relative; padding: 56px 44px 40px; display: flex; flex-direction: column; overflow-y: auto; }
-        .cm-close { position: absolute; top: 18px; right: 22px; padding: 6px 2px; font-size: 0.875rem; color: #c2a895; background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: color 0.2s ease, text-decoration-color 0.2s ease; }
-        .cm-close:hover { color: #f4ede6; text-decoration-color: currentColor; }
+        .cm-media { position: relative; min-height: 440px; overflow: hidden; }
+        .cm-shape { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .cm-photo { position: absolute; z-index: 1; left: 14%; top: 10%; width: 65%; height: 75%; object-fit: cover; object-position: 50% 22%; border-radius: 16px; box-shadow: 0 20px 40px rgba(91, 49, 40, 0.4); }
+        .cm-tongue { position: absolute; z-index: 2; left: 0; bottom: 9%; width: 94%; height: 50px; }
+        .cm-body { position: relative; padding: 58px 44px 40px; display: flex; flex-direction: column; overflow-y: auto; }
+        .cm-close { position: absolute; top: 18px; right: 22px; padding: 6px 2px; font-size: 0.875rem; color: var(--lz-marrom); background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(91, 49, 40, 0.4); text-underline-offset: 4px; transition: text-decoration-color 0.2s ease; }
+        .cm-close:hover { text-decoration-color: currentColor; }
         .cm-title { font-family: 'Cinzel', serif; font-size: 2.1rem; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
-        .cm-lead { font-size: 1rem; line-height: 1.6; color: #d4c0b0; max-width: 26rem; margin-bottom: 32px; }
-        .cm-list { list-style: none; margin: auto 0 0; padding: 0; border-top: 1px solid rgba(244, 237, 230, 0.16); }
-        .cm-list li { border-bottom: 1px solid rgba(244, 237, 230, 0.16); }
+        .cm-lead { font-size: 1rem; line-height: 1.6; color: var(--lz-marrom); max-width: 26rem; margin-bottom: 32px; }
+        .cm-list { list-style: none; margin: auto 0 0; padding: 0; border-top: 1px solid rgba(91, 49, 40, 0.22); }
+        .cm-list li { border-bottom: 1px solid rgba(91, 49, 40, 0.22); }
         .cm-link { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 18px 0; }
         .cm-name { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; transition: color 0.2s ease; }
-        .cm-detail { font-size: 0.875rem; color: #c2a895; text-align: right; overflow-wrap: anywhere; }
-        .cm-link:hover .cm-name { color: #e0825d; }
-        .cm-link:focus-visible, .cm-close:focus-visible { outline: 2px solid #e0825d; outline-offset: 4px; border-radius: 2px; }
+        .cm-detail { font-size: 0.875rem; color: var(--lz-marrom); text-align: right; overflow-wrap: anywhere; }
+        .cm-link:hover .cm-name { color: #A9471F; }
+        .cm-link:focus-visible, .cm-close:focus-visible { outline: 2px solid var(--lz-marrom); outline-offset: 4px; border-radius: 2px; }
         @media (max-width: 640px) {
             .cm { align-items: flex-end; padding: 0; }
-            .cm-panel { grid-template-columns: 1fr; width: 100%; max-height: 92vh; border-radius: 18px 18px 0 0; transform: translateY(100%); }
-            .cm-photo { height: 190px; min-height: 0; object-position: 50% 22%; }
-            .cm-panel { position: relative; }
-            .cm-body { position: static; padding: 28px 24px 32px; }
-            .cm-close { top: 14px; right: 14px; padding: 8px 14px; border-radius: 999px; color: #f4ede6; background: rgba(20, 13, 10, 0.6); }
+            .cm-panel { grid-template-columns: 1fr; width: 100%; max-height: 92vh; border-radius: 20px 20px 0 0; transform: translateY(100%); }
+            .cm-media { min-height: 0; height: 210px; }
+            .cm-photo { left: 28px; top: 24px; width: 140px; height: 172px; border-radius: 14px; }
+            .cm-tongue { left: 0; bottom: 10px; width: 220px; height: 30px; }
+            .cm-body { position: static; padding: 24px 24px 32px; }
+            .cm-close { top: 16px; right: 18px; }
             .cm-title { font-size: 1.75rem; }
             .cm-lead { margin-bottom: 22px; }
         }
@@ -308,6 +312,24 @@
         .ct .ab-btn:focus-visible, .ct-link:focus-visible { outline: 2px solid #ffffff; outline-offset: 4px; border-radius: 2px; }
         .ct-status { font-size: 0.9rem; line-height: 1.5; color: var(--lz-offwhite); margin-top: 32px; }
         @media (max-width: 767px) { .ct-inner { grid-template-columns: 1fr; } }
+
+        /* --- RODAPÉ: marrom da parede, entrando com uma curva sobre o contato --- */
+        .ft { position: relative; z-index: 22; background: var(--lz-marrom); color: #ead7c8; padding: clamp(24px, 4vw, 48px) 24px 28px; }
+        .ft-curve { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: clamp(50px, 8vw, 110px); fill: var(--lz-marrom); }
+        .ft-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; }
+        .ft-logo { font-family: 'Cinzel', serif; font-size: 2.6rem; font-weight: 900; line-height: 1; margin-bottom: 12px; }
+        .ft-brand p:not(.ft-logo) { max-width: 16rem; font-size: 0.95rem; line-height: 1.7; }
+        .ft-col h2 { margin-bottom: 14px; font-size: 0.95rem; font-weight: 700; color: var(--lz-areia); }
+        .ft-col a, .ft-col button, .ft-col p { display: block; padding: 0; background: none; border: 0; font: inherit; font-size: 0.95rem; line-height: 2; color: #ead7c8; text-align: left; cursor: pointer; }
+        .ft-col p { cursor: default; }
+        .ft-col a:hover, .ft-col button:hover { color: #ffffff; text-decoration: underline; text-underline-offset: 4px; }
+        .ft a:focus-visible, .ft button:focus-visible { outline: 2px solid var(--lz-areia); outline-offset: 3px; border-radius: 2px; }
+        .ft-copy { max-width: 1040px; margin: 40px auto 0; padding-top: 18px; border-top: 1px solid rgba(237, 227, 195, 0.2); font-size: 0.85rem; color: #d8c2b3; }
+        @media (max-width: 767px) {
+            .ft-inner { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+            .ft-brand { grid-column: 1 / -1; }
+            .ft-hours { grid-column: 1 / -1; order: 3; }
+        }
 
         /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
         #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
@@ -500,67 +522,40 @@
         </section>
     </main>
 
-    <footer class="bg-brown-950 text-beige-200 pt-16 pb-8 relative z-25">
-        <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            <div class="space-y-4 md:col-span-1">
-                <div class="flex items-center gap-3">
-                    <div class="flex items-center justify-center exact-logo-lz">
-                        <span class="font-display font-black text-xl letter-l">L</span><span class="font-display font-black text-xl letter-z">Z</span>
-                    </div>
-                </div>
-                <p class="text-xs text-beige-300 leading-relaxed font-light">
-                    Estúdio de cinematografia e fotografia editorial dedicado a criar narrativas visuais autênticas e marcantes.
-                </p>
+    <footer class="ft">
+        <svg class="ft-curve" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,110 V50 C160,90 300,100 470,70 C640,40 760,10 930,30 C1060,46 1140,70 1200,60 V110 Z"/></svg>
+        <div class="ft-inner">
+            <div class="ft-brand">
+                <p class="ft-logo exact-logo-lz" aria-label="LZ Audiovisual"><span class="letter-l">L</span><span class="letter-z">Z</span></p>
+                <p>Estúdio de fotografia e vídeo para marcas e pessoas.</p>
             </div>
-
-            <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Navegação</h4>
-                <ul class="space-y-2 text-xs text-beige-300">
-                    <li><a href="#about-me" class="hover:text-beige-100 transition-colors">Sobre Mim</a></li>
-                    <li><a href="#portfolio" class="hover:text-beige-100 transition-colors">Portfólio & Galeria</a></li>
-                    <li><button onclick="openContactModal()" class="bg-transparent border-none text-xs text-beige-300 hover:text-beige-100 transition-colors cursor-pointer p-0 text-left">Fale Conosco</button></li>
-                </ul>
+            <nav class="ft-col" aria-label="Rodapé">
+                <h2>Navegação</h2>
+                <a href="#about-me">Sobre</a>
+                <a href="#portfolio">Portfólio</a>
+                <button type="button" onclick="openContactModal()">Contato</button>
+            </nav>
+            <div class="ft-col ft-hours">
+                <h2>Atendimento</h2>
+                <p>Segunda a sexta, 9h às 19h</p>
+                <a href="mailto:contato@lzaudiovisual.com">contato@lzaudiovisual.com</a>
             </div>
-
-            <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Atendimento</h4>
-                <p class="text-xs text-beige-300 leading-relaxed">
-                    Segunda a Sexta: 09h às 19h<br>
-                    Atendimento global sob consulta.
-                </p>
-                <p class="text-xs text-beige-300">
-                    <i class="fa-regular fa-envelope mr-1"></i> contato@lzaudiovisual.com
-                </p>
-            </div>
-
-            <div class="space-y-3">
-                <h4 class="font-display font-bold text-sm text-beige-100 uppercase tracking-widest">Redes Sociais</h4>
-                <div class="flex items-center gap-3">
-                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
-                        <i class="fa-brands fa-instagram text-sm"></i>
-                    </a>
-                    <a href="https://wa.me/5500000000000" target="_blank" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
-                    </a>
-                    <a href="mailto:contato@lzaudiovisual.com" class="w-10 h-10 rounded-xl bg-brown-900 border border-brown-800 flex items-center justify-center text-beige-100 hover:bg-brown-800 hover:text-beige-300 transition-colors">
-                        <i class="fa-regular fa-envelope text-sm"></i>
-                    </a>
-                </div>
+            <div class="ft-col">
+                <h2>Redes</h2>
+                <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener">WhatsApp</a>
             </div>
         </div>
-
-        <div class="max-w-7xl mx-auto px-6 lg:px-16 pt-6 border-t border-brown-900 flex flex-col sm:flex-row items-center justify-between text-xs text-beige-400 gap-4">
-            <p>&copy; 2026 LZ Audiovisual. Todos os direitos reservados.</p>
-            <div class="flex items-center gap-6">
-                <a href="#" class="hover:text-beige-200 transition-colors">Termos de Uso</a>
-                <a href="#" class="hover:text-beige-200 transition-colors">Política de Privacidade</a>
-            </div>
-        </div>
+        <p class="ft-copy">© 2026 LZ Audiovisual</p>
     </footer>
 
     <div id="contact-modal" class="cm" aria-hidden="true">
         <div id="contact-modal-content" class="cm-panel" role="dialog" aria-modal="true" aria-labelledby="cm-title">
-            <img class="cm-photo" src="luiza.jpeg" alt="Luiza, da LZ Audiovisual">
+            <div class="cm-media">
+                <svg class="cm-shape" viewBox="0 0 310 440" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 H230 C300,40 310,150 280,250 C256,330 290,390 270,440 H0 Z" fill="#C4562F"/><path d="M200,30 C240,0 310,10 310,70 V120 C280,130 230,120 210,90 C195,70 190,45 200,30 Z" fill="#EDE3C3"/></svg>
+                <img class="cm-photo" src="luiza.jpeg" alt="Luiza, da LZ Audiovisual">
+                <svg class="cm-tongue" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 C100,0 200,4 250,12 C292,20 294,50 256,54 C170,60 90,60 0,60 Z" fill="#5B3128"/></svg>
+            </div>
             <div class="cm-body">
                 <button type="button" class="cm-close" onclick="closeContactModal()">Fechar</button>
                 <h2 id="cm-title" class="cm-title">Fale com a Luiza</h2>
