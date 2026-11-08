@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#140d0a">
+    <script>
+        // modo de teste: ?sem=portfolio, ?sem=impacto ou ?sem=portfolio,impacto esconde esses efeitos para achar o que trava a barra do Safari
+        (function () {
+            const sem = (new URLSearchParams(location.search).get('sem') || '').split(',');
+            const ids = { portfolio: '#portfolio', impacto: '#phone-story' };
+            const css = sem.map((k) => ids[k]).filter(Boolean).map((sel) => sel + '{display:none!important}').join('');
+            if (css) document.write('<style>' + css + '</style>');
+        })();
+    </script>
     <title>LZ — Audiovisual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
