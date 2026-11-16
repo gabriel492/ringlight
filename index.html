@@ -61,22 +61,6 @@
             border-radius: 4px;
         }
 
-        .exact-logo-lz {
-            display: inline-flex;
-            align-items: baseline;
-            line-height: 1;
-        }
-        .exact-logo-lz .letter-l {
-            color: #c4623f;
-            letter-spacing: -0.28em;
-        }
-        .exact-logo-lz .letter-z {
-            color: #c4623f;
-            position: relative;
-            top: 0.2em;
-            letter-spacing: -0.0025em;
-            margin-left: 0.05em;
-        }
 
         .zoom-hero-wrapper {
             height: 100vh;
@@ -327,7 +311,7 @@
         .ft { position: relative; z-index: 22; background: var(--lz-marrom); color: #ead7c8; padding: clamp(24px, 4vw, 48px) 24px 28px; }
         .ft-curve { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: clamp(50px, 8vw, 110px); fill: var(--lz-marrom); }
         .ft-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; }
-        .ft-logo { font-family: 'Cinzel', serif; font-size: 2.6rem; font-weight: 900; line-height: 1; margin-bottom: 12px; }
+        .ft-logo { font-family: 'Cinzel', serif; font-size: 3.4rem; font-weight: 900; line-height: 1; margin-bottom: 12px; }
         .ft-brand p:not(.ft-logo) { max-width: 16rem; font-size: 0.95rem; line-height: 1.7; }
         .ft-col h2 { margin-bottom: 14px; font-size: 0.95rem; font-weight: 700; color: var(--lz-areia); }
         .ft-col a, .ft-col button, .ft-col p { display: block; padding: 0; background: none; border: 0; font: inherit; font-size: 0.95rem; line-height: 2; color: #ead7c8; text-align: left; cursor: pointer; }
@@ -347,8 +331,10 @@
         .ps-tongue { position: absolute; left: 0; display: flex; }
         .ps-tongue span { flex: 1; background: #5B3128; }
         .ps-tongue svg { flex: none; height: 100%; width: clamp(60px, 7vw, 110px); margin-left: -1px; fill: #5B3128; }
-        #navbar .exact-logo-lz span { transition: color 0.3s ease; }
-        #navbar.nav-on-warm .exact-logo-lz span { color: #F4F1EA; }
+        /* --- LOGO: desenho do arquivo logo-lz.png, pintado pela cor de cada lugar --- */
+        .lz-mark { display: inline-block; height: 1em; aspect-ratio: 855 / 1262; background-color: #F7EEDF; -webkit-mask: url('logo-lz.png') center / contain no-repeat; mask: url('logo-lz.png') center / contain no-repeat; vertical-align: middle; transition: background-color 0.3s ease; }
+        .lz-mark-nav { font-size: 34px; }
+        #navbar.nav-on-light .lz-mark { background-color: #5B3128; }
 
         /* áreas seguras do iPhone (só têm efeito se o site for ocupar a tela inteira) */
         #navbar { padding-top: calc(1.5rem + env(safe-area-inset-top)); }
@@ -372,9 +358,7 @@
     <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
-                <div class="flex items-center justify-center exact-logo-lz transition-transform duration-300 group-hover:scale-105">
-                    <span class="font-display font-black text-2xl letter-l">L</span><span class="font-display font-black text-2xl letter-z">Z</span>
-                </div>
+                <span class="lz-mark lz-mark-nav transition-transform duration-300 group-hover:scale-105" role="img" aria-label="LZ"></span>
                 <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30 nav-text">AUDIOVISUAL</span>
             </a>
 
@@ -391,7 +375,7 @@
             <div class="vf-inner">
                 <div class="vf-copy">
                     <p class="vf-kicker">Videomaker · Fotografia</p>
-                    <p class="vf-logo exact-logo-lz" aria-hidden="true"><span class="letter-l">L</span><span class="letter-z">Z</span></p>
+                    <p class="vf-logo" aria-hidden="true"><span class="lz-mark"></span></p>
                     <h1 class="vf-title">Vídeos que fazem sua marca ser lembrada</h1>
                     <p class="vf-text">Roteiro, gravação e edição para redes sociais, eventos e marcas.</p>
                 </div>
@@ -561,7 +545,7 @@
         <svg class="ft-curve" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,110 V50 C160,90 300,100 470,70 C640,40 760,10 930,30 C1060,46 1140,70 1200,60 V110 Z"/></svg>
         <div class="ft-inner">
             <div class="ft-brand">
-                <p class="ft-logo exact-logo-lz" aria-label="LZ Audiovisual"><span class="letter-l">L</span><span class="letter-z">Z</span></p>
+                <p class="ft-logo"><span class="lz-mark" role="img" aria-label="LZ Audiovisual"></span></p>
                 <p>Estúdio de fotografia e vídeo para marcas e pessoas.</p>
             </div>
             <nav class="ft-col" aria-label="Rodapé">
