@@ -86,7 +86,10 @@
         .ps-screen > * { position: absolute; inset: 0; }
         .ps-island { position: absolute; left: 50%; top: 22px; width: 112px; height: 32px; margin-left: -56px; border-radius: 20px; background: #000; z-index: 8; }
         .ps-insta { background: #0d1014; }
-        .ps-insta video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ps-insta { overflow: hidden; }
+        .ps-insta img { position: absolute; left: 0; top: 0; width: 100%; height: auto; display: block; }
+        .ig-page, .ig-tabs { will-change: transform; }
+        .ig-bar-scroll { opacity: 0; }
         .ps-tile { position: absolute; inset: auto; background: rgba(0, 0, 0, 0.35); opacity: 0; pointer-events: none; }
         .ps-photo { position: absolute; inset: auto; overflow: hidden; opacity: 0; background: #000; will-change: left, top, width, height, opacity; }
         .ps-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
@@ -397,7 +400,12 @@
                     <div class="ps-phone" aria-hidden="true">
                         <div class="ps-island"></div>
                         <div class="ps-screen">
-                            <div class="ps-insta"><video muted playsinline preload="none" poster="clips/instagram-scroll.jpg" data-src="clips/instagram-scroll.mp4"></video></div>
+                            <div class="ps-insta">
+                                <img class="ig-page" src="clips/ig-perfil.jpg" alt="" decoding="async" loading="lazy">
+                                <img class="ig-tabs" src="clips/ig-abas.jpg" alt="">
+                                <img class="ig-bar" src="clips/ig-topo.jpg" alt="">
+                                <img class="ig-bar ig-bar-scroll" src="clips/ig-topo-rolando.jpg" alt="">
+                            </div>
                             <div class="ps-tile"></div>
                             <div class="ps-photo"><img src="lz.jpg" alt=""></div>
                             <div class="ps-touch"></div>
@@ -578,18 +586,20 @@
             const stage = $('.ps-stage'), phone = $('.ps-phone'), head = $('.ps-head');
             const touch = $('.ps-touch'), end = $('.ps-end'), tile = $('.ps-tile'), photo = $('.ps-photo');
             const notes = [...section.querySelectorAll('.ps-note')];
-            const video = $('.ps-insta video');
+            const igPage = $('.ig-page'), igTabs = $('.ig-tabs'), igBarScroll = $('.ig-bar-scroll');
             const warm = $('.ps-warm'), blob = $('.ps-blob'), tongue = $('.ps-tongue');
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             const PHONE_W = 390, PHONE_H = 844, SCREEN_W = 366, SCREEN_H = 820, HEADER = 88;
-            // foto da grade tocada no último quadro do vídeo (a da placa LZ), em pixels da tela do celular
-            const TILE = { x: 246.5, y: 415.6, w: 125.7, h: 167.2 };
+            // perfil do Instagram montado numa imagem só (1180 px de largura), que rola dentro da tela
+            const IG_W = 1180, IG_H = 6970, IG_BAR = 325, IG_TABS = 1385;
+            const K = SCREEN_W / IG_W, IG_END = IG_H - SCREEN_H / K;
+            // foto da grade tocada no fim da rolagem (a da placa LZ), em pixels da tela do celular
+            const TILE = { x: 788 * K, y: (5710 - IG_END) * K, w: (IG_W - 788) * K, h: 521 * K };
             // momentos da cena: o vídeo rola com o scroll, um toque na foto, a foto abre em tela cheia
             const SCRUB = [0.1, 0.58], TAP = [0.57, 0.65], OPEN = [0.64, 0.72];
-            const VIDEO_START = 0.6; // o perfil fica parado no começo do vídeo; a rolagem dele começa aqui
             let W = 0, H = 0, portrait = 1, endScale = 1, portraitY = 0, endX = 0, endY = 0;
-            let target = 0, current = -1, frame = 0, visible = false, lastTime = -1;
+            let target = 0, current = -1, frame = 0, visible = false;
 
             const clamp = (v) => Math.min(1, Math.max(0, v));
             const part = (p, a, b) => clamp((p - a) / (b - a));
@@ -633,11 +643,11 @@
                 head.style.opacity = 1 - smooth(part(p, 0.1, 0.22)) * 0.82 - smooth(part(p, 0.62, 0.72)) * 0.18;
                 head.style.transform = 'translateY(' + (-14 * rise) + 'px)';
 
-                // o perfil do Instagram rola junto com o scroll
-                if (video.duration) {
-                    const t = VIDEO_START + part(p, SCRUB[0], SCRUB[1]) * (video.duration - VIDEO_START - 0.04);
-                    if (Math.abs(t - lastTime) > 1 / 60) { lastTime = t; video.currentTime = t; }
-                }
+                // o perfil do Instagram rola junto com o scroll; a barra do nome fica fixa e as abas grudam embaixo dela
+                const off = part(p, SCRUB[0], SCRUB[1]) * IG_END;
+                igPage.style.transform = 'translate3d(0,' + (-off * K).toFixed(2) + 'px,0)';
+                igTabs.style.transform = 'translate3d(0,' + (Math.max(IG_BAR, IG_TABS - off) * K).toFixed(2) + 'px,0)';
+                igBarScroll.style.opacity = clamp(off / 200);
 
                 // toque na foto da placa LZ
                 const tp = part(p, TAP[0], TAP[1]);
@@ -693,15 +703,7 @@
             }
 
             function loadVideos() {
-                if (video.src) return;
-                video.src = video.dataset.src;
-                video.preload = 'auto';
-                // alguns celulares só mostram o quadro buscado depois de um play rápido
-                video.addEventListener('loadedmetadata', () => {
-                    const r = video.play();
-                    if (r) r.then(() => { video.pause(); lastTime = -1; render(current < 0 ? target : current); }).catch(() => {});
-                    lastTime = -1; render(current < 0 ? target : current);
-                }, { once: true });
+                if (igPage.loading === 'lazy') igPage.loading = 'eager';
             }
 
             function refresh() { measure(); current = -1; readScroll(); }
