@@ -73,7 +73,7 @@
 
 
         /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
-        .ps { position: relative; height: 520vh; height: 520svh; background: #140d0a; color: #f4ede6; }
+        .ps { position: relative; height: 640vh; height: 640svh; background: #140d0a; color: #f4ede6; }
         /* as telas presas não encostam nas bordas nem têm cor própria: o Safari do iPhone pegava a cor delas para as barras e não soltava mais */
         .ps-stage { position: sticky; top: 1px; height: calc(100vh - 2px); height: calc(100svh - 2px); overflow: hidden; background: transparent; }
         .ps-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); pointer-events: none; }
@@ -92,7 +92,8 @@
         .ig-bar-scroll { opacity: 0; }
         .ps-tile { position: absolute; inset: auto; background: rgba(0, 0, 0, 0.35); opacity: 0; pointer-events: none; }
         .ps-photo { position: absolute; inset: auto; overflow: hidden; opacity: 0; background: #000; will-change: left, top, width, height, opacity; }
-        .ps-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+        .ps-photo { background: #0d1014; }
+        .ps-reel-v { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; display: block; will-change: transform; }
         .ps-touch { position: absolute; z-index: 7; inset: auto; left: 0; top: 0; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75); opacity: 0; will-change: transform, opacity; }
         .ps-notes { display: none; }
         .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
@@ -392,7 +393,10 @@
                                 <img class="ig-bar ig-bar-scroll" src="clips/ig-topo-rolando.jpg" alt="">
                             </div>
                             <div class="ps-tile"></div>
-                            <div class="ps-photo"><img src="lz.jpg" alt=""></div>
+                            <div class="ps-photo">
+                                <video class="ps-reel-v" muted loop playsinline preload="none" poster="clips/reel-1.jpg" data-src="clips/reel-1.mp4"></video>
+                                <video class="ps-reel-v" muted loop playsinline preload="none" poster="clips/reel-2.jpg" data-src="clips/reel-2.mp4"></video>
+                            </div>
                             <div class="ps-touch"></div>
                         </div>
                     </div>
@@ -557,6 +561,7 @@
             const $ = (sel) => section.querySelector(sel);
             const stage = $('.ps-stage'), phone = $('.ps-phone'), head = $('.ps-head');
             const touch = $('.ps-touch'), end = $('.ps-end'), tile = $('.ps-tile'), photo = $('.ps-photo');
+            const reels = [...section.querySelectorAll('.ps-reel-v')];
             const notes = [...section.querySelectorAll('.ps-note')];
             const igPage = $('.ig-page'), igTabs = $('.ig-tabs'), igBarScroll = $('.ig-bar-scroll');
             const warm = $('.ps-warm'), blob = $('.ps-blob'), tongue = $('.ps-tongue');
@@ -569,7 +574,8 @@
             // foto da grade tocada no fim da rolagem (a da placa LZ), em pixels da tela do celular
             const TILE = { x: 788 * K, y: (5710 - IG_END) * K, w: (IG_W - 788) * K, h: 521 * K };
             // momentos da cena: o vídeo rola com o scroll, um toque na foto, a foto abre em tela cheia
-            const SCRUB = [0.1, 0.58], TAP = [0.57, 0.65], OPEN = [0.64, 0.72];
+            // o perfil rola, um toque abre o primeiro reel, e um arrastar para cima passa para o segundo
+            const SCRUB = [0.08, 0.46], TAP = [0.45, 0.52], OPEN = [0.51, 0.58], SWIPE = [0.64, 0.71];
             let W = 0, H = 0, portrait = 1, endScale = 1, portraitY = 0, endX = 0, endY = 0;
             let target = 0, current = -1, frame = 0, visible = false;
 
@@ -608,7 +614,7 @@
 
             function render(p) {
                 const rise = smooth(part(p, 0, 0.08));
-                const turn = smooth(part(p, 0.72, 0.86));
+                const turn = smooth(part(p, 0.74, 0.86));
                 const y = mix(H * 0.72, portraitY, rise);
                 phone.style.transform = 'translate(-50%,-50%) translate(' + (endX * turn) + 'px,' + mix(y, endY, turn) + 'px) scale(' + mix(portrait, endScale, turn) + ')';
 
@@ -625,11 +631,28 @@
                 const tp = part(p, TAP[0], TAP[1]);
                 const pressed = Math.sin(Math.PI * part(tp, 0.4, 0.85));
                 const cx = TILE.x + TILE.w * 0.45, cy = TILE.y + TILE.h * 0.5;
-                touch.style.opacity = tp > 0 && tp < 1 ? Math.min(1, Math.sin(Math.PI * tp) * 2.5) : 0;
-                touch.style.transform = 'translate(' + (cx - (1 - tp) * 60) + 'px,' + (cy + (1 - tp) * 120) + 'px) scale(' + (1 - pressed * 0.28) + ')';
                 Object.assign(tile.style, { left: TILE.x + 'px', top: TILE.y + 'px', width: TILE.w + 'px', height: TILE.h + 'px', opacity: pressed });
 
-                // a foto abre a partir do quadradinho até ocupar a tela
+                // dedo arrastando de baixo para cima para trocar de reel
+                const sp = part(p, SWIPE[0], SWIPE[1]);
+                const drag = smooth(part(sp, 0.15, 0.85));
+                if (tp > 0 && tp < 1) {
+                    touch.style.opacity = Math.min(1, Math.sin(Math.PI * tp) * 2.5);
+                    touch.style.transform = 'translate(' + (cx - (1 - tp) * 60) + 'px,' + (cy + (1 - tp) * 120) + 'px) scale(' + (1 - pressed * 0.28) + ')';
+                } else if (sp > 0 && sp < 1) {
+                    touch.style.opacity = Math.min(1, Math.sin(Math.PI * sp) * 2.5);
+                    touch.style.transform = 'translate(' + SCREEN_W / 2 + 'px,' + mix(SCREEN_H * 0.78, SCREEN_H * 0.22, drag) + 'px) scale(0.85)';
+                } else {
+                    touch.style.opacity = 0;
+                }
+                reels[0].style.transform = 'translate3d(0,' + (-drag * 100) + '%,0)';
+                reels[1].style.transform = 'translate3d(0,' + ((1 - drag) * 100) + '%,0)';
+                if (visible && !reduced) {
+                    setPlaying(reels[0], p >= OPEN[0] - 0.02 && p < SWIPE[1]);
+                    setPlaying(reels[1], p > SWIPE[0]);
+                }
+
+                // o primeiro reel abre a partir do quadradinho até ocupar a tela
                 const op = smooth(part(p, OPEN[0], OPEN[1]));
                 Object.assign(photo.style, {
                     left: mix(TILE.x, 0, op) + 'px', top: mix(TILE.y, 0, op) + 'px',
@@ -644,7 +667,7 @@
                     notes[i].style.transform = 'translateY(calc(-50% + ' + (20 * (1 - t)) + 'px))';
                 });
 
-                const heat = smooth(part(p, 0.74, 0.86));
+                const heat = smooth(part(p, 0.76, 0.86));
                 warm.style.opacity = heat;
                 blob.style.transform = 'scale(' + mix(0.9, 1, heat) + ')';
                 tongue.style.transform = 'translateX(' + (-100 * (1 - smooth(part(p, 0.8, 0.9)))) + '%)';
@@ -654,10 +677,15 @@
                     window.dispatchEvent(new Event('lz:navcheck'));
                 }
 
-                const finish = smooth(part(p, 0.87, 0.95));
+                const finish = smooth(part(p, 0.88, 0.95));
                 end.style.opacity = finish;
                 end.style.transform = 'translateY(' + (18 * (1 - finish)) + 'px)';
                 end.classList.toggle('is-on', finish > 0.6);
+            }
+
+            function setPlaying(video, on) {
+                if (on && video.paused) { const r = video.play(); if (r) r.catch(() => {}); }
+                else if (!on && !video.paused) video.pause();
             }
 
             function readScroll() {
@@ -676,6 +704,7 @@
 
             function loadVideos() {
                 if (igPage.loading === 'lazy') igPage.loading = 'eager';
+                reels.forEach((v) => { if (!v.src) { v.src = v.dataset.src; v.preload = 'auto'; } });
             }
 
             function refresh() { measure(); current = -1; readScroll(); }
@@ -701,6 +730,7 @@
             new IntersectionObserver((entries) => {
                 visible = entries[0].isIntersecting;
                 if (visible) { current = -1; readScroll(); }
+                else reels.forEach((v) => v.pause());
             }).observe(section);
 
             document.addEventListener('scroll', readScroll, { passive: true, capture: true });
