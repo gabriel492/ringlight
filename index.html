@@ -78,7 +78,7 @@
         .ps[data-warm="true"] { background: #B9502D; }
         .ps-head { position: absolute; left: 0; right: 0; top: 104px; text-align: center; padding: 0 16px; will-change: opacity, transform; }
         .ps-kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
-        .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem, 15.5vw, 12rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #e8c98f 0%, #9a6a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(2.4rem, 12vw, 9.4rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #e8c98f 0%, #9a6a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .ps-phone { position: absolute; left: 50%; top: 50%; width: 390px; height: 800px; border-radius: 64px; background: #0b0706; box-shadow: 0 0 0 2px #5c4336, 0 0 0 5px #1e1410, 0 40px 90px rgba(0, 0, 0, 0.6); will-change: transform; transform: translate(-50%, 60vh); }
         .ps-screen { position: absolute; inset: 12px; border-radius: 52px; overflow: hidden; background: #000; font-family: 'Plus Jakarta Sans', sans-serif; }
         .ps-screen > * { position: absolute; inset: 0; }
@@ -293,7 +293,7 @@
             .ft-hours { grid-column: 1 / -1; order: 3; }
         }
 
-        /* --- FINAL DO "IMPACTO": o fundo vira terracota com as formas da parede --- */
+        /* --- FINAL DO PORTFÓLIO: o fundo vira terracota com as formas da parede --- */
         .ps-warm { position: absolute; inset: 0; background: #B9502D; opacity: 0; pointer-events: none; will-change: opacity; }
         .ps-blob { position: absolute; left: 0; top: 0; fill: #C9603A; will-change: transform; }
         .ps-tongue { position: absolute; left: 0; display: flex; }
@@ -363,16 +363,16 @@
         <div class="light-wrap">
             
             <!-- HISTÓRIA NO CELULAR: conduzida pela rolagem -->
-            <section class="ps" id="phone-story" aria-label="Do perfil ao seu projeto">
+            <section class="ps" id="phone-story" aria-label="Portfólio">
                 <div class="ps-stage">
                     <div class="ps-head">
-                        <p class="ps-kicker">Do primeiro olhar ao seu projeto</p>
-                        <p class="ps-title" aria-hidden="true">IMPACTO</p>
+                        <p class="ps-kicker">Direto do feed da LZ</p>
+                        <h2 class="ps-title">PORTFÓLIO</h2>
                     </div>
                     <div class="ps-notes">
-                        <div class="ps-note"><span>01</span><strong>Chama atenção</strong><p>Um vídeo com estética de cinema faz a sua marca ser notada.</p></div>
-                        <div class="ps-note"><span>02</span><strong>Mostra quem você é</strong><p>A identidade visual acompanha cada ponto de contato.</p></div>
-                        <div class="ps-note"><span>03</span><strong>Conquista o clique</strong><p>Quem se conecta com a sua história quer ver mais.</p></div>
+                        <div class="ps-note"><span>01</span><strong>Cada post tem um propósito.</strong><p>Conteúdo pensado para parar o scroll e mostrar a sua marca do jeito certo.</p></div>
+                        <div class="ps-note"><span>02</span><strong>Um toque e a história começa.</strong><p>Vídeos com estética de cinema, feitos para prender do primeiro ao último segundo.</p></div>
+                        <div class="ps-note"><span>03</span><strong>Arraste e veja mais.</strong><p>Casamentos, marcas e eventos, cada um com a sua própria história.</p></div>
                     </div>
                     <div class="ps-warm" aria-hidden="true">
                         <svg class="ps-blob" viewBox="0 0 520 680" preserveAspectRatio="none"><path d="M60,0 H420 C500,60 520,200 470,330 C430,440 470,560 430,680 H40 C80,560 20,450 30,320 C40,190 0,80 60,0 Z"/></svg>
@@ -605,10 +605,10 @@
                 blob.style.left = cx - pw * 0.95 + 'px';
                 blob.style.top = (wide ? 0 : cy - ph * 0.675) + 'px';
                 tongue.style.width = cx + pw * 0.62 + 'px';
-                // a faixa marrom termina exatamente na base do celular
+                // o celular fica um pouco acima da base da faixa marrom, como a foto do Sobre
                 const th = Math.max(40, ph * 0.11);
                 tongue.style.height = th + 'px';
-                tongue.style.top = cy + ph / 2 - th + 'px';
+                tongue.style.top = cy + ph / 2 - th * 0.55 + 'px';
             }
 
             // a seção tem 560 telas de altura; a rolagem do perfil foi encurtada (de 243 para 163) e o resto mantém o ritmo
