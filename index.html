@@ -68,7 +68,7 @@
 
 
         /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
-        .ps { position: relative; height: 640vh; height: 640svh; background: #140d0a; color: #f4ede6; }
+        .ps { position: relative; height: 560vh; height: 560svh; background: #140d0a; color: #f4ede6; }
         /* as telas presas não encostam nas bordas nem têm cor própria: o Safari do iPhone pegava a cor delas para as barras e não soltava mais */
         .ps-stage { position: sticky; top: 1px; height: calc(100vh - 2px); height: calc(100svh - 2px); overflow: hidden; background: transparent; }
         .ps-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); pointer-events: none; }
@@ -606,7 +606,15 @@
                 tongue.style.top = cy + ph / 2 - ph * 0.14 + 'px';
             }
 
+            // a seção tem 560 telas de altura; a rolagem do perfil foi encurtada (de 243 para 163) e o resto mantém o ritmo
+            function timeline(p) {
+                const v = p * 560;
+                const old = v <= 51.2 ? v : v <= 214.4 ? 51.2 + (v - 51.2) * (243.2 / 163.2) : v + 80;
+                return old / 640;
+            }
+
             function render(p) {
+                p = timeline(p);
                 const rise = smooth(part(p, 0, 0.08));
                 const turn = smooth(part(p, 0.74, 0.86));
                 const y = mix(H * 0.72, portraitY, rise);
