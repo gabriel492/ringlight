@@ -76,7 +76,7 @@
         .ps-stage { position: sticky; top: 1px; height: calc(100vh - 2px); height: calc(100svh - 2px); overflow: hidden; background: transparent; }
         .ps-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); pointer-events: none; }
         .ps[data-warm="true"] { background: #B9502D; }
-        .ps-head { position: absolute; left: 0; right: 0; top: 104px; text-align: center; padding: 0 16px; will-change: opacity, transform; }
+        .ps-head { position: absolute; left: 0; right: 0; top: calc(80px + env(safe-area-inset-top)); text-align: center; padding: 0 16px; will-change: opacity, transform; }
         .ps-kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
         .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(2.4rem, 12vw, 9.4rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #e8c98f 0%, #9a6a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .ps-phone { position: absolute; left: 50%; top: 50%; width: 390px; height: 800px; border-radius: 64px; background: #0b0706; box-shadow: 0 0 0 2px #5c4336, 0 0 0 5px #1e1410, 0 40px 90px rgba(0, 0, 0, 0.6); will-change: transform; transform: translate(-50%, 60vh); }
