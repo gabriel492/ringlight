@@ -83,6 +83,12 @@ input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
 .ps-end.ps-end-side { right: auto; width: min(420px, 34vw); padding: 0; text-align: left; }
 .ps-end.ps-end-side h3 { font-size: clamp(2rem, 3vw, 2.8rem); }
 .ps-end.ps-end-side p { margin-left: 0; }
+/* no celular o texto final fica mais compacto para o aparelho ganhar altura */
+@media (max-width: 1023px) {
+    .ps-end { padding: 0 20px; }
+    .ps-end h3 { line-height: 1.1; margin-bottom: 6px; }
+    .ps-end p { font-size: 0.9rem; line-height: 1.4; margin-bottom: 14px; }
+}
 @media (min-width: 1024px) {
     .ps-notes { display: block; position: absolute; inset: 0; pointer-events: none; }
     .ps-note { position: absolute; top: 50%; width: min(24vw, 320px); opacity: 0; will-change: opacity, transform; }
