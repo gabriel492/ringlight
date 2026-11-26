@@ -81,7 +81,7 @@
         .ps-head { position: absolute; left: 0; right: 0; top: 104px; text-align: center; padding: 0 16px; will-change: opacity, transform; }
         .ps-kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
         .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem, 15.5vw, 12rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #e8c98f 0%, #9a6a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .ps-phone { position: absolute; left: 50%; top: 50%; width: 390px; height: 844px; border-radius: 64px; background: #0b0706; box-shadow: 0 0 0 2px #5c4336, 0 0 0 5px #1e1410, 0 40px 90px rgba(0, 0, 0, 0.6); will-change: transform; transform: translate(-50%, 60vh); }
+        .ps-phone { position: absolute; left: 50%; top: 50%; width: 390px; height: 800px; border-radius: 64px; background: #0b0706; box-shadow: 0 0 0 2px #5c4336, 0 0 0 5px #1e1410, 0 40px 90px rgba(0, 0, 0, 0.6); will-change: transform; transform: translate(-50%, 60vh); }
         .ps-screen { position: absolute; inset: 12px; border-radius: 52px; overflow: hidden; background: #000; font-family: 'Plus Jakarta Sans', sans-serif; }
         .ps-screen > * { position: absolute; inset: 0; }
         .ps-island { position: absolute; left: 50%; top: 22px; width: 112px; height: 32px; margin-left: -56px; border-radius: 20px; background: #000; z-index: 8; }
@@ -93,7 +93,7 @@
         .ps-tile { position: absolute; inset: auto; background: rgba(0, 0, 0, 0.35); opacity: 0; pointer-events: none; }
         .ps-photo { position: absolute; inset: auto; overflow: hidden; opacity: 0; background: #000; will-change: left, top, width, height, opacity; }
         .ps-photo { background: #0d1014; }
-        .ps-reel-v { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block; will-change: transform; }
+        .ps-reel-v { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: fill; display: block; will-change: transform; }
         .ps-touch { position: absolute; z-index: 7; inset: auto; left: 0; top: 0; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75); opacity: 0; will-change: transform, opacity; }
         .ps-notes { display: none; }
         .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
@@ -566,7 +566,7 @@
             const warm = $('.ps-warm'), blob = $('.ps-blob'), tongue = $('.ps-tongue');
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            const PHONE_W = 390, PHONE_H = 844, SCREEN_W = 366, SCREEN_H = 820, HEADER = 88;
+            const PHONE_W = 390, PHONE_H = 800, SCREEN_W = 366, SCREEN_H = 776, HEADER = 88;
             // perfil do Instagram montado numa imagem só (1180 px de largura), que rola dentro da tela
             const IG_W = 1180, IG_H = 6970, IG_BAR = 325, IG_TABS = 1385;
             const K = SCREEN_W / IG_W, IG_END = IG_H - SCREEN_H / K;
