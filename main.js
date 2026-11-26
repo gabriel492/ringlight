@@ -100,8 +100,13 @@
             end.style.left = (W / 2 + endX + (PHONE_W * endScale) / 2 + 56) + 'px';
             end.style.top = (H / 2 + portraitY - end.offsetHeight / 2) + 'px';
         } else {
+            // no celular o texto final fica perto da base da tela e o aparelho cresce até ocupar o espaço de cima
+            // (a folga de 40px embaixo do celular é para a faixa marrom, que passa um pouco da base dele)
             end.style.left = '';
-            end.style.top = (HEADER + PHONE_H * endScale + 18) + 'px';
+            const endTop = H - end.offsetHeight - 28;
+            endScale = Math.min(portrait, (endTop - 40 - 76) / PHONE_H);
+            endY = 76 + (PHONE_H * endScale) / 2 - H / 2;
+            end.style.top = endTop + 'px';
         }
         // formas da parede posicionadas em volta do celular parado no final
         const pw = PHONE_W * endScale, ph = PHONE_H * endScale, cx = W / 2 + endX, cy = H / 2 + endY;
