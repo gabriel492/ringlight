@@ -260,7 +260,6 @@ input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
     -webkit-text-fill-color: #ffffff; caret-color: #ffffff; -webkit-box-shadow: 0 0 0 1000px var(--lz-terracota-fundo) inset; transition: background-color 600000s 0s;
 }
 .ct-field input:autofill { background: transparent; }
-.ab-btn:disabled { opacity: 0.7; cursor: progress; }
 .ct-field [aria-invalid="true"] { border-bottom-color: var(--lz-marrom); box-shadow: 0 1.5px 0 0 var(--lz-marrom); }
 /* erro em etiqueta marrom: legível sobre o terracota */
 .ct-error { width: fit-content; margin-top: 10px; padding: 4px 10px; border-radius: 6px; background: var(--lz-marrom); color: #ffffff; font-size: 0.875rem; font-weight: 600; line-height: 1.4; }
@@ -268,10 +267,7 @@ input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
 /* aviso de mensagem enviada, no lugar dos campos */
 /* alinhado com o "Conte a sua ideia": título na mesma altura e mesmo tamanho, texto igual ao da esquerda */
 .ct-sent { animation: ct-sent-in 0.45s ease both; }
-.ct-sent-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-.ct-sent-icon { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--lz-offwhite); color: var(--lz-terracota-fundo); }
-.ct-sent-icon svg { width: 22px; height: 22px; }
-.ct-sent-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; color: #ffffff; outline: none; }
+.ct-sent-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; color: #ffffff; outline: none; }
 .ct-sent p { font-size: 1.0625rem; line-height: 1.7; color: #ffffff; max-width: 26rem; margin-bottom: 24px; }
 .ct-sent .ct-again { padding: 0; font-size: 0.95rem; line-height: 1.7; font-weight: 600; color: #ffffff; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; cursor: pointer; }
 .ct-sent .ct-again:hover { text-decoration-thickness: 2.5px; }

@@ -341,7 +341,6 @@
     const TO = 'lzdigital.comercial@gmail.com';
     const ENDPOINT = 'https://formsubmit.co/ajax/' + TO;
     const status = document.getElementById('ct-status');
-    const button = form.querySelector('button[type="submit"]');
     const trap = form.querySelector('input[name="_honey"]');
     const fields = [
         { el: form.querySelector('#ct-name'), ok: (v) => v.trim().length > 0 },
@@ -370,13 +369,6 @@
         status.textContent = 'Abrimos o seu app de e-mail com a mensagem pronta. Se ele não abriu, escreva para ' + TO + ' ou chame no WhatsApp.';
     }
 
-    function busy(on) {
-        button.style.width = on ? button.offsetWidth + 'px' : '';
-        button.disabled = on;
-        button.setAttribute('aria-busy', on ? 'true' : 'false');
-        button.textContent = on ? 'Enviando…' : 'Enviar mensagem';
-    }
-
     // depois do envio os campos dão lugar a um aviso de "mensagem enviada", com a opção de mandar outra
     const sent = document.getElementById('ct-sent');
     const sentTitle = sent && sent.querySelector('.ct-sent-title');
@@ -393,7 +385,7 @@
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (button.disabled) return;
+        if (!sent.hidden) return;
         const invalid = fields.filter((field) => !check(field));
         if (invalid.length) { invalid[0].el.focus(); status.textContent = ''; return; }
         const [name, email, message] = fields.map((field) => field.el.value.trim());
@@ -401,35 +393,47 @@
         // robô preencheu o campo invisível: finge que enviou e descarta
         if (trap && trap.value) { showSent(true); return; }
 
-        busy(true);
+        // mostra "Mensagem enviada!" na hora e envia em segundo plano;
+        // se o envio falhar, os campos voltam preenchidos com o aviso do problema
+        const payload = JSON.stringify({
+            Nome: name,
+            'E-mail': email,
+            Mensagem: message,
+            _subject: 'Orçamento pelo site — ' + name,
+            _replyto: email,
+            _template: 'table',
+            _captcha: 'false'
+        });
         status.textContent = '';
+        form.hidden = true;
+        sent.hidden = false;
+        sentTitle.focus();
+
         let data = null;
         try {
             const res = await fetch(ENDPOINT, {
                 method: 'POST',
+                keepalive: true,
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({
-                    Nome: name,
-                    'E-mail': email,
-                    Mensagem: message,
-                    _subject: 'Orçamento pelo site — ' + name,
-                    _replyto: email,
-                    _template: 'table',
-                    _captcha: 'false'
-                })
+                body: payload
             });
             data = await res.json();
         } catch (err) {
             data = null;
         }
-        busy(false);
 
-        // FormSubmit fora do ar ou bloqueado: usa o app de e-mail
+        if (data && (data.success === true || data.success === 'true')) {
+            // deu certo: limpa os campos escondidos para a próxima mensagem (se a pessoa ainda não começou outra)
+            if (!form.hidden) return;
+            form.reset();
+            fields.forEach((field) => { field.el.removeAttribute('aria-invalid'); field.el.removeAttribute('aria-describedby'); document.getElementById(field.el.id + '-error').hidden = true; });
+            return;
+        }
+
+        // não deu: volta o formulário como estava
+        sent.hidden = true;
+        form.hidden = false;
         if (!data) { openMailApp(name, email, message); return; }
-
-        if (data.success === true || data.success === 'true') { showSent(true); return; }
-
-        // antes da primeira confirmação o FormSubmit pede para ativar o formulário pelo e-mail
         if (/activat/i.test(String(data.message || ''))) {
             status.textContent = 'Formulário aguardando ativação: confirme o e-mail do FormSubmit enviado para ' + TO + ' e envie de novo.';
             return;
