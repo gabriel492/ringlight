@@ -380,43 +380,26 @@
     }
 
     function busy(on) {
-        // o botão mantém a largura enquanto o texto muda, para o anel de luz ficar centralizado
         button.style.width = on ? button.offsetWidth + 'px' : '';
         button.disabled = on;
         button.setAttribute('aria-busy', on ? 'true' : 'false');
         button.textContent = on ? 'Enviando…' : 'Enviar mensagem';
     }
 
-    // efeito ring light: o anel acende em volta do botão enquanto envia
-    const section = form.closest('.ct');
-    const actions = button.parentElement;
-    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    let ring = null;
-    function ringOn() {
-        ring = document.createElement('span');
-        ring.className = 'ct-ring is-busy';
-        ring.setAttribute('aria-hidden', 'true');
-        ring.style.left = button.offsetLeft + button.offsetWidth / 2 + 'px';
-        ring.style.top = button.offsetTop + button.offsetHeight / 2 + 'px';
-        actions.insertBefore(ring, button);
+    // depois do envio os campos dão lugar a um aviso de "mensagem enviada", com a opção de mandar outra
+    const sent = document.getElementById('ct-sent');
+    const sentTitle = sent && sent.querySelector('.ct-sent-title');
+    function showSent(on) {
+        form.hidden = on;
+        sent.hidden = !on;
+        if (on) { sentTitle.focus(); return; }
+        form.reset();
+        if (opened) opened.value = String(Date.now());
+        fields.forEach((field) => { field.el.removeAttribute('aria-invalid'); field.el.removeAttribute('aria-describedby'); document.getElementById(field.el.id + '-error').hidden = true; });
+        status.textContent = '';
+        fields[0].el.focus();
     }
-    function ringOff(flash) {
-        if (flash && section) {
-            // flash de câmera saindo do botão
-            const a = button.getBoundingClientRect(), s = section.getBoundingClientRect();
-            const f = document.createElement('span');
-            f.className = 'ct-flash';
-            f.setAttribute('aria-hidden', 'true');
-            f.style.setProperty('--fx', a.left + a.width / 2 - s.left + 'px');
-            f.style.setProperty('--fy', a.top + a.height / 2 - s.top + 'px');
-            section.appendChild(f);
-            setTimeout(() => f.remove(), 1000);
-        }
-        const r = ring; ring = null;
-        if (!r) return;
-        r.classList.remove('is-busy'); r.classList.add('is-off');
-        setTimeout(() => r.remove(), 650);
-    }
+    if (sent) sent.querySelector('button').addEventListener('click', () => showSent(false));
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -427,31 +410,19 @@
 
         busy(true);
         status.textContent = '';
-        status.classList.remove('is-ok');
-        ringOn();
         let data = null;
-        const minimum = wait(900); // tempo para o anel acender por inteiro
         try {
             const res = await fetch('contato.php', { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
             data = await res.json();
         } catch (err) {
             data = null;
         }
-        await minimum;
         busy(false);
-        ringOff(Boolean(data && data.ok));
 
         // servidor indisponível ou sem PHP: usa o app de e-mail
         if (!data || typeof data.ok !== 'boolean') { openMailApp(name, email, message); return; }
 
-        if (data.ok) {
-            status.classList.add('is-ok');
-            form.reset();
-            if (opened) opened.value = String(Date.now());
-            fields.forEach((field) => { field.el.removeAttribute('aria-invalid'); field.el.removeAttribute('aria-describedby'); document.getElementById(field.el.id + '-error').hidden = true; });
-            status.textContent = 'Mensagem enviada! A Luiza vai responder no seu e-mail em breve.';
-            return;
-        }
+        if (data.ok) { showSent(true); return; }
         if (data.erros) {
             const wrong = fields.filter((field) => !show(field, data.erros[field.name] || ''));
             if (wrong.length) wrong[0].el.focus();
