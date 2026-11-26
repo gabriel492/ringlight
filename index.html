@@ -587,7 +587,8 @@
                 portraitY = HEADER / 2;
                 // no final o celular continua em pé: no computador vai para a esquerda, no celular encolhe para o texto caber embaixo
                 const wide = W >= 1024;
-                endScale = wide ? portrait : Math.min(portrait, (H * 0.5) / PHONE_H);
+                // no computador o celular encolhe se precisar para a faixa marrom caber inteira embaixo dele
+                endScale = wide ? Math.min(portrait, (H / 2 - portraitY - 24) / (PHONE_H * (0.5 + 0.11 * 0.45))) : Math.min(portrait, (H * 0.5) / PHONE_H);
                 endX = wide ? -Math.min(W * 0.18, 260) : 0;
                 endY = wide ? portraitY : HEADER + (PHONE_H * endScale) / 2 - H / 2;
                 end.classList.toggle('ps-end-side', wide);
