@@ -1,8 +1,9 @@
 # LZ Audiovisual — site
 
-Site de uma página da LZ Audiovisual (videomaker Luiza). Publicado pela Vercel a cada envio para o `main`.
+Site de uma página da LZ Audiovisual (videomaker Luiza).
 
-- Endereço atual: https://ringlight-two.vercel.app/
+- Hoje: publicado pela Vercel a cada envio para o `main`, em https://ringlight-two.vercel.app/
+- Destino final: hospedagem na HostGator (veja "Publicar na HostGator")
 
 ## Arquivos
 
@@ -14,7 +15,8 @@ Site de uma página da LZ Audiovisual (videomaker Luiza). Publicado pela Vercel 
 | `fonts/` | Cinzel e Plus Jakarta Sans (licença OFL, arquivos `OFL-*.txt`) |
 | `clips/` | Foto da abertura, print do perfil do Instagram e os reels do portfólio |
 | `og-image.jpg` | Imagem que aparece ao compartilhar o link (1200x630) |
-| `vercel.json` | Cabeçalhos de segurança (CSP e afins) |
+| `.htaccess` | Configuração da HostGator: HTTPS, cabeçalhos de segurança, compressão e cache |
+| `vercel.json` | Os mesmos cabeçalhos de segurança, para enquanto o site estiver na Vercel |
 | `robots.txt`, `sitemap.xml` | Indexação no Google |
 
 Não há build nem dependências: é só HTML, CSS e JavaScript.
@@ -29,17 +31,31 @@ python3 -m http.server 8000
 
 e abrir http://localhost:8000. (Os vídeos precisam de um servidor que aceite requisições parciais para avançar no tempo; o da Vercel aceita.)
 
+## Publicar na HostGator
+
+1. No cPanel, ativar o SSL grátis do domínio (AutoSSL / "SSL/TLS Status").
+2. Abrir o **Gerenciador de Arquivos** e entrar em `public_html` (ou na pasta do domínio).
+3. Enviar estes arquivos e pastas, mantendo a mesma estrutura:
+   - `index.html`, `styles.css`, `main.js`, `.htaccess`
+   - `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `logo-lz.png`, `og-image.jpg`
+   - `luiza.jpeg`, `lz.jpg`, `robots.txt`, `sitemap.xml`
+   - as pastas `clips/` e `fonts/` inteiras
+4. Arquivos que **não** precisam subir: `README.md`, `vercel.json`, `.gitignore` e a pasta `.git`.
+5. O `.htaccess` começa com ponto e fica oculto: no Gerenciador de Arquivos, em "Configurações", marcar "Mostrar arquivos ocultos" para conferir que ele foi.
+
 ## Ao ligar o domínio próprio
 
-Trocar `https://ringlight-two.vercel.app/` pelo novo endereço em:
+Trocar `https://ringlight-two.vercel.app/` pelo endereço definitivo em:
 
 - `index.html` (canonical, `og:url`, `og:image` e JSON-LD)
 - `robots.txt` e `sitemap.xml`
 
 ## Ao trocar o formulário para envio direto (Formspree ou outro)
 
-A política de segurança em `vercel.json` só permite conexões com o próprio site. Adicionar o endereço do serviço em `connect-src` e `form-action`, por exemplo `https://formspree.io`.
+A política de segurança (`.htaccess` e `vercel.json`) só permite conexões com o próprio site e a Cloudflare. Adicionar o endereço do serviço em `connect-src` e `form-action` nos dois arquivos, por exemplo `https://formspree.io`.
 
 ## Contagem de visitas
 
-O script `/_vercel/insights/script.js` só funciona depois de ativar **Web Analytics** no painel do projeto na Vercel.
+Cloudflare Web Analytics (gratuito, sem cookies). No fim do `index.html` há um comentário marcando onde colar o código gerado em dash.cloudflare.com > Web Analytics > Manage site. Os endereços da Cloudflare já estão liberados no `.htaccess` e no `vercel.json`.
+
+O cPanel da HostGator também tem estatísticas próprias em **Métricas > Awstats**, que contam pelos registros do servidor (incluem robôs).
