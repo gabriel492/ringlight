@@ -116,17 +116,17 @@
         .ps.ps-static { height: 100vh; height: 100svh; }
 
 
-        /* --- ABERTURA: visor de câmera com vídeo vertical --- */
+        /* --- ABERTURA: visor de câmera com a foto da Luiza --- */
         .vf-hero { min-height: 100vh; min-height: 100svh; height: auto; background: #140d0a; color: #f4ede6; }
-        .vf-bg { position: absolute; inset: -60px; background: url('clips/hero-blur.jpg') center 30% / cover; filter: blur(34px) brightness(0.45) saturate(1.1); }
+        .vf-bg { position: absolute; inset: -60px; background: url('clips/hero-luiza-blur.jpg') center / cover; filter: blur(34px) brightness(0.45) saturate(1.1); }
         .vf-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 30%, rgba(14, 9, 8, 0.78) 100%); }
         .vf-inner { position: relative; z-index: 2; width: 100%; max-width: 1180px; margin: 0 auto; padding: 104px 64px 72px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 64px; }
         .vf-kicker { margin-bottom: 18px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: #c2a895; }
         .vf-logo { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 8vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 16px; justify-content: flex-start; }
         .vf-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; max-width: 34rem; }
         .vf-text { font-size: 1.05rem; line-height: 1.6; color: #e6d7ca; max-width: 30rem; }
-        .vf-frame { position: relative; height: min(76vh, 640px); aspect-ratio: 9 / 16; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
-        .vf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .vf-frame { position: relative; width: min(46vw, 620px); aspect-ratio: 3 / 2; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+        .vf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
         .vf-grid { position: absolute; inset: 0; pointer-events: none; background:
             linear-gradient(90deg, transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(33.33% + 0.5px), transparent 0 calc(66.66% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(66.66% + 0.5px), transparent 0),
             linear-gradient(transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(33.33% + 0.5px), transparent 0 calc(66.66% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(66.66% + 0.5px), transparent 0); }
@@ -153,7 +153,8 @@
             .vf-hero { align-items: stretch; }
             .vf-bg, .vf-hero::after, .vf-scroll, .vf-kicker, .vf-grid, .vf-cross, .vf-hud-bottom { display: none; }
             .vf-inner { position: static; display: block; padding: 0; max-width: none; }
-            .vf-frame { position: absolute; inset: 0; height: auto; aspect-ratio: auto; box-shadow: none; }
+            .vf-frame { position: absolute; inset: 0; width: auto; height: auto; aspect-ratio: auto; box-shadow: none; }
+            .vf-video { object-position: 48% 30%; }
             .vf-shade { display: block; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 13, 10, 0.95) 12%, rgba(20, 13, 10, 0.4) 44%, transparent 64%), linear-gradient(to bottom, rgba(20, 13, 10, 0.55), transparent 20%); }
             .vf-corner.tl, .vf-corner.tr { top: 78px; }
             .vf-corner.bl, .vf-corner.br { opacity: 0.5; }
@@ -350,9 +351,7 @@
                     <p class="vf-text">Roteiro, gravação e edição para redes sociais, eventos e marcas.</p>
                 </div>
                 <div class="vf-frame">
-                    <video class="vf-video" autoplay muted loop playsinline preload="auto" poster="clips/hero.jpg">
-                        <source src="clips/hero.mp4" type="video/mp4">
-                    </video>
+                    <img class="vf-video" src="clips/hero-luiza.jpg" alt="Luiza, da LZ Audiovisual">
                     <div class="vf-grid" aria-hidden="true"></div>
                     <div class="vf-shade" aria-hidden="true"></div>
                     <span class="vf-corner tl" aria-hidden="true"></span><span class="vf-corner tr" aria-hidden="true"></span>
