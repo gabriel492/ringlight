@@ -1,53 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark scroll-smooth" style="cursor: auto !important;">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#140d0a">
     <style>html, body { background-color: #140d0a; }</style>
     <title>LZ — Audiovisual</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brown: {
-                            950: '#140d0a',
-                            900: '#1e1410',
-                            800: '#2d1f18',
-                            700: '#422f25',
-                            600: '#5c4336',
-                            500: '#7a5a4a',
-                        },
-                        beige: {
-                            50: '#faf7f4',
-                            100: '#f4ede6',
-                            200: '#e6d7ca',
-                            300: '#d4c0b0',
-                            400: '#c2a895',
-                            500: '#ab8d79',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        display: ['"Cinzel"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            cursor: auto !important;
-        }
+        /* base (reset mínimo, substitui o Tailwind) */
+        *, ::before, ::after { box-sizing: border-box; border: 0 solid; }
+        html { -webkit-text-size-adjust: 100%; line-height: 1.5; scroll-behavior: smooth; }
+        body { margin: 0; line-height: inherit; background: #140d0a; color: #f4ede6; font-family: "Plus Jakarta Sans", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; position: relative; }
+        ::selection { background: #c2a895; color: #140d0a; }
+        h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+        blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre { margin: 0; }
+        ol, ul, menu { list-style: none; margin: 0; padding: 0; }
+        a { color: inherit; text-decoration: inherit; }
+        b, strong { font-weight: bolder; }
+        img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }
+        img, video { max-width: 100%; height: auto; }
+        button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; color: inherit; margin: 0; padding: 0; }
+        button, [role="button"] { cursor: pointer; }
+        button, [type="button"], [type="submit"] { -webkit-appearance: button; background-color: transparent; background-image: none; }
+        textarea { resize: vertical; }
+        input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
+        [hidden] { display: none; }
+
+        /* navbar */
+        #navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; padding: 1.5rem 1.5rem; transition: all 0.3s ease; }
+        .nav-in { max-width: 80rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .nav-brand .lz-mark { transition: transform 0.3s ease; }
+        .nav-brand:hover .lz-mark { transform: scale(1.05); }
+        .nav-word { font-family: "Cinzel", serif; font-weight: 600; font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.3em; color: #d4c0b0; text-transform: uppercase; padding-left: 0.25rem; border-left: 1px solid rgba(212, 192, 176, 0.3); }
+        .nav-cta { color: #e6d7ca; font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
+        .nav-cta:hover { color: #fff; }
+        @media (min-width: 1024px) { #navbar { padding-left: 4rem; padding-right: 4rem; } }
+        .site-main { position: relative; z-index: 10; }
+        .light-wrap { background: #f4ede6; color: #140d0a; position: relative; z-index: 20; }
+
 
         ::-webkit-scrollbar {
             width: 8px;
@@ -324,22 +319,22 @@
         #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
     </style>
 </head>
-<body class="bg-brown-950 text-beige-100 font-sans antialiased selection:bg-beige-400 selection:text-brown-950 overflow-x-hidden relative">
+<body>
 
-    <header id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 px-6 lg:px-16">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <span class="lz-mark lz-mark-nav transition-transform duration-300 group-hover:scale-105" role="img" aria-label="LZ"></span>
-                <span class="font-display font-semibold text-xs tracking-[0.3em] text-beige-300 uppercase pl-1 border-l border-beige-300/30 nav-text">AUDIOVISUAL</span>
+    <header id="navbar">
+        <div class="nav-in">
+            <a href="#" class="nav-brand">
+                <span class="lz-mark lz-mark-nav" role="img" aria-label="LZ"></span>
+                <span class="nav-word nav-text">AUDIOVISUAL</span>
             </a>
 
-            <button onclick="openContactModal()" class="nav-text bg-transparent border-none text-beige-200 hover:text-white font-sans text-xs tracking-[0.2em] uppercase transition-colors cursor-pointer p-0">
+            <button onclick="openContactModal()" class="nav-cta nav-text">
                 Contato
             </button>
         </div>
     </header>
 
-    <main class="relative z-10">
+    <main class="site-main">
 
         <section class="zoom-hero-wrapper vf-hero" id="hero-wrapper">
             <div class="vf-bg" aria-hidden="true"></div>
@@ -364,7 +359,7 @@
             <p class="vf-scroll" aria-hidden="true">Role para ver mais</p>
         </section>
 
-        <div class="bg-beige-100 text-brown-950 relative z-20 transition-colors">
+        <div class="light-wrap">
             
             <!-- HISTÓRIA NO CELULAR: conduzida pela rolagem -->
             <section class="ps" id="phone-story" aria-label="Do perfil ao seu projeto">
@@ -386,7 +381,7 @@
                         <div class="ps-island"></div>
                         <div class="ps-screen">
                             <div class="ps-insta">
-                                <img class="ig-page" src="clips/ig-perfil.jpg" alt="" decoding="async" loading="lazy">
+                                <img class="ig-page" src="clips/ig-perfil.webp" alt="" decoding="async" loading="lazy">
                                 <img class="ig-tabs" src="clips/ig-abas.jpg" alt="">
                                 <img class="ig-bar" src="clips/ig-topo.jpg" alt="">
                                 <img class="ig-bar ig-bar-scroll" src="clips/ig-topo-rolando.jpg" alt="">
