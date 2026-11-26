@@ -84,6 +84,8 @@
         W = stage.clientWidth; H = stage.clientHeight;
         portrait = Math.min((H - HEADER - 20) / PHONE_H, (W * 0.74) / PHONE_W, 0.82);
         portraitY = HEADER / 2;
+        // no celular o aparelho sobe e encosta logo abaixo do menu, para sobrar espaço embaixo para a frase
+        if (W < 1024) portraitY = 68 + (PHONE_H * portrait) / 2 - H / 2;
         // no final o celular continua em pé: no computador vai para a esquerda, no celular encolhe para o texto caber embaixo
         const wide = W >= 1024;
         // no computador o celular encolhe se precisar para a faixa marrom caber inteira embaixo dele

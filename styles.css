@@ -93,6 +93,14 @@ input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
     .ps-note p { color: #d4c0b0; line-height: 1.55; }
 }
 .ps.ps-static { height: 100vh; height: 100svh; }
+/* no celular as frases 01, 02 e 03 aparecem como legenda sobre a parte de baixo do aparelho */
+@media (max-width: 1023px) {
+    .ps-notes { display: block; position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+    .ps-note { position: absolute; left: 0; right: 0; top: auto !important; bottom: 0; transform: none !important; padding: 84px 28px calc(10px + env(safe-area-inset-bottom)); text-align: center; opacity: 0; background: linear-gradient(to top, rgba(20, 13, 10, 0.97) 48%, rgba(20, 13, 10, 0.8) 72%, rgba(20, 13, 10, 0)); }
+    .ps-note span { display: block; margin-bottom: 3px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; color: #E0A27A; }
+    .ps-note strong { display: block; font-family: 'Cinzel', serif; font-size: 1.3rem; line-height: 1.1; margin-bottom: 4px; color: #F4F1EA; }
+    .ps-note p { font-size: 0.92rem; line-height: 1.35; color: #e6d7ca; max-width: 22rem; margin: 0 auto; }
+}
 
 
 /* --- ABERTURA: visor de câmera com a foto da Luiza --- */
