@@ -266,12 +266,14 @@ input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
 .ct-error { width: fit-content; margin-top: 10px; padding: 4px 10px; border-radius: 6px; background: var(--lz-marrom); color: #ffffff; font-size: 0.875rem; font-weight: 600; line-height: 1.4; }
 .ct-actions { position: relative; margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
 /* aviso de mensagem enviada, no lugar dos campos */
-.ct-sent { padding: 8px 0 4px; animation: ct-sent-in 0.45s ease both; }
-.ct-sent-icon { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 22px; border-radius: 50%; background: var(--lz-offwhite); color: var(--lz-terracota-fundo); }
-.ct-sent-icon svg { width: 26px; height: 26px; }
-.ct-sent-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.15; color: #ffffff; margin-bottom: 12px; outline: none; }
-.ct-sent p { font-size: 1rem; line-height: 1.6; color: #ffffff; max-width: 26rem; margin-bottom: 28px; }
-.ct-sent .ct-again { padding: 0; font-size: 0.95rem; font-weight: 600; color: #ffffff; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; cursor: pointer; }
+/* alinhado com o "Conte a sua ideia": título na mesma altura e mesmo tamanho, texto igual ao da esquerda */
+.ct-sent { animation: ct-sent-in 0.45s ease both; }
+.ct-sent-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.ct-sent-icon { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--lz-offwhite); color: var(--lz-terracota-fundo); }
+.ct-sent-icon svg { width: 22px; height: 22px; }
+.ct-sent-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; color: #ffffff; outline: none; }
+.ct-sent p { font-size: 1.0625rem; line-height: 1.7; color: #ffffff; max-width: 26rem; margin-bottom: 24px; }
+.ct-sent .ct-again { padding: 0; font-size: 0.95rem; line-height: 1.7; font-weight: 600; color: #ffffff; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; cursor: pointer; }
 .ct-sent .ct-again:hover { text-decoration-thickness: 2.5px; }
 @keyframes ct-sent-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ct-sent { animation: none; } }
