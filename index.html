@@ -181,13 +181,12 @@
                     <p class="ct-alt">Prefere conversar? <button type="button" class="ct-link" data-contact="open">Fale pelo WhatsApp ou Instagram</button>.</p>
                 </div>
 
-                <form class="ct-form" id="contact-form" action="contato.php" method="post" novalidate>
-                    <!-- armadilhas para robôs: ninguém vê nem preenche estes campos -->
+                <form class="ct-form" id="contact-form" novalidate>
+                    <!-- armadilha para robôs: ninguém vê nem preenche este campo -->
                     <div class="ct-trap" aria-hidden="true">
                         <label for="ct-site">Não preencha este campo</label>
-                        <input id="ct-site" name="site" type="text" tabindex="-1" autocomplete="off">
+                        <input id="ct-site" name="_honey" type="text" tabindex="-1" autocomplete="off">
                     </div>
-                    <input type="hidden" name="t" value="">
                     <div class="ct-field">
                         <label for="ct-name">Seu nome</label>
                         <input id="ct-name" name="nome" type="text" autocomplete="name" maxlength="100" required placeholder="Ex.: Ana Souza…">
