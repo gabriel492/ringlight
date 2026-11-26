@@ -55,7 +55,7 @@ Trocar `https://ringlight-two.vercel.app/` pelo endereço definitivo em:
 
 Na HostGator o formulário envia pelo `contato.php`, que manda um e-mail para a Luiza com o "Responder" apontando para quem escreveu. No topo do arquivo:
 
-- `$DESTINO`: e-mail que recebe as mensagens (hoje `contato@lzaudiovisual.com`)
+- `$DESTINO`: e-mail que recebe as mensagens (hoje `lzdigital.comercial@gmail.com`)
 - `$REMETENTE`: vazio usa `nao-responda@<domínio do site>`; precisa ser do próprio domínio para não cair no spam
 - `$LIMITE_POR_HORA`: máximo de mensagens por visitante por hora
 

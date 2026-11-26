@@ -375,8 +375,8 @@
     function openMailApp(name, email, message) {
         const subject = 'Orçamento pelo site — ' + name;
         const body = message + '\n\n' + name + '\n' + email;
-        window.location.href = 'mailto:contato@lzaudiovisual.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        status.textContent = 'Abrimos o seu app de e-mail com a mensagem pronta. Se ele não abriu, escreva para contato@lzaudiovisual.com ou chame no WhatsApp.';
+        window.location.href = 'mailto:lzdigital.comercial@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        status.textContent = 'Abrimos o seu app de e-mail com a mensagem pronta. Se ele não abriu, escreva para lzdigital.comercial@gmail.com ou chame no WhatsApp.';
     }
 
     function busy(on) {

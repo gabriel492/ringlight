@@ -5,7 +5,7 @@
 
 // ===== CONFIGURAÇÃO =====
 // Para onde vão as mensagens do site:
-$DESTINO = 'contato@lzaudiovisual.com';
+$DESTINO = 'lzdigital.comercial@gmail.com';
 // Remetente técnico: precisa ser um e-mail do próprio domínio do site, senão o provedor
 // marca como spam ou recusa. Deixe vazio para usar "nao-responda@<domínio do site>".
 $REMETENTE = '';
