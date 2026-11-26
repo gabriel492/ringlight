@@ -1,0 +1,12 @@
+# sistema
+.DS_Store
+Thumbs.db
+
+# Vercel e ferramentas
+.vercel
+node_modules/
+*.log
+
+# variáveis de ambiente e segredos
+.env
+.env.*

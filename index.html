@@ -4,322 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#140d0a">
-    <style>html, body { background-color: #140d0a; }</style>
-    <title>LZ — Audiovisual</title>
+    <title>LZ Audiovisual — Videomaker</title>
+    <meta name="description" content="LZ Audiovisual: vídeos que fazem sua marca ser lembrada. Roteiro, gravação e edição para redes sociais, eventos e marcas, com a videomaker Luiza.">
+    <!-- trocar o endereço abaixo (e no sitemap.xml e robots.txt) quando o domínio próprio estiver ligado -->
+    <link rel="canonical" href="https://ringlight-two.vercel.app/">
+
+    <!-- prévia do link no WhatsApp, Instagram, Facebook e afins -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="LZ Audiovisual">
+    <meta property="og:title" content="LZ Audiovisual — Vídeos que fazem sua marca ser lembrada">
+    <meta property="og:description" content="Roteiro, gravação e edição para redes sociais, eventos e marcas.">
+    <meta property="og:url" content="https://ringlight-two.vercel.app/">
+    <meta property="og:image" content="https://ringlight-two.vercel.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Luiza, da LZ Audiovisual, com o texto Vídeos que fazem sua marca ser lembrada">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="fonts/cinzel.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="fonts/plus-jakarta-sans.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="styles.css">
 
-    <style>
-        /* base (reset mínimo, substitui o Tailwind) */
-        *, ::before, ::after { box-sizing: border-box; border: 0 solid; }
-        html { -webkit-text-size-adjust: 100%; line-height: 1.5; scroll-behavior: smooth; }
-        body { margin: 0; line-height: inherit; background: #140d0a; color: #f4ede6; font-family: "Plus Jakarta Sans", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; position: relative; }
-        ::selection { background: #c2a895; color: #140d0a; }
-        h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
-        blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre { margin: 0; }
-        ol, ul, menu { list-style: none; margin: 0; padding: 0; }
-        a { color: inherit; text-decoration: inherit; }
-        b, strong { font-weight: bolder; }
-        img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }
-        img, video { max-width: 100%; height: auto; }
-        button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; color: inherit; margin: 0; padding: 0; }
-        button, [role="button"] { cursor: pointer; }
-        button, [type="button"], [type="submit"] { -webkit-appearance: button; background-color: transparent; background-image: none; }
-        textarea { resize: vertical; }
-        input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
-        [hidden] { display: none; }
+    <!-- dados do negócio para o Google -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "LZ Audiovisual",
+  "description": "Videomaker: roteiro, gravação e edição de vídeos para redes sociais, eventos e marcas.",
+  "url": "https://ringlight-two.vercel.app/",
+  "image": "https://ringlight-two.vercel.app/og-image.jpg",
+  "logo": "https://ringlight-two.vercel.app/apple-touch-icon.png",
+  "telephone": "+55 41 98461-4507",
+  "email": "contato@lzaudiovisual.com",
+  "sameAs": [
+    "https://www.instagram.com/luizazbonick/"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Luiza"
+  }
+}
+    </script>
 
-        /* navbar */
-        #navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; padding: 1.5rem 1.5rem; transition: all 0.3s ease; }
-        .nav-in { max-width: 80rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .nav-brand { display: flex; align-items: center; gap: 0.75rem; }
-        .nav-brand .lz-mark { transition: transform 0.3s ease; }
-        .nav-brand:hover .lz-mark { transform: scale(1.05); }
-        .nav-word { font-family: "Cinzel", serif; font-weight: 600; font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.3em; color: #d4c0b0; text-transform: uppercase; padding-left: 0.25rem; border-left: 1px solid rgba(212, 192, 176, 0.3); }
-        .nav-cta { color: #e6d7ca; font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
-        .nav-cta:hover { color: #fff; }
-        @media (min-width: 1024px) { #navbar { padding-left: 4rem; padding-right: 4rem; } }
-        .site-main { position: relative; z-index: 10; }
-        .light-wrap { background: #f4ede6; color: #140d0a; position: relative; z-index: 20; }
-
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #140d0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #422f25;
-            border-radius: 4px;
-        }
-
-
-        .zoom-hero-wrapper {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-
-        /* --- HISTÓRIA NO CELULAR: a rolagem conduz o que acontece dentro da tela --- */
-        .ps { position: relative; height: 560vh; height: 560svh; background: #140d0a; color: #f4ede6; }
-        /* as telas presas não encostam nas bordas nem têm cor própria: o Safari do iPhone pegava a cor delas para as barras e não soltava mais */
-        .ps-stage { position: sticky; top: 1px; height: calc(100vh - 2px); height: calc(100svh - 2px); overflow: hidden; background: transparent; }
-        .ps-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #2d1f18 0%, #140d0a 62%); pointer-events: none; }
-        .ps[data-warm="true"] { background: #B9502D; }
-        .ps-head { position: absolute; left: 0; right: 0; top: calc(80px + env(safe-area-inset-top)); text-align: center; padding: 0 16px; will-change: opacity, transform; }
-        .ps-kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #c2a895; }
-        .ps-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(2.4rem, 12vw, 9.4rem); line-height: 1.05; letter-spacing: 0.02em; background: linear-gradient(180deg, #F4F1EA 0%, #EDE3C3 22%, #E0A27A 55%, #C4562F 82%, #9E4426 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .ps-phone { position: absolute; left: 50%; top: 50%; width: 390px; height: 800px; border-radius: 64px; background: #0b0706; box-shadow: 0 0 0 2px #5c4336, 0 0 0 5px #1e1410, 0 40px 90px rgba(0, 0, 0, 0.6); will-change: transform; transform: translate(-50%, 60vh); }
-        .ps-screen { position: absolute; inset: 12px; border-radius: 52px; overflow: hidden; background: #000; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .ps-screen > * { position: absolute; inset: 0; }
-        .ps-island { position: absolute; left: 50%; top: 22px; width: 112px; height: 32px; margin-left: -56px; border-radius: 20px; background: #000; z-index: 8; }
-        .ps-insta { background: #0d1014; }
-        .ps-insta { overflow: hidden; }
-        .ps-insta img { position: absolute; left: 0; top: 0; width: 100%; height: auto; display: block; }
-        .ig-page, .ig-tabs { will-change: transform; }
-        .ig-bar-scroll { opacity: 0; }
-        .ps-tile { position: absolute; inset: auto; background: rgba(0, 0, 0, 0.35); opacity: 0; pointer-events: none; }
-        .ps-photo { position: absolute; inset: auto; overflow: hidden; opacity: 0; background: #000; will-change: left, top, width, height, opacity; }
-        .ps-photo { background: #0d1014; }
-        .ps-reel-v { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: fill; display: block; max-width: none; will-change: transform; }
-        .ps-touch { position: absolute; z-index: 7; inset: auto; left: 0; top: 0; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75); opacity: 0; will-change: transform, opacity; }
-        .ps-notes { display: none; }
-        .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
-        .ps-end h3 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3.4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
-        .ps-end p { max-width: 34rem; margin: 0 auto 18px; font-size: 0.95rem; line-height: 1.55; color: #fbe9df; }
-        .ps-end button { padding: 13px 30px; border-radius: 999px; background: #f4ede6; color: #B9502D; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
-        .ps-end.is-on { pointer-events: auto; }
-        .ps-end.ps-end-side { right: auto; width: min(420px, 34vw); padding: 0; text-align: left; }
-        .ps-end.ps-end-side h3 { font-size: clamp(2rem, 3vw, 2.8rem); }
-        .ps-end.ps-end-side p { margin-left: 0; }
-        @media (min-width: 1024px) {
-            .ps-notes { display: block; position: absolute; inset: 0; pointer-events: none; }
-            .ps-note { position: absolute; top: 50%; width: min(24vw, 320px); opacity: 0; will-change: opacity, transform; }
-            .ps-note:nth-child(odd) { right: calc(50% + 250px); text-align: right; }
-            .ps-note:nth-child(even) { left: calc(50% + 250px); }
-            .ps-note span { display: block; margin-bottom: 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; color: #c2a895; }
-            .ps-note strong { display: block; font-family: 'Cinzel', serif; font-size: 1.75rem; line-height: 1.2; margin-bottom: 8px; }
-            .ps-note p { color: #d4c0b0; line-height: 1.55; }
-        }
-        .ps.ps-static { height: 100vh; height: 100svh; }
-
-
-        /* --- ABERTURA: visor de câmera com a foto da Luiza --- */
-        .vf-hero { min-height: 100vh; min-height: 100svh; height: auto; background: #140d0a; color: #f4ede6; }
-        .vf-bg { position: absolute; inset: -60px; background: url('clips/hero-luiza-blur.jpg') center / cover; filter: blur(34px) brightness(0.45) saturate(1.1); }
-        .vf-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 30%, rgba(14, 9, 8, 0.78) 100%); }
-        .vf-inner { position: relative; z-index: 2; width: 100%; max-width: 1180px; margin: 0 auto; padding: 104px 64px 72px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 64px; }
-        .vf-kicker { margin-bottom: 18px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: #c2a895; }
-        .vf-logo { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 8vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 16px; justify-content: flex-start; }
-        .vf-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; max-width: 34rem; }
-        .vf-text { font-size: 1.05rem; line-height: 1.6; color: #e6d7ca; max-width: 30rem; }
-        .vf-frame { position: relative; width: min(46vw, 620px); aspect-ratio: 3 / 2; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
-        .vf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
-        .vf-grid { position: absolute; inset: 0; pointer-events: none; background:
-            linear-gradient(90deg, transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(33.33% + 0.5px), transparent 0 calc(66.66% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(66.66% + 0.5px), transparent 0),
-            linear-gradient(transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(33.33% + 0.5px), transparent 0 calc(66.66% - 0.5px), rgba(255, 255, 255, 0.18) 0 calc(66.66% + 0.5px), transparent 0); }
-        .vf-shade { display: none; }
-        .vf-corner { position: absolute; width: 30px; height: 30px; border: 0 solid rgba(255, 255, 255, 0.9); pointer-events: none; }
-        .vf-corner.tl { top: 14px; left: 14px; border-top-width: 2px; border-left-width: 2px; }
-        .vf-corner.tr { top: 14px; right: 14px; border-top-width: 2px; border-right-width: 2px; }
-        .vf-corner.bl { bottom: 14px; left: 14px; border-bottom-width: 2px; border-left-width: 2px; }
-        .vf-corner.br { bottom: 14px; right: 14px; border-bottom-width: 2px; border-right-width: 2px; }
-        .vf-cross { position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; pointer-events: none; }
-        .vf-cross::before, .vf-cross::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.7); }
-        .vf-cross::before { left: 12px; top: 0; width: 2px; height: 26px; }
-        .vf-cross::after { top: 12px; left: 0; width: 26px; height: 2px; }
-        .vf-hud { position: absolute; left: 30px; right: 30px; display: flex; justify-content: space-between; align-items: center; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.06em; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8); pointer-events: none; }
-        .vf-hud-top { top: 22px; }
-        .vf-hud-bottom { bottom: 22px; }
-        .vf-rec { display: flex; align-items: center; gap: 7px; font-weight: 700; }
-        .vf-rec i { width: 10px; height: 10px; border-radius: 50%; background: #e5402e; box-shadow: 0 0 10px #e5402e; animation: vf-blink 1s steps(1) infinite; }
-        .vf-batt { display: inline-block; width: 22px; height: 11px; margin-left: 6px; padding: 1px; border: 1.5px solid #fff; border-radius: 2px; vertical-align: -1px; }
-        .vf-batt::after { content: ''; display: block; width: 72%; height: 100%; background: #fff; }
-        @keyframes vf-blink { 50% { opacity: 0.15; } }
-        @media (max-width: 1023px) {
-            .vf-hero { align-items: stretch; }
-            .vf-bg, .vf-hero::after, .vf-kicker, .vf-grid, .vf-cross, .vf-hud-bottom { display: none; }
-            .vf-inner { position: static; display: block; padding: 0; max-width: none; }
-            .vf-frame { position: absolute; inset: 0; width: auto; height: auto; aspect-ratio: auto; box-shadow: none; }
-            .vf-video { object-position: 48% 30%; }
-            .vf-shade { display: block; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 13, 10, 0.95) 12%, rgba(20, 13, 10, 0.4) 44%, transparent 64%), linear-gradient(to bottom, rgba(20, 13, 10, 0.55), transparent 20%); }
-            .vf-corner.tl, .vf-corner.tr { top: 78px; }
-            .vf-corner.bl, .vf-corner.br { opacity: 0.5; }
-            .vf-hud-top { top: 88px; left: 32px; right: 32px; }
-            .vf-copy { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 24px calc(44px + env(safe-area-inset-bottom)); text-align: center; }
-            .vf-logo { justify-content: center; font-size: 4rem; margin-bottom: 10px; }
-            .vf-title { font-size: clamp(1.6rem, 6.4vw, 2.2rem); margin: 0 auto 10px; }
-            .vf-text { font-size: 0.95rem; margin: 0 auto; }
-                }
-        @media (prefers-reduced-motion: reduce) { .vf-rec i { animation: none; } }
-
-        /* --- CONTATO: painel com a foto da Luiza e os três canais --- */
-        .cm { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(20, 13, 10, 0.72); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0s linear 0.25s; }
-        .cm.is-open { opacity: 1; visibility: visible; transition: opacity 0.25s ease; }
-        /* trava a página por trás sem mexer no overflow do html, que no celular quebrava os efeitos de rolagem */
-        .cm { touch-action: none; overscroll-behavior: contain; }
-        .cm-panel { touch-action: pan-y; }
-        .cm-body { overscroll-behavior: contain; }
-        .cm-panel { position: relative; display: grid; grid-template-columns: 310px minmax(0, 1fr); width: min(780px, 100%); max-height: calc(100vh - 48px); overflow: hidden; border-radius: 8px; background: var(--lz-offwhite); color: var(--lz-escuro); box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5); transform: translateY(12px); transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1); }
-        .cm.is-open .cm-panel { transform: none; }
-        .cm-media { position: relative; min-height: 440px; overflow: hidden; }
-        .cm-shape { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .cm-photo { position: absolute; z-index: 1; left: 14%; top: 10%; width: 65%; height: 75%; object-fit: cover; object-position: 50% 22%; border-radius: 16px; box-shadow: 0 20px 40px rgba(91, 49, 40, 0.4); }
-        .cm-tongue { position: absolute; z-index: 2; left: 0; bottom: 9%; width: 94%; height: 50px; }
-        .cm-body { position: relative; padding: 58px 44px 40px; display: flex; flex-direction: column; overflow-y: auto; }
-        .cm-close { position: absolute; top: 18px; right: 22px; padding: 6px 2px; font-size: 0.875rem; color: var(--lz-marrom); background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(91, 49, 40, 0.4); text-underline-offset: 4px; transition: text-decoration-color 0.2s ease; }
-        .cm-close:hover { text-decoration-color: currentColor; }
-        .cm-title { font-family: 'Cinzel', serif; font-size: 2.1rem; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
-        .cm-lead { font-size: 1rem; line-height: 1.6; color: var(--lz-marrom); max-width: 26rem; margin-bottom: 32px; }
-        .cm-list { list-style: none; margin: auto 0 0; padding: 0; border-top: 1px solid rgba(91, 49, 40, 0.22); }
-        .cm-list li { border-bottom: 1px solid rgba(91, 49, 40, 0.22); }
-        .cm-link { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 18px 0; }
-        .cm-name { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; transition: color 0.2s ease; }
-        .cm-detail { font-size: 0.875rem; color: var(--lz-marrom); text-align: right; overflow-wrap: anywhere; }
-        .cm-link:hover .cm-name { color: #A9471F; }
-        .cm-link:focus-visible, .cm-close:focus-visible { outline: 2px solid var(--lz-marrom); outline-offset: 4px; border-radius: 2px; }
-        @media (max-width: 640px) {
-            .cm { align-items: flex-end; padding: 0; }
-            .cm-panel { grid-template-columns: 1fr; width: 100%; max-height: 92vh; border-radius: 20px 20px 0 0; transform: translateY(100%); }
-            .cm-media { min-height: 0; height: 210px; }
-            .cm-shape { width: min(300px, 82%); }
-            .cm-photo { left: 28px; top: 24px; width: 140px; height: 172px; border-radius: 14px; }
-            .cm-tongue { left: 0; bottom: 10px; width: 220px; height: 30px; }
-            .cm-body { position: static; padding: 24px 24px 32px; }
-            .cm-close { top: 16px; right: 18px; }
-            .cm-title { font-size: 1.75rem; }
-            .cm-lead { margin-bottom: 22px; }
-        }
-        @media (prefers-reduced-motion: reduce) { .cm, .cm-panel { transition: none; } }
-
-        /* --- PALETA DA PAREDE DO ESTÚDIO --- */
-        :root { --lz-terracota: #C4562F; --lz-terracota-fundo: #B9502D; --lz-areia: #EDE3C3; --lz-marrom: #5B3128; --lz-offwhite: #F4F1EA; --lz-escuro: #140d0a; }
-
-        /* --- SOBRE: fotos verticais sobre as formas da parede do estúdio --- */
-        .ab { position: relative; z-index: 20; overflow: hidden; background: var(--lz-offwhite); color: var(--lz-escuro); padding: clamp(140px, 16vw, 220px) 24px clamp(150px, 16vw, 230px); }
-        .ab-curve { position: absolute; top: 0; left: 0; width: 100%; height: clamp(56px, 9vw, 120px); fill: #B9502D; }
-        .ab-row { position: relative; max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); align-items: center; gap: clamp(40px, 8vw, 112px); }
-        .ab-row + .ab-row { margin-top: clamp(120px, 14vw, 190px); }
-        .ab-row-flip { grid-template-columns: minmax(0, 1fr) minmax(0, 360px); }
-        .ab-row-flip .ab-media { order: 2; }
-        .ab-media { position: relative; }
-        .ab-paint { position: absolute; display: flex; pointer-events: none; }
-        .ab-paint span { flex: 1; }
-        .ab-paint svg { display: block; flex: none; height: 100%; }
-        .ab-paint span + svg, .ab-paint svg + span { margin-left: -1px; }
-        .ab-paint-left { left: -100vw; }
-        .ab-paint-right { right: -100vw; }
-        .ab-paint-big { top: -12%; bottom: -13%; z-index: 0; }
-        .ab-paint-big svg { width: clamp(90px, 12vw, 170px); }
-        .ab-row:not(.ab-row-flip) .ab-paint-big { right: -14%; }
-        .ab-row:not(.ab-row-flip) .ab-paint-big span { background: var(--lz-terracota); }
-        .ab-row:not(.ab-row-flip) .ab-paint-big svg { fill: var(--lz-terracota); }
-        .ab-row-flip .ab-paint-big { left: -18%; }
-        .ab-row-flip .ab-paint-big span { background: var(--lz-areia); }
-        .ab-row-flip .ab-paint-big svg { fill: var(--lz-areia); }
-        .ab-blob { position: absolute; z-index: 0; top: -4%; right: -24%; width: 46%; fill: var(--lz-areia); }
-        .ab-tongue { z-index: 1; bottom: -7%; height: clamp(48px, 6vw, 84px); }
-        .ab-tongue span { background: var(--lz-marrom); }
-        .ab-tongue svg { width: clamp(70px, 8vw, 120px); fill: var(--lz-marrom); }
-        .ab-row:not(.ab-row-flip) .ab-tongue { right: -16%; }
-        .ab-row-flip .ab-tongue { left: -16%; }
-        .ab-frame { position: relative; z-index: 2; margin: 0; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: var(--lz-escuro); box-shadow: 0 30px 60px rgba(91, 49, 40, 0.35); }
-        .ab-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
-        .ab-caption { position: absolute; left: 20px; right: 20px; bottom: 13%; text-align: center; font-size: 1.05rem; font-weight: 700; line-height: 1.7; }
-        .ab-caption span { padding: 3px 10px; border-radius: 6px; background: var(--lz-marrom); color: #ffffff; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-        .ab-text { position: relative; z-index: 2; max-width: 34rem; }
-        .ab-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 24px; }
-        .ab-text p { font-size: 1.0625rem; line-height: 1.7; color: var(--lz-marrom); }
-        .ab-text p + p { margin-top: 16px; }
-        .ab-btn { margin-top: 32px; padding: 14px 30px; border-radius: 999px; background: var(--lz-marrom); color: var(--lz-offwhite); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background-color 0.2s ease; }
-        .ab-btn:hover { background: #47251d; }
-        .ab-btn:focus-visible { outline: 2px solid var(--lz-marrom); outline-offset: 4px; }
-        @media (max-width: 767px) {
-            .ab-row, .ab-row-flip { grid-template-columns: 1fr; gap: 96px; }
-            .ab-paint-big { bottom: -9%; }
-            .ab-row-flip .ab-media { order: 0; }
-            .ab-media { width: min(76%, 300px); margin: 0 auto; }
-        }
-
-        /* --- CONTATO FINAL: seção terracota, formulário que abre o e-mail com a mensagem pronta --- */
-        .ct { position: relative; z-index: 21; background: var(--lz-terracota-fundo); color: var(--lz-offwhite); padding: clamp(48px, 7vw, 96px) 24px clamp(88px, 11vw, 144px); }
-        .ct-curve { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: clamp(50px, 8vw, 110px); fill: var(--lz-terracota-fundo); }
-        .ct-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(40px, 8vw, 112px); align-items: start; }
-        .ct-title { font-family: 'Cinzel', serif; font-size: clamp(1.9rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
-        .ct-intro p { font-size: 1.0625rem; line-height: 1.7; color: var(--lz-offwhite); max-width: 26rem; }
-        .ct-intro .ct-alt { margin-top: 24px; font-size: 0.95rem; }
-        .ct-link { padding: 0; background: none; border: 0; color: #ffffff; font: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.55); text-underline-offset: 4px; cursor: pointer; transition: text-decoration-color 0.2s ease; }
-        .ct-link:hover { text-decoration-color: #ffffff; }
-        .ct-field + .ct-field { margin-top: 28px; }
-        .ct-field label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 600; color: #ffffff; }
-        .ct-field input, .ct-field textarea { display: block; width: 100%; padding: 10px 0 12px; background: transparent; border: 0; border-bottom: 1.5px solid rgba(244, 241, 234, 0.6); border-radius: 0; color: #ffffff; font: inherit; font-size: 1.0625rem; resize: vertical; transition: border-color 0.2s ease; }
-        .ct-field input::placeholder, .ct-field textarea::placeholder { color: rgba(244, 241, 234, 0.72); }
-        .ct-field input:hover, .ct-field textarea:hover { border-bottom-color: var(--lz-offwhite); }
-        .ct-field input:focus, .ct-field textarea:focus { outline: none; border-bottom-color: #ffffff; box-shadow: 0 1.5px 0 0 #ffffff; }
-        .ct-field [aria-invalid="true"] { border-bottom-color: #3b1a12; }
-        .ct-error { margin-top: 8px; font-size: 0.875rem; font-weight: 600; color: #3b1a12; }
-        .ct-actions { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
-        .ct .ab-btn { background: var(--lz-offwhite); color: var(--lz-terracota-fundo); }
-        .ct .ab-btn:hover { background: #ffffff; }
-        .ct .ab-btn:focus-visible, .ct-link:focus-visible { outline: 2px solid #ffffff; outline-offset: 4px; border-radius: 2px; }
-        .ct-status { font-size: 0.9rem; line-height: 1.5; color: var(--lz-offwhite); margin-top: 32px; }
-        @media (max-width: 767px) { .ct-inner { grid-template-columns: 1fr; } }
-
-        /* --- RODAPÉ: marrom da parede, entrando com uma curva sobre o contato --- */
-        .ft { position: relative; z-index: 22; background: var(--lz-marrom); color: #ead7c8; padding: clamp(24px, 4vw, 48px) 24px 28px; }
-        .ft-curve { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: clamp(50px, 8vw, 110px); fill: var(--lz-marrom); }
-        .ft-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; }
-        .ft-logo { font-family: 'Cinzel', serif; font-size: 3.4rem; font-weight: 900; line-height: 1; margin-bottom: 12px; }
-        .ft-brand p:not(.ft-logo) { max-width: 16rem; font-size: 0.95rem; line-height: 1.7; }
-        .ft-col h2 { margin-bottom: 14px; font-size: 0.95rem; font-weight: 700; color: var(--lz-areia); }
-        .ft-col a, .ft-col button, .ft-col p { display: block; padding: 0; background: none; border: 0; font: inherit; font-size: 0.95rem; line-height: 2; color: #ead7c8; text-align: left; cursor: pointer; }
-        .ft-col p { cursor: default; }
-        .ft-col a:hover, .ft-col button:hover { color: #ffffff; text-decoration: underline; text-underline-offset: 4px; }
-        .ft a:focus-visible, .ft button:focus-visible { outline: 2px solid var(--lz-areia); outline-offset: 3px; border-radius: 2px; }
-        .ft-copy { max-width: 1040px; margin: 40px auto 0; padding-top: 18px; border-top: 1px solid rgba(237, 227, 195, 0.2); font-size: 0.85rem; color: #d8c2b3; }
-        @media (max-width: 767px) {
-            .ft-inner { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
-            .ft-brand { grid-column: 1 / -1; }
-            .ft-hours { grid-column: 1 / -1; order: 3; }
-        }
-
-        /* --- FINAL DO PORTFÓLIO: o fundo vira terracota com as formas da parede --- */
-        .ps-warm { position: absolute; inset: 0; background: #B9502D; opacity: 0; pointer-events: none; will-change: opacity; }
-        .ps-blob { position: absolute; left: 0; top: 0; fill: #C9603A; will-change: transform; }
-        .ps-tongue { position: absolute; left: 0; display: flex; }
-        .ps-tongue span { flex: 1; background: #5B3128; }
-        .ps-tongue svg { flex: none; height: 100%; width: clamp(60px, 7vw, 110px); margin-left: -1px; fill: #5B3128; }
-        /* --- LOGO: desenho do arquivo logo-lz.png, pintado pela cor de cada lugar --- */
-        .lz-mark { display: inline-block; height: 1em; aspect-ratio: 855 / 1262; background-color: #F7EEDF; -webkit-mask: url('logo-lz.png') center / contain no-repeat; mask: url('logo-lz.png') center / contain no-repeat; vertical-align: middle; transition: background-color 0.3s ease; }
-        .lz-mark-nav { font-size: 34px; }
-        #navbar.nav-on-light .lz-mark { background-color: #5B3128; }
-
-        /* áreas seguras do iPhone (só têm efeito se o site for ocupar a tela inteira) */
-        #navbar { padding-top: calc(1.5rem + env(safe-area-inset-top)); }
-        .ft { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
-        @media (max-width: 1023px) {
-            .vf-corner.tl, .vf-corner.tr { top: calc(78px + env(safe-area-inset-top)); }
-            .vf-hud-top { top: calc(88px + env(safe-area-inset-top)); }
-            .vf-corner.bl, .vf-corner.br { bottom: calc(14px + env(safe-area-inset-bottom)); }
-        }
-        @media (max-width: 640px) {
-            .cm-body { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
-        }
-
-        /* --- MENU TRANSPARENTE: o texto muda de cor conforme o fundo que passa atrás dele --- */
-        #navbar .nav-text { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); transition: color 0.3s ease, border-color 0.3s ease; }
-        #navbar.nav-on-light .nav-text { color: #140d0a; border-color: rgba(20, 13, 10, 0.3); text-shadow: none; }
-    </style>
+    <!-- contagem de visitas da Vercel (sem cookies); precisa estar ativada no painel do projeto -->
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -330,7 +63,7 @@
                 <span class="nav-word nav-text">AUDIOVISUAL</span>
             </a>
 
-            <button onclick="openContactModal()" class="nav-cta nav-text">
+            <button type="button" class="nav-cta nav-text" data-contact="open">
                 Contato
             </button>
         </div>
@@ -338,7 +71,7 @@
 
     <main class="site-main">
 
-        <section class="zoom-hero-wrapper vf-hero" id="hero-wrapper">
+        <section class="vf-hero">
             <div class="vf-bg" aria-hidden="true"></div>
             <div class="vf-inner">
                 <div class="vf-copy">
@@ -348,7 +81,7 @@
                     <p class="vf-text">Roteiro, gravação e edição para redes sociais, eventos e marcas.</p>
                 </div>
                 <div class="vf-frame">
-                    <img class="vf-video" src="clips/hero-luiza.jpg" alt="Luiza, da LZ Audiovisual">
+                    <img class="vf-video" src="clips/hero-luiza.jpg" alt="Luiza, da LZ Audiovisual" width="1280" height="854" fetchpriority="high">
                     <div class="vf-grid" aria-hidden="true"></div>
                     <div class="vf-shade" aria-hidden="true"></div>
                     <span class="vf-corner tl" aria-hidden="true"></span><span class="vf-corner tr" aria-hidden="true"></span>
@@ -398,7 +131,7 @@
                     <div class="ps-end">
                         <h3>A próxima história pode ser a sua.</h3>
                         <p>Do conceito à entrega final, cuidamos de cada detalhe.</p>
-                        <button type="button" onclick="openContactModal()">Iniciar seu projeto</button>
+                        <button type="button" data-contact="open">Iniciar seu projeto</button>
                     </div>
                 </div>
             </section>
@@ -437,7 +170,7 @@
                     <h2 class="ab-title">O jeito LZ de contar histórias</h2>
                     <p>Cada projeto começa com uma conversa para entender a sua marca. Depois vêm o planejamento, a gravação e a edição, acompanhados de perto até a entrega.</p>
                     <p>Direção de arte e cuidado técnico em cada etapa, para que a sua marca seja vista do jeito certo.</p>
-                    <button type="button" class="ab-btn" onclick="openContactModal()">Iniciar seu projeto</button>
+                    <button type="button" class="ab-btn" data-contact="open">Iniciar seu projeto</button>
                 </div>
             </div>
         </section>
@@ -448,29 +181,30 @@
                 <div class="ct-intro">
                     <h2 class="ct-title">Conte a sua ideia</h2>
                     <p>Escreva o que você quer gravar e a Luiza responde com um orçamento.</p>
-                    <p class="ct-alt">Prefere conversar? <button type="button" class="ct-link" onclick="openContactModal()">Fale pelo WhatsApp ou Instagram</button>.</p>
+                    <p class="ct-alt">Prefere conversar? <button type="button" class="ct-link" data-contact="open">Fale pelo WhatsApp ou Instagram</button>.</p>
                 </div>
 
                 <form class="ct-form" id="contact-form" novalidate>
                     <div class="ct-field">
                         <label for="ct-name">Seu nome</label>
-                        <input id="ct-name" name="nome" type="text" autocomplete="name" required placeholder="Ex.: Ana Souza…">
+                        <input id="ct-name" name="nome" type="text" autocomplete="name" maxlength="100" required placeholder="Ex.: Ana Souza…">
                         <p class="ct-error" id="ct-name-error" hidden>Digite o seu nome.</p>
                     </div>
                     <div class="ct-field">
                         <label for="ct-email">E-mail</label>
-                        <input id="ct-email" name="email" type="email" autocomplete="email" spellcheck="false" required placeholder="voce@email.com">
+                        <input id="ct-email" name="email" type="email" autocomplete="email" spellcheck="false" maxlength="254" required placeholder="voce@email.com">
                         <p class="ct-error" id="ct-email-error" hidden>Digite um e-mail válido, como voce@email.com.</p>
                     </div>
                     <div class="ct-field">
                         <label for="ct-message">O que você quer gravar?</label>
-                        <textarea id="ct-message" name="mensagem" rows="4" required placeholder="Ex.: um vídeo para o lançamento da minha loja…"></textarea>
+                        <textarea id="ct-message" name="mensagem" rows="4" maxlength="1500" required placeholder="Ex.: um vídeo para o lançamento da minha loja…"></textarea>
                         <p class="ct-error" id="ct-message-error" hidden>Conte um pouco sobre o projeto.</p>
                     </div>
                     <div class="ct-actions">
                         <button type="submit" class="ab-btn">Enviar mensagem</button>
                         <p class="ct-status" id="ct-status" role="status" aria-live="polite"></p>
                     </div>
+                    <p class="ct-privacy">Usamos seus dados só para responder ao seu contato e não compartilhamos com ninguém.</p>
                 </form>
             </div>
         </section>
@@ -486,7 +220,7 @@
             <nav class="ft-col" aria-label="Rodapé">
                 <h2>Navegação</h2>
                 <a href="#about-me">Sobre</a>
-                <button type="button" onclick="openContactModal()">Contato</button>
+                <button type="button" data-contact="open">Contato</button>
             </nav>
             <div class="ft-col ft-hours">
                 <h2>Atendimento</h2>
@@ -510,7 +244,7 @@
                 <svg class="cm-tongue" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 C100,0 200,4 250,12 C292,20 294,50 256,54 C170,60 90,60 0,60 Z" fill="#5B3128"/></svg>
             </div>
             <div class="cm-body">
-                <button type="button" class="cm-close" onclick="closeContactModal()">Fechar</button>
+                <button type="button" class="cm-close" data-contact="close">Fechar</button>
                 <h2 id="cm-title" class="cm-title">Fale com a Luiza</h2>
                 <p class="cm-lead">Conte o que você quer gravar e combine os detalhes direto com ela.</p>
                 <ul class="cm-list">
@@ -522,333 +256,6 @@
         </div>
     </div>
 
-    <script>
-        let contactOpener = null;
-
-        function openContactModal() {
-            const modal = document.getElementById('contact-modal');
-            contactOpener = document.activeElement;
-            modal.classList.add('is-open');
-            modal.setAttribute('aria-hidden', 'false');
-            setTimeout(() => modal.querySelector('.cm-close').focus(), 60);
-        }
-
-        function closeContactModal() {
-            const modal = document.getElementById('contact-modal');
-            if (!modal.classList.contains('is-open')) return;
-            modal.classList.remove('is-open');
-            modal.setAttribute('aria-hidden', 'true');
-            if (contactOpener && contactOpener.focus) contactOpener.focus();
-        }
-
-        document.getElementById('contact-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'contact-modal') closeContactModal();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeContactModal();
-        });
-
-        // --- HISTÓRIA NO CELULAR: o progresso da rolagem (0 a 1) define cada momento da cena ---
-        (function () {
-            const section = document.getElementById('phone-story');
-            if (!section) return;
-            const $ = (sel) => section.querySelector(sel);
-            const stage = $('.ps-stage'), phone = $('.ps-phone'), head = $('.ps-head');
-            const touch = $('.ps-touch'), end = $('.ps-end'), tile = $('.ps-tile'), photo = $('.ps-photo');
-            const reels = [...section.querySelectorAll('.ps-reel-v')];
-            const notes = [...section.querySelectorAll('.ps-note')];
-            const igPage = $('.ig-page'), igTabs = $('.ig-tabs'), igBarScroll = $('.ig-bar-scroll');
-            const warm = $('.ps-warm'), blob = $('.ps-blob'), tongue = $('.ps-tongue');
-            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            const PHONE_W = 390, PHONE_H = 800, SCREEN_W = 366, SCREEN_H = 776, HEADER = 88;
-            // perfil do Instagram montado numa imagem só (1180 px de largura), que rola dentro da tela
-            const IG_W = 1180, IG_H = 6970, IG_BAR = 325, IG_TABS = 1385;
-            const K = SCREEN_W / IG_W, IG_END = IG_H - SCREEN_H / K;
-            // miniatura da grade tocada no fim da rolagem (o 1º quadro do 1º reel), em pixels da tela do celular
-            const TILE = { x: 394 * K, y: (5182 - IG_END) * K, w: 392 * K, h: 521 * K };
-            // pedaço do vídeo que aparece na miniatura (frações do quadro): o reel abre a partir desse recorte
-            const CROP = { x: 0, y: 180 / 1096 }, CROP_S = TILE.w / ((450 / 540) * SCREEN_W);
-            // momentos da cena: o vídeo rola com o scroll, um toque na foto, a foto abre em tela cheia
-            // o perfil rola, um toque abre o primeiro reel, e um arrastar para cima passa para o segundo
-            const SCRUB = [0.08, 0.46], TAP = [0.45, 0.52], OPEN = [0.51, 0.58], SWIPE = [0.64, 0.71];
-            let W = 0, H = 0, portrait = 1, endScale = 1, portraitY = 0, endX = 0, endY = 0;
-            let target = 0, current = -1, frame = 0, visible = false;
-
-            const clamp = (v) => Math.min(1, Math.max(0, v));
-            const part = (p, a, b) => clamp((p - a) / (b - a));
-            const smooth = (t) => t * t * (3 - 2 * t);
-            const mix = (a, b, t) => a + (b - a) * t;
-
-            function measure() {
-                W = stage.clientWidth; H = stage.clientHeight;
-                portrait = Math.min((H - HEADER - 20) / PHONE_H, (W * 0.74) / PHONE_W, 0.82);
-                portraitY = HEADER / 2;
-                // no final o celular continua em pé: no computador vai para a esquerda, no celular encolhe para o texto caber embaixo
-                const wide = W >= 1024;
-                // no computador o celular encolhe se precisar para a faixa marrom caber inteira embaixo dele
-                endScale = wide ? Math.min(portrait, (H / 2 - portraitY - 24) / (PHONE_H * (0.5 + 0.11 * 0.45))) : Math.min(portrait, (H * 0.5) / PHONE_H);
-                endX = wide ? -Math.min(W * 0.18, 260) : 0;
-                endY = wide ? portraitY : HEADER + (PHONE_H * endScale) / 2 - H / 2;
-                end.classList.toggle('ps-end-side', wide);
-                // as frases ficam sempre abaixo do título, nunca por cima dele
-                const headBottom = head.offsetTop + head.offsetHeight;
-                notes.forEach((n) => { n.style.top = Math.max(H / 2, headBottom + 32 + n.offsetHeight / 2) + 'px'; });
-                if (wide) {
-                    end.style.left = (W / 2 + endX + (PHONE_W * endScale) / 2 + 56) + 'px';
-                    end.style.top = (H / 2 + portraitY - end.offsetHeight / 2) + 'px';
-                } else {
-                    end.style.left = '';
-                    end.style.top = (HEADER + PHONE_H * endScale + 18) + 'px';
-                }
-                // formas da parede posicionadas em volta do celular parado no final
-                const pw = PHONE_W * endScale, ph = PHONE_H * endScale, cx = W / 2 + endX, cy = H / 2 + endY;
-                blob.style.width = pw * 1.9 + 'px';
-                blob.style.height = (wide ? H : ph * 1.35) + 'px';
-                blob.style.left = cx - pw * 0.95 + 'px';
-                blob.style.top = (wide ? 0 : cy - ph * 0.675) + 'px';
-                tongue.style.width = cx + pw * 0.62 + 'px';
-                // o celular fica um pouco acima da base da faixa marrom, como a foto do Sobre
-                const th = Math.max(40, ph * 0.11);
-                tongue.style.height = th + 'px';
-                tongue.style.top = cy + ph / 2 - th * 0.55 + 'px';
-            }
-
-            // a seção tem 560 telas de altura; a rolagem do perfil foi encurtada (de 243 para 163) e o resto mantém o ritmo
-            function timeline(p) {
-                const v = p * 560;
-                const old = v <= 51.2 ? v : v <= 214.4 ? 51.2 + (v - 51.2) * (243.2 / 163.2) : v + 80;
-                return old / 640;
-            }
-
-            function render(p) {
-                p = timeline(p);
-                const rise = smooth(part(p, 0, 0.08));
-                const turn = smooth(part(p, 0.74, 0.86));
-                const y = mix(H * 0.72, portraitY, rise);
-                phone.style.transform = 'translate(-50%,-50%) translate(' + (endX * turn) + 'px,' + mix(y, endY, turn) + 'px) scale(' + mix(portrait, endScale, turn) + ')';
-
-                head.style.opacity = 1 - smooth(part(p, 0.06, 0.12)) * 0.82 - smooth(part(p, 0.62, 0.72)) * 0.18;
-                head.style.transform = 'translateY(' + (-14 * rise) + 'px)';
-
-                // o perfil do Instagram rola junto com o scroll; a barra do nome fica fixa e as abas grudam embaixo dela
-                const off = part(p, SCRUB[0], SCRUB[1]) * IG_END;
-                igPage.style.transform = 'translate3d(0,' + (-off * K).toFixed(2) + 'px,0)';
-                igTabs.style.transform = 'translate3d(0,' + (Math.max(IG_BAR, IG_TABS - off) * K).toFixed(2) + 'px,0)';
-                igBarScroll.style.opacity = clamp(off / 200);
-
-                // toque na miniatura do reel
-                const tp = part(p, TAP[0], TAP[1]);
-                const pressed = Math.sin(Math.PI * part(tp, 0.4, 0.85));
-                const cx = TILE.x + TILE.w * 0.45, cy = TILE.y + TILE.h * 0.5;
-                Object.assign(tile.style, { left: TILE.x + 'px', top: TILE.y + 'px', width: TILE.w + 'px', height: TILE.h + 'px', opacity: pressed });
-
-                // dedo arrastando de baixo para cima para trocar de reel
-                const sp = part(p, SWIPE[0], SWIPE[1]);
-                const drag = smooth(part(sp, 0.15, 0.85));
-                if (tp > 0 && tp < 1) {
-                    touch.style.opacity = Math.min(1, Math.sin(Math.PI * tp) * 2.5);
-                    touch.style.transform = 'translate(' + (cx - (1 - tp) * 60) + 'px,' + (cy + (1 - tp) * 120) + 'px) scale(' + (1 - pressed * 0.28) + ')';
-                } else if (sp > 0 && sp < 1) {
-                    touch.style.opacity = Math.min(1, Math.sin(Math.PI * sp) * 2.5);
-                    touch.style.transform = 'translate(' + SCREEN_W / 2 + 'px,' + mix(SCREEN_H * 0.78, SCREEN_H * 0.22, drag) + 'px) scale(0.85)';
-                } else {
-                    touch.style.opacity = 0;
-                }
-                reels[0].style.transform = 'translate3d(0,' + (-drag * 100) + '%,0)';
-                reels[1].style.transform = 'translate3d(0,' + ((1 - drag) * 100) + '%,0)';
-                if (visible && !reduced) {
-                    setPlaying(reels[0], p >= OPEN[1] - 0.004 && p < SWIPE[1]);
-                    if (p < OPEN[0] && reels[0].currentTime > 0) reels[0].currentTime = 0;
-                    setPlaying(reels[1], p > SWIPE[0]);
-                }
-
-                // o primeiro reel abre a partir do quadradinho até ocupar a tela
-                const op = smooth(part(p, OPEN[0], OPEN[1]));
-                Object.assign(photo.style, {
-                    left: mix(TILE.x, 0, op) + 'px', top: mix(TILE.y, 0, op) + 'px',
-                    width: mix(TILE.w, SCREEN_W, op) + 'px', height: mix(TILE.h, SCREEN_H, op) + 'px',
-                    opacity: p >= OPEN[0] ? 1 : 0
-                });
-                const vs = mix(CROP_S, 1, op);
-                reels.forEach((v) => Object.assign(v.style, {
-                    width: SCREEN_W * vs + 'px', height: SCREEN_H * vs + 'px',
-                    left: mix(-CROP.x * SCREEN_W * CROP_S, 0, op) + 'px', top: mix(-CROP.y * SCREEN_H * CROP_S, 0, op) + 'px'
-                }));
-
-                [[0.125, 0.3], [0.3, 0.52], [0.52, 0.7]].forEach(([a, b], i) => {
-                    if (!notes[i]) return;
-                    const t = smooth(part(p, a, a + 0.04)) * (1 - smooth(part(p, b - 0.04, b)));
-                    notes[i].style.opacity = t;
-                    notes[i].style.transform = 'translateY(calc(-50% + ' + (20 * (1 - t)) + 'px))';
-                });
-
-                const heat = smooth(part(p, 0.76, 0.86));
-                warm.style.opacity = heat;
-                blob.style.transform = 'scale(' + mix(0.9, 1, heat) + ')';
-                tongue.style.transform = 'translateX(' + (-100 * (1 - smooth(part(p, 0.8, 0.9)))) + '%)';
-                const isWarm = heat > 0.5;
-                if (section.dataset.warm !== String(isWarm)) {
-                    section.dataset.warm = String(isWarm);
-                    window.dispatchEvent(new Event('lz:navcheck'));
-                }
-
-                const finish = smooth(part(p, 0.88, 0.95));
-                end.style.opacity = finish;
-                end.style.transform = 'translateY(' + (18 * (1 - finish)) + 'px)';
-                end.classList.toggle('is-on', finish > 0.6);
-            }
-
-            function setPlaying(video, on) {
-                if (on && video.paused) { const r = video.play(); if (r) r.catch(() => {}); }
-                else if (!on && !video.paused) video.pause();
-            }
-
-            function readScroll() {
-                const box = section.getBoundingClientRect();
-                target = clamp(-box.top / Math.max(1, box.height - H));
-                if (!frame) frame = requestAnimationFrame(tick);
-            }
-
-            function tick() {
-                frame = 0;
-                current = current < 0 ? target : current + (target - current) * 0.14;
-                if (Math.abs(target - current) < 0.0004) current = target;
-                render(current);
-                if (current !== target) frame = requestAnimationFrame(tick);
-            }
-
-            function loadVideos() {
-                if (igPage.loading === 'lazy') igPage.loading = 'eager';
-                reels.forEach((v) => { if (!v.src) { v.src = v.dataset.src; v.preload = 'auto'; } });
-            }
-
-            function refresh() { measure(); current = -1; readScroll(); }
-
-            measure();
-            window.addEventListener('resize', refresh);
-            window.addEventListener('load', refresh);
-            document.fonts && document.fonts.ready.then(refresh);
-            section.querySelectorAll('img').forEach((img) => img.addEventListener('load', measure));
-
-            if (reduced) {
-                section.classList.add('ps-static');
-                loadVideos();
-                measure();
-                render(1);
-                return;
-            }
-
-            new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) loadVideos();
-            }, { rootMargin: '100% 0px' }).observe(section);
-
-            new IntersectionObserver((entries) => {
-                visible = entries[0].isIntersecting;
-                if (visible) { current = -1; readScroll(); }
-                else reels.forEach((v) => v.pause());
-            }).observe(section);
-
-            document.addEventListener('scroll', readScroll, { passive: true, capture: true });
-            readScroll();
-        })();
-
-        // --- MENU TRANSPARENTE: usa texto escuro quando passa sobre uma seção clara ---
-        (function () {
-            const navbar = document.getElementById('navbar');
-            let waiting = false;
-
-            function sectionColor(node) {
-                for (; node; node = node.parentElement) {
-                    const rgba = getComputedStyle(node).backgroundColor.match(/[\d.]+/g).map(Number);
-                    if (rgba.length < 4 || rgba[3] > 0.5) return rgba;
-                }
-                return [0, 0, 0];
-            }
-
-            function colorAt(y) {
-                const under = document.elementsFromPoint(window.innerWidth / 2, y)
-                    .find((el) => !navbar.contains(el));
-                if (!under) return null;
-                if (under === document.documentElement || under === document.body) return y > 20 ? colorAt(y - 16) : null;
-                const block = under.closest('section, footer, .zoom-hero-wrapper') || under;
-                return block.dataset.warm === 'true' ? [185, 80, 45] : sectionColor(block);
-            }
-
-            function update() {
-                waiting = false;
-                const top = colorAt(navbar.offsetHeight / 2);
-                if (!top) return;
-                const [r, g, b] = top;
-                navbar.classList.toggle('nav-on-light', 0.299 * r + 0.587 * g + 0.114 * b > 150);
-                // sobre terracota a logo terracota sumiria, então ela fica off-white
-                navbar.classList.toggle('nav-on-warm', r > 150 && g < 120 && b < 90);
-            }
-
-            function schedule() {
-                if (waiting) return;
-                waiting = true;
-                requestAnimationFrame(update);
-            }
-
-            document.addEventListener('scroll', schedule, { passive: true, capture: true });
-            window.addEventListener('resize', schedule);
-            window.addEventListener('load', schedule);
-            window.addEventListener('lz:navcheck', schedule);
-            schedule();
-        })();
-
-
-        // --- ABERTURA: contador de tempo do visor, no formato HH:MM:SS:quadros ---
-        (function () {
-            const time = document.querySelector('.vf-time');
-            if (!time) return;
-            const start = performance.now();
-            const pad = (n) => String(n).padStart(2, '0');
-            setInterval(() => {
-                const frames = Math.floor((performance.now() - start) / (1000 / 30));
-                const seconds = Math.floor(frames / 30);
-                time.textContent = pad(Math.floor(seconds / 3600)) + ':' + pad(Math.floor(seconds / 60) % 60) + ':' + pad(seconds % 60) + ':' + pad(frames % 30);
-            }, 1000 / 30);
-        })();
-
-        // --- CONTATO FINAL: valida os campos e abre o e-mail com a mensagem pronta ---
-        (function () {
-            const form = document.getElementById('contact-form');
-            if (!form) return;
-            const status = document.getElementById('ct-status');
-            const fields = [
-                { el: form.querySelector('#ct-name'), ok: (v) => v.trim().length > 0 },
-                { el: form.querySelector('#ct-email'), ok: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
-                { el: form.querySelector('#ct-message'), ok: (v) => v.trim().length > 0 }
-            ];
-
-            function check(field) {
-                const valid = field.ok(field.el.value);
-                const error = document.getElementById(field.el.id + '-error');
-                field.el.setAttribute('aria-invalid', valid ? 'false' : 'true');
-                if (valid) field.el.removeAttribute('aria-describedby');
-                else field.el.setAttribute('aria-describedby', error.id);
-                error.hidden = valid;
-                return valid;
-            }
-
-            fields.forEach((field) => field.el.addEventListener('blur', () => {
-                if (field.el.getAttribute('aria-invalid') !== null || field.el.value) check(field);
-            }));
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const invalid = fields.filter((field) => !check(field));
-                if (invalid.length) { invalid[0].el.focus(); status.textContent = ''; return; }
-                const [name, email, message] = fields.map((field) => field.el.value.trim());
-                const subject = 'Orçamento pelo site — ' + name;
-                const body = message + '\n\n' + name + '\n' + email;
-                window.location.href = 'mailto:contato@lzaudiovisual.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-                status.textContent = 'Abrimos o seu app de e-mail com a mensagem pronta. Confira e toque em enviar.';
-            });
-        })();
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
