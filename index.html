@@ -88,7 +88,7 @@
         .ps-tile { position: absolute; inset: auto; background: rgba(0, 0, 0, 0.35); opacity: 0; pointer-events: none; }
         .ps-photo { position: absolute; inset: auto; overflow: hidden; opacity: 0; background: #000; will-change: left, top, width, height, opacity; }
         .ps-photo { background: #0d1014; }
-        .ps-reel-v { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: fill; display: block; will-change: transform; }
+        .ps-reel-v { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: fill; display: block; max-width: none; will-change: transform; }
         .ps-touch { position: absolute; z-index: 7; inset: auto; left: 0; top: 0; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75); opacity: 0; will-change: transform, opacity; }
         .ps-notes { display: none; }
         .ps-end { position: absolute; left: 0; right: 0; padding: 0 24px; text-align: center; opacity: 0; pointer-events: none; will-change: opacity, transform; }
@@ -565,8 +565,10 @@
             // perfil do Instagram montado numa imagem só (1180 px de largura), que rola dentro da tela
             const IG_W = 1180, IG_H = 6970, IG_BAR = 325, IG_TABS = 1385;
             const K = SCREEN_W / IG_W, IG_END = IG_H - SCREEN_H / K;
-            // foto da grade tocada no fim da rolagem (a da placa LZ), em pixels da tela do celular
-            const TILE = { x: 788 * K, y: (5710 - IG_END) * K, w: (IG_W - 788) * K, h: 521 * K };
+            // miniatura da grade tocada no fim da rolagem (o 1º quadro do 1º reel), em pixels da tela do celular
+            const TILE = { x: 394 * K, y: (5182 - IG_END) * K, w: 392 * K, h: 521 * K };
+            // pedaço do vídeo que aparece na miniatura (frações do quadro): o reel abre a partir desse recorte
+            const CROP = { x: 0, y: 180 / 1096 }, CROP_S = TILE.w / ((450 / 540) * SCREEN_W);
             // momentos da cena: o vídeo rola com o scroll, um toque na foto, a foto abre em tela cheia
             // o perfil rola, um toque abre o primeiro reel, e um arrastar para cima passa para o segundo
             const SCRUB = [0.08, 0.46], TAP = [0.45, 0.52], OPEN = [0.51, 0.58], SWIPE = [0.64, 0.71];
@@ -621,7 +623,7 @@
                 igTabs.style.transform = 'translate3d(0,' + (Math.max(IG_BAR, IG_TABS - off) * K).toFixed(2) + 'px,0)';
                 igBarScroll.style.opacity = clamp(off / 200);
 
-                // toque na foto da placa LZ
+                // toque na miniatura do reel
                 const tp = part(p, TAP[0], TAP[1]);
                 const pressed = Math.sin(Math.PI * part(tp, 0.4, 0.85));
                 const cx = TILE.x + TILE.w * 0.45, cy = TILE.y + TILE.h * 0.5;
@@ -642,7 +644,8 @@
                 reels[0].style.transform = 'translate3d(0,' + (-drag * 100) + '%,0)';
                 reels[1].style.transform = 'translate3d(0,' + ((1 - drag) * 100) + '%,0)';
                 if (visible && !reduced) {
-                    setPlaying(reels[0], p >= OPEN[0] - 0.02 && p < SWIPE[1]);
+                    setPlaying(reels[0], p >= OPEN[1] - 0.004 && p < SWIPE[1]);
+                    if (p < OPEN[0] && reels[0].currentTime > 0) reels[0].currentTime = 0;
                     setPlaying(reels[1], p > SWIPE[0]);
                 }
 
@@ -653,6 +656,11 @@
                     width: mix(TILE.w, SCREEN_W, op) + 'px', height: mix(TILE.h, SCREEN_H, op) + 'px',
                     opacity: p >= OPEN[0] ? 1 : 0
                 });
+                const vs = mix(CROP_S, 1, op);
+                reels.forEach((v) => Object.assign(v.style, {
+                    width: SCREEN_W * vs + 'px', height: SCREEN_H * vs + 'px',
+                    left: mix(-CROP.x * SCREEN_W * CROP_S, 0, op) + 'px', top: mix(-CROP.y * SCREEN_H * CROP_S, 0, op) + 'px'
+                }));
 
                 [[0.08, 0.3], [0.3, 0.52], [0.52, 0.7]].forEach(([a, b], i) => {
                     if (!notes[i]) return;
