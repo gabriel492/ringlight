@@ -142,11 +142,10 @@
         .vf-rec i { width: 10px; height: 10px; border-radius: 50%; background: #e5402e; box-shadow: 0 0 10px #e5402e; animation: vf-blink 1s steps(1) infinite; }
         .vf-batt { display: inline-block; width: 22px; height: 11px; margin-left: 6px; padding: 1px; border: 1.5px solid #fff; border-radius: 2px; vertical-align: -1px; }
         .vf-batt::after { content: ''; display: block; width: 72%; height: 100%; background: #fff; }
-        .vf-scroll { position: absolute; z-index: 2; left: 50%; bottom: 22px; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #c2a895; white-space: nowrap; }
         @keyframes vf-blink { 50% { opacity: 0.15; } }
         @media (max-width: 1023px) {
             .vf-hero { align-items: stretch; }
-            .vf-bg, .vf-hero::after, .vf-scroll, .vf-kicker, .vf-grid, .vf-cross, .vf-hud-bottom { display: none; }
+            .vf-bg, .vf-hero::after, .vf-kicker, .vf-grid, .vf-cross, .vf-hud-bottom { display: none; }
             .vf-inner { position: static; display: block; padding: 0; max-width: none; }
             .vf-frame { position: absolute; inset: 0; width: auto; height: auto; aspect-ratio: auto; box-shadow: none; }
             .vf-video { object-position: 48% 30%; }
@@ -356,7 +355,6 @@
                     <div class="vf-hud vf-hud-bottom" aria-hidden="true"><span>4K · 30fps</span><span>ISO 400 <b class="vf-batt"></b></span></div>
                 </div>
             </div>
-            <p class="vf-scroll" aria-hidden="true">Role para ver mais</p>
         </section>
 
         <div class="light-wrap">
