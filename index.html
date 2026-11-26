@@ -605,8 +605,10 @@
                 blob.style.left = cx - pw * 0.95 + 'px';
                 blob.style.top = (wide ? 0 : cy - ph * 0.675) + 'px';
                 tongue.style.width = cx + pw * 0.62 + 'px';
-                tongue.style.height = Math.max(40, ph * 0.11) + 'px';
-                tongue.style.top = cy + ph / 2 - ph * 0.14 + 'px';
+                // a faixa marrom termina exatamente na base do celular
+                const th = Math.max(40, ph * 0.11);
+                tongue.style.height = th + 'px';
+                tongue.style.top = cy + ph / 2 - th + 'px';
             }
 
             // a seção tem 560 telas de altura; a rolagem do perfil foi encurtada (de 243 para 163) e o resto mantém o ritmo
