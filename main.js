@@ -333,39 +333,91 @@
     sync();
 })();
 
-// --- CONTATO FINAL: valida os campos e abre o e-mail com a mensagem pronta ---
+// --- CONTATO FINAL: valida os campos e envia por e-mail (contato.php na HostGator) ---
+// Se o envio pelo servidor não estiver disponível (por exemplo, na Vercel, que não roda PHP),
+// abre o app de e-mail do visitante com a mensagem pronta, como antes.
 (function () {
     const form = document.getElementById('contact-form');
     if (!form) return;
     const status = document.getElementById('ct-status');
+    const button = form.querySelector('button[type="submit"]');
+    const opened = form.querySelector('input[name="t"]');
+    if (opened) opened.value = String(Date.now());
     const fields = [
-        { el: form.querySelector('#ct-name'), ok: (v) => v.trim().length > 0 },
-        { el: form.querySelector('#ct-email'), ok: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
-        { el: form.querySelector('#ct-message'), ok: (v) => v.trim().length > 0 }
+        { name: 'nome', el: form.querySelector('#ct-name'), ok: (v) => v.trim().length > 0 },
+        { name: 'email', el: form.querySelector('#ct-email'), ok: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+        { name: 'mensagem', el: form.querySelector('#ct-message'), ok: (v) => v.trim().length > 0 }
     ];
 
-    function check(field) {
-        const valid = field.ok(field.el.value);
+    function show(field, message) {
         const error = document.getElementById(field.el.id + '-error');
+        const valid = !message;
         field.el.setAttribute('aria-invalid', valid ? 'false' : 'true');
         if (valid) field.el.removeAttribute('aria-describedby');
-        else field.el.setAttribute('aria-describedby', error.id);
+        else { field.el.setAttribute('aria-describedby', error.id); error.textContent = message; }
         error.hidden = valid;
         return valid;
     }
 
-    fields.forEach((field) => field.el.addEventListener('blur', () => {
-        if (field.el.getAttribute('aria-invalid') !== null || field.el.value) check(field);
-    }));
+    function check(field) {
+        const error = document.getElementById(field.el.id + '-error');
+        return show(field, field.ok(field.el.value) ? '' : error.dataset.msg);
+    }
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const invalid = fields.filter((field) => !check(field));
-        if (invalid.length) { invalid[0].el.focus(); status.textContent = ''; return; }
-        const [name, email, message] = fields.map((field) => field.el.value.trim());
+    fields.forEach((field) => {
+        const error = document.getElementById(field.el.id + '-error');
+        error.dataset.msg = error.textContent;
+        field.el.addEventListener('blur', () => {
+            if (field.el.getAttribute('aria-invalid') !== null || field.el.value) check(field);
+        });
+    });
+
+    function openMailApp(name, email, message) {
         const subject = 'Orçamento pelo site — ' + name;
         const body = message + '\n\n' + name + '\n' + email;
         window.location.href = 'mailto:contato@lzaudiovisual.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         status.textContent = 'Abrimos o seu app de e-mail com a mensagem pronta. Se ele não abriu, escreva para contato@lzaudiovisual.com ou chame no WhatsApp.';
+    }
+
+    function busy(on) {
+        button.disabled = on;
+        button.setAttribute('aria-busy', on ? 'true' : 'false');
+        button.textContent = on ? 'Enviando…' : 'Enviar mensagem';
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (button.disabled) return;
+        const invalid = fields.filter((field) => !check(field));
+        if (invalid.length) { invalid[0].el.focus(); status.textContent = ''; return; }
+        const [name, email, message] = fields.map((field) => field.el.value.trim());
+
+        busy(true);
+        status.textContent = '';
+        let res = null, data = null;
+        try {
+            res = await fetch('contato.php', { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+            data = await res.json();
+        } catch (err) {
+            data = null;
+        }
+        busy(false);
+
+        // servidor indisponível ou sem PHP: usa o app de e-mail
+        if (!data || typeof data.ok !== 'boolean') { openMailApp(name, email, message); return; }
+
+        if (data.ok) {
+            form.reset();
+            if (opened) opened.value = String(Date.now());
+            fields.forEach((field) => { field.el.removeAttribute('aria-invalid'); field.el.removeAttribute('aria-describedby'); document.getElementById(field.el.id + '-error').hidden = true; });
+            status.textContent = 'Mensagem enviada! A Luiza vai responder no seu e-mail em breve.';
+            return;
+        }
+        if (data.erros) {
+            const wrong = fields.filter((field) => !show(field, data.erros[field.name] || ''));
+            if (wrong.length) wrong[0].el.focus();
+            return;
+        }
+        status.textContent = data.erro || 'Não conseguimos enviar agora. Tente de novo ou chame no WhatsApp.';
     });
 })();

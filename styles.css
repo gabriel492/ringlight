@@ -254,6 +254,13 @@ input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
 .ct-field input::placeholder, .ct-field textarea::placeholder { color: rgba(244, 241, 234, 0.72); }
 .ct-field input:hover, .ct-field textarea:hover { border-bottom-color: var(--lz-offwhite); }
 .ct-field input:focus, .ct-field textarea:focus { outline: none; border-bottom-color: #ffffff; box-shadow: 0 1.5px 0 0 #ffffff; }
+.ct-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+/* preenchimento automático do navegador: mantém o fundo terracota e o texto branco */
+.ct-field input:-webkit-autofill, .ct-field input:-webkit-autofill:hover, .ct-field input:-webkit-autofill:focus, .ct-field textarea:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff; caret-color: #ffffff; -webkit-box-shadow: 0 0 0 1000px var(--lz-terracota-fundo) inset; transition: background-color 600000s 0s;
+}
+.ct-field input:autofill { background: transparent; }
+.ab-btn:disabled { opacity: 0.7; cursor: progress; }
 .ct-field [aria-invalid="true"] { border-bottom-color: var(--lz-marrom); box-shadow: 0 1.5px 0 0 var(--lz-marrom); }
 /* erro em etiqueta marrom: legível sobre o terracota */
 .ct-error { width: fit-content; margin-top: 10px; padding: 4px 10px; border-radius: 6px; background: var(--lz-marrom); color: #ffffff; font-size: 0.875rem; font-weight: 600; line-height: 1.4; }
